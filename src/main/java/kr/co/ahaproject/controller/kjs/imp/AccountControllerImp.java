@@ -2,16 +2,19 @@ package kr.co.ahaproject.controller.kjs.imp;
 
 import kr.co.ahaproject.controller.kjs.AccountController;
 import kr.co.ahaproject.dto.AccountDTO;
-import kr.co.ahaproject.entity.Account;
 import kr.co.ahaproject.mapper.kjs.AccountMapper;
 import kr.co.ahaproject.service.kjs.AccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -34,6 +37,7 @@ public class AccountControllerImp implements AccountController {
     @Override
     @PostMapping("/register")
     public String register(AccountDTO accountDTO) throws UnsupportedEncodingException {
+        
 
         String msg = "회원가입이 완료되었습니다.";
 
@@ -58,4 +62,15 @@ public class AccountControllerImp implements AccountController {
     }
 
 
+    @Override
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication != null){
+            new SecurityContextLogoutHandler().logout(request,response,authentication);
+        }
+
+        return "redirect:/login-form";
+    }
 }

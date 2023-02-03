@@ -18,4 +18,6 @@ public class AccountDTO {
     String ac_person_name;
     String ac_role;
     String ac_regdate;
+
+
 }

@@ -6,15 +6,15 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-public class UserContext extends User {
+public class AccountContext extends User {
 
     private final Account account;
 
-    public UserContext(Account user, Collection<? extends GrantedAuthority> authorities) {
-        super(user.getUsername(), user.getAc_password(), authorities);
-        this.account = user;
-    }
+    public AccountContext(Account account, Collection<? extends GrantedAuthority> authorities) {
+        super(account.getUsername(), account.getAc_password(), authorities);
 
+        this.account = account;
+    }
 
     public Account getAccount() {
         return account;

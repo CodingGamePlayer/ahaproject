@@ -1,6 +1,7 @@
 package kr.co.ahaproject.service.kjs.imp;
 
 import kr.co.ahaproject.dto.AccountDTO;
+import kr.co.ahaproject.entity.Account;
 import kr.co.ahaproject.mapper.kjs.AccountMapper;
 import kr.co.ahaproject.service.kjs.AccountService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,8 +38,9 @@ class AccountServiceImpTest {
     @Test
     void findByUsername() {
 
+        String username = "user";
 
-        AccountDTO result = accountService.findByUsername("user");
+        Account result = accountMapper.findByUsername(username);
 
         log.info("account : " + result);
     }

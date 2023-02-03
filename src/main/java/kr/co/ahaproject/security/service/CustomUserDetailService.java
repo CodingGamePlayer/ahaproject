@@ -13,27 +13,28 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service("userDetailsService")
+@Service("userDetailService")
 public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
     private AccountMapper accountMapper;
 
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Account account = accountMapper.findByUsername(username);
+        Account account = accountMapper.findByUsername(email);
 
-        if(account == null) {
-            throw new UsernameNotFoundException("UsernameNotFoundException");
+        if(account == null ){
+            throw new UsernameNotFoundException("해당하는 유저의 정보를 찾을 수 없습니다.");
         }
 
         List<GrantedAuthority> roles = new ArrayList<>();
         roles.add(new SimpleGrantedAuthority(account.getAc_role()));
 
-        UserContext userContext = new UserContext(account, roles);
+        AccountContext accountContext = new AccountContext(account, roles);
 
-        return userContext;
+        return accountContext;
     }
 
 
