@@ -19,7 +19,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+//
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
