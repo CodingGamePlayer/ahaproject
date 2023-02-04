@@ -53,9 +53,5 @@ public class AccountControllerImp implements AccountController {
         return "redirect:/login-form";
     }
 
-    @Override
-    @GetMapping("/user/profile")
-    public String profile() {
-        return "user/profile";
-    }
+
 }

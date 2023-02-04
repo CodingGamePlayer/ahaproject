@@ -9,7 +9,6 @@ public interface AccountController {
     String loginForm();
     String logout(HttpServletRequest request, HttpServletResponse response);
 
-    String profile();
 
 
 

@@ -41,82 +41,66 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">구분</label>
-                    <input class="form-control" type="text">
+                    <label class="form-control-label">*구분</label>
+                    <input class="form-control" type="text" id="misu_div">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">회사명</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <label class="form-control-label">*회사명</label>
+                    <select class="form-select" aria-label="Default select example"  id="cp_name">
+                        <th:block th:each="company : ${companyDTOs}">
+                            <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
+                        </th:block>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">공사코드</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <label class="form-control-label">*공사코드</label>
+                    <select class="form-select" aria-label="Default select example" id="cst_code">
+                        <th:block th:each="const : ${constructionDTOs}">
+                        <option th:value="${const.cst_code}" >[[${const.cst_code}]]</option>
+                        </th:block>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">거래처명</label>
-                    <input class="form-control" type="text">
+                    <label class="form-control-label">*거래처명</label>
+                    <input class="form-control" type="text" id="misu_name">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">담당자</label>
-                    <input class="form-control" type="text">
+                    <label class="form-control-label">*담당자</label>
+                    <input class="form-control" type="text" id="misu_manager">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">미수금</label>
-                    <input class="form-control" type="text">
+                    <label class="form-control-label">*미수금</label>
+                    <input class="form-control" type="text" id="misu_value">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">수금액</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" id="misu_collect_value">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">미수금잔액</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" id="misu_total_value">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">수금일</label>
-                    <div
-                            class='input-group'
-                            id='datetimepicker1'
-                            data-td-target-input='nearest'
-                            data-td-target-toggle='nearest'
-                    >
-                        <input
-                                id='datetimepicker1Input'
-                                type='text'
-                                class='form-control'
-                                data-td-target='#datetimepicker1'
-                        />
-                        <span
-                                class='input-group-text'
-                                data-td-target='#datetimepicker1'
-                                data-td-toggle='datetimepicker'
-                        >
+                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
+                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
                     </div>
@@ -125,7 +109,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">수금완료여부</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" id="misu_finished">
                         <option value="0" selected>미완료</option>
                         <option value="1" >수금완료</option>
                     </select>
@@ -134,13 +118,74 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" id="misu_etc">
                 </div>
             </div>
-
+            <input type="button" class="btn btn-primary" id="misuSubmitBtn" value="등록하기" />
         </div>
     </div>
 </div>
+<script>
+    const misuSubmitBtn = document.querySelector('#misuSubmitBtn');
+
+    misuSubmitBtn.addEventListener("click", () => {
+        const input_misu_div = document.querySelector('#misu_div').value;
+        const input_cp_name = document.querySelector('#cp_name').value;
+        const input_cst_code = document.querySelector('#cst_code').value;
+        const input_misu_manager = document.querySelector('#misu_manager').value;
+        const input_misu_value = document.querySelector('#misu_value').value;
+        const input_misu_name = document.querySelector('#misu_name').value;
+        const input_misu_total_value = document.querySelector('#misu_total_value').value;
+        const input_misu_collect_date = document.querySelector('#datetimepicker1Input').value;
+        const input_misu_collect_value = document.querySelector('#misu_collect_value').value;
+        const input_misu_finished = document.querySelector('#misu_finished').value;
+        const input_misu_etc = document.querySelector('#misu_etc').value;
+
+        const misu = {
+            misu_div : input_misu_div,
+            cp_name : input_cp_name,
+            cst_code : input_cst_code,
+            misu_manager : input_misu_manager,
+            misu_value : input_misu_value,
+            misu_name : input_misu_name,
+            misu_total_value : input_misu_total_value,
+            misu_collect_date : input_misu_collect_date,
+            misu_collect_value : input_misu_collect_value,
+            misu_finished : input_misu_finished,
+            misu_etc : input_misu_etc
+        };
+
+        if(input_misu_div == "" || input_cp_name == "" ||
+            input_cst_code == "" || input_misu_manager == "" ||
+            input_misu_value == "" || input_misu_name =="" ||
+            input_misu_total_value == ""){
+            alert('*이 있는 칸은 채워주시기 바랍니다.')
+            return;
+        }
+
+        console.log(misu);
+
+        const url = "/api/admin/misu";
+
+        fetch(url, {
+           method : "POST",
+           body : JSON.stringify(misu),
+           headers : {
+               "Content-Type" : "application/json"
+           }
+        }).then(response => {
+           if(response.ok){
+               response.text();
+               alert('등록이 완료되었습니다.');
+           } else {
+               alert('등록을 실패하였습니다.');
+           }
+        });
+
+
+    });
+</script>
+
 <script>
     const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
