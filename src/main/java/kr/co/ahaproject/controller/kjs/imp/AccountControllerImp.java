@@ -56,6 +56,6 @@ public class AccountControllerImp implements AccountController {
     @Override
     @GetMapping("/user/profile")
     public String profile() {
-        return null;
+        return "user/profile";
     }
 }
