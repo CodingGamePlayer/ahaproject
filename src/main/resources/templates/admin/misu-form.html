@@ -110,8 +110,8 @@
                 <div class="form-group">
                     <label class="form-control-label">수금완료여부</label>
                     <select class="form-select" aria-label="Default select example" id="misu_finished">
-                        <option value="0" selected>미완료</option>
-                        <option value="1" >수금완료</option>
+                        <option value="false" selected>미완료</option>
+                        <option value="true" >수금완료</option>
                     </select>
                 </div>
             </div>
@@ -141,7 +141,7 @@
         const input_misu_finished = document.querySelector('#misu_finished').value;
         const input_misu_etc = document.querySelector('#misu_etc').value;
 
-        const misu = {
+        const misu1 = {
             misu_div : input_misu_div,
             cp_name : input_cp_name,
             cst_code : input_cst_code,
@@ -163,13 +163,13 @@
             return;
         }
 
-        console.log(misu);
+        console.log(misu1);
 
         const url = "/api/admin/misu";
 
         fetch(url, {
            method : "POST",
-           body : JSON.stringify(misu),
+           body : JSON.stringify(misu1),
            headers : {
                "Content-Type" : "application/json"
            }
@@ -177,6 +177,7 @@
            if(response.ok){
                response.text();
                alert('등록이 완료되었습니다.');
+               window.location.reload();
            } else {
                alert('등록을 실패하였습니다.');
            }

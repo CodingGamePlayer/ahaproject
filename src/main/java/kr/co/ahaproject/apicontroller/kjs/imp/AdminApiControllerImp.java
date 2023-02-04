@@ -1,6 +1,5 @@
 package kr.co.ahaproject.apicontroller.kjs.imp;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import kr.co.ahaproject.apicontroller.kjs.AdminApiController;
 import kr.co.ahaproject.dto.MisuDTO;
 import kr.co.ahaproject.service.kjs.MisuService;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +20,7 @@ public class AdminApiControllerImp implements AdminApiController {
 
     @Override
     @PostMapping("/misu")
-    public ResponseEntity register(@RequestBody MisuDTO misuDTO) {
+    public ResponseEntity<MisuDTO> register(@RequestBody MisuDTO misuDTO) {
 
         if(misuDTO == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

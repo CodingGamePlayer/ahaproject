@@ -23,7 +23,7 @@ public class MisuServiceImp implements MisuService {
 
         int result = misuMapper.register(modelMapper.map(misuDTO, Misu.class));
 
-        if(! (result > 0)){
+        if (!(result > 0)) {
             return 0;
         }
 
