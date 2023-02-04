@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class AccountControllerImp implements AccountController {
 
+
+
     @Autowired
     private AccountService accountService;
 
@@ -49,5 +51,11 @@ public class AccountControllerImp implements AccountController {
         }
 
         return "redirect:/login-form";
+    }
+
+    @Override
+    @GetMapping("/user/profile")
+    public String profile() {
+        return null;
     }
 }
