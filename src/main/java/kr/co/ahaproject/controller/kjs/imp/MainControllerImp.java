@@ -10,7 +10,7 @@ public class MainControllerImp implements MainController {
     @Override
     @GetMapping("/")
     public String main() {
-        return "main";
+        return "user/main";
     }
 
 
