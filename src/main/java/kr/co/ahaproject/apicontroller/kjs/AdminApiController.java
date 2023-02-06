@@ -7,4 +7,7 @@ public interface AdminApiController {
 
     ResponseEntity register(MisuDTO misuDTO);
 
+    ResponseEntity update(MisuDTO misuDTO);
+
+
 }

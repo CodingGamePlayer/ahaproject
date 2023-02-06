@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Misu {
 
+    int misu_id;
     String misu_div;
     String cp_name;
     String cst_code;

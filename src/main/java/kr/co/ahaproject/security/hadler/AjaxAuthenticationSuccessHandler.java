@@ -28,5 +28,6 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
         httpServletResponse.addHeader("Content-Type", "application/json; charset=UTF-8");
 
         ObjectMapper.writeValue(httpServletResponse.getWriter(), account);
+
     }
 }

@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 public class MisuServiceImp implements MisuService {
@@ -28,5 +31,34 @@ public class MisuServiceImp implements MisuService {
         }
 
         return 1;
+    }
+
+    @Override
+    public List<MisuDTO> selectAll() {
+
+        List<Misu> misuList = misuMapper.selectAll();
+
+        return misuList.stream()
+                .map(misu -> modelMapper.map(misu, MisuDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public MisuDTO findById(MisuDTO misuDTO) {
+
+        Misu misu = misuMapper.findById(modelMapper.map(misuDTO, Misu.class));
+        return modelMapper.map(misu, MisuDTO.class);
+    }
+
+    @Override
+    public int update(MisuDTO misuDTO) {
+        Misu misu = modelMapper.map(misuDTO, Misu.class);
+        int update = misuMapper.update(misu);
+
+        if(!(update>0)){
+            return 0;
+        }
+
+        return update;
     }
 }

@@ -5,8 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface AccountApiController {
 
-
-
     ResponseEntity<AccountDTO> register(AccountDTO accountDTO);
+
 
 }
