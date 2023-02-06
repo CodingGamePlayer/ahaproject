@@ -42,7 +42,7 @@ public class AdminApiControllerImp implements AdminApiController {
 
         int result = misuService.update(misuDTO);
         log.info(String.valueOf(result));
-        if (result == 0){
+        if (result == 1){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
