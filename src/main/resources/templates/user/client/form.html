@@ -41,10 +41,20 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*회사명</label>
+                    <label class="form-control-label">*회사번호</label>
                     <select class="form-select" aria-label="Default select example"  id="cp_num">
                         <th:block th:each="company : ${companys}">
                             <option th:value="${company.cp_num}">[[${company.cp_num}]]</option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*회사명</label>
+                    <select class="form-select" aria-label="Default select example"  id="cp_name">
+                        <th:block th:each="company : ${companys}">
+                            <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
                         </th:block>
                     </select>
                 </div>
@@ -62,7 +72,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*회사 전화번호</label>
-                    <select class="form-select" aria-label="Default select example" id="cp_address">
+                    <select class="form-select" aria-label="Default select example" id="cp_tel">
                         <th:block th:each="company : ${companys}">
                         <option th:value="${company.cp_tel}" >[[${company.cp_tel}]]</option>
                         </th:block>
@@ -110,11 +120,11 @@
     </div>
 </div>
 <script>
-    const clietnSubmitBtn = document.querySelector('#clientSubmitBtn');
+    const clientSubmitBtn = document.querySelector('#clientSubmitBtn');
 
     clientSubmitBtn.addEventListener("click", () => {
         const input_cp_num = document.querySelector('#cp_num').value;
-        const input_cp_num = document.querySelector('#cp_num').value;
+        const input_cp_name = document.querySelector('#cp_name').value;
         const input_cp_address = document.querySelector('#cp_address').value;
         const input_cp_tel = document.querySelector('#cp_tel').value;
         const input_cl_code = document.querySelector('#cl_code').value;
@@ -127,7 +137,7 @@
 
         const client1 = {
             cp_num : input_cp_num,
-            cp_num : input_cp_num,
+            cp_name : input_cp_name,
             cp_address : input_cp_address,
             cp_tel : input_cp_tel,
             cl_code : input_cl_code,
@@ -139,10 +149,9 @@
             cl_etc3 : input_cl_etc3
         };
 
-        if(input_cp_name == "" || input_cp_num == "" ||
-            input_cp_address == "" || input_cp_tel == "" ||
-            input_cl_code == "" || input_cl_email =="" ||
-            input_cl_account == ""){
+        if(input_cp_num == "" ||input_cp_name == "" || 
+        input_cp_address == "" || input_cp_tel == "" ||
+        input_cl_code == "" || input_cl_email =="" || input_cl_account == ""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }

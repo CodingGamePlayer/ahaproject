@@ -14,18 +14,31 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/user/client")
+@RequestMapping("/api/user")
 public class ClientApiControllerImp implements ClientApiController {
 
     @Autowired
-    private ClientServiceImp Service;
+    private ClientServiceImp clientService;
 
 
 
 	@Override
-	public ResponseEntity register(ClientDTO clientDTO) {
+	@PostMapping("client")
+	public ResponseEntity register(@RequestBody ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
-		return null;
+		 if(clientDTO == null){
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	        }
+
+
+	        int result = clientService.register(clientDTO);
+
+
+	        if(result == 0){
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	        }
+
+	        return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 	@Override
