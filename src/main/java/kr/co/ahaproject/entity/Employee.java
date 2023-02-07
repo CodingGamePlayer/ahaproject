@@ -14,8 +14,10 @@ public class Employee {
     Long emp_id;
     String cp_name;
     String emp_code;
+
     String emp_name;
     String emp_joining;
+    String emp_regid;
     String emp_tel;
     String emp_email;
     String emp_address;

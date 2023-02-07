@@ -19,11 +19,11 @@
                 </button>
 
                 <div class="collapse ms-3 mb-3" id="basicInfo" >
-                    <div><a href="#" class="text-white text-sm">- 고객정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 고객정보 입력</a></div>
+                    <div><a href="/user/client/list" class="text-white text-sm">- 고객정보 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitClient()">- 고객정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 직원정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 직원정보 입력</a></div>
+                    <div><a href="/user/employee/emmain" class="text-white text-sm">- 직원정보 보기</a></div>
+                    <div><a href="/user/employee/emform" class="text-white text-sm" th:onclick="regitEmployee()">- 직원정보 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 장비정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 장비정보 입력</a></div>
@@ -122,6 +122,11 @@
 
                 window.open("/admin/misu-form", "_blank", option);
             }
+            function regitClient(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/client/form", "_blank", option);
+            }
             
             // 자재 등록하기
             function regitMaterial() {
@@ -137,6 +142,17 @@
                    window.location.href="http://localhost:9000/logout";
                }
             });
+
+
+            //인사정보 등록(새창)
+            function regitEmployee(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/employee/emform", "_blank", option);
+            }
+
+
+
         </script>
         <div class="sidenav-footer mx-4 ">
             <div class="card border-radius-md" id="sidenavCard">
