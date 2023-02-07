@@ -39,7 +39,6 @@
   <div class="card-body">
     <h5 class="card-title mt-3 mb-3">인사 정보 등록</h5>
     <div class="row">
-
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">*회사명</label>
@@ -54,13 +53,7 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">*사원번호</label>
-          <input class="input-group-sm form-control " type="text" id="emp_code">
-        </div>
-      </div>
-
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label class="form-control-label">*사원명</label>
+          <input class="input-group-sm form-control" placeholder="ex) EM0001" type="text" id="emp_code">
         </div>
       </div>
 
@@ -86,40 +79,40 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">*주민등록번호</label>
-          <input class="form-control" type="text" id="emp_regid">
+          <input class="form-control" type="text" placeholder="ex) 980704-1234567" id="emp_regid">
         </div>
       </div>
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">이메일</label>
-          <input class="form-control" type="text" id="emp_email">
+          <input class="form-control" type="text" placeholder="ex) aha@gmail.com" id="emp_email">
         </div>
       </div>
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">전화번호</label>
-          <input class="form-control" type="text" id="emp_tel">
+          <input class="form-control" type="text" placeholder="ex) 010-1234-5678" id="emp_tel">
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">주소</label>
-          <input class="form-control" type="text" id="emp_address">
+          <input class="form-control" type="text" id="emp_address" >
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">계좌번호</label>
-          <input class="form-control" type="text" id="emp_account">
+          <input class="form-control" type="text" placeholder="ex) OO은행 110-111-2245454 김계좌" id="emp_account">
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="form-control-label">파일</label>
-          <input class="form-control" type="text" id="emp_file">
+          <label class="form-control-label">입사서류 외 파일</label>
+          <input class="form-control" type="file" id="emp_file">
         </div>
       </div>
       <div class="col-sm-12">
@@ -143,7 +136,6 @@
         </div>
       </div>
 
-
       <input type="button" class="btn btn-primary" id="empSubmitBtn" value="등록하기" />
     </div>
   </div>
@@ -152,8 +144,8 @@
 <script>
   const empSubmitBtn = document.querySelector('#empSubmitBtn');
 
-  misuSubmitBtn.addEventListener("click", () => {
-    const input_emp_id = document.querySelector('#emp_id').value;
+    empSubmitBtn.addEventListener("click", () => {
+    // const input_emp_id = document.querySelector('#emp_id').value;
     const input_cp_name = document.querySelector('#cp_name').value;
     const input_emp_name = document.querySelector('#emp_name').value;
     const input_emp_joining = document.querySelector('#datetimepicker1Input').value;
@@ -168,7 +160,7 @@
     const input_emp_etc3 = document.querySelector('#emp_etc3').value;
 
     const emp1 = {
-      emp_id: input_emp_id,
+      // emp_id: input_emp_id,
       cp_name : input_cp_name,
       emp_name : input_emp_name,
       emp_tel : input_emp_tel,
@@ -183,14 +175,15 @@
       emp_etc3 : input_emp_etc3
     };
 
-    if(input_emp_id == "" || input_cp_name == "" ||
-            input_emp_name == "" || input_emp_tel == "" ||
+    if(input_cp_name == "" ||
+            input_emp_name == "" || input_emp_joining == "" ||
             input_emp_regid == ""){
       alert('*이 있는 칸은 채워주시기 바랍니다.')
       return;
     }
 
     console.log(emp1);
+
 
     const url = "/user/employee/emform";
 

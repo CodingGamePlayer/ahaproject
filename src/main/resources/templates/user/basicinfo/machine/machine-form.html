@@ -39,7 +39,14 @@
     <div class="card-body">
         <h5 class="card-title mt-3 mb-3">장비정보 등록</h5>
         <div class="row">
-
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*장비코드</label>
+                    <th:block th:each="machine : ${machineDTOs}">
+                    <input class="form-control" th:value="${machine.m_id}" type="text" id="m_code" disabled>
+                    </th:block>
+                </div>
+            </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*장비명</label>
@@ -116,6 +123,7 @@
     const misuSubmitBtn = document.querySelector('#machineSubmitBtn');
 
     misuSubmitBtn.addEventListener("click", () => {
+        const input_m_code = document.querySelector('#m_code').value;
         const input_m_name = document.querySelector('#m_name').value;
         const input_m_equip_num = document.querySelector('#m_equip_num').value;
         const input_m_type = document.querySelector('#m_type').value;
@@ -128,6 +136,7 @@
         const input_m_etc3 = document.querySelector('#m_etc3').value;
 
         const machine1 = {
+            m_code : input_m_code,
             m_name : input_m_name,
             m_equip_num : input_m_equip_num,
             m_type : input_m_type,
@@ -140,7 +149,8 @@
             m_etc3 : input_m_etc3
         };
 
-        if(input_m_name == "" || input_m_equip_num == "" ||
+        if(input_m_code == ""||
+            input_m_name == "" || input_m_equip_num == "" ||
             input_m_type == "" || input_m_price == "" ||
             input_m_tax == "" || input_m_date ==""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')

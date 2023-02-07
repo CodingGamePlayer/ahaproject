@@ -1,8 +1,8 @@
-package kr.co.ahaproject.service.kjs.imp;
+package kr.co.ahaproject.service.cyr.imp;
 
 import kr.co.ahaproject.entity.Employee;
-import kr.co.ahaproject.mapper.kjs.EmployeeMapper;
-import kr.co.ahaproject.service.kjs.EmployeeService;
+import kr.co.ahaproject.mapper.cyr.EmployeeMapper;
+import kr.co.ahaproject.service.cyr.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

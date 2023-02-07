@@ -29,6 +29,12 @@ public class MachineControllerImp implements MachineController {
     @Override
     @GetMapping("/basicinfo/machine-form")
     public String machineForm(Model model) {
+
+        List<MachineDTO> machineDTOS = machineService.selectAll();
+
+        
+
+        model.addAttribute("machineDTOs", machineDTOS);
         return "/user/basicinfo/machine/machine-form";
     }
 }
