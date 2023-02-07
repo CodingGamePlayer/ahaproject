@@ -7,4 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface MachineApiController {
 
+    ResponseEntity register(MachineDTO machineDTO);
+
+    ResponseEntity update(MachineDTO machineDTO);
 }

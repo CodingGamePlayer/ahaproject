@@ -17,6 +17,7 @@ public class Machine {
     String m_type;
     Long m_price;
     Long m_tax;
+    String m_date;
     String m_file;
     String m_etc1;
     String m_etc2;
