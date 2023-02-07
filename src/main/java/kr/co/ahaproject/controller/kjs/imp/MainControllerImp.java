@@ -1,17 +1,94 @@
 package kr.co.ahaproject.controller.kjs.imp;
 
-import kr.co.ahaproject.controller.kjs.MainController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import kr.co.ahaproject.controller.kjs.MainController;
+import kr.co.ahaproject.dto.MaterialDTO;
+import kr.co.ahaproject.service.kjs.MaterialService;
 
 @Controller
 public class MainControllerImp implements MainController {
+	
+	@Autowired
+	private MaterialService materialService;
 
     @Override
     @GetMapping("/")
     public String main() {
         return "user/main";
     }
+
+    
+    
+    /*		자재 기초정보 CRUD
+            작업자 : 재원 23.02.07       */
+    
+    // 자재 기초정보 START ======
+    
+    // 자재 기초정보 전체글보기
+	@Override
+	@GetMapping("/user/basicinfo/material/list")
+	public String list(Model model) {
+		
+		model.addAttribute("listData", materialService.listAll());
+		return "/user/material/material";
+	}
+	
+	// 자재 기초정보 글생성 이동
+	@Override
+	@GetMapping("/user/basicinfo/material/register")
+	public String register() {
+			
+		return "/user/material/material-form.html";
+	}
+	
+	// 자재 기초정보 글생성 처리
+	@Override
+	@PostMapping("/user/basicinfo/material/registerPro")
+	public String registerPro(MaterialDTO dto) {
+		
+		materialService.create(dto);
+		System.out.println("처리완료");
+		return "redirect:/user/basicinfo/material/list";
+	}
+
+	@Override
+	public String detail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public String updatePro() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String delete() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	
+
+
+
+	
+	
+	// 자재 기초정보 END ======
 
 
 }
