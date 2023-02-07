@@ -1,4 +1,7 @@
 package kr.co.ahaproject.controller.moo;
 
-public class MachineController {
+import org.springframework.ui.Model;
+
+public interface MachineController {
+    String machineForm(Model model);
 }
