@@ -1,20 +1,13 @@
 package kr.co.ahaproject.controller.kjs.imp;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import kr.co.ahaproject.controller.kjs.MainController;
-import kr.co.ahaproject.dto.MaterialDTO;
-import kr.co.ahaproject.service.kjs.MaterialService;
+
 
 @Controller
 public class MainControllerImp implements MainController {
-	
-	@Autowired
-	private MaterialService materialService;
 
     @Override
     @GetMapping("/")
@@ -23,7 +16,7 @@ public class MainControllerImp implements MainController {
     }
 
     
-    
+
     /*		자재 기초정보 CRUD
             작업자 : 재원 23.02.07       */
     
@@ -34,7 +27,7 @@ public class MainControllerImp implements MainController {
 	@GetMapping("/user/basicinfo/material/list")
 	public String list(Model model) {
 		
-		model.addAttribute("listData", materialService.listAll());
+//		model.addAttribute("listData", materialService.listAll());
 		return "/user/material/material";
 	}
 	
@@ -51,7 +44,7 @@ public class MainControllerImp implements MainController {
 	@PostMapping("/user/basicinfo/material/registerPro")
 	public String registerPro(MaterialDTO dto) {
 		
-		materialService.create(dto);
+//		materialService.create(dto);
 		System.out.println("처리완료");
 		return "redirect:/user/basicinfo/material/list";
 	}
@@ -86,9 +79,6 @@ public class MainControllerImp implements MainController {
 
 
 
-	
-	
-	// 자재 기초정보 END ======
 
 
 }

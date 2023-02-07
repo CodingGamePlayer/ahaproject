@@ -19,14 +19,14 @@
                 </button>
 
                 <div class="collapse ms-3 mb-3" id="basicInfo" >
-                    <div><a href="#" class="text-white text-sm">- 고객정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 고객정보 입력</a></div>
+                    <div><a href="/user/client/list" class="text-white text-sm">- 고객정보 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitClient()">- 고객정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 직원정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 직원정보 입력</a></div>
+                    <div><a href="/user/employee/emmain" class="text-white text-sm">- 직원정보 보기</a></div>
+                    <div><a href="/user/employee/emform" class="text-white text-sm" th:onclick="regitEmployee()">- 직원정보 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 장비정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 장비정보 입력</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitMachine()">- 장비정보 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 회사정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 회사정보 입력</a></div>
@@ -73,6 +73,25 @@
                     <div><a href="#" class="text-white text-sm">- 2번 게시판</a></div>
                     <div><a href="#" class="text-white text-sm">- 3번 게시판</a></div>
                     <div><a href="#" class="text-white text-sm">- 4번 게시판</a></div>
+                </div>
+                <button class="btn btn-sm mt-3 text-start mb-2 btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#accounting" aria-expanded="false" aria-controls="collapseExample1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-accounting me-1" viewBox="0 0 16 16">
+                        <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                        <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z"/>
+                    </svg>
+                    Accounting
+                </button>
+                <div class="collapse ms-3 mb-3" id="accounting" >
+                    <div><a href="#" class="text-white text-sm">- 공사정보 전체보기</a></div>
+                    <div><hr></div>
+                    <div><a href="#" class="text-white text-sm">- 매출내역 보기</a></div>
+                    <div><a href="#" class="text-white text-sm">- 매출내역 입력</a></div>
+                    <div><hr></div>
+                    <div><a href="/user/accounting/income/list" class="text-white text-sm">- 매입내역 보기</a></div>
+                    <div><a href="/user/accounting/income/register" class="text-white text-sm">- 매입내역 입력</a></div>
+                    <div><hr></div>
+                    <div><a href="#" class="text-white text-sm">- 인건비내역 보기</a></div>
+                    <div><a href="#" class="text-white text-sm">- 인건비내역 입력</a></div>
                 </div>
                 <button sec:authorize="hasAuthority('ROLE_ADMIN')" class="btn btn-sm btn-warning mt-3 text-start mb-2 " type="button" data-bs-toggle="collapse" data-bs-target="#adminPage" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-briefcase-fill me-1" viewBox="0 0 16 16">
@@ -122,6 +141,11 @@
 
                 window.open("/admin/misu-form", "_blank", option);
             }
+            function regitClient(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/client/form", "_blank", option);
+            }
             
             // 자재 등록하기
             function regitMaterial() {
@@ -130,6 +154,12 @@
                 window.open("/user/basicinfo/material/register", "_blank", option);
             }				
 
+            function regitMachine(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/basicinfo/machine-form", "_blank", option);
+            }
+
             const logoutBtn = document.querySelector('#sidebar-logout');
 
             logoutBtn.addEventListener("click", ()=>{
@@ -137,6 +167,17 @@
                    window.location.href="http://localhost:9000/logout";
                }
             });
+
+
+            //인사정보 등록(새창)
+            function regitEmployee(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/employee/emform", "_blank", option);
+            }
+
+
+
         </script>
         <div class="sidenav-footer mx-4 ">
             <div class="card border-radius-md" id="sidenavCard">
