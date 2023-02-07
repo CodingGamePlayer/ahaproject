@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Update;
 import kr.co.ahaproject.dto.BoardDTO;
 import kr.co.ahaproject.dto.ReplyDTO;
 import kr.co.ahaproject.entity.Board;
+import kr.co.ahaproject.entity.Misu;
 import kr.co.ahaproject.entity.Reply;
 
 @Mapper
@@ -30,32 +31,31 @@ public interface Replymapper {
             @Result(property = "b_id", column = "b_id"),
             @Result(property = "rp_body", column = "rp_body"),
             @Result(property = "us_id", column = "us_id")})
-           
-      List<BoardDTO> listAll();
+	List<ReplyDTO> getdetail(int b_id);
             @Select("SELECT * FROM reply WHERE rp_id = #{reply.rp_id}")
             @ResultMap("ReplyMap")
             Reply findById(@Param("reply") Reply reply);
 	
-	List<ReplyDTO> getdetail(int b_id);
 	
 	
 	//댓글 선택조회
-	@Select("select* from reply where rp_id = #{rp_id}")
-	ReplyDTO replySelectOne(int rp_id);
+	@Select("select* from reply where rp_id = #{reply.rp_id}")
+	ReplyDTO replySelectOne(@Param("reply") Reply reply);
 	
 	//댓글 작성
-	@Insert("insert into reply(rp_body, us_id) values(#{rp_body}, #{us_id}")
-	int replycreate(ReplyDTO dto);
+	@Insert("insert into reply(rp_body, us_id) values(#{reply.rp_body}, #{reply.us_id}")
+	int replycreate(@Param("reply") Reply reply);
 	
 	
 	
 	//댓글 수정
-	@Update("update reply set rp_body=#{rp_body}, us_id=#{us_id} where rp_id = #{rp_id} and b_id = #{b_id}")
-	int replyupdate(ReplyDTO dto); 
+
+	@Update("update `ahaproject`.`reply` set rp_body=#{reply.rp_body}, us_id=#{reply.us_id} where rp_id = #{reply.rp_id} and b_id = #{reply.b_id}")
+	int replyupdate(@Param("reply")Reply reply); 
 	
 	
 	
 	//댓글 삭제
-	@Delete("delete from reply where rp_id=#{rp_id}")
-	int replydelete(int rp_id);
+	@Delete("delete from reply where rp_id=#{reply.rp_id}")
+	int replydelete(@Param("reply") Reply reply);
 }
