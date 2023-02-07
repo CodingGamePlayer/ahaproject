@@ -37,21 +37,21 @@ public interface Boardmapper {
 	
 	//글 작성 
 	@Insert("insert into board(`b_title`,`b_body`,`b_etc`,`b_file`) values(#{board.b_title},#{board.b_body},#{board.b_etc},#{board.b_file}")
-      int create(@Param("board") Board board);
+      int create(BoardDTO dto);
 	
 	//글 수정
 	 @Update("UPDATE `ahaproject`.`board` SET " +
 	            "`ct_id` = #{board.ct_id}, `us_id` = #{board.us_id}, " +
 	            "`b_title` = #{board.b_title}, `b_body` = #{board.b_body}, `b_etc` = #{board.b_etc}, " +
 	            "`b_file` = #{board.b_file} WHERE (`b_id` = #{board.b_id})")
-	    int update(@Param("board") Board board);
+	    int update(BoardDTO dto);
 
 	
 	//선택조회
 	@Select("select* from board where `b_id` = #{board.b_id}")
-	BoardDTO SelectOne(@Param("board") Board board);
+	BoardDTO SelectOne(int b_id);
 	
 	//글 삭제 
 	@Delete("delete from board where `b_id` =#{board.b_id}")
-	int delete(@Param("board") Board board);
+	int delete(int b_id);
 }
