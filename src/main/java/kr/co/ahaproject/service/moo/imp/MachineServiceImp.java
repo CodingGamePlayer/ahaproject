@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -32,8 +33,11 @@ public class MachineServiceImp implements MachineService {
     @Override
     public List<MachineDTO> selectAll() {
 
+        List<Machine> machineList = machineMapper.selectAll();
 
-        return null;
+        return machineList.stream()
+                .map(machine -> modelMapper.map(machine, MachineDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
