@@ -21,6 +21,10 @@ public class DebuggingAspect {
     private void cut1(){
     }
 
+    @Pointcut("execution(* kr.co.ahaproject.apicontroller..*.*(..))")
+    private void cut2(){
+    }
+
     @Before("cut()")
     public void loggingArgs(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
@@ -65,6 +69,33 @@ public class DebuggingAspect {
 
     @AfterReturning(value = "cut1()", returning = "returnObj")
     public void loggingReturnValueForServ(JoinPoint joinPoint, Object returnObj) {
+
+        String simpleName = joinPoint.getTarget()
+                .getClass()
+                .getSimpleName();
+
+        String methodName = joinPoint.getSignature().getName();
+
+        log.info("{}#{}의 입력값 => {}", simpleName, methodName, returnObj);
+    }
+
+    @Before("cut2()")
+    public void loggingArgsForApi(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+
+        String simpleName = joinPoint.getTarget()
+                .getClass()
+                .getSimpleName();
+
+        String methodName = joinPoint.getSignature().getName();
+
+        for (Object obj : args) {
+            log.info("{}#{}의 입력값 => {}", simpleName, methodName, obj);
+        }
+    }
+
+    @AfterReturning(value = "cut2()", returning = "returnObj")
+    public void loggingReturnValueForApi(JoinPoint joinPoint, Object returnObj) {
 
         String simpleName = joinPoint.getTarget()
                 .getClass()
