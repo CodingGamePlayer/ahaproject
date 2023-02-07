@@ -24,7 +24,6 @@ import java.util.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/user")
 public class UpDownControllerImp implements UpDownController {
 
     @Value("${kr.co.ahaproject.upload.path}")
@@ -32,7 +31,7 @@ public class UpDownControllerImp implements UpDownController {
 
     @Override
     @Operation(summary = "Upload post", description = "파일업로드 하는 메소드")
-    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/user/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public List<UploadResultDTO> upload(UploadFileDTO uploadFileDTO) {
 
         log.info(String.valueOf(uploadFileDTO));
@@ -82,7 +81,7 @@ public class UpDownControllerImp implements UpDownController {
 
     @Override
     @ApiOperation(value = "view 파일", notes = "Get방식으로 첨부파일 조회")
-    @GetMapping("/view/{fileName}")
+    @GetMapping("/user/view/{fileName}")
     public ResponseEntity<Resource> viewFileGET(@PathVariable String fileName) {
 
         Resource resource = new FileSystemResource(uploadPath + File.separator + fileName);
@@ -100,7 +99,7 @@ public class UpDownControllerImp implements UpDownController {
 
     @Override
     @ApiOperation(value = "remove 파일", notes = "DELETE 방식으로 파일 삭제")
-    @DeleteMapping("/remove/{fileName}")
+    @DeleteMapping("/user/remove/{fileName}")
     public Map<String, Boolean> removeFile(@PathVariable String fileName) {
 
         Resource resource = new FileSystemResource(uploadPath + File.separator + fileName);
