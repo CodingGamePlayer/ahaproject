@@ -16,7 +16,7 @@ public class ImcomeServiceImp implements IncomeService {
     public List<IncomeOutcomeDTO> selectAll() {
         List<IncomeOutcome> io= incomeMapper.selectAll();
 
-        return "";
+        return null;
     }
 
     @Override
