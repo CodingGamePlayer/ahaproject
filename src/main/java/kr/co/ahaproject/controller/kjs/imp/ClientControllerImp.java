@@ -1,5 +1,6 @@
 package kr.co.ahaproject.controller.kjs.imp;
 
+import java.text.Format;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import kr.co.ahaproject.controller.kjs.ClientController;
 import kr.co.ahaproject.dto.ClientDTO;
 import kr.co.ahaproject.dto.CompanyDTO;
 import kr.co.ahaproject.dto.MisuDTO;
+import kr.co.ahaproject.entity.Client;
 import kr.co.ahaproject.service.kjs.CompanyService;
 import kr.co.ahaproject.service.kjs.imp.ClientServiceImp;
 
@@ -40,8 +42,9 @@ public class ClientControllerImp implements ClientController {
 //	작성페이지 이동
 	@Override
 	@GetMapping("/form")
-	public String clientForm(Model model) {
+	public String clientForm(Model model,ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
+		
 		List<CompanyDTO> companyList = companyService.selectAll();
 		model.addAttribute("companys", companyList);
 		return "user/client/form";
