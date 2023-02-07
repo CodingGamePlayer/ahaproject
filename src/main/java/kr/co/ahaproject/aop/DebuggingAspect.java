@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class DebuggingAspect {
-
+    //aop 기능 추가
     @Pointcut("execution(* kr.co.ahaproject.controller..*.*(..))")
     private void cut() {
     }
