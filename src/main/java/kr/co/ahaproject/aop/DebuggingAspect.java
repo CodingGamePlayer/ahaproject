@@ -17,7 +17,7 @@ public class DebuggingAspect {
     private void cut() {
     }
 
-    @Pointcut("execution(* kr.co.ahaproject.service..*.*(..)")
+    @Pointcut("execution(* kr.co.ahaproject.service..*.*(..))")
     private void cut1(){
     }
 
