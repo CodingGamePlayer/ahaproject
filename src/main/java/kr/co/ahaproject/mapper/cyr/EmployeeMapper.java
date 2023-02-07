@@ -31,15 +31,15 @@ public interface EmployeeMapper {
     @Select("select * from employee where emp_id = #{emp_id}")
     Employee selectOne(int emp_id);
 
-    @Insert("insert into (cp_name,emp_code,emp_name,emp_joining,emp_regid,emp_tel,emp_email,emp_address,emp_account,emp_file,emp_etc1,emp_etc2,emp_etc3)" +
-            " values (#{cp_name},#{emp_code},#{emp_name},#{emp_regid}, #{emp_joining},#{emp_tel},#{emp_email},#{emp_address},#{emp_account},#{emp_file},#{emp_etc1},#{emp_etc2},#{emp_etc3}")
+    @Insert("insert into employee (cp_name,emp_code,emp_name,emp_joining,emp_regid,emp_tel,emp_email,emp_address,emp_account,emp_file,emp_etc1,emp_etc2,emp_etc3)" +
+            " values (#{cp_name},#{emp_code},#{emp_name},#{emp_joining},#{emp_regid},#{emp_tel},#{emp_email},#{emp_address},#{emp_account},#{emp_file},#{emp_etc1},#{emp_etc2},#{emp_etc3})")
     int insert(Employee employee);
 
     @Update("update employee set emp_code=#{emp_code},emp_name=#{emp_name},emp_regid=#{emp_regid},emp_joining=#{emp_joining},emp_tel=#{emp_tel},emp_email=#{emp_email}," +
             "emp_address=#{emp_address},emp_account=#{emp_account},emp_file={emp_file},emp_etc1=#{emp_etc1},emp_etc2=#{emp_etc2},emp_etc3=#{emp_etc3}")
     int update(Employee employee);
 
-    @Delete("delete from employee where emp_id =#{emp_id}")
+    @Delete("delete from employee where emp_id=#{emp_id}")
     int delete(int emp_id);
 
 }
