@@ -2,18 +2,41 @@ package kr.co.ahaproject.service.jyh;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 import kr.co.ahaproject.dto.BoardDTO;
-import kr.co.ahaproject.mapper.jyh.Boardmapper;
 
 
 
-@Service
-public class BoardService {
+
+
+public interface BoardService {
 	
-	@Autowired
-	Boardmapper mapper;
+	
+	
+	//전체조회
+	List<BoardDTO> listAll();
+		
+	//글 작성
+	public int create(BoardDTO dto);
+			
+		
+	//해당 글 선택조회
+	public BoardDTO SelectOne(int b_id);
+			
+			
+		
+		
+		//글 수정
+		public int update(BoardDTO dto); 
+			
+		
+		
+		//글 삭제
+		public int delete(int b_id);
+			
+		
+		
+		
 	
 	
 	

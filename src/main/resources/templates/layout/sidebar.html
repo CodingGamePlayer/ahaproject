@@ -23,7 +23,8 @@
                     <div><a href="#" class="text-white text-sm" th:onclick="regitClient()">- 고객정보 입력</a></div>
                     <div><hr></div>
                     <div><a href="/user/employee/emmain" class="text-white text-sm">- 직원정보 보기</a></div>
-                    <div><a href="/user/employee/emform" class="text-white text-sm" th:onclick="regitEmployee()">- 직원정보 입력</a></div>
+<!--                    20230207 15:44 수정-->
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitEmployee()">- 직원정보 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 장비정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMachine()">- 장비정보 입력</a></div>
@@ -31,7 +32,7 @@
                     <div><a href="#" class="text-white text-sm">- 회사정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 회사정보 입력</a></div>
                     <div><hr></div>
-                    <div><a th:href="@{/user/basicinfo/material/list}" class="text-white text-sm">- 자재정보 보기</a></div>
+                    <div><a href="/user/material/list" class="text-white text-sm">- 자재정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMaterial()">- 자재정보 입력</a></div>
                     <div><hr></div>
                     <div><a th:href="@{/user/basicinfo/card}" class="text-white text-sm">- 카드정보 보기</a></div>
@@ -69,10 +70,11 @@
                     Communication
                 </button>
                 <div class="collapse ms-3 mb-3" id="gboard" >
-                    <div><a href="#" class="text-white text-sm">- 1번 게시판</a></div>
-                    <div><a href="#" class="text-white text-sm">- 2번 게시판</a></div>
-                    <div><a href="#" class="text-white text-sm">- 3번 게시판</a></div>
-                    <div><a href="#" class="text-white text-sm">- 4번 게시판</a></div>
+                <div><a href="/user/gboard/list" class="text-white text-sm">- 전체보기</a></div>
+                    <div><a href="#" class="text-white text-sm">- 공지사항</a></div>
+                    <div><a href="#" class="text-white text-sm">- 자유게시판</a></div>
+                    <div><a href="#" class="text-white text-sm">- QnA</a></div>
+                    
                 </div>
                 <button class="btn btn-sm mt-3 text-start mb-2 btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#accounting" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-accounting me-1" viewBox="0 0 16 16">
@@ -186,7 +188,6 @@
 
                 window.open("/user/accounting/outcome/register", "_blank", option);
             }
-
 
 
         </script>

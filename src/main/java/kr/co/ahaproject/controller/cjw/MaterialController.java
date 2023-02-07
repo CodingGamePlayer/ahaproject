@@ -1,4 +1,4 @@
-package kr.co.ahaproject.controller.kjs;
+package kr.co.ahaproject.controller.cjw;
 
 import org.springframework.ui.Model;
 
