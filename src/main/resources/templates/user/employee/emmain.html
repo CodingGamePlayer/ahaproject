@@ -58,9 +58,6 @@
 <!--                                    <td class="text-center text-secondary text-xs font-weight-semibold opacity-7" th:text="${list.emp_account}">계좌정보</td>-->
 <!--                                    <td class="text-center text-secondary text-xs font-weight-semibold opacity-7" th:text="${list.emp_etc1}">비고</td>-->
 <!--                                </tr>-->
-
-
-
                                 <th:block th:each="list:${list}">
                                     <tr>
                                         <td>
@@ -111,13 +108,13 @@
                                                 </svg>
                                             </a>
                                         </td>
-<!--                                        <script>-->
-<!--                                            function editEmployee(id){-->
-<!--                                                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";-->
+                                        <script>
+                                            function editEmployee(id){
+                                                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-<!--                                                window.open("/admin/misu-edit?misu_id=" + id, "_blank", option);-->
-<!--                                            }-->
-<!--                                        </script>-->
+                                                window.open("/user/employee/emeditform?emp_id=" + id, "_blank", option);
+                                            }
+                                        </script>
 
 
                                     </tr>
