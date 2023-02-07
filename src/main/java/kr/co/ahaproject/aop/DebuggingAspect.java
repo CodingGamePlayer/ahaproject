@@ -93,7 +93,7 @@ public class DebuggingAspect {
             log.info("{}#{}의 입력값 => {}", simpleName, methodName, obj);
         }
     }
-
+//
     @AfterReturning(value = "cut2()", returning = "returnObj")
     public void loggingReturnValueForApi(JoinPoint joinPoint, Object returnObj) {
 
