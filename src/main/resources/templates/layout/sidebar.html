@@ -84,11 +84,11 @@
                 <div class="collapse ms-3 mb-3" id="accounting" >
                     <div><a href="#" class="text-white text-sm">- 공사정보 전체보기</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 매출내역 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 매출내역 입력</a></div>
+                    <div><a href="/user/accounting/outcome/list" class="text-white text-sm">- 매출내역 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitOutcome()">- 매출내역 입력</a></div>
                     <div><hr></div>
                     <div><a href="/user/accounting/income/list" class="text-white text-sm">- 매입내역 보기</a></div>
-                    <div><a href="/user/accounting/income/register" class="text-white text-sm">- 매입내역 입력</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitIncome()">- 매입내역 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 인건비내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 인건비내역 입력</a></div>
@@ -174,6 +174,17 @@
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                 window.open("/user/employee/emform", "_blank", option);
+            }
+            //매입,매출 등록
+            function regitIncome(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/accounting/income/register", "_blank", option);
+            }
+            function regitOutcome(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/accounting/outcome/register", "_blank", option);
             }
 
 
