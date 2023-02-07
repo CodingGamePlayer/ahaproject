@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MaterialDTO {
+	//주석테스트
     int mt_id;
     String mt_code;
     String mt_name;
