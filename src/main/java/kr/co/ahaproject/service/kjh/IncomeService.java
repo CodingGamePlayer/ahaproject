@@ -8,8 +8,12 @@ import java.util.List;
 
 public interface IncomeService {
     List<IncomeOutcomeDTO> selectAll();
+
     IncomeOutcomeDTO selectOne(int id);
+
     int insert(IncomeOutcomeDTO ioDTO);
+
     int update(IncomeOutcomeDTO ioDTO);
+
     int delete(int id);
 }
