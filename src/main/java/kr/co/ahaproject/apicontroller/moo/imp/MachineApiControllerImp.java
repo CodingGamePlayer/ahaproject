@@ -1,5 +1,4 @@
 package kr.co.ahaproject.apicontroller.moo.imp;
-
 import kr.co.ahaproject.apicontroller.moo.MachineApiController;
 import kr.co.ahaproject.dto.MachineDTO;
 import kr.co.ahaproject.service.moo.MachineService;
@@ -18,6 +17,7 @@ public class MachineApiControllerImp implements MachineApiController {
 
     @Autowired
     private MachineService machineService;
+
 
 
 }
