@@ -35,11 +35,13 @@ public class EmployeeControllerImp implements EmployeeController {
 
         return null;
     }
-
     @Override
     @GetMapping("user/employee/emform")
     public String goInsert(Model model) {
         model.addAttribute("companyDTOs", companyService.selectAll());
+        int id = employeeService.selectid() +1;
+        String idkey = String.format("%04d",id);
+        model.addAttribute("idkey",idkey);
         return "user/employee/emform";
     }
 

@@ -24,6 +24,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
             crossorigin="anonymous"></script>
+
+    <!--  제이쿼리 datepicker 사용시 3줄 복사해서 페이지 붙여놓을 것!-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- 복붙 end -->
+
     <!— Tempus Dominus JavaScript —>
     <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
             crossorigin="anonymous"></script>
@@ -95,17 +102,47 @@
                     <input class="form-control" type="text" id="misu_total_value">
                 </div>
             </div>
+<!--            <div class="col-sm-12">-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label">수금일</label>-->
+<!--                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>-->
+<!--                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />-->
+<!--                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >-->
+<!--                        <span class='fa-solid fa-calendar'></span>-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <!-- datepicker 수정함 script까지 -->
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">수금일</label>
-                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
-                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
-                        <span class='fa-solid fa-calendar'></span>
-                        </span>
-                    </div>
+                    <label class="form-control-label">*수금일</label>
+                    <input class="datepicker form-control" id='misu_collect_date'>
                 </div>
             </div>
+                    <script>
+
+                        $.datepicker.setDefaults({
+                            dateFormat: 'yy-mm-dd',
+                            prevText: '이전 달',
+                            nextText: '다음 달',
+                            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                            showMonthAfterYear: true,
+                            yearSuffix: '년'
+                        });
+
+                        $(function () {
+                            $('.datepicker').datepicker();
+                        });
+
+                    </script>
+
+                <!-- 수금일 datepicker end -->
+
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">수금완료여부</label>
@@ -136,7 +173,7 @@
         const input_misu_value = document.querySelector('#misu_value').value;
         const input_misu_name = document.querySelector('#misu_name').value;
         const input_misu_total_value = document.querySelector('#misu_total_value').value;
-        const input_misu_collect_date = document.querySelector('#datetimepicker1Input').value;
+        const input_misu_collect_date = document.querySelector('#misu_total_value').value;
         const input_misu_collect_value = document.querySelector('#misu_collect_value').value;
         const input_misu_finished = document.querySelector('#misu_finished').value;
         const input_misu_etc = document.querySelector('#misu_etc').value;
@@ -187,30 +224,30 @@
     });
 </script>
 
-<script>
-    const datevalue = document.querySelector('#datetimepicker1Input').value;
-    console.log(datevalue);
-    new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
-        display: {
-            components: {
-                seconds: false,
-                useTwentyfourHour: false,
-            },
-            icons: {
-                type: 'icons',
-                time: 'fa fa-solid fa-clock',
-                date: 'fa fa-solid fa-calendar',
-                up: 'fa fa-solid fa-arrow-up',
-                down: 'fa fa-solid fa-arrow-down',
-                previous: 'fa fa-solid fa-chevron-left',
-                next: 'fa fa-solid fa-chevron-right',
-                today: 'fa fa-solid fa-calendar-check',
-                clear: 'fa fa-solid fa-trash',
-                close: 'fas fa-solid fa-xmark'
-            },
-        },
-    });
-</script>
+<!--<script>-->
+<!--    const datevalue = document.querySelector('#datetimepicker1Input').value;-->
+<!--    console.log(datevalue);-->
+<!--    new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {-->
+<!--        display: {-->
+<!--            components: {-->
+<!--                seconds: false,-->
+<!--                useTwentyfourHour: false,-->
+<!--            },-->
+<!--            icons: {-->
+<!--                type: 'icons',-->
+<!--                time: 'fa fa-solid fa-clock',-->
+<!--                date: 'fa fa-solid fa-calendar',-->
+<!--                up: 'fa fa-solid fa-arrow-up',-->
+<!--                down: 'fa fa-solid fa-arrow-down',-->
+<!--                previous: 'fa fa-solid fa-chevron-left',-->
+<!--                next: 'fa fa-solid fa-chevron-right',-->
+<!--                today: 'fa fa-solid fa-calendar-check',-->
+<!--                clear: 'fa fa-solid fa-trash',-->
+<!--                close: 'fas fa-solid fa-xmark'-->
+<!--            },-->
+<!--        },-->
+<!--    });-->
+<!--</script>-->
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
