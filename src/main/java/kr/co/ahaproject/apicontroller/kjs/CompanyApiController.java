@@ -10,6 +10,8 @@ public interface CompanyApiController {
     ResponseEntity register(CompanyDTO companyDTO);
 
     ResponseEntity update(CompanyDTO companyDTO);
+    
+    ResponseEntity delete(CompanyDTO companyDTO);
 
 
 }

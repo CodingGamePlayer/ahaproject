@@ -3,6 +3,7 @@ package kr.co.ahaproject.apicontroller.kjs.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,6 +56,23 @@ public class CompanyApiControllerImp implements CompanyApiController{
 		
 		return ResponseEntity.status(HttpStatus.OK).build();
 
+	}
+
+	@Override
+	@DeleteMapping("/company")
+	public ResponseEntity<CompanyDTO> delete(@RequestBody CompanyDTO companyDTO) {
+		// TODO Auto-generated method stub
+		if(companyDTO == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+		
+		int result = companyService.delete(companyDTO);
+		
+		if(result == 0) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 }

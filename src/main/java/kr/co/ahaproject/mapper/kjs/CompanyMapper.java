@@ -2,6 +2,7 @@ package kr.co.ahaproject.mapper.kjs;
 
 import kr.co.ahaproject.entity.Company;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -99,5 +100,9 @@ public interface CompanyMapper {
     		+ "cp_file = #{company.cp_file}"
     		+ "WHERE cp_id = #{company.cp_id};")
     int update(@Param("company") Company company);
-
+    
+//    삭제
+    @Delete("DELETE FROM ahaproject.company "
+    		+ "WHERE cp_id = #{company.cp_id}")
+    int delete(@Param("company") Company company);
 }

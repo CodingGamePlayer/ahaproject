@@ -67,6 +67,16 @@ public class ClientServiceImp implements ClientService {
 	        
         return update;
 	}
+
+	@Override
+	public int delete(ClientDTO clientDTO) {
+		// TODO Auto-generated method stub
+		int rs = cm.delete(modelMapper.map(clientDTO, Client.class));
+		
+		if(!(rs>0)) return 0;
+		
+		return rs;
+	}
 	
 	
 

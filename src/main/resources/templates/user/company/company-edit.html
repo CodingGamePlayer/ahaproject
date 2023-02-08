@@ -141,12 +141,14 @@
                     <input class="form-control" type="text" id="cp_file" th:value="${company.cp_file}">
                 </div>
             </div>
-            <input type="button" class="btn btn-primary" id="companySubmitBtn" value="등록하기" />
+            <input type="button" class="btn btn-primary" id="companySubmitBtn" value="수정하기" />
+            <input type="button" class="btn btn-dark mt-2" id="companyDeleteBtn" value="삭제하기"/>
         </div>
     </div>
 </div>
 <script>
     const companySubmitBtn = document.querySelector('#companySubmitBtn');
+    const companyDeleteBtn = document.querySelector('#companyDeleteBtn');
     const urlParams = new URL(location.href).searchParams;
 
 
@@ -209,10 +211,40 @@
         }).then(response => {
            if(response.ok){
                response.text();
-               alert('등록이 완료되었습니다.');
+               alert('수정이 완료되었습니다.');
                window.close();
            } else {
-               alert('등록을 실패하였습니다.');
+               alert('수정을 실패하였습니다.');
+           }
+        });
+
+
+    });
+    
+    companyDeleteBtn.addEventListener("click", () => {
+    	
+        const input_cp_id = urlParams.get('cp_id')
+		
+        const company = {
+        	cp_id : input_cp_id
+        }
+
+        const url = "/api/user/company";
+
+        fetch(url, {
+           method : "DELETE",
+           body : JSON.stringify(company),
+           headers : {
+               "Content-Type" : "application/json"
+           }
+        }).then(response => {
+           if(response.ok){
+               response.text();
+               alert('삭제 완료되었습니다.');
+               window.close();
+               window.location.reload();
+           } else {
+               alert('삭제 실패하였습니다.');
            }
         });
 
