@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <title>
+        아하포장건설
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700"
+          rel="stylesheet"/>
+    <!-- Nucleo Icons -->
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/assets/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+    <!— Tempus Dominus JavaScript —>
+    <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
+            crossorigin="anonymous"></script>
+
+    <!— Tempus Dominus Styles —>
+    <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
+          rel="stylesheet" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="card m-3">
+
+    <div class="card-body">
+        <h5 class="card-title mt-3 mb-3">고객정보 등록</h5>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*회사명</label>
+                    <select class="form-select" aria-label="Default select example"  id="cp_name">
+                        <th:block th:each="company : ${companys}">
+                            <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*사업자번호</label>
+                    <select class="form-select" aria-label="Default select example"  id="cp_num">
+                        <th:block th:each="company : ${companys}">
+                            <option th:value="${company.cp_num}">[[${company.cp_num}]]</option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*회사주소</label>
+                    <select class="form-select" aria-label="Default select example" id="cp_address">
+                        <th:block th:each="company : ${companys}">
+                        <option th:value="${company.cp_address}" >[[${company.cp_address}]]</option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*회사 전화번호</label>
+                    <select class="form-select" aria-label="Default select example" id="cp_tel">
+                        <th:block th:each="company : ${companys}">
+                        <option th:value="${company.cp_tel}" >[[${company.cp_tel}]]</option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*거래처코드</label>
+                    <input class="form-control" type="text" id="cl_code">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*이메일</label>
+                    <input class="form-control" type="text" id="cl_email">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*계좌</label>
+                    <input class="form-control" type="text" id="cl_account">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*파일</label>
+                    <input class="form-control" type="text" id="cl_file">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*비고1</label>
+                    <textarea style="resize: none;" rows="5" cols="50" id="cl_etc1"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*비고2</label>
+                    <input class="form-control" type="text" id="cl_etc2">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*비고3</label>
+                    <input class="form-control" type="text" id="cl_etc3">
+                </div>
+            </div>
+            <input type="button" class="btn btn-primary" id="clientSubmitBtn" value="등록하기" />
+        </div>
+    </div>
+</div>
+<script>
+    const clientSubmitBtn = document.querySelector('#clientSubmitBtn');
+
+    clientSubmitBtn.addEventListener("click", () => {
+        const input_cp_num = document.querySelector('#cp_num').value;
+        const input_cp_name = document.querySelector('#cp_name').value;
+        const input_cp_address = document.querySelector('#cp_address').value;
+        const input_cp_tel = document.querySelector('#cp_tel').value;
+        const input_cl_code = document.querySelector('#cl_code').value;
+        const input_cl_email = document.querySelector('#cl_email').value;
+        const input_cl_account = document.querySelector('#cl_account').value;
+        const input_cl_file = document.querySelector('#cl_file').value;
+        const input_cl_etc1 = document.querySelector('#cl_etc1').value;
+        const input_cl_etc2 = document.querySelector('#cl_etc2').value;
+        const input_cl_etc3 = document.querySelector('#cl_etc3').value;
+
+        const client1 = {
+            cp_num : input_cp_num,
+            cp_name : input_cp_name,
+            cp_address : input_cp_address,
+            cp_tel : input_cp_tel,
+            cl_code : input_cl_code,
+            cl_email : input_cl_email,
+            cl_account : input_cl_account,
+            cl_file : input_cl_file,
+            cl_etc1 : input_cl_etc1,
+            cl_etc2 : input_cl_etc2,
+            cl_etc3 : input_cl_etc3
+        };
+
+        if(input_cp_num == "" ||input_cp_name == "" || 
+        input_cp_address == "" || input_cp_tel == "" ||
+        input_cl_code == "" || input_cl_email =="" || input_cl_account == ""){
+            alert('*이 있는 칸은 채워주시기 바랍니다.')
+            return;
+        }
+
+        console.log(client1);
+
+        const url = "/api/user/client";
+
+        fetch(url, {
+           method : "POST",
+           body : JSON.stringify(client1),
+           headers : {
+               "Content-Type" : "application/json"
+           }
+        }).then(response => {
+           if(response.ok){
+               response.text();
+               alert('등록이 완료되었습니다.');
+               window.location.reload();
+           } else {
+               alert('등록을 실패하였습니다.');
+           }
+        });
+
+
+    });
+</script>
+
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<script
+        src="/assets/js/plugins/swiper-bundle.min.js"
+        type="text/javascript"
+></script>
+<script src="/assets/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
+</body>
+</html>

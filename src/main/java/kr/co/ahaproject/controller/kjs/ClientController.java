@@ -12,5 +12,5 @@ public interface ClientController {
 
     String clientForm(Model model,ClientDTO client);
 
-    String clientEditForm(MisuDTO misuDTO, Model model);
+    String clientEditForm(Model model, ClientDTO client);
 }

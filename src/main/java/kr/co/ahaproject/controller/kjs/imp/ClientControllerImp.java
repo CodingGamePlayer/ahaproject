@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.co.ahaproject.controller.kjs.ClientController;
 import kr.co.ahaproject.dto.ClientDTO;
 import kr.co.ahaproject.dto.CompanyDTO;
-import kr.co.ahaproject.dto.MisuDTO;
-import kr.co.ahaproject.entity.Client;
 import kr.co.ahaproject.service.kjs.CompanyService;
 import kr.co.ahaproject.service.kjs.imp.ClientServiceImp;
 
@@ -36,7 +34,7 @@ public class ClientControllerImp implements ClientController {
 		// TODO Auto-generated method stub
 		List<ClientDTO> list = clientService.selectAll();
 		model.addAttribute("clients", list);
-		return "user/client/list";
+		return "user/client/client-list";
 	}
 
 //	작성페이지 이동
@@ -47,13 +45,22 @@ public class ClientControllerImp implements ClientController {
 		
 		List<CompanyDTO> companyList = companyService.selectAll();
 		model.addAttribute("companys", companyList);
-		return "user/client/form";
+		return "user/client/client-form";
 	}
 
+//	수정페이지 이동
 	@Override
-	public String clientEditForm(MisuDTO misuDTO, Model model) {
+	@GetMapping("/edit")
+	public String clientEditForm(Model model, ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		 ClientDTO rs = clientService.findById(clientDTO); 
+		 List<CompanyDTO> companyList = companyService.selectAll(); 
+		 model.addAttribute("client", rs);
+		 model.addAttribute("companys", companyList);
+		 
+		
+		return "user/client/client-edit";
 	}
 	
 }
