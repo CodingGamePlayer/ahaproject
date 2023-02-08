@@ -9,9 +9,9 @@ import java.util.List;
 public interface MisuMapper {
 
     @Insert("INSERT INTO `ahaproject`.`misu` (`misu_div`, `cp_name`, `cst_code`, `misu_manager`, `misu_value`, " +
-            "`misu_name`, `misu_total_value`, `misu_collect_date`, `misu_collect_value`, `misu_finished`, `misu_etc`) " +
+            "`misu_name`, `misu_total_value`, `misu_collect_date`, `misu_collect_value`, `misu_finished`,`misu_uuid`,`misu_filename`, `misu_etc`) " +
             "VALUES (#{misu.misu_div}, #{misu.cp_name}, #{misu.cst_code}, #{misu.misu_manager}, #{misu.misu_value}, #{misu.misu_name}, #{misu.misu_total_value}," +
-            " #{misu.misu_collect_date}, #{misu.misu_collect_value}, #{misu.misu_finished}, #{misu.misu_etc})")
+            " #{misu.misu_collect_date}, #{misu.misu_collect_value}, #{misu.misu_finished}, #{misu.misu_uuid}, #{misu.misu_filename}, #{misu.misu_etc})")
     int register(@Param("misu")Misu misu);
 
 
@@ -28,6 +28,8 @@ public interface MisuMapper {
             @Result(property = "misu_collect_date", column = "misu_collect_date"),
             @Result(property = "misu_collect_value", column = "misu_collect_value"),
             @Result(property = "misu_finished", column = "misu_finished"),
+            @Result(property = "misu_uuid", column = "misu_uuid"),
+            @Result(property = "misu_filename", column = "misu_filename"),
             @Result(property = "misu_etc", column = "misu_etc")})
     List<Misu> selectAll();
 
@@ -39,6 +41,7 @@ public interface MisuMapper {
             "`misu_div` = #{misu.misu_div}, `cp_name` = #{misu.cp_name}, `cst_code` = #{misu.cst_code}, " +
             "`misu_manager` = #{misu.misu_manager}, `misu_value` = #{misu.misu_value}, `misu_name` = #{misu.misu_name}, " +
             "`misu_total_value` = #{misu.misu_total_value}, `misu_collect_date` = #{misu.misu_collect_date}, `misu_collect_value` = #{misu.misu_collect_value}, " +
-            "`misu_finished` = #{misu.misu_finished}, `misu_etc` = #{misu.misu_etc} WHERE (`misu_id` = #{misu.misu_id})")
+            "`misu_finished` = #{misu.misu_finished}, `misu_uuid` = #{misu.misu_uuid}, `misu_filename` = #{misu.misu_filename}, " +
+            "`misu_etc` = #{misu.misu_etc} WHERE (`misu_id` = #{misu.misu_id})")
     int update(@Param("misu") Misu misu);
 }

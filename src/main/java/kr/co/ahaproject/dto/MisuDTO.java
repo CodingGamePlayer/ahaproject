@@ -22,5 +22,7 @@ public class MisuDTO {
     String misu_collect_date;
     Long misu_collect_value;
     Boolean misu_finished;
+    String misu_uuid;
+    String misu_filename;
     String misu_etc;
 }

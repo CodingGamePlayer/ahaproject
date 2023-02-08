@@ -12,5 +12,7 @@ public interface MachineService {
 
     int update(MachineDTO machineDTO);
 
+
    Integer getm_code();
+
 }

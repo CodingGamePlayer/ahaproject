@@ -35,6 +35,7 @@ public class MachineControllerImp implements MachineController {
         List<MachineDTO> machineDTOS = machineService.selectAll();
         int new_m_code = Integer.parseInt(String.valueOf(machineService.getm_code()+1));
 
+
         String str = String.format("%04d", new_m_code);
 
         model.addAttribute("machineDTOs", machineDTOS);
