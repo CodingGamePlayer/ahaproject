@@ -50,10 +50,19 @@ public class ClientControllerImp implements ClientController {
 		return "user/client/form";
 	}
 
+//	수정페이지 이동
 	@Override
-	public String clientEditForm(MisuDTO misuDTO, Model model) {
+	@GetMapping("/edit")
+	public String clientEditForm(Model model, ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		 ClientDTO rs = clientService.findById(clientDTO); 
+		 List<CompanyDTO> companyList = companyService.selectAll(); 
+		 model.addAttribute("client", rs);
+		 model.addAttribute("companys", companyList);
+		 
+		
+		return "user/client/edit";
 	}
 	
 }

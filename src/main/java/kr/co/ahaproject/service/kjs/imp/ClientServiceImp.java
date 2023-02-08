@@ -54,24 +54,20 @@ public class ClientServiceImp implements ClientService {
         return modelMapper.map(client, ClientDTO.class);
 	}
 
+
+
 	@Override
 	public int update(ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
+		 Client client = modelMapper.map(clientDTO, Client.class);
+	        int update = cm.update(client);
 
-//	@Override
-//	public int update(ClientDTO clientDTO) {
-//		// TODO Auto-generated method stub
-//		 Client client = modelMapper.map(clientDTO, Client.class);
-//	        int update = cm.update(client);
-//
-//	        if(!(update>0)){
-//	            return 0;
-//	        }
-//
-//	        return update;
-//	}
+	        if(!(update>0)){
+	            return 0;
+	        }
+	        
+        return update;
+	}
 	
 	
 

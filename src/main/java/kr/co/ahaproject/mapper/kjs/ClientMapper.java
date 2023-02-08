@@ -65,11 +65,18 @@ public interface ClientMapper {
 
     
 //  고객 수정
-    @Update("UPDATE ahaproject.misu SET " +
-            "misu_div = #{misu.misu_div}, cp_name = #{misu.cp_name}, cst_code = #{misu.cst_code}, " +
-            "misu_manager = #{misu.misu_manager}, misu_value = #{misu.misu_value}, misu_name = #{misu.misu_name}, " +
-            "misu_total_value = #{misu.misu_total_value}, misu_collect_date = #{misu.misu_collect_date}, misu_collect_value = #{misu.misu_collect_value}, " +
-            "misu_finished = #{misu.misu_finished}, misu_etc = #{misu.misu_etc} WHERE (misu_id = #{misu.misu_id})")
-    int update(@Param("client") ClientDTO clientDTO);
-
+    @Update("UPDATE ahaproject.client SET "
+    		+ "cp_name = #{client.cp_name},"
+    		+ "cp_num = #{client.cp_num},"
+    		+ "cp_address = #{client.cp_address},"
+    		+ "cp_tel = #{client.cp_tel},"
+    		+ "cl_code = #{client.cl_code},"
+    		+ "cl_email = #{client.cl_email},"
+    		+ "cl_account = #{client.cl_account},"
+    		+ "cl_file = #{client.cl_file},"
+    		+ "cl_etc1 = #{client.cl_etc1},"
+    		+ "cl_etc2 = #{client.cl_etc2},"
+    		+ "cl_etc3 = #{client.cl_etc3}"
+    		+ "WHERE cl_id = #{client.cl_id}")
+    int update(@Param("client") Client client);
 }
