@@ -1,4 +1,4 @@
-package kr.co.ahaproject.controller.kjs.imp;
+package kr.co.ahaproject.controller.cjw.imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import kr.co.ahaproject.controller.kjs.MaterialController;
+import kr.co.ahaproject.controller.cjw.MaterialController;
 import kr.co.ahaproject.dto.MaterialDTO;
-import kr.co.ahaproject.service.kjs.MaterialService;
+import kr.co.ahaproject.service.cjw.MaterialService;
 
 @Controller
 public class MaterialControllerImp implements MaterialController {
