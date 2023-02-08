@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IncomeControllerImp implements IncomeController {
     @Autowired
     IncomeService incomeService;
-    @Autowired
-    CardServiceImpl cardService;
 
     @Override
     @GetMapping("/list")
@@ -35,6 +33,7 @@ public class IncomeControllerImp implements IncomeController {
     @Override
     @GetMapping("/register")
     public String registerForm() {
+        //회사, 거래처, 공사 서비스
         return "user/accounting/income/register";
     }
 
@@ -43,12 +42,20 @@ public class IncomeControllerImp implements IncomeController {
     @GetMapping("/{id}/update")
     public String editForm(@PathVariable int id, Model model) {
         model.addAttribute("ioDTO", incomeService.selectOne(id));
+        //회사, 거래처, 공사 서비스
         return "user/accounting/income/update";
     }
+
+    @Override
+    @GetMapping("{id}/delete")
+    public String delete(@PathVariable int id) {
+        incomeService.delete(id);
+        return "redirect:/user/accounting/income/list";
+    }
+
     @GetMapping("/jh")
     public String test(Model model)
-    { model.addAttribute("card",cardService.findByCard(1));
-
+    {
         return "detail-page";
     }
 }
