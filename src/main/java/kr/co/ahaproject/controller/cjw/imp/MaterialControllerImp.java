@@ -39,14 +39,7 @@ public class MaterialControllerImp implements MaterialController {
 		
 		return "/user/material/material-form";
 	}
-	
-	// 자재 기초정보 글생성 처리
-	@Override
-	@PostMapping("/user/material/registerPro")
-	public String registerPro(MaterialDTO dto) {
-		materialService.create(dto);
-		return null;
-	}
+
 	
 	// 자재 기초정보 상세보기 페이지 이동
 	@Override
@@ -57,18 +50,7 @@ public class MaterialControllerImp implements MaterialController {
 		return "/user/material/material-edit-form";
 	}
 
-	// 자재 기초정보 상세보기 페이지 → 수정처리해주기
-	@Override
-	public String updatePro() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public String delete() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 

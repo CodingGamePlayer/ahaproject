@@ -21,7 +21,7 @@ public class MaterialApiControllerImp implements MaterialApiController {
 	@Autowired
 	private MaterialService materialService;
 
-	
+	// 자재 기초등록 - 글생성
 	@Override
 	@PostMapping("/material")
 	public ResponseEntity register(@RequestBody MaterialDTO materialDTO) {
@@ -39,6 +39,7 @@ public class MaterialApiControllerImp implements MaterialApiController {
         return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
+	// 자재 기초등록 - 수정처리
 	@Override
 	@PutMapping("/material")
 	public ResponseEntity update(@RequestBody MaterialDTO materialDTO) {
@@ -53,6 +54,8 @@ public class MaterialApiControllerImp implements MaterialApiController {
 	        return ResponseEntity.status(HttpStatus.OK).build();
 	}
 	
+	
+	// 자재 기초등록 - 삭제처리
 	@Override
 	@DeleteMapping("/material")
 	public ResponseEntity delete(@RequestBody MaterialDTO materialDTO) {

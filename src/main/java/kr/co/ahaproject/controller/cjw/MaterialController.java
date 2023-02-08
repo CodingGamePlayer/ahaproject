@@ -8,7 +8,6 @@ public interface MaterialController {
 	
 	 /* 기초정보 CRUD 작업 
      * 재원 23.02.07
-     * dd
      */ 
     
     // 자재 기초정보 START ======
@@ -19,17 +18,9 @@ public interface MaterialController {
     // 자재 기초정보 글생성 이동
     String register();
     
-    // 자재 기초정보 글생성 처리
-    String registerPro(MaterialDTO dto);
-    
     // 자재 기초정보 상세보기 이동
     String detail(MaterialDTO dto, Model model);
-    
-    // 자재 기초정보 수정처리
-    String updatePro();
-    
-    // 자재 기초정보 삭제
-    String delete();
+
 
 	
 
