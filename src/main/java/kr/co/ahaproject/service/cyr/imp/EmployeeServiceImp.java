@@ -19,6 +19,11 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     @Override
+    public int selectid(){
+        return employeeMapper.selectid();
+    }
+
+    @Override
     public Employee selectOne(int emp_id) {
         return employeeMapper.selectOne(emp_id);
     }

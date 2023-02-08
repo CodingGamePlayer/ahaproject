@@ -17,17 +17,18 @@ public class AdminApiControllerImp implements AdminApiController {
     @Autowired
     private MisuService misuService;
 
+
+
     @Override
     @PostMapping("/misu")
     public ResponseEntity<MisuDTO> register(@RequestBody MisuDTO misuDTO) {
 
-        if(misuDTO == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        if(misuDTO.getMisu_uuid() == null){
+            misuDTO.setMisu_uuid("");
+            misuDTO.setMisu_filename("");
         }
 
-
         int result = misuService.register(misuDTO);
-
 
         if(result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -47,5 +48,14 @@ public class AdminApiControllerImp implements AdminApiController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @Override
+    @DeleteMapping("/misu")
+    public ResponseEntity delete(MisuDTO misuDTO) {
+
+
+
+        return null;
     }
 }
