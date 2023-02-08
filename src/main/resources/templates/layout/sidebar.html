@@ -29,8 +29,8 @@
                     <div><a href="#" class="text-white text-sm">- 장비정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMachine()">- 장비정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 회사정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 회사정보 입력</a></div>
+                    <div><a href="/user/company/list" class="text-white text-sm">- 회사정보 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitCompany()">- 회사정보 입력</a></div>
                     <div><hr></div>
                     <div><a href="/user/material/list" class="text-white text-sm">- 자재정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMaterial()">- 자재정보 입력</a></div>
@@ -160,6 +160,11 @@
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                 window.open("/user/basicinfo/machine-form", "_blank", option);
+            }
+            function regitCompany(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/company/form", "_blank", option);
             }
 
             const logoutBtn = document.querySelector('#sidebar-logout');

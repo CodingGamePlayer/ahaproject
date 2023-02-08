@@ -49,7 +49,6 @@ public class ClientServiceImp implements ClientService {
 	@Override
 	public ClientDTO findById(ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
-
         Client client = cm.findById(modelMapper.map(clientDTO, Client.class));
         return modelMapper.map(client, ClientDTO.class);
 	}

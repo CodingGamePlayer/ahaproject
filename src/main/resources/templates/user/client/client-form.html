@@ -41,20 +41,20 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*회사번호</label>
-                    <select class="form-select" aria-label="Default select example"  id="cp_num">
+                    <label class="form-control-label">*회사명</label>
+                    <select class="form-select" aria-label="Default select example"  id="cp_name">
                         <th:block th:each="company : ${companys}">
-                            <option th:value="${company.cp_num}">[[${company.cp_num}]]</option>
+                            <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
                         </th:block>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*회사명</label>
-                    <select class="form-select" aria-label="Default select example"  id="cp_name">
+                    <label class="form-control-label">*사업자번호</label>
+                    <select class="form-select" aria-label="Default select example"  id="cp_num">
                         <th:block th:each="company : ${companys}">
-                            <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
+                            <option th:value="${company.cp_num}">[[${company.cp_num}]]</option>
                         </th:block>
                     </select>
                 </div>
@@ -82,7 +82,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*거래처코드</label>
-                    <input class="form-control" type="text" id="cl_code" disabled="disabled" th:value="cl_code">
+                    <input class="form-control" type="text" id="cl_code">
                 </div>
             </div>
             <div class="col-sm-12">

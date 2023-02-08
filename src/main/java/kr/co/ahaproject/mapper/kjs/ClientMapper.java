@@ -19,20 +19,6 @@ import kr.co.ahaproject.entity.Client;
 
 @Mapper
 public interface ClientMapper {
-
-	
-//	cl_id int AI PK 
-//	cp_name varchar(45) 
-//	cp_num varchar(45) 
-//	cp_address varchar(255) 
-//	cp_tel varchar(255) 
-//	cl_code varchar(255) PK 
-//	cl_email varchar(255) 
-//	cl_account varchar(255) 
-//	cl_file varchar(500) 
-//	cl_etc1 varchar(255) 
-//	cl_etc2 varchar(255) 
-//	cl_etc3 varchar(255)
 	
 //	고객 등록
     @Insert("INSERT INTO ahaproject.client (cp_num, cp_name, cp_address, cp_tel, cl_code, cl_email, cl_account, cl_file, cl_etc1, cl_etc2, cl_etc3) "
