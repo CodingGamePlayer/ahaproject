@@ -22,15 +22,15 @@ public class BoardApiControllerImpl implements BoardApiController{
 	private BoardService service;
 
 	@Override
-	@PostMapping("/board")
+	@PostMapping("/board/list")
 	public ResponseEntity<BoardDTO> create(@RequestBody BoardDTO dto) {
 		System.out.println("API 컨트롤러 테스트 로그");
 		
 		  if(dto == null){
 	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	        }
-
-
+		  
+		  System.out.println(dto.toString());
 	        int result = service.create(dto);
 
 

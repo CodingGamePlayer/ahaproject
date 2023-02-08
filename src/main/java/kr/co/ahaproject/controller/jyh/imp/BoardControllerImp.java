@@ -29,7 +29,7 @@ public class BoardControllerImp implements BoardController {
 		return "user/board/list";
 	}
 
-
+	//등록페이지 이동
 	@Override
 	@GetMapping("/user/board/register")
 	public String create() {

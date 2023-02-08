@@ -36,7 +36,8 @@ public interface Boardmapper {
 	
 	
 	//글 작성 
-	@Insert("insert into board(ct_id,b_title,b_body,b_etc,b_file) values(#{ct_id},#{b_title},#{b_body},#{b_etc},#{b_file}")
+	
+	@Insert("insert into board(ct_id,us_id,b_title,b_body,b_etc,b_file) values(#{ct_id},#{us_id},#{b_title},#{b_body},#{b_etc},#{b_file})")
       int create(BoardDTO dto);
 	
 	//글 수정

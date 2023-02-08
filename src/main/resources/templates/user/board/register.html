@@ -42,16 +42,16 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*카테고리</label>
-                    <!--  <select class="form-select" aria-label="Default select example" id="ct_id">
-                        <option value="noticeboard">공지사항</option>
-                        <option value="freeboard" >자유게시판</option>
-                        <option value="qnaboard" >QnA</option>
-                    </select> -->
+                    <select class="form-select" aria-label="Default select example" id="ct_id">
+                        <option th:text="noticeBoard" th:value="1">공지사항</option>
+                        <option th:text="freeboard" th:value="2">자유게시판</option>
+                        <option th:text="qnaboard" th:value="3">QnA</option>
+                    </select>
                 </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*유저</label>
-                    <input class = "form-control" type = "text" id = "us_id">
+                    <input class = "form-control" th:value="1" id="us_id" readonly="readonly" placeholder="유저 아이디">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -80,7 +80,7 @@
             </div>
             </div>
             
-            <input  type="button" class="btn btn-primary" id="boardSubmitBtn" value="등록하기" />
+            <input type="submit" class="btn btn-primary" value="등록하기" id="boardSubmitBtn"/>
           
         </div>
     </div>
@@ -97,27 +97,29 @@
         const input_b_etc = document.querySelector('#b_etc').value;
         const input_b_file = document.querySelector('#b_file').value;
         
+        
+        
         const board1 = {
             ct_id : input_ct_id,
             us_id : input_us_id,
             b_title : input_b_title,
            	b_body : input_b_body,
             b_etc : input_b_etc,
-            b_file : input_b_file,
+            b_file : input_b_file
            
         };
 
-        if( input_ct_id == "" ||
-            input_us_id == "" || input_b_title == "" ||
-            input_b_body == "" || input_b_etc =="" ||
-            input_b_file == ""){
+        if( input_ct_id == "" ||input_us_id == "" ||
+        	input_b_title == "" ||input_b_body == "" ||
+        	input_b_etc =="" ||input_b_file == "")
+        {
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
 
         console.log(board1);
 
-        const url = "/api/user/board";
+        const url = "/api/user/board/list";
 
         fetch(url, {
            method : "POST",
@@ -139,7 +141,7 @@
     });
 </script>
 
-<script>
+<!-- <script>
     const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
@@ -162,7 +164,7 @@
             },
         },
     });
-</script>
+</script> -->
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
