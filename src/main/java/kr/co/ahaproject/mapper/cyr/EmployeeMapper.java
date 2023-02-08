@@ -1,7 +1,8 @@
-package kr.co.ahaproject.mapper.kjs;
+package kr.co.ahaproject.mapper.cyr;
 
 import kr.co.ahaproject.entity.Company;
 import kr.co.ahaproject.entity.Employee;
+import kr.co.ahaproject.entity.Misu;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -40,8 +41,5 @@ public interface EmployeeMapper {
 
     @Delete("delete from employee where emp_id =#{emp_id}")
     int delete(int emp_id);
-
-
-
 
 }
