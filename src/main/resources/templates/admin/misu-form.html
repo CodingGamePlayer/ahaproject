@@ -24,13 +24,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
             crossorigin="anonymous"></script>
-
-    <!--  제이쿼리 datepicker 사용시 3줄 복사해서 페이지 붙여놓을 것!-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- 복붙 end -->
-
     <!— Tempus Dominus JavaScript —>
     <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
             crossorigin="anonymous"></script>
@@ -38,6 +31,12 @@
     <!— Tempus Dominus Styles —>
     <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
           rel="stylesheet" crossorigin="anonymous">
+
+    <!--  제이쿼리 datepicker 사용시 3줄 복사해서 페이지 붙여놓을 것!-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- 복붙 end -->
 
 </head>
 <body>
@@ -55,7 +54,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*회사명</label>
-                    <select class="form-select" aria-label="Default select example"  id="cp_name">
+                    <select class="form-select" aria-label="Default select example" id="cp_name">
                         <th:block th:each="company : ${companyDTOs}">
                             <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
                         </th:block>
@@ -66,9 +65,9 @@
                 <div class="form-group">
                     <label class="form-control-label">*공사코드</label>
                     <select class="form-select" aria-label="Default select example" id="cst_code">
-
-                        <option th:value="${const.cst_code}" >[[${const.cst_code}]]</option>
-
+                        <th:block th:each="const : ${constructionDTOs}">
+                            <option th:value="${const.cst_code}">[[${const.cst_code}]]</option>
+                        </th:block>
                     </select>
                 </div>
             </div>
@@ -102,53 +101,26 @@
                     <input class="form-control" type="text" id="misu_total_value">
                 </div>
             </div>
-<!--            <div class="col-sm-12">-->
-<!--                <div class="form-group">-->
-<!--                    <label class="form-control-label">수금일</label>-->
-<!--                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>-->
-<!--                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />-->
-<!--                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >-->
-<!--                        <span class='fa-solid fa-calendar'></span>-->
-<!--                        </span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-            <!-- datepicker 수정함 script까지 -->
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*수금일</label>
-                    <input class="datepicker form-control" id='misu_collect_date'>
+                    <label class="form-control-label">수금일</label>
+                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest'
+                         data-td-target-toggle='nearest'>
+                        <input id='datetimepicker1Input' type='text' class='form-control'
+                               data-td-target='#datetimepicker1'/>
+                        <span class='input-group-text' data-td-target='#datetimepicker1'
+                              data-td-toggle='datetimepicker'>
+                        <span class='fa-solid fa-calendar'></span>
+                        </span>
+                    </div>
                 </div>
             </div>
-                    <script>
-
-                        $.datepicker.setDefaults({
-                            dateFormat: 'yy-mm-dd',
-                            prevText: '이전 달',
-                            nextText: '다음 달',
-                            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-                            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-                            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-                            showMonthAfterYear: true,
-                            yearSuffix: '년'
-                        });
-
-                        $(function () {
-                            $('.datepicker').datepicker();
-                        });
-
-                    </script>
-
-                <!-- 수금일 datepicker end -->
-
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">수금완료여부</label>
                     <select class="form-select" aria-label="Default select example" id="misu_finished">
                         <option value="false" selected>미완료</option>
-                        <option value="true" >수금완료</option>
+                        <option value="true">수금완료</option>
                     </select>
                 </div>
             </div>
@@ -158,11 +130,131 @@
                     <input class="form-control" type="text" id="misu_etc">
                 </div>
             </div>
-            <input type="button" class="btn btn-primary" id="misuSubmitBtn" value="등록하기" />
+            <!--            파일첨부를 위한 기능 추가 start-->
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">파일</label><br>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        파일등록
+                    </button>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">
+                    </div>
+                </div>
+            </div>
+
+            <!--            파일첨부를 위한 기능 추가 end-->
+
+            <input type="button" class="btn btn-primary" id="misuSubmitBtn" value="등록하기"/>
         </div>
     </div>
 </div>
+<!-- 파일 첨부용 Modal start -->
+
+
+<div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">파일첨부</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">첨부파일을 선택하세요.</label>
+                    <input class="form-control" type="file" id="formFile" name="files">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUploadBtn">Close
+                </button>
+                <button type="button" class="btn btn-primary uploadBtn" id="uploadBtn">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 파일 첨부용 Modal end -->
+
+<!-- 파일 첨부용 JS start-->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/upload.js"></script>
+
+<!-- 파일 첨부용 JS end-->
+
 <script>
+    let input_UUID;
+    let input_Filename;
+
+    document.querySelector(".uploadBtn").addEventListener("click", function (e) {
+
+        const formObj = new FormData();
+
+        const fileInput = document.querySelector("input[name='files']")
+
+        console.log(fileInput.files)
+
+        const files = fileInput.files
+
+        for (let i = 0; i < files.length; i++) {
+            formObj.append("files", files[i]);
+        }
+
+
+        uploadToServer(formObj).then(result => {
+            console.log(result)
+            //console.log(result)
+            for (const uploadResult of result) {
+                showUploadFile(uploadResult)
+            }
+            document.getElementById('closeUploadBtn').click()
+        }).catch(e => {
+            document.getElementById('closeUploadBtn').click()
+
+        })
+
+    }, false)
+
+    const uploadResult = document.querySelector(".uploadResult")
+
+    function showUploadFile({uuid, fileName, link}) {
+        input_UUID = uuid;
+        input_Filename = fileName;
+        const str =
+            `<div class="card col-10 ">
+            <div class="card-header ">
+                ${fileName}
+                <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+            </div>
+            <div class="card-body">
+                 <img src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
+            </div>
+        </div><!-- card -->`
+
+        uploadResult.innerHTML += str
+    }
+
+
+    function removeFile(uuid, fileName, obj) {
+
+        console.log(uuid)
+        console.log(fileName)
+
+        console.log(obj)
+
+        const targetDiv = obj.closest(".card")
+
+        removeFileToServer(uuid, fileName).then(data => {
+            targetDiv.remove()
+        })
+    }
+
+
+
     const misuSubmitBtn = document.querySelector('#misuSubmitBtn');
 
     misuSubmitBtn.addEventListener("click", () => {
@@ -173,29 +265,31 @@
         const input_misu_value = document.querySelector('#misu_value').value;
         const input_misu_name = document.querySelector('#misu_name').value;
         const input_misu_total_value = document.querySelector('#misu_total_value').value;
-        const input_misu_collect_date = document.querySelector('#misu_total_value').value;
+        const input_misu_collect_date = document.querySelector('#datetimepicker1Input').value;
         const input_misu_collect_value = document.querySelector('#misu_collect_value').value;
         const input_misu_finished = document.querySelector('#misu_finished').value;
         const input_misu_etc = document.querySelector('#misu_etc').value;
 
         const misu1 = {
-            misu_div : input_misu_div,
-            cp_name : input_cp_name,
-            cst_code : input_cst_code,
-            misu_manager : input_misu_manager,
-            misu_value : input_misu_value,
-            misu_name : input_misu_name,
-            misu_total_value : input_misu_total_value,
-            misu_collect_date : input_misu_collect_date,
-            misu_collect_value : input_misu_collect_value,
-            misu_finished : input_misu_finished,
-            misu_etc : input_misu_etc
+            misu_div: input_misu_div,
+            cp_name: input_cp_name,
+            cst_code: input_cst_code,
+            misu_manager: input_misu_manager,
+            misu_value: input_misu_value,
+            misu_name: input_misu_name,
+            misu_total_value: input_misu_total_value,
+            misu_collect_date: input_misu_collect_date,
+            misu_collect_value: input_misu_collect_value,
+            misu_uuid : input_UUID,
+            misu_filename : input_Filename,
+            misu_finished: input_misu_finished,
+            misu_etc: input_misu_etc
         };
 
-        if(input_misu_div == "" || input_cp_name == "" ||
+        if (input_misu_div == "" || input_cp_name == "" ||
             input_cst_code == "" || input_misu_manager == "" ||
-            input_misu_value == "" || input_misu_name =="" ||
-            input_misu_total_value == ""){
+            input_misu_value == "" || input_misu_name == "" ||
+            input_misu_total_value == "") {
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
@@ -205,49 +299,49 @@
         const url = "/api/admin/misu";
 
         fetch(url, {
-           method : "POST",
-           body : JSON.stringify(misu1),
-           headers : {
-               "Content-Type" : "application/json"
-           }
+            method: "POST",
+            body: JSON.stringify(misu1),
+            headers: {
+                "Content-Type": "application/json"
+            }
         }).then(response => {
-           if(response.ok){
-               response.text();
-               alert('등록이 완료되었습니다.');
-               window.location.reload();
-           } else {
-               alert('등록을 실패하였습니다.');
-           }
+            if (response.ok) {
+                response.text();
+                alert('등록이 완료되었습니다.');
+                window.location.reload();
+            } else {
+                alert('등록을 실패하였습니다.');
+            }
         });
 
 
     });
 </script>
 
-<!--<script>-->
-<!--    const datevalue = document.querySelector('#datetimepicker1Input').value;-->
-<!--    console.log(datevalue);-->
-<!--    new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {-->
-<!--        display: {-->
-<!--            components: {-->
-<!--                seconds: false,-->
-<!--                useTwentyfourHour: false,-->
-<!--            },-->
-<!--            icons: {-->
-<!--                type: 'icons',-->
-<!--                time: 'fa fa-solid fa-clock',-->
-<!--                date: 'fa fa-solid fa-calendar',-->
-<!--                up: 'fa fa-solid fa-arrow-up',-->
-<!--                down: 'fa fa-solid fa-arrow-down',-->
-<!--                previous: 'fa fa-solid fa-chevron-left',-->
-<!--                next: 'fa fa-solid fa-chevron-right',-->
-<!--                today: 'fa fa-solid fa-calendar-check',-->
-<!--                clear: 'fa fa-solid fa-trash',-->
-<!--                close: 'fas fa-solid fa-xmark'-->
-<!--            },-->
-<!--        },-->
-<!--    });-->
-<!--</script>-->
+<script>
+    const datevalue = document.querySelector('#datetimepicker1Input').value;
+    console.log(datevalue);
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
+        display: {
+            components: {
+                seconds: false,
+                useTwentyfourHour: false,
+            },
+            icons: {
+                type: 'icons',
+                time: 'fa fa-solid fa-clock',
+                date: 'fa fa-solid fa-calendar',
+                up: 'fa fa-solid fa-arrow-up',
+                down: 'fa fa-solid fa-arrow-down',
+                previous: 'fa fa-solid fa-chevron-left',
+                next: 'fa fa-solid fa-chevron-right',
+                today: 'fa fa-solid fa-calendar-check',
+                clear: 'fa fa-solid fa-trash',
+                close: 'fas fa-solid fa-xmark'
+            },
+        },
+    });
+</script>
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
