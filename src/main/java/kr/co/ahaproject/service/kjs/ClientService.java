@@ -17,4 +17,6 @@ public interface ClientService {
 	    
 	    int delete(ClientDTO clientDTO);
 	    
+	    int maxNum();
+	    
 }

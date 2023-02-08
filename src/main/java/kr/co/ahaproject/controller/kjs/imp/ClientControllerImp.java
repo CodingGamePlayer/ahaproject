@@ -45,6 +45,9 @@ public class ClientControllerImp implements ClientController {
 		
 		List<CompanyDTO> companyList = companyService.selectAll();
 		model.addAttribute("companys", companyList);
+		int rs = clientService.maxNum();
+		String maxNum = String.format("%04d", rs);
+		model.addAttribute("maxNum", maxNum);
 		return "user/client/client-form";
 	}
 

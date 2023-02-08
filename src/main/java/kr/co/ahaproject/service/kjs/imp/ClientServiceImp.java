@@ -77,6 +77,12 @@ public class ClientServiceImp implements ClientService {
 		
 		return rs;
 	}
+
+	@Override
+	public int maxNum() {
+		// TODO Auto-generated method stub
+		return cm.maxNum();
+	}
 	
 	
 

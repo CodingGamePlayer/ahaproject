@@ -73,4 +73,8 @@ public interface ClientMapper {
   @Delete("DELETE FROM ahaproject.client "
   		+ "WHERE cl_id = #{client.cl_id}")
   int delete(@Param("client") Client client);
+  
+// 거래처 코드
+  @Select ("select max(cl_id)+1 from ahaproject.client")
+  int maxNum();
 }
