@@ -18,7 +18,7 @@ public interface BoardController {
 	String list(Model model);
 	
 	//작성
-	String create(Model model);
+	String create();
 	
 	
 	

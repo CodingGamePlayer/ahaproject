@@ -32,12 +32,8 @@ public class BoardControllerImp implements BoardController {
 
 	@Override
 	@GetMapping("/user/board/register")
-	public String create(Model model) {
-//		List<CategoryDTO> categoryDTOS = CategoryService.selectAll();
-//      List<estimateDTO> estimateDTOS = estimateService.selectAll();
-//
-//        model.addAttribute("categoryDTOS", categoryDTOS);
-//        model.addAttribute("estimateDTOS", estimateDTOS);
+	public String create() {
+
 		
 		
 		return "user/board/register";
