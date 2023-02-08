@@ -78,4 +78,15 @@ class MisuServiceImpTest {
 
         log.info(String.valueOf(update));
     }
+
+    @Test
+    void delete() {
+
+        MisuDTO misuDTO = MisuDTO.builder()
+                .misu_id(11)
+                .build();
+        int delete = misuService.delete(misuDTO);
+        log.info(String.valueOf(delete));
+
+    }
 }

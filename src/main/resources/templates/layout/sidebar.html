@@ -74,7 +74,7 @@
                     <div><a href="#" class="text-white text-sm">- 공지사항</a></div>
                     <div><a href="#" class="text-white text-sm">- 자유게시판</a></div>
                     <div><a href="#" class="text-white text-sm">- QnA</a></div>
-                    
+
                 </div>
                 <button class="btn btn-sm mt-3 text-start mb-2 btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#accounting" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-accounting me-1" viewBox="0 0 16 16">
@@ -109,7 +109,7 @@
                     <div><a href="#" class="text-white text-sm">- 블랙리스트 등록</a></div>
                     <div><a href="#" class="text-white text-sm">- 블랙리스트 보기</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 사용자권한 변경</a></div>
+                    <div><a href="/admin/manage-account" class="text-white text-sm">- 사용자권한 변경</a></div>
                 </div>
 
                 <li class="nav-item mt-2">
@@ -148,13 +148,13 @@
 
                 window.open("/user/client/form", "_blank", option);
             }
-            
+
             // 자재 등록하기
             function regitMaterial() {
             	let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
-				
+
                 window.open("/user/basicinfo/material/register", "_blank", option);
-            }				
+            }
 
             // 장비정보 입력
             function regitMachine(){
