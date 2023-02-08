@@ -1,8 +1,8 @@
 package kr.co.ahaproject.controller.kjh.imp;
 
 import kr.co.ahaproject.controller.kjh.IncomeController;
-import kr.co.ahaproject.dto.IncomeOutcomeDTO;
 import kr.co.ahaproject.service.kjh.IncomeService;
+import kr.co.ahaproject.service.mskim.imp.CardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IncomeControllerImp implements IncomeController {
     @Autowired
     IncomeService incomeService;
+    @Autowired
+    CardServiceImpl cardService;
 
     @Override
     @GetMapping("/list")
@@ -36,10 +38,17 @@ public class IncomeControllerImp implements IncomeController {
         return "user/accounting/income/register";
     }
 
+
     @Override
     @GetMapping("/{id}/update")
     public String editForm(@PathVariable int id, Model model) {
         model.addAttribute("ioDTO", incomeService.selectOne(id));
         return "user/accounting/income/update";
+    }
+    @GetMapping("/jh")
+    public String test(Model model)
+    { model.addAttribute("card",cardService.findByCard(1));
+
+        return "detail-page";
     }
 }
