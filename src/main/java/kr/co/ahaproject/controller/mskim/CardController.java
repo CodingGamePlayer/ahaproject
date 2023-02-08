@@ -13,6 +13,7 @@ public interface CardController {
 	// 카드 정보 등록 폼 이동
 	String card_form();
 	
+	// 카드 정보 수정 폼
 	ModelAndView card_edit(ModelAndView mav, int card_id);
 	
 

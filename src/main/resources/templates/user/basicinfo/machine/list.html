@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layout/default-template.html}">
+
+<!-- default_layout.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+    <!--    <link rel="stylesheet" th:href="@{/css/page/home.css}" >-->
+</th:block>
+<!-- default_layout.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <!--    <script th:src="@{/js/page/home.js}"></script>-->
+</th:block>
+<style>
+
+</style>
+<!-- Content -->
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-12 pe-3">
+            <div class="card border shadow-xs mb-4">
+                <div class="card-header border-bottom pb-0">
+                    <div class="d-sm-flex align-items-center">
+                        <div>
+                            <h6 class="font-weight-semibold text-lg mb-0">장비 현황</h6>
+                            <p class="text-sm">장비별 현황 전체보기</p>
+                        </div>
+                        <div class="ms-auto d-flex">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0 py-0">
+                    <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
+                        <table class="table align-items-center mb-0">
+                            <thead class="bg-gray-100">
+                            <tr>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7">장비코드</th>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">장비명</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">규격(제품번호)</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">타입</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입액</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">세액</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입일자</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">파일</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고1</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고2</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고3</th>
+                                <th class="text-secondary opacity-7"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="machine : ${machineDTOs}">
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex align-items-center">
+
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center ms-1">
+                                                <span class="text-secondary text-sm font-weight-normal"
+                                                      th:text="${machine.m_code}"/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machine.m_name}"/>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machine.m_equip_num}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machine.m_type}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machine.m_price}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machine.m_tax}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machine.m_date}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machine.m_file}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machine.m_etc1}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machine.m_etc2}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machine.m_etc3}"/>
+                                    </td>
+                                    </th:block>
+
+                                    <td class="align-middle">
+                                    </td>
+
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+                <div class="table-responsive p-0">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</html>

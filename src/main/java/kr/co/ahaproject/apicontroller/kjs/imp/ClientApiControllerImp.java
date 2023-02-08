@@ -36,10 +36,16 @@ public class ClientApiControllerImp implements ClientApiController {
 	}
 
 	@Override
-	public ResponseEntity update(ClientDTO clientDTO) {
+	@PutMapping("/client")
+	public ResponseEntity<ClientDTO> update(@RequestBody ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
-		return null;
+		 
+		int result = clientService.update(clientDTO);
+		log.info(String.valueOf(result));
+		if (result == 0){
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	        }
+		
+	        return ResponseEntity.status(HttpStatus.OK).build();
 	}
-
-
 }

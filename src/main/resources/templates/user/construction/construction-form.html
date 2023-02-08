@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <title>
+        아하포장건설
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700"
+          rel="stylesheet"/>
+    <!-- Nucleo Icons -->
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/assets/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+    <!— Tempus Dominus JavaScript —>
+    <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
+            crossorigin="anonymous"></script>
+
+    <!— Tempus Dominus Styles —>
+    <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
+          rel="stylesheet" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="card m-3">
+
+    <div class="card-body">
+        <h5 class="card-title mt-3 mb-3">카드 정보 등록</h5>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*카드명</label>
+                    <input class="input-group-sm form-control " type="text" id="card_name">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*카드구분</label>
+                    <select class="form-select" aria-label="Default select example"  id="card_class">
+                    	<option th:value="개인카드">개인카드</option>
+                    	<option th:value="법인카드">법인카드</option>
+                    	<option th:value="사업비카드">사업비카드</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*카드유형</label>
+                    <select class="form-select" aria-label="Default select example" id="card_type">
+                        <option th:value="체크카드" >체크카드</option>
+                        <option th:value="신용카드" >신용카드</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*카드회사</label>
+                    <input class="form-control" type="text" id="card_company">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*카드번호</label>
+                    <input class="form-control" type="text" id="card_num">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*카드 끝번호(4자리)</label>
+                    <input class="form-control" type="text" id="card_endnum">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*카드 만료일</label>
+                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
+                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
+                        <span class='fa-solid fa-calendar'></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*거래처 코드</label>
+                    <input class="form-control" type="text" id="cl_code">
+                </div>
+            </div>
+            <input type="button" class="btn btn-primary" id="cardSubmitBtn" value="등록하기" />
+        </div>
+    </div>
+</div>
+<script>
+    const cardSubmitBtn = document.querySelector('#cardSubmitBtn');
+
+    cardSubmitBtn.addEventListener("click", () => {
+        const input_card_name = document.querySelector('#card_name').value;
+        const input_card_class = document.querySelector('#card_class').value;
+        const input_card_type = document.querySelector('#card_type').value;
+        const input_card_company = document.querySelector('#card_company').value;
+        const input_card_num = document.querySelector('#card_num').value;
+        const input_card_endnum = document.querySelector('#card_endnum').value;
+        const input_card_exp_date = document.querySelector('#datetimepicker1Input').value;
+        const input_cl_code = document.querySelector('#cl_code').value;
+
+        const cardif = {
+        	cl_code : input_cl_code,
+            card_name : input_card_name,
+            card_class : input_card_class,
+            card_type : input_card_type,
+            card_company : input_card_company,
+            card_num : input_card_num,
+            card_endnum : input_card_endnum,
+            card_exp_date : input_card_exp_date
+            
+        };
+
+        if(input_card_name == "" || input_card_class == "" ||
+        	input_card_type == "" || input_cl_code == "" ||
+        	input_card_company == "" || input_card_num =="" ||
+        	input_card_endnum == "" || input_card_exp_date == ""){
+            alert('*이 있는 칸은 채워주시기 바랍니다.')
+            return;
+        }
+
+        console.log(cardif);
+
+        const url = "/api/user/basicinfo/card/cardinfo";
+
+        fetch(url, {
+           method : "POST",
+           body : JSON.stringify(cardif),
+           headers : {
+               "Content-Type" : "application/json"
+           }
+        }).then(response => {
+           if(response.ok){
+               response.text();
+               alert('등록이 완료되었습니다.');
+               window.location.reload();
+           } else {
+               alert('등록을 실패하였습니다.');
+           }
+        });
+
+
+    });
+</script>
+
+<script>
+    const datevalue = document.querySelector('#datetimepicker1Input').value;
+    console.log(datevalue);
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
+    	display: {
+            components: {
+                clock: false
+            },
+            icons: {
+                type: 'icons',
+                time: 'fa fa-solid fa-clock',
+                date: 'fa fa-solid fa-calendar',
+                up: 'fa fa-solid fa-arrow-up',
+                down: 'fa fa-solid fa-arrow-down',
+                previous: 'fa fa-solid fa-chevron-left',
+                next: 'fa fa-solid fa-chevron-right',
+                today: 'fa fa-solid fa-calendar-check',
+                clear: 'fa fa-solid fa-trash',
+                close: 'fas fa-solid fa-xmark'
+            },
+        },
+    	 
+        
+    });
+</script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<script
+        src="/assets/js/plugins/swiper-bundle.min.js"
+        type="text/javascript"
+></script>
+<script src="/assets/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
+</body>
+</html>
