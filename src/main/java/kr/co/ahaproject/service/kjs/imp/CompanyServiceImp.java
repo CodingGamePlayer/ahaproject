@@ -20,7 +20,7 @@ public class CompanyServiceImp implements CompanyService {
 
     @Autowired
     private CompanyMapper companyMapper;
-
+    
     private ModelMapper modelMapper = new ModelMapper();
 
     @Override
