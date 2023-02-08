@@ -68,7 +68,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">파일</label>
-                    <input class="form-control" type="text" id="mt_file" name="mt_file">
+                    <input class="form-control" type="file" id="mt_file" name="mt_file">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -110,35 +110,33 @@
         const input_mt_etc2 = document.querySelector('#mt_etc2').value;
         const input_mt_etc3 = document.querySelector('#mt_etc3').value;
 
-        const misu1 = {
-            misu_div : input_misu_div,
-            cp_name : input_cp_name,
-            cst_code : input_cst_code,
-            misu_manager : input_misu_manager,
-            misu_value : input_misu_value,
-            misu_name : input_misu_name,
-            misu_total_value : input_misu_total_value,
-            misu_collect_date : input_misu_collect_date,
-            misu_collect_value : input_misu_collect_value,
-            misu_finished : input_misu_finished,
-            misu_etc : input_misu_etc
+        const material1 = {
+            mt_code : input_mt_code,
+            mt_name : input_mt_name,
+            mt_standard : input_mt_standard,
+            mt_remain : input_mt_remain,
+            mt_file : input_mt_file,
+            mt_etc1 : input_mt_etc1,
+            mt_etc2 : input_mt_etc2,
+            mt_etc3 : input_mt_etc3
         };
 
-        if(input_misu_div == "" || input_cp_name == "" ||
-            input_cst_code == "" || input_misu_manager == "" ||
-            input_misu_value == "" || input_misu_name =="" ||
-            input_misu_total_value == ""){
-            alert('*이 있는 칸은 채워주시기 바랍니다.')
+        if(input_mt_code == "" || input_mt_name == "" ||
+           input_mt_standard == "" || input_mt_remain == "")
+        {
+            alert('*이 있는 칸은 채워주시기 바랍니다.');
             return;
         }
+        
+        
 
-        console.log(misu1);
+        console.log(material1);
 
-        const url = "/api/admin/misu";
+        const url = "/api/user/material";
 
         fetch(url, {
            method : "POST",
-           body : JSON.stringify(misu1),
+           body : JSON.stringify(material1),
            headers : {
                "Content-Type" : "application/json"
            }
@@ -157,7 +155,8 @@
 
     </script>
 <script>
-    const datevalue = document.querySelector('#datetimepicker1Input').value;
+
+    /* const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
         display: {
@@ -178,7 +177,8 @@
                 close: 'fas fa-solid fa-xmark'
             },
         },
-    });
+    }); */
+    
 </script>
 
 
