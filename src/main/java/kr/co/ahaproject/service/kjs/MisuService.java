@@ -13,4 +13,6 @@ public interface MisuService {
     MisuDTO findById(MisuDTO misuDTO);
 
     int update(MisuDTO misuDTO);
+
+    int delete(MisuDTO misuDTO);
 }
