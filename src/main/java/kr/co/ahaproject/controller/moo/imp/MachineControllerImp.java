@@ -33,7 +33,7 @@ public class MachineControllerImp implements MachineController {
     public String register(Model model) {
 
         List<MachineDTO> machineDTOS = machineService.selectAll();
-        int new_m_code = machineService.getm_code()+1;
+        int new_m_code = Integer.parseInt(String.valueOf(machineService.getm_code()+1));
 
         String str = String.format("%04d", new_m_code);
 
