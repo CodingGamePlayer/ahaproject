@@ -43,12 +43,11 @@ public class MachineServiceImp implements MachineService {
     @Override
     public int update(MachineDTO machineDTO) {
         Machine machine = modelMapper.map(machineDTO, Machine.class);
-//ㅎㅎ
         return 0;
     }
 
     @Override
-    public int getm_code() {
+    public Integer getm_code() {
         return machineMapper.getm_code();
     }
 
