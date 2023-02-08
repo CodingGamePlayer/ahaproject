@@ -1,16 +1,22 @@
 package kr.co.ahaproject.mapper.kjs;
 
 import kr.co.ahaproject.entity.Company;
+
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
 @Mapper
 public interface CompanyMapper {
 
+//	전체조회
     @Select("SELECT * FROM company")
     @Results(id = "companyMap", value = {
             @Result(property = "cp_id", column = "cp_id"),
@@ -30,6 +36,68 @@ public interface CompanyMapper {
             @Result(property = "cp_domain", column = "cp_domain"),
             @Result(property = "cp_file", column = "cp_file") })
     List<Company> selectAll();
-
+    
+//  등록
+    @Insert("INSERT INTO ahaproject.company "
+    		+ "(cp_name,"
+    		+ "cp_num,"
+    		+ "cp_address,"
+    		+ "cp_tel,"
+    		+ "cp_type,"
+    		+ "cp_head_name,"
+    		+ "cp_head_id,"
+    		+ "cp_sector,"
+    		+ "cp_establish,"
+    		+ "cp_open,"
+    		+ "cp_eng_name,"
+    		+ "cp_eng_address,"
+    		+ "cp_eng_head_name,"
+    		+ "cp_domain,"
+    		+ "cp_file)"
+    		+ " VALUES "
+    		+ "(#{company.cp_name},"
+    		+ "#{company.cp_num},"
+    		+ "#{company.cp_address},"
+    		+ "#{company.cp_tel},"
+    		+ "#{company.cp_type},"
+    		+ "#{company.cp_head_name},"
+    		+ "#{company.cp_head_id},"
+    		+ "#{company.cp_sector},"
+    		+ "#{company.cp_establish},"
+    		+ "#{company.cp_open},"
+    		+ "#{company.cp_eng_name},"
+    		+ "#{company.cp_eng_address},"
+    		+ "#{company.cp_eng_head_name},"
+    		+ "#{company.cp_domain},"
+    		+ "#{company.cp_file});")
+    int register(@Param("company")Company company);
+    
+//  선택조회
+    @Select("SELECT * "
+    		+ "FROM `ahaproject`.`company`"
+    		+ "where cp_id = #{company.cp_id}")
+    @ResultMap("companyMap")
+    Company findById(@Param("company")Company company);
+    
+//  수정
+    @Update("UPDATE `ahaproject`.`company` "
+    		+ "SET "
+    		+ "`cp_name` = #{cp_name},"
+    		+ "`cp_num` = #{cp_num},"
+    		+ "`cp_address` = #{cp_address},"
+    		+ "`cp_tel` = #{cp_tel},"
+    		+ "`cp_type` = #{cp_type},"
+    		+ "`cp_head_name` = #{cp_head_name},"
+    		+ "`cp_head_id` = #{cp_head_id},"
+    		+ "`cp_sector` = #{cp_sector},"
+    		+ "`cp_establish` = #{cp_establish},"
+    		+ "`cp_open` = #{cp_open},"
+    		+ "`cp_eng_name` = #{cp_eng_name},"
+    		+ "`cp_eng_address` = #{cp_eng_address},"
+    		+ "`cp_eng_head_name` = #{cp_eng_head_name},"
+    		+ "`cp_domain` = #{cp_domain},"
+    		+ "`cp_file` = #{cp_file}"
+    		+ "WHERE `cp_id` = #{comapany.cp_id;")
+    int update(@Param("company") Company company);
 
 }
