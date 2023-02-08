@@ -33,6 +33,7 @@ public interface MachineMapper {
     @ResultMap("machineMap")
     Machine findById(@Param("machine") Machine machine);
 
+
     @Select("SELECT ifnull((SELECT m_id FROM ahaproject.machine ORDER BY m_id DESC limit 1),0 ) AS m_id From ahaproject.machine union ALL select 0 AS m_id FROM dual LIMIT 1")
     int getm_code();
 }

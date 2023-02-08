@@ -9,5 +9,8 @@ public interface AdminApiController {
 
     ResponseEntity update(MisuDTO misuDTO);
 
+    ResponseEntity delete(MisuDTO misuDTO);
+
+
 
 }

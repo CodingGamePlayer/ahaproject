@@ -34,11 +34,11 @@
 
 </head>
 <body>
-<div class="card m-3">
+ <div class="card m-3">
 
     <div class="card-body">
         <h5 class="card-title mt-3 mb-3">고객정보 등록</h5>
-        <div class="row">
+ 		 <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*회사번호</label>
@@ -82,53 +82,55 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*거래처코드</label>
-                    <input class="form-control" type="text" id="cl_code" disabled="disabled" th:value="cl_code">
+                    <input class="form-control" type="text" id="cl_code" disabled="disabled" th:value="${client.cl_code}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*이메일</label>
-                    <input class="form-control" type="text" id="cl_email">
+                    <input class="form-control" type="text" id="cl_email" th:value="${client.cl_email}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*계좌</label>
-                    <input class="form-control" type="text" id="cl_account">
+                    <input class="form-control" type="text" id="cl_account" th:value="${client.cl_account}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*파일</label>
-                    <input class="form-control" type="text" id="cl_file">
+                    <input class="form-control" type="text" id="cl_file" th:value="${client.cl_file}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*비고1</label>
-                    <textarea style="resize: none;" rows="5" cols="50" id="cl_etc1"></textarea>
+                    <textarea style="resize: none;" rows="5" cols="50" id="cl_etc1">[[${client.cl_etc1}]]</textarea>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*비고2</label>
-                    <input class="form-control" type="text" id="cl_etc2">
+                    <input class="form-control" type="text" id="cl_etc2" th:value="${client.cl_etc2}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*비고3</label>
-                    <input class="form-control" type="text" id="cl_etc3">
+                    <input class="form-control" type="text" id="cl_etc3" th:value="${client.cl_etc3}">
                 </div>
             </div>
+            <input type="hidden" id="cl_id" th:value="${client.cl_id}"/>
             <input type="button" class="btn btn-primary" id="clientSubmitBtn" value="등록하기" />
-        </div>
+        </div> 
     </div>
-</div>
+</div> 
 <script>
     const clientSubmitBtn = document.querySelector('#clientSubmitBtn');
 
     clientSubmitBtn.addEventListener("click", () => {
+        const input_cl_id = document.querySelector('#cl_id').value;
         const input_cp_num = document.querySelector('#cp_num').value;
         const input_cp_name = document.querySelector('#cp_name').value;
         const input_cp_address = document.querySelector('#cp_address').value;
@@ -142,6 +144,7 @@
         const input_cl_etc3 = document.querySelector('#cl_etc3').value;
 
         const client1 = {
+            cl_id : input_cl_id,
             cp_num : input_cp_num,
             cp_name : input_cp_name,
             cp_address : input_cp_address,
@@ -167,7 +170,7 @@
         const url = "/api/user/client";
 
         fetch(url, {
-           method : "POST",
+           method : "PUT",
            body : JSON.stringify(client1),
            headers : {
                "Content-Type" : "application/json"
@@ -176,7 +179,7 @@
            if(response.ok){
                response.text();
                alert('등록이 완료되었습니다.');
-               window.location.reload();
+               window.close();
            } else {
                alert('등록을 실패하였습니다.');
            }
