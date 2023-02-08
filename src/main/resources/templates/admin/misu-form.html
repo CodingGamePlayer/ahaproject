@@ -59,9 +59,9 @@
                 <div class="form-group">
                     <label class="form-control-label">*공사코드</label>
                     <select class="form-select" aria-label="Default select example" id="cst_code">
-                        <th:block th:each="const : ${constructionDTOs}">
+
                         <option th:value="${const.cst_code}" >[[${const.cst_code}]]</option>
-                        </th:block>
+
                     </select>
                 </div>
             </div>

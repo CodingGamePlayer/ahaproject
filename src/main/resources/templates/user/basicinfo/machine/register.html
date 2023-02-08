@@ -42,9 +42,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*장비코드</label>
-                    <th:block th:each="machine : ${machineDTOs}">
-                    <input class="form-control" th:value="${machine.m_id}" type="text" id="m_code" disabled>
-                    </th:block>
+                    <input class="form-control" th:value="'MC'+${m_code}" type="text" id="m_code" disabled>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -61,10 +59,10 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*자사 or 타사</label>
+                    <label class="form-control-label">*타입</label>
                     <select class="form-select" aria-label="Default select example" id="m_type">
-                        <option value="false" selected>자사</option>
-                        <option value="true" >타사</option>
+                        <option value="자사" selected>자사</option>
+                        <option value="타사" >타사</option>
                     </select>
                 </div>
             </div>
@@ -156,6 +154,19 @@
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
+
+        // var pattern_num = /[0-9]/;	// 숫자
+        // var pattern_eng = /[a-zA-Z]/;	// 문자
+        // var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+        // var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+        //
+        // // 매입액 숫자 입력 유효성 체크
+        // if( (pattern_num.test(input_m_price) || pattern_num.test(input_m_tax)) && !(pattern_eng.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_spc.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_kor.test(input_m_price) || pattern_eng.test(input_m_tax)) ){
+        //     return true;
+        // }else{
+        //     alert("매입액과 세액은 숫자만 입력 가능합니다.");
+        //     return;
+        // }
 
         console.log(machine1);
 
