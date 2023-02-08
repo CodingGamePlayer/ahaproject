@@ -36,7 +36,7 @@ public interface Boardmapper {
 	
 	
 	//글 작성 
-	@Insert("insert into board(`b_title`,`b_body`,`b_etc`,`b_file`) values(#{board.b_title},#{board.b_body},#{board.b_etc},#{board.b_file}")
+	@Insert("insert into board(ct_id,b_title,b_body,b_etc,b_file) values(#{ct_id},#{b_title},#{b_body},#{b_etc},#{b_file}")
       int create(BoardDTO dto);
 	
 	//글 수정
@@ -48,10 +48,10 @@ public interface Boardmapper {
 
 	
 	//선택조회
-	@Select("select* from board where `b_id` = #{board.b_id}")
+	@Select("select* from board where b_id = #{board.b_id}")
 	BoardDTO SelectOne(int b_id);
 	
 	//글 삭제 
-	@Delete("delete from board where `b_id` =#{board.b_id}")
+	@Delete("delete from board where b_id =#{board.b_id}")
 	int delete(int b_id);
 }

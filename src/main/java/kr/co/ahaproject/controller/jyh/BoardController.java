@@ -9,13 +9,16 @@ import kr.co.ahaproject.dto.BoardDTO;
 public interface BoardController {
 	
 	/*
-	 *  gboard:자유게시판
-	 *  noticeboard:공지사항
+	 *  gboard:공지사항
+	 *  noticeboard:자유게시판
 	 *  qnaboard:qna
 	 * */
 	
 	//전체조회
 	String list(Model model);
+	
+	//작성
+	String create(Model model);
 	
 	
 	
