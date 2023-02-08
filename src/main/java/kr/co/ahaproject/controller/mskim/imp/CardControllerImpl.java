@@ -20,7 +20,7 @@ public class CardControllerImpl implements CardController {
 	public ModelAndView card(ModelAndView mav) {
 		
 		mav.addObject("cardDTOs", cardService.selectAll());
-		mav.setViewName("user/card/card");
+		mav.setViewName("user/card/cardlist");
 		
 		return mav;
 	}
@@ -30,8 +30,23 @@ public class CardControllerImpl implements CardController {
 	public ModelAndView cardClient(ModelAndView mav, @RequestParam("cl_code") String cl_code) {
 		
 		mav.addObject("cardDTOs", cardService.findBYClient(cl_code));
-		mav.setViewName("user/card/card");
+		mav.setViewName("user/card/cardlist");
 		return mav;
 	}
+
+	@Override
+	@GetMapping("/user/basicinfo/card-form")
+	public String card_form() {
+		return "user/card/card-form";
+	}
+
+	@Override
+	@GetMapping("/user/basicinfo/card-edit")
+	public ModelAndView card_edit(ModelAndView mav, @RequestParam("card_id") int card_id) {
+		mav.addObject("cardDTO", cardService.findByCard(card_id));
+		mav.setViewName("user/card/card-edit-form");
+		return mav;
+	}
+	
 
 }

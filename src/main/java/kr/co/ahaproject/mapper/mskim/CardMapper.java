@@ -46,15 +46,15 @@ public interface CardMapper {
 	// 카드 정보 등록
 	@Insert("insert into card(cl_code, card_name, card_class, card_type,"+
 			" card_company, card_num, card_endnum, card_exp_date)"+ 
-			" values(#{cl_code}, #{card_name}, #{card_class}, #{card_type},"+
-			" #{card_company}, #{card_num}, #{card_endnum}, #{card_exp_date})")
+			" values(#{card.cl_code}, #{card.card_name}, #{card.card_class}, #{card.card_type},"+
+			" #{card.card_company}, #{card.card_num}, #{card.card_endnum}, #{card.card_exp_date})")
 	int register(@Param("card") Card card);
 	
 	// 카드 정보 수정
-	@Update("update card set cl_code = #{cl_code}, card_name=#{card_name}, "+ 
-			"card_class = #{card_class}, card_type = #{card_type}, card_company = #{card_company}, "+ 
-			"card_num = #{card_num}, card_endnum = #{card_endnum}, card_exp_date = #{card_exp_date} "+ 
-			"where card_id = #{card_id}")
+	@Update("update card set cl_code = #{card.cl_code}, card_name=#{card.card_name}, "+ 
+			"card_class = #{card.card_class}, card_type = #{card.card_type}, card_company = #{card.card_company}, "+ 
+			"card_num = #{card.card_num}, card_endnum = #{card.card_endnum}, card_exp_date = #{card.card_exp_date} "+ 
+			"where card_id = #{card.card_id}")
 	int update(@Param("card") Card card);
 	
 	@Delete("delete from card where card_id = #{card_id}")
