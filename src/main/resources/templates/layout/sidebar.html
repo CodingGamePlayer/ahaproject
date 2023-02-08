@@ -28,7 +28,7 @@
 <!--                    20230207 15:44 수정-->
                     <div><a href="#" class="text-white text-sm" th:onclick="regitEmployee()">- 직원정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 장비정보 보기</a></div>
+                    <div><a th:href="@{/user/machine}" class="text-white text-sm">- 장비정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMachine()">- 장비정보 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 회사정보 보기</a></div>
@@ -158,10 +158,11 @@
                 window.open("/user/basicinfo/material/register", "_blank", option);
             }				
 
+            // 장비정보 입력
             function regitMachine(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-                window.open("/user/basicinfo/machine-form", "_blank", option);
+                window.open("/user/basicinfo/register", "_blank", option);
             }
 
             const logoutBtn = document.querySelector('#sidebar-logout');
