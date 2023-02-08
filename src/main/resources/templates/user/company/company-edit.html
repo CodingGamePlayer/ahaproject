@@ -34,7 +34,234 @@
 
 </head>
 <body>
-	하이
+<div class="card m-3">
+    <div class="card-body">
+        <h5 class="card-title mt-3 mb-3">회사정보 등록</h5>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*회사명</label>
+                    <input class="form-control" type="text" id="cp_name" th:value="${company.cp_name}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*사업자번호</label>
+                    <input class="form-control" type="text" id="cp_num" th:value="${company.cp_num}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+               <div class="form-group">
+                    <label class="form-control-label">*사업장주소</label>
+                    <input class="form-control" type="text" id="cp_address" th:value="${company.cp_address}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*회사 전화번호</label>
+                    <input class="form-control" type="text" id="cp_tel" th:value="${company.cp_tel}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                   <label for="form-control-label">법인,개인</label>
+					 <select class="form-select" aria-label="Default select example"  id="cp_type">
+					    <option value="법인">법인</option>
+					    <option value="개인">개인</option>
+				    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*대표자명</label>
+                    <input class="form-control" type="text" id="cp_head_name" th:value="${company.cp_head_name}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*주민등록번호</label>
+                    <input class="form-control" type="text" id="cp_head_id" th:value="${company.cp_head_id}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*업종</label>
+                    <input class="form-control" type="text" id="cp_sector" th:value="${company.cp_sector}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*설립연월일</label>
+                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                        <input id='cp_establish' type='text' class='form-control' data-td-target='#datetimepicker1' th:value="${company.cp_establish}"/>
+                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
+                        <span class='fa-solid fa-calendar'></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*개업연월일</label>
+                    <div class='input-group' id='datetimepicker2' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                        <input id='cp_open' type='text' class='form-control' data-td-target='#datetimepicker2' th:value="${company.cp_open}" />
+                        <span class='input-group-text' data-td-target='#datetimepicker2' data-td-toggle='datetimepicker' >
+                        <span class='fa-solid fa-calendar'></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*영문 회사명</label>
+                    <input class="form-control" type="text" id="cp_eng_name" th:value="${company.cp_eng_name}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*영문 사업장주소</label>
+                    <input class="form-control" type="text" id="cp_eng_address" th:value="${company.cp_eng_address}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*영문 대표자명</label>
+                    <input class="form-control" type="text" id="cp_eng_head_name" th:value="${company.cp_eng_head_name}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*도메인명</label>
+                    <input class="form-control" type="text" id="cp_domain" th:value="${company.cp_domain}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*파일</label>
+                    <input class="form-control" type="text" id="cp_file" th:value="${company.cp_file}">
+                </div>
+            </div>
+            <input type="button" class="btn btn-primary" id="companySubmitBtn" value="등록하기" />
+        </div>
+    </div>
+</div>
+<script>
+    const companySubmitBtn = document.querySelector('#companySubmitBtn');
+    const urlParams = new URL(location.href).searchParams;
+
+
+    companySubmitBtn.addEventListener("click", () => {
+    	
+        const input_cp_id = urlParams.get('cp_id')
+        const input_cp_name = document.querySelector('#cp_name').value;
+        const input_cp_num = document.querySelector('#cp_num').value;
+        const input_cp_address = document.querySelector('#cp_address').value;
+        const input_cp_tel = document.querySelector('#cp_tel').value;
+        const input_cp_type = document.querySelector('#cp_type').value;
+        const input_cp_head_name = document.querySelector('#cp_head_name').value;
+        const input_cp_head_id = document.querySelector('#cp_head_id').value;
+        const input_cp_file = document.querySelector('#cp_file').value;
+        const input_cp_sector = document.querySelector('#cp_sector').value;
+        const input_cp_establish = document.querySelector('#cp_establish').value;
+        const input_cp_open = document.querySelector('#cp_open').value;
+        const input_cp_eng_name = document.querySelector('#cp_eng_name').value;
+        const input_cp_eng_address = document.querySelector('#cp_eng_address').value;
+        const input_cp_eng_head_name = document.querySelector('#cp_eng_head_name').value;
+        const input_cp_domain = document.querySelector('#cp_domain').value;
+
+        const company1 = {
+        	cp_id : input_cp_id,
+            cp_num : input_cp_num,
+            cp_name : input_cp_name,
+            cp_address : input_cp_address,
+            cp_tel : input_cp_tel,
+            cp_type : input_cp_type,
+            cp_head_name : input_cp_head_name,
+            cp_head_id : input_cp_head_id,
+            
+            cp_file : input_cp_file,
+            cp_sector : input_cp_sector,
+            cp_establish : input_cp_establish,
+            cp_open : input_cp_open,
+            cp_eng_name: input_cp_eng_name,
+            cp_eng_address : input_cp_eng_address,
+            cp_eng_head_name : input_cp_eng_head_name,
+            cp_domain : input_cp_domain
+        };
+
+        if(input_cp_num == "" ||input_cp_name == "" || 
+        input_cp_address == "" || input_cp_tel == "" ||
+        input_cp_type == "" || input_cp_head_name =="" || input_cp_head_id == ""){
+            alert('*이 있는 칸은 채워주시기 바랍니다.')
+            return;
+        }
+
+        console.log(company1);
+
+        const url = "/api/user/company";
+
+        fetch(url, {
+           method : "PUT",
+           body : JSON.stringify(company1),
+           headers : {
+               "Content-Type" : "application/json"
+           }
+        }).then(response => {
+           if(response.ok){
+               response.text();
+               alert('등록이 완료되었습니다.');
+               window.close();
+           } else {
+               alert('등록을 실패하였습니다.');
+           }
+        });
+
+
+    });
+</script>
+<script>
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
+        display: {
+            components: {
+                 clock: false
+            },
+            icons: {
+                type: 'icons',
+                time: 'fa fa-solid fa-clock',
+                date: 'fa fa-solid fa-calendar',
+                up: 'fa fa-solid fa-arrow-up',
+                down: 'fa fa-solid fa-arrow-down',
+                previous: 'fa fa-solid fa-chevron-left',
+                next: 'fa fa-solid fa-chevron-right',
+                today: 'fa fa-solid fa-calendar-check',
+                clear: 'fa fa-solid fa-trash',
+                close: 'fas fa-solid fa-xmark'
+            },
+        },
+    });
+</script>
+<script>
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker2'), {
+        display: {
+            components: {
+            	 clock: false
+            },
+            icons: {
+                type: 'icons',
+                time: 'fa fa-solid fa-clock',
+                date: 'fa fa-solid fa-calendar',
+                up: 'fa fa-solid fa-arrow-up',
+                down: 'fa fa-solid fa-arrow-down',
+                previous: 'fa fa-solid fa-chevron-left',
+                next: 'fa fa-solid fa-chevron-right',
+                today: 'fa fa-solid fa-calendar-check',
+                clear: 'fa fa-solid fa-trash',
+                close: 'fas fa-solid fa-xmark'
+            },
+        },
+    });
+</script>
+
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
