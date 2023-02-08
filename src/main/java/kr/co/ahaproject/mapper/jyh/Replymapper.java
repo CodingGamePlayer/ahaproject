@@ -32,6 +32,7 @@ public interface Replymapper {
             @Result(property = "rp_body", column = "rp_body"),
             @Result(property = "us_id", column = "us_id")})
 	List<ReplyDTO> getdetail(int b_id);
+	
             @Select("SELECT * FROM reply WHERE rp_id = #{reply.rp_id}")
             @ResultMap("ReplyMap")
             Reply findById(@Param("reply") Reply reply);
@@ -40,22 +41,22 @@ public interface Replymapper {
 	
 	//댓글 선택조회
 	@Select("select* from reply where rp_id = #{reply.rp_id}")
-	ReplyDTO replySelectOne(@Param("reply") Reply reply);
+	ReplyDTO replySelectOne(int rp_id);
 	
 	//댓글 작성
 	@Insert("insert into reply(rp_body, us_id) values(#{reply.rp_body}, #{reply.us_id}")
-	int replycreate(@Param("reply") Reply reply);
+	int replycreate(ReplyDTO dto);
 	
 	
 	
 	//댓글 수정
 
 	@Update("update `ahaproject`.`reply` set rp_body=#{reply.rp_body}, us_id=#{reply.us_id} where rp_id = #{reply.rp_id} and b_id = #{reply.b_id}")
-	int replyupdate(@Param("reply")Reply reply); 
+	int replyupdate(ReplyDTO dto); 
 	
 	
 	
 	//댓글 삭제
 	@Delete("delete from reply where rp_id=#{reply.rp_id}")
-	int replydelete(@Param("reply") Reply reply);
+	int replydelete(int rp_id);
 }
