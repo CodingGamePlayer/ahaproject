@@ -24,8 +24,8 @@
                 <div class="card-header border-bottom pb-0">
                     <div class="d-sm-flex align-items-center">
                         <div>
-                            <h6 class="font-weight-semibold text-lg mb-0">매입 현황</h6>
-                            <p class="text-sm">매입별 현황 전체보기</p>
+                            <h6 class="font-weight-semibold text-lg mb-0">카드 정보</h6>
+                            <p class="text-sm">카드 정보 전체보기</p>
                         </div>
                         <div class="ms-auto d-flex">
 
@@ -38,54 +38,61 @@
                         <table class="table align-items-center mb-0">
                             <thead class="bg-gray-100">
                             <tr>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7">카드명</th>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">카드구분</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">카드유형
+                                </th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">카드사</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">카드번호</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">카드끝자리</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">만료일</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처코드</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사코드</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 공급가액</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 합계금액</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 지급액</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 잔액</th>
-                                <th class="text-secondary opacity-7"></th>
+                                
                             </tr>
                             </thead>
                             <tbody>
-                            <th:block th:each="inoutDTO : ${inoutDTOs}">
+                            <th:block th:each="cardDTO : ${cardDTOs}">
                                 <tr>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${inoutDTO.cl_code}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${inoutDTO.cst_code}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${inoutDTO.cp_name}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${inoutDTO.misu_total_value}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${inoutDTO.misu_collect_value}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_collect_value}"/>
-                                    </td>
-                                    <th:block th:switch="${misuDTO.misu_finished}">
-                                        <td class="align-middle text-center">
-                                            <span class="badge badge-sm border border-danger text-danger bg-danger"th:case="false">수금미완</span>
-                                            <span class="badge badge-sm border border-success text-success bg-success"th:case="true">수금완료</span>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex align-items-center">
 
-                                        </td>
-                                    </th:block>
-
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center ms-1">
+                                                <span class="text-secondary text-sm font-weight-normal"
+                                                      th:text="${cardDTO.card_name}"/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${cardDTO.card_class}"/>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${cardDTO.card_type}"/>
+                                    </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_etc}"/>
+                                              th:text="${cardDTO.card_company}"/>
                                     </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${cardDTO.card_num}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${cardDTO.card_endnum}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${cardDTO.card_exp_date}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${cardDTO.cl_code}"/>
+                                    </td>
+                                   
 
                                     <td class="align-middle">
                                         <a href="#" th:onclick="editMisu([[${misuDTO.misu_id}]])">

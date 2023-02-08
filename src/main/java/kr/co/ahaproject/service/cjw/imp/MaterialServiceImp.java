@@ -1,4 +1,4 @@
-package kr.co.ahaproject.service.kjs.imp;
+package kr.co.ahaproject.service.cjw.imp;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.ahaproject.dto.MaterialDTO;
-import kr.co.ahaproject.mapper.kjs.MaterialMapper;
-import kr.co.ahaproject.service.kjs.MaterialService;
+import kr.co.ahaproject.mapper.cjw.MaterialMapper;
+import kr.co.ahaproject.service.cjw.MaterialService;
 
 @Service
 public class MaterialServiceImp implements MaterialService{

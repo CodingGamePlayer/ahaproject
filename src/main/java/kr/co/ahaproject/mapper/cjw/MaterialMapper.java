@@ -1,4 +1,4 @@
-package kr.co.ahaproject.mapper.kjs;
+package kr.co.ahaproject.mapper.cjw;
 
 
 import java.util.List;
