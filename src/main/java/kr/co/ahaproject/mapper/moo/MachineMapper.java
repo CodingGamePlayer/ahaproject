@@ -1,6 +1,8 @@
 package kr.co.ahaproject.mapper.moo;
 
+import kr.co.ahaproject.dto.MachineDTO;
 import kr.co.ahaproject.entity.Machine;
+import kr.co.ahaproject.entity.Misu;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -26,4 +28,11 @@ public interface MachineMapper {
             @Result(property = "m_etc2", column = "m_etc2"),
             @Result(property = "m_etc3", column = "m_etc3")})
     List<Machine> selectAll();
+
+    @Select("SELECT * FROM `ahaproject`.`machine` WHERE m_id = #{machine.m_id}")
+    @ResultMap("machineMap")
+    Machine findById(@Param("machine") Machine machine);
+
+    @Select("SELECT m_id FROM ahaproject.machine ORDER BY m_id DESC limit 1")
+    int getm_code();
 }

@@ -19,9 +19,7 @@ public class MachineApiControllerImp implements MachineApiController {
 
     @Override
     @PostMapping("/machine")
-
-    public ResponseEntity<MachineDTO> register(@RequestBody MachineDTO machineDTO) {
-
+    public ResponseEntity register(@RequestBody MachineDTO machineDTO) {
 
         if(machineDTO ==  null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
