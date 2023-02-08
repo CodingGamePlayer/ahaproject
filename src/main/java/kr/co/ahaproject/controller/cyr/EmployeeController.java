@@ -21,7 +21,6 @@ public interface EmployeeController {
 
     ResponseEntity register(Employee employee);
 
-
     ResponseEntity update(Employee employee);
 
 }
