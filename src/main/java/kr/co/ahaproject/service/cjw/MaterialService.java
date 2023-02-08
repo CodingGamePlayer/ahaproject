@@ -1,4 +1,4 @@
-package kr.co.ahaproject.service.kjs;
+package kr.co.ahaproject.service.cjw;
 
 import java.util.List;
 
