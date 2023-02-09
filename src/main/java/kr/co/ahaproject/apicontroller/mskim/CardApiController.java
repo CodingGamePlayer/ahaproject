@@ -10,5 +10,6 @@ public interface CardApiController {
 	
 	ResponseEntity update(CardDTO cardDTO);
 	
+	ResponseEntity delete(CardDTO cardDTO);
 
 }

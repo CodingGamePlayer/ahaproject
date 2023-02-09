@@ -3,6 +3,7 @@ package kr.co.ahaproject.controller.mskim.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.ahaproject.controller.mskim.ConstructionController;
@@ -10,13 +11,14 @@ import kr.co.ahaproject.service.mskim.ConstructionService2;
 
 
 @Controller
+@RequestMapping("/user/worksite/construction")
 public class ConstructionControllerImpl implements ConstructionController {
 
 	@Autowired
 	private ConstructionService2 constructionService;
 	
 	@Override
-	@GetMapping("/user/worksite/construction")
+	@GetMapping("/cst-list")
 	public ModelAndView construction(ModelAndView mav) {
 		
 		mav.addObject("constructionDTOs", constructionService.selectAll());
@@ -26,9 +28,10 @@ public class ConstructionControllerImpl implements ConstructionController {
 	}
 
 	@Override
+	@GetMapping("/cst-form")
 	public String construction_form() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "user/construction/construction-form";
 	}
 
 	@Override

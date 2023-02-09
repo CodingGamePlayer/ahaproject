@@ -75,9 +75,9 @@ public class CardServiceImpl implements CardService{
 	}
 
 	@Override
-	public int delete(int card_id) {
+	public int delete(CardDTO cardDTO) {
 		
-		int result = cardMapper.delete(card_id);
+		int result = cardMapper.delete(modelMapper.map(cardDTO, Card.class));
 		
 		if( !(result >0)) {
 			return 0;

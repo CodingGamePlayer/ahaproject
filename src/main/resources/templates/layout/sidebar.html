@@ -35,7 +35,7 @@
                     <div><a href="/user/material/list" class="text-white text-sm">- 자재정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMaterial()">- 자재정보 입력</a></div>
                     <div><hr></div>
-                    <div><a th:href="@{/user/basicinfo/card}" class="text-white text-sm">- 카드정보 보기</a></div>
+                    <div><a th:href="@{/user/basicinfo/card/card-list}" class="text-white text-sm">- 카드정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitCard()">- 카드정보 입력</a></div>
 
                 </div>
@@ -47,8 +47,8 @@
                     Workspace
                 </button>
                 <div class="collapse ms-3 mb-3" id="worksite" >
-                    <div><a th:href="@{/user/worksite/construction}" class="text-white text-sm">- 공사정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 공사정보 입력</a></div>
+                    <div><a th:href="@{/user/worksite/construction/cst-list}" class="text-white text-sm">- 공사정보 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitConstruction()">- 공사정보 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 자재사용내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 자재사용내역 입력</a></div>
@@ -188,7 +188,7 @@
             function regitCard(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-                window.open("/user/basicinfo/card-form", "_blank", option);
+                window.open("/user/basicinfo/card/card-form", "_blank", option);
             }
             
             //매입,매출 등록
@@ -201,6 +201,13 @@
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                 window.open("/user/accounting/outcome/register", "_blank", option);
+            }
+            
+            // 공사정보 입력
+            function regitConstruction(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/worksite/construction/cst-form", "_blank", option);
             }
 
 

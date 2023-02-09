@@ -31,4 +31,48 @@ public class ConstructionServiceImp2 implements ConstructionService2 {
                 .map(construction -> modelMapper.map(construction, ConstructionDTO.class))
                 .collect(Collectors.toList());
     }
+
+	@Override
+	public ConstructionDTO findByCst(ConstructionDTO cstDTO) {
+		
+		Construction cst = constructionMapper.findByCst(modelMapper.map(cstDTO, Construction.class));
+		
+		return modelMapper.map(cst, ConstructionDTO.class);
+	}
+
+	@Override
+	public int regist(ConstructionDTO cstDTO) {
+		
+		int result = constructionMapper.register(modelMapper.map(cstDTO, Construction.class));
+		
+		if(!(result>0)) {
+			return 0;
+		}
+		
+		return 1;
+	}
+
+	@Override
+	public int update(ConstructionDTO cstDTO) {
+		
+		int result = constructionMapper.update(modelMapper.map(cstDTO, Construction.class));
+		
+		if(!(result>0)) {
+			return 0;
+		}
+		
+		return 1;
+	}
+
+	@Override
+	public int delete(ConstructionDTO cstDTO) {
+
+		int result = constructionMapper.delete(modelMapper.map(cstDTO, Construction.class));
+		
+		if(!(result>0)) {
+			return 0;
+		}
+		
+		return 1;
+	}
 }

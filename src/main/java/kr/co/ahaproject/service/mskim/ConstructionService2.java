@@ -7,4 +7,12 @@ import java.util.List;
 public interface ConstructionService2 {
 
     List<ConstructionDTO> selectAll();
+    
+    ConstructionDTO findByCst(ConstructionDTO cstDTO);
+    
+    int regist(ConstructionDTO cstDTO);
+    
+    int update(ConstructionDTO cstDTO);
+    
+    int delete(ConstructionDTO cstDTO);
 }

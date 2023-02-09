@@ -100,13 +100,47 @@
                 </div>
             </div>
             <input type="button" class="btn btn-primary" id="cardSubmitBtn" value="수정하기" />
+            <input type="button" class="btn btn-dark mt-2" id="cardDeleteBtn" value="삭제하기"/>
         </div>
     </div>
 </div>
 <script>
     const cardSubmitBtn = document.querySelector('#cardSubmitBtn');
     const urlParams = new URL(location.href).searchParams;
+    
+    const cardDeleteBtn = document.getElementById('cardDeleteBtn');
+    					  
+    cardDeleteBtn.addEventListener("click", () => {
+    	const input_card_id = urlParams.get('card_id');
+        
 
+        const cardif = {
+        	card_id : input_card_id
+            
+        };
+
+        console.log(cardif);
+
+        const url = "/api/user/basicinfo/card/cardinfo";
+
+        fetch(url, {
+           method : "DELETE",
+           body : JSON.stringify(cardif),
+           headers : {
+               "Content-Type" : "application/json"
+           }
+        }).then(response => {
+           if(response.ok){
+               response.text();
+               alert('삭제가 되었습니다.');
+               window.close();
+           } else {
+               alert('삭제를 실패하였습니다.');
+           }
+        });
+
+
+    });
     cardSubmitBtn.addEventListener("click", () => {
     	const input_card_id = urlParams.get('card_id');
         const input_card_name = document.querySelector('#card_name').value;

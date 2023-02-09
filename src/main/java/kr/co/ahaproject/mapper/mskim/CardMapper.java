@@ -57,7 +57,8 @@ public interface CardMapper {
 			"where card_id = #{card.card_id}")
 	int update(@Param("card") Card card);
 	
-	@Delete("delete from card where card_id = #{card_id}")
-	int delete(@Param("card_id") int card_id);
+	// 카드 정보 삭제
+	@Delete("delete from card where card_id = #{card.card_id}")
+	int delete(@Param("card") Card card);
 	
 }
