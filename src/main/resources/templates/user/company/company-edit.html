@@ -66,9 +66,8 @@
                 <div class="form-group">
                    <label for="form-control-label">법인,개인</label>
 					 <select class="form-select" aria-label="Default select example"  id="cp_type">
-					 	<option th:value="${company.cp_type}" selected>[[${company.cp_type}]]</option>
-					    <option value="법인">법인</option>
-					    <option value="개인">개인</option>
+					    <option id="type1" value="법인">법인</option>
+					    <option id="type2" value="개인">개인</option>
 				    </select>
                 </div>
             </div>
@@ -142,6 +141,8 @@
     </div>
 </div>
 <script>
+	
+	
     const companySubmitBtn = document.querySelector('#companySubmitBtn');
     const companyDeleteBtn = document.querySelector('#companyDeleteBtn');
     const urlParams = new URL(location.href).searchParams;
@@ -243,6 +244,28 @@
 
 
     });
+</script>
+<script  th:inline="javascript">
+    /*<![CDATA[*/
+    function selectOne(){
+    	
+    	console.log("하이")
+    	console.log(/*[[ ${company.cp_type }]]*/)
+    	const team = document.querySelector('#type1');
+        const solo = document.querySelector('#type2');
+        
+        if(team.value === /*[[ ${company.cp_type }]]*/){
+        	team.setAttribute("selected", "selected")
+        }
+        if(solo.value === /*[[ ${company.cp_type }]]*/){
+        	solo.setAttribute("selected", "selected")
+        }
+    }
+	window.onload = function(){
+
+		selectOne();
+	}
+   	/*]]>*/
 </script>
 <script>
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
