@@ -22,7 +22,7 @@ public interface IncomeMapper {
 
     @Select("select * from ahaproject.income_outcome where io_id = #{io_id}")
     @ResultMap("ioMap")
-    IncomeOutcome selectOne(int io_id);
+    IncomeOutcome selectOne(long io_id);
 
     @Insert("insert into ahaproject.income_outcome (cl_code, cst_code, cp_name, in_supp_value, in_total_value, in_collect_value, in_collect_remain) " +
             "values(#{io.cl_code}, #{io.cst_code}, #{io.cp_name}, #{io.in_supp_value}, #{io.in_total_value}, #{io.in_collect_value}, #{io.in_collect_remain})")
@@ -58,7 +58,7 @@ public interface IncomeMapper {
 
     @Select("SELECT `cl_code`, `cst_code`, sum(`in_supp_value`) in_supp_value, sum(`in_collect_value`) in_collect_value " +
             "FROM ahaproject.income_outcome  group by `cl_code`,`cst_code` with rollup;")
-    @Results(id = "ioMap", value = {
+    @Results(id = "ioMap1", value = {
             @Result(property = "io_id", column = "io_id"),
             @Result(property = "cl_code", column = "cl_code"),
             @Result(property = "cst_code", column = "cst_code"),
