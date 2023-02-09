@@ -60,7 +60,7 @@ public class UpDownControllerImp implements UpDownController {
 
                         File thumbFile = new File(uploadPath, "s_" + uuid + "_" + originalName);
 
-                        Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 200, 200);
+                        Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 700, 600);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
