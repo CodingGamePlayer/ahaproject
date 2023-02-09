@@ -1,9 +1,11 @@
 package kr.co.ahaproject.controller.kjs.imp;
 
 import kr.co.ahaproject.controller.kjs.AdminController;
+import kr.co.ahaproject.dto.AccountDTO;
 import kr.co.ahaproject.dto.CompanyDTO;
 import kr.co.ahaproject.dto.ConstructionDTO;
 import kr.co.ahaproject.dto.MisuDTO;
+import kr.co.ahaproject.service.kjs.AccountService;
 import kr.co.ahaproject.service.kjs.CompanyService;
 import kr.co.ahaproject.service.kjs.ConstructionService;
 import kr.co.ahaproject.service.kjs.MisuService;
@@ -23,9 +25,11 @@ public class AdminControllerImp implements AdminController {
     private CompanyService companyService;
     @Autowired
     private ConstructionService constructionService;
-
     @Autowired
     private MisuService misuService;
+
+    @Autowired
+    private AccountService accountService;
 
     @Override
     @GetMapping("/misu")
@@ -69,4 +73,16 @@ public class AdminControllerImp implements AdminController {
         model.addAttribute("constructionDTOs", constructionDTOS);
         return "admin/misu-edit-form";
     }
+
+    @Override
+    @GetMapping("/manage-account")
+    public String manage(Model model) {
+
+        List<AccountDTO> accountDTOS = accountService.selectAll();
+
+        model.addAttribute("accountDTOs", accountDTOS);
+
+        return "admin/manage-account";
+    }
 }
+

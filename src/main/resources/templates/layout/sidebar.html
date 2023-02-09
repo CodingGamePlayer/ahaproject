@@ -26,17 +26,17 @@
 <!--                    20230207 15:44 수정-->
                     <div><a href="#" class="text-white text-sm" th:onclick="regitEmployee()">- 직원정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 장비정보 보기</a></div>
+                    <div><a th:href="@{/user/machine}" class="text-white text-sm">- 장비정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMachine()">- 장비정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 회사정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 회사정보 입력</a></div>
+                    <div><a href="/user/company/list" class="text-white text-sm">- 회사정보 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitCompany()">- 회사정보 입력</a></div>
                     <div><hr></div>
                     <div><a href="/user/material/list" class="text-white text-sm">- 자재정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMaterial()">- 자재정보 입력</a></div>
                     <div><hr></div>
-                    <div><a th:href="@{/user/basicinfo/card}" class="text-white text-sm">- 카드정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 카드정보 입력</a></div>
+                    <div><a th:href="@{/user/basicinfo/card/card-list}" class="text-white text-sm">- 카드정보 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitCard()">- 카드정보 입력</a></div>
 
                 </div>
                 <button class="btn btn-sm mt-3 text-start mb-2 btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#worksite" aria-expanded="false" aria-controls="collapseExample1">
@@ -47,11 +47,11 @@
                     Workspace
                 </button>
                 <div class="collapse ms-3 mb-3" id="worksite" >
-                    <div><a href="#" class="text-white text-sm">- 공사정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 공사정보 입력</a></div>
+                    <div><a th:href="@{/user/worksite/construction/cst-list}" class="text-white text-sm">- 공사정보 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitConstruction()">- 공사정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 자재사용내역 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 자재사용내역 입력</a></div>
+                    <div><a href="/user/worksite/use-material/list" class="text-white text-sm">- 자재사용내역 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitUseMaterial()">- 자재사용내역 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 견적서정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 견적서정보 입력</a></div>
@@ -74,7 +74,7 @@
                     <div><a href="#" class="text-white text-sm">- 공지사항</a></div>
                     <div><a href="#" class="text-white text-sm">- 자유게시판</a></div>
                     <div><a href="#" class="text-white text-sm">- QnA</a></div>
-                    
+
                 </div>
                 <button class="btn btn-sm mt-3 text-start mb-2 btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#accounting" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-accounting me-1" viewBox="0 0 16 16">
@@ -86,11 +86,11 @@
                 <div class="collapse ms-3 mb-3" id="accounting" >
                     <div><a href="#" class="text-white text-sm">- 공사정보 전체보기</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 매출내역 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 매출내역 입력</a></div>
+                    <div><a href="/user/accounting/outcome/list" class="text-white text-sm">- 매출내역 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitOutcome()">- 매출내역 입력</a></div>
                     <div><hr></div>
                     <div><a href="/user/accounting/income/list" class="text-white text-sm">- 매입내역 보기</a></div>
-                    <div><a href="/user/accounting/income/register" class="text-white text-sm">- 매입내역 입력</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitIncome()">- 매입내역 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 인건비내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 인건비내역 입력</a></div>
@@ -109,7 +109,7 @@
                     <div><a href="#" class="text-white text-sm">- 블랙리스트 등록</a></div>
                     <div><a href="#" class="text-white text-sm">- 블랙리스트 보기</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 사용자권한 변경</a></div>
+                    <div><a href="/admin/manage-account" class="text-white text-sm">- 사용자권한 변경</a></div>
                 </div>
 
                 <li class="nav-item mt-2">
@@ -149,17 +149,31 @@
                 window.open("/user/client/form", "_blank", option);
             }
             
-            // 자재 등록하기
+            // 현장 - 자재 입력 페이지 이동하기 
+            function regitUseMaterial(){
+				let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+				
+                window.open("/user/worksite/use-material/register", "_blank", option);
+            }
+            
+            // 자재정보 입력 페이지 이동하기
             function regitMaterial() {
             	let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 				
-                window.open("/user/basicinfo/material/register", "_blank", option);
-            }				
+                window.open("/user/material/register", "_blank", option);
+            }	
 
+
+            // 장비정보 입력
             function regitMachine(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-                window.open("/user/basicinfo/machine-form", "_blank", option);
+                window.open("/user/basicinfo/register", "_blank", option);
+            }
+            function regitCompany(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/company/form", "_blank", option);
             }
 
             const logoutBtn = document.querySelector('#sidebar-logout');
@@ -176,6 +190,32 @@
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                 window.open("/user/employee/emform", "_blank", option);
+            }
+            
+			//카드정보 입력
+            function regitCard(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/basicinfo/card/card-form", "_blank", option);
+            }
+            
+            //매입,매출 등록
+            function regitIncome(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/accounting/income/register", "_blank", option);
+            }
+            function regitOutcome(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/accounting/outcome/register", "_blank", option);
+            }
+            
+            // 공사정보 입력
+            function regitConstruction(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/worksite/construction/cst-form", "_blank", option);
             }
 
 

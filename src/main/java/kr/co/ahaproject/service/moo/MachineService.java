@@ -11,4 +11,8 @@ public interface MachineService {
     List<MachineDTO> selectAll();
 
     int update(MachineDTO machineDTO);
+
+
+   Integer getm_code();
+
 }

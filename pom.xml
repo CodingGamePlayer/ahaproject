@@ -95,11 +95,32 @@
 
 
         <!--        Rest API 통신을 문서화 하기 위한 lib-->
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-ui</artifactId>-->
+<!--            <version>1.6.7</version>-->
+<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter -->
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.7</version>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.19</version>
+        </dependency>
+
+
+
 
         <!--        Json 객체들을 쉽게 만들거나 자료구조에 담을 수 있게 하기 위한 lib-->
         <dependency>
@@ -126,7 +147,6 @@
             <artifactId>spring-boot-starter-aop</artifactId>
             <version>3.0.2</version>
         </dependency>
-
 
     </dependencies>
 

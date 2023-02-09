@@ -115,8 +115,14 @@
                 <div class="form-group">
                     <label class="form-control-label">수금완료여부</label>
                     <select class="form-select" aria-label="Default select example" id="misu_finished">
-                        <option value="false">미완료</option>
-                        <option value="true">수금완료</option>
+                        <th:block th:if="${misuDTO.misu_finished} == false">
+                            <option  value="false" selected>미완료</option>
+                            <option value="true">수금완료</option>
+                        </th:block>
+                        <th:block th:unless="${misuDTO.misu_finished} == false">
+                            <option  value="false" >미완료</option>
+                            <option value="true" selected>수금완료</option>
+                        </th:block>
                     </select>
                 </div>
             </div>
@@ -126,13 +132,179 @@
                     <input class="form-control" type="text" id="misu_etc" th:value="${misuDTO.misu_etc}">
                 </div>
             </div>
-            <input type="button" class="btn btn-primary" id="misuSubmitBtn" value="등록하기"/>
+
+<!--            파일등록을 위한 코드 start-->
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">파일</label><br>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        파일변경
+                    </button>
+                    <a class="btn btn-secondary" href="#" onclick="resetImage()">
+                        기존사진삭제
+                    </a>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">
+                    </div>
+                </div>
+            </div>
+<!--            파일등록을 위한 코드 end-->
+            <input type="button" class="btn btn-primary" id="misuSubmitBtn" value="수정하기"/>
+            <input type="button" class="btn btn-dark mt-2" id="misuDeleteBtn" value="삭제하기"/>
         </div>
     </div>
 </div>
+<!-- 파일 첨부용 Modal start -->
+
+
+<div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">파일첨부</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">첨부파일을 선택하세요.</label>
+                    <input class="form-control" type="file" id="formFile" name="files">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUploadBtn">Close
+                </button>
+                <button type="button" class="btn btn-primary uploadBtn" id="uploadBtn">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 파일 첨부용 Modal end -->
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/upload.js"></script>
+
 <script>
-    const misuSubmitBtn = document.querySelector('#misuSubmitBtn');
+
+<!--    이미지 파일을 사용하기 위한 JS-->
+    /*<![CDATA[*/
+    let input_UUID = "[[${misuDTO.misu_uuid}]]";
+    let input_Filename= "[[${misuDTO.misu_filename}]]";
+    /*]]>*/
+
+    document.querySelector(".uploadBtn").addEventListener("click", function (e) {
+
+        const formObj = new FormData();
+
+        const fileInput = document.querySelector("input[name='files']")
+
+        console.log(fileInput.files)
+
+        const files = fileInput.files
+
+        for (let i = 0; i < files.length; i++) {
+            formObj.append("files", files[i]);
+        }
+
+
+        uploadToServer(formObj).then(result => {
+            console.log(result)
+            //console.log(result)
+            for (const uploadResult of result) {
+                showUploadFile(uploadResult)
+            }
+            document.getElementById('closeUploadBtn').click()
+        }).catch(e => {
+            document.getElementById('closeUploadBtn').click()
+
+        })
+
+    }, false)
+
+    const uploadResult = document.querySelector(".uploadResult")
+
+    function showUploadFile({uuid, fileName, link}) {
+        input_UUID = uuid;
+        input_Filename = fileName;
+        const str =
+            `<div class="card col-10 ">
+            <div class="card-header ">
+                ${fileName}
+                <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+            </div>
+            <div class="card-body">
+                 <img src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
+            </div>
+        </div><!-- card -->`
+
+        uploadResult.innerHTML += str
+    }
+
+
+    function removeFile(uuid, fileName, obj) {
+
+        console.log(uuid)
+        console.log(fileName)
+
+        console.log(obj)
+
+        const targetDiv = obj.closest(".card")
+
+        removeFileToServer(uuid, fileName).then(data => {
+            targetDiv.remove()
+        })
+    }
+
+<!--    기존의 파일 경로들을 살리기 위한 내용-->
+
+
+    function resetImage(){
+
+        if(window.confirm('이미지 파일을 삭제하시겠습니까?')){
+            input_UUID = '';
+            input_Filename = '';
+            alert("이미지가 삭제되었습니다. 수정하기 버튼을 눌러 저장하시기 바랍니다.")
+        }
+
+    }
+<!--    이미지 파일을 사용하기 위한 JS-->
+
+
+const misuSubmitBtn = document.querySelector('#misuSubmitBtn');
     const urlParams = new URL(location.href).searchParams;
+    const misuDeleteBtn = document.getElementById("misuDeleteBtn");
+
+    misuDeleteBtn.addEventListener("click", () => {
+        const input_misu_id = urlParams.get('misu_id');
+
+        const misu = {
+            misu_id : input_misu_id
+        }
+
+        const url = "/api/admin/misu"
+
+        fetch(url, {
+            method : "DELETE",
+            body : JSON.stringify(misu),
+            headers : {
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            if (response.ok) {
+                response.text();
+                alert('삭제가 되었습니다.');
+                opener.location.reload();
+                window.close();
+            } else {
+                alert('삭제를 실패하였습니다.');
+            }
+        });
+    });
+
 
     misuSubmitBtn.addEventListener("click", () => {
         const input_misu_id = urlParams.get('misu_id');
@@ -159,6 +331,8 @@
             misu_total_value: input_misu_total_value,
             misu_collect_date: input_misu_collect_date,
             misu_collect_value: input_misu_collect_value,
+            misu_uuid : input_UUID,
+            misu_filename : input_Filename,
             misu_finished: input_misu_finished,
             misu_etc: input_misu_etc
         };
@@ -171,12 +345,13 @@
             return;
         }
 
+
         console.log(misu1);
 
         const url = "/api/admin/misu";
 
         fetch(url, {
-            method: "PU8T",
+            method: "PUT",
             body: JSON.stringify(misu1),
             headers: {
                 "Content-Type": "application/json"
@@ -184,10 +359,11 @@
         }).then(response => {
             if (response.ok) {
                 response.text();
-                alert('등록이 완료되었습니다.');
+                alert('수정이 완료되었습니다.');
+                opener.location.reload();
                 window.close();
             } else {
-                alert('등록을 실패하였습니다.');
+                alert('수정을 실패하였습니다.');
             }
         });
 

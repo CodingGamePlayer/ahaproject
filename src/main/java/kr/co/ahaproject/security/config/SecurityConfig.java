@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         web.ignoring().requestMatchers(new AntPathRequestMatcher("/fonts/"));
         web.ignoring().antMatchers("/api-doc",  "/configuration/ui","/swagger-resources", "/configuration/security","/swagger-ui.html", "/webjars/**","/swagger/**");
         web.ignoring().antMatchers("/**/*.svg", "/favicon.ico", "/**/*.png", "/**/*.gif","/**/*.svg", "/**/*.jpg", "/**/*.html", "/**/*.css","/**/*.js");
+        web.ignoring().antMatchers("/swagger-ui/**", "/bus/v3/api-docs/**");
     }
 
     @Override
