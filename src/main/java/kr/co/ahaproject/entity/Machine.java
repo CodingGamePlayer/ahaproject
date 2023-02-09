@@ -18,10 +18,11 @@ public class Machine {
     Long m_price;
     Long m_tax;
     String m_date;
-    String m_file;
+    String m_filename;
     String m_etc1;
     String m_etc2;
     String m_etc3;
-
     String m_uuid;
+
+    String m_use;
 }

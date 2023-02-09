@@ -42,8 +42,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*장비코드</label>
-                    <input class="input-group-sm form-control " type="text" id="m_code" disabled
-                           th:value="${machine.m_code}"/>
+                    <input class="input-group-sm form-control " type="text" id="m_code" th:value="${machine.m_code}" disabled/>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -59,8 +58,7 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*타입</label>
+                <div class="form-group">*타입</label>
                     <input class="form-control" type="text" id="m_type" th:value="${machine.m_type}">
                 </div>
             </div>
@@ -78,7 +76,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">매입일자</label>
+                    <label class="form-control-label">*매입일자</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest'
                          data-td-target-toggle='nearest'>
                         <input id='datetimepicker1Input' th:value="${machine.m_date}" type='text' class='form-control'
@@ -90,13 +88,35 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">비고1</label>
+                    <input class="form-control" type="text" id="m_etc1" th:value="${machine.m_etc1}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">비고2</label>
+                    <input class="form-control" type="text" id="m_etc2" th:value="${machine.m_etc2}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">비고3</label>
+                    <input class="form-control" type="text" id="m_etc3" th:value="${machine.m_etc3}">
+                </div>
+            </div>
+
             <!--            파일등록을 위한 코드 start-->
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">파일</label><br>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        파일등록
+                        파일변경
                     </button>
+                    <a class="btn btn-secondary" href="#" onclick="resetImage()">
+                        기존사진삭제
+                    </a>
                 </div>
             </div>
 
@@ -107,12 +127,14 @@
                 </div>
             </div>
             <!--            파일등록을 위한 코드 end-->
-            <input type="button" class="btn btn-primary" id="machineSubmitBtn" value="등록하기"/>
+            <input type="button" class="btn btn-primary" id="machineSubmitBtn" value="수정하기"/>
             <input type="button" class="btn btn-dark mt-2" id="machineDeleteBtn" value="삭제하기"/>
         </div>
     </div>
 </div>
 <!-- 파일 첨부용 Modal start -->
+
+
 <div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -136,31 +158,16 @@
     </div>
 </div>
 <!-- 파일 첨부용 Modal end -->
-<div class="col-sm-12">
-    <div class="form-group">
-        <label class="form-control-label">비고1</label>
-        <input class="form-control" type="text" id="m_etc1" th:value="${machine.m_etc1}">
-    </div>
-</div>
-<div class="col-sm-12">
-    <div class="form-group">
-        <label class="form-control-label">비고1</label>
-        <input class="form-control" type="text" id="m_etc2" th:value="${machine.m_etc2}">
-    </div>
-</div>
-<div class="col-sm-12">
-    <div class="form-group">
-        <label class="form-control-label">비고1</label>
-        <input class="form-control" type="text" id="m_etc3" th:value="${machine.m_etc3}">
-    </div>
-</div>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/upload.js"></script>
 
 <script>
+
+    <!--    이미지 파일을 사용하기 위한 JS-->
     /*<![CDATA[*/
-    let input_UUID = "[[${machine.m_uuid}]]";
-    let input_Filename = "[[${machine.m_filename}]]";
+    let input_UUID = "[[${machine.m_id}]]";
+    let input_Filename= "[[${machine.m_filename}]]";
     /*]]>*/
 
     document.querySelector(".uploadBtn").addEventListener("click", function (e) {
@@ -226,30 +233,45 @@
         })
     }
 
+    <!--    기존의 파일 경로들을 살리기 위한 내용-->
+
+
+    function resetImage(){
+
+        if(window.confirm('이미지 파일을 삭제하시겠습니까?')){
+            input_UUID = '';
+            input_Filename = '';
+            alert("이미지가 삭제되었습니다. 수정하기 버튼을 눌러 저장하시기 바랍니다.")
+        }
+
+    }
+    <!--    이미지 파일을 사용하기 위한 JS-->
+
 
     const machineSubmitBtn = document.querySelector('#machineSubmitBtn');
     const urlParams = new URL(location.href).searchParams;
-
     const machineDeleteBtn = document.getElementById("machineDeleteBtn");
+
     machineDeleteBtn.addEventListener("click", () => {
         const input_m_id = urlParams.get('m_id');
 
         const machine = {
-            m_id: input_m_id
+            m_id : input_m_id
         }
 
-        const url = "/api/admin/machine"
+        const url = "/api/user/machine"
 
         fetch(url, {
-            method: "DELETE",
-            body: JSON.stringify(machine),
-            headers: {
+            method : "DELETE",
+            body : JSON.stringify(machine),
+            headers : {
                 "Content-Type": "application/json"
             }
         }).then(response => {
             if (response.ok) {
                 response.text();
                 alert('삭제가 되었습니다.');
+                opener.location.reload();
                 window.close();
             } else {
                 alert('삭제를 실패하였습니다.');
@@ -257,7 +279,7 @@
         });
     });
 
-
+    const input_m_id = urlParams.get('m_id');
     machineSubmitBtn.addEventListener("click", () => {
         const input_m_code = document.querySelector('#m_code').value;
         const input_m_name = document.querySelector('#m_name').value;
@@ -266,37 +288,50 @@
         const input_m_price = document.querySelector('#m_price').value;
         const input_m_tax = document.querySelector('#m_tax').value;
         const input_m_date = document.querySelector('#datetimepicker1Input').value;
-        const input_m_file = document.querySelector('#m_file').value;
         const input_m_etc1 = document.querySelector('#m_etc1').value;
         const input_m_etc2 = document.querySelector('#m_etc2').value;
         const input_m_etc3 = document.querySelector('#m_etc3').value;
 
         const machine1 = {
-            m_code: input_m_code,
-            m_name: input_m_name,
-            m_equip_num: input_m_equip_num,
-            m_type: input_m_type,
-            m_price: input_m_price,
-            m_tax: input_m_tax,
-            m_date: input_m_date,
-            m_file: input_m_file,
-            m_etc1: input_m_etc1,
-            m_etc2: input_m_etc2,
-            m_etc3: input_m_etc3
+            m_id : input_m_id,
+            m_code : input_m_code,
+            m_name : input_m_name,
+            m_equip_num : input_m_equip_num,
+            m_type : input_m_type,
+            m_price : input_m_price,
+            m_tax : input_m_tax,
+            m_date : input_m_date,
+            m_filename : input_Filename,
+            m_etc1 : input_m_etc1,
+            m_etc2 : input_m_etc2,
+            m_etc3 : input_m_etc3,
+            m_uuid : input_UUID
         };
 
-        if (input_m_code == "" ||
+        if(input_m_code == ""||
             input_m_name == "" || input_m_equip_num == "" ||
             input_m_type == "" || input_m_price == "" ||
-            input_m_tax == "" || input_m_date == "") {
+            input_m_tax == "" || input_m_date ==""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
 
+        var pattern_num = /[0-9]/;	// 숫자
+        var pattern_eng = /[a-zA-Z]/;	// 문자
+        var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+        var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+
+        // 매입액 숫자 입력 유효성 체크
+        if( (pattern_num.test(input_m_price) || pattern_num.test(input_m_tax)) && !(pattern_eng.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_spc.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_kor.test(input_m_price) || pattern_eng.test(input_m_tax)) ){
+
+        }else{
+            alert("매입액과 세액은 숫자만 입력 가능합니다.");
+            return ;
+        }
 
         console.log(machine1);
 
-        const url = "/api/admin/machine";
+        const url = "/api/user/machine";
 
         fetch(url, {
             method: "PUT",
@@ -308,6 +343,7 @@
             if (response.ok) {
                 response.text();
                 alert('수정이 완료되었습니다.');
+                opener.location.reload();
                 window.close();
             } else {
                 alert('수정을 실패하였습니다.');
@@ -316,16 +352,13 @@
 
 
     });
-</script>
 
-<script>
     const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
         display: {
             components: {
-                seconds: false,
-                useTwentyfourHour: false,
+                clock:false,
             },
             icons: {
                 type: 'icons',

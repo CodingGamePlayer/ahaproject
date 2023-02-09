@@ -1,5 +1,6 @@
 package kr.co.ahaproject.controller.moo;
 
+import kr.co.ahaproject.dto.MachineDTO;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,5 +12,5 @@ public interface MachineController {
     String register(Model model);
 
     // 장비정보 수정
-    String update(Model model);
+    String update(MachineDTO machineDTO, Model model);
 }
