@@ -1,7 +1,6 @@
 package kr.co.ahaproject.controller.kjh.imp;
 
 import kr.co.ahaproject.controller.kjh.IncomeController;
-import kr.co.ahaproject.dto.IncomeOutcomeDTO;
 import kr.co.ahaproject.service.kjh.IncomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

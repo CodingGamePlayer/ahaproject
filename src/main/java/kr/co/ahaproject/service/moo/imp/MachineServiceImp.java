@@ -1,7 +1,9 @@
 package kr.co.ahaproject.service.moo.imp;
 
 import kr.co.ahaproject.dto.MachineDTO;
+import kr.co.ahaproject.dto.MisuDTO;
 import kr.co.ahaproject.entity.Machine;
+import kr.co.ahaproject.entity.Misu;
 import kr.co.ahaproject.mapper.moo.MachineMapper;
 import kr.co.ahaproject.service.moo.MachineService;
 import lombok.extern.slf4j.Slf4j;
@@ -43,12 +45,35 @@ public class MachineServiceImp implements MachineService {
     @Override
     public int update(MachineDTO machineDTO) {
         Machine machine = modelMapper.map(machineDTO, Machine.class);
-        return 0;
+        int update = machineMapper.update(machine);
+
+        if(!(update>0)){
+            return 0;
+        }
+
+        return update;
+    }
+
+    @Override
+    public MachineDTO findById(MachineDTO machineDTO) {
+        Machine machine = machineMapper.findById(modelMapper.map(machineDTO, Machine.class));
+        return modelMapper.map(machine, MachineDTO.class);
     }
 
     @Override
     public Integer getm_code() {
         return machineMapper.getm_code();
+    }
+
+    @Override
+    public int delete(MachineDTO machineDTO) {
+        int result = machineMapper.delete(modelMapper.map(machineDTO, Machine.class));
+
+        if(!(result>0)){
+            return 0;
+        }
+
+        return result;
     }
 
 }

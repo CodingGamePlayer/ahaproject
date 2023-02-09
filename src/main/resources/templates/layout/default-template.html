@@ -21,7 +21,71 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- CSS Files -->
     <link id="pagestyle" href="/assets/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
+    <script>
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar')
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                height: 800,
+                initialView: 'dayGridMonth',
+
+                headerToolbar: {
+                    left: 'title',
+                    right: 'prev,next today',
+                },editable: false,
+
+
+                events: [
+                    // my event data
+                    {
+                        title:  '서울시보수공사 - 재설',
+                        start:  '2023-02-01',
+                        end: '2023-02-03',
+                        color: 'sky',
+                        textColor: 'black',
+                        allDay: true,
+                        default: true
+
+                    },
+                    {
+                        title:  '서울시보수공사 - 재설',
+                        start:  '2023-02-01',
+                        end: '2023-02-03',
+                        color: 'sky',
+                        textColor: 'black',
+                        allDay: true,
+                        default: true
+
+                    },
+                    {
+                        title:  '평택초등학교 준공 - 레미콘',
+                        start:  '2023-02-10',
+                        end: '2023-02-12',
+                        color: 'sky',
+                        textColor: 'black',
+                        allDay: true,
+                        default: true
+
+                    },
+                ],
+
+                // 시간 format 지정하는 것들
+                // eventTimeFormat: { // like '14:30:00'
+                //     hour: '2-digit',
+                //     minute: '2-digit',
+                //     second: '0-digit',
+                //     hour12: false
+                // }
+            })
+            calendar.render()
+        })
+
+
+
+
+
+    </script>
 </head>
 <body style="overflow-y: scroll; overflow-x: hidden;">
 <div class="row">
