@@ -24,7 +24,14 @@
                             <div>
                                 <h6 class="font-weight-semibold text-lg mb-0">인사 현황</h6>
                                 <p class="text-sm">인사 현황 전체보기</p>
-                                <button class="btn btn-primary">인사 신규 등록하기</button>
+                                <button class="btn btn-primary" th:onclick="regitEmployee()">인사 신규 등록하기</button>
+                                <script>
+                                    function regitEmployee(){
+                                        let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                                        window.open("/user/employee/emform", "_blank", option);
+                                    }
+                                </script>
                             </div>
                             <div class="ms-auto d-flex">
 
@@ -44,6 +51,8 @@
                                     <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">주소</th>
                                     <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">계좌정보</th>
                                     <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고</th>
+                                    <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">사용여부</th>
+
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
@@ -100,6 +109,15 @@
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${list.emp_etc1}"/>
                                         </td>
+
+                                        <th:block th:switch="${list.emp_use}">
+                                            <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-danger text-danger bg-danger"
+                                                  th:case="false">사용안함</span>
+                                                <span class="badge badge-sm border border-success text-success bg-success"
+                                                      th:case="true">사용중</span>
+                                            </td>
+                                        </th:block>
 
                                         <td class="align-middle">
                                             <a href="#" th:onclick="editEmployee([[${list.emp_id}]])">

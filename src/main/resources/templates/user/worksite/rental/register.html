@@ -31,37 +31,14 @@
     <!— Tempus Dominus Styles —>
     <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
           rel="stylesheet" crossorigin="anonymous">
-    <!-- Popperjs -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <!-- Tempus Dominus JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.2.10/dist/js/tempus-dominus.min.js" crossorigin="anonymous"></script>
-
-    <!-- Tempus Dominus Styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.2.10/dist/css/tempus-dominus.min.css" crossorigin="anonymous">
 
 </head>
 <body>
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">미수금 등록</h5>
+        <h5 class="card-title mt-3 mb-3">장비대여내역 등록</h5>
         <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*구분</label>
-                    <input class="input-group-sm form-control " type="text" id="misu_div">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*회사명</label>
-                    <select class="form-select" aria-label="Default select example" id="cp_name">
-                        <th:block th:each="company : ${companyDTOs}">
-                            <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
-                        </th:block>
-                    </select>
-                </div>
-            </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*공사코드</label>
@@ -74,43 +51,44 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*거래처명</label>
-                    <input class="form-control" type="text" id="misu_name">
+                    <label class="form-control-label">*렌트 시작일</label>
+                    <input class="form-control" type="text" id="rent_start">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*담당자</label>
-                    <input class="form-control" type="text" id="misu_manager">
+                    <label class="form-control-label">*렌트 종료일</label>
+                    <input class="form-control" type="text" id="rent_end">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*미수금</label>
-                    <input class="form-control" type="text" id="misu_value">
+                    <label class="form-control-label">*장비명</label>
+                    <select class="form-select" aria-label="Default select example" id="m_name">
+                        <th:block th:each="machine : ${machineDTOs}">
+                            <option th:value="${machine.m_name}">[[${machine.m_name}]]</option>
+                        </th:block>
+                    </select>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">수금액</label>
-                    <input class="form-control" type="text" id="misu_collect_value">
+                    <label class="form-control-label">*공급가액</label>
+                    <input class="form-control" type="text" id="rent_supp_value">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">미수금잔액</label>
-                    <input class="form-control" type="text" id="misu_total_value">
+                    <label class="form-control-label">*세액</label>
+                    <input class="form-control" type="text" id="rent_tax">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">수금일</label>
-                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest'
-                         data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control'
-                               data-td-target='#datetimepicker1'/>
-                        <span class='input-group-text' data-td-target='#datetimepicker1'
-                              data-td-toggle='datetimepicker'>
+                    <label class="form-control-label">*수금일자</label>
+                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
+                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
                     </div>
@@ -118,19 +96,32 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">수금완료여부</label>
-                    <select class="form-select" aria-label="Default select example" id="misu_finished">
-                        <option value="false" selected>미완료</option>
-                        <option value="true">수금완료</option>
-                    </select>
+                    <label class="form-control-label">*수금액</label>
+                    <input class="form-control" type="text" id="rent_collect_value">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">비고</label>
-                    <input class="form-control" type="text" id="misu_etc">
+                    <label class="form-control-label">미수금</label>
+                    <input class="form-control" type="text" id="rent_misu">
                 </div>
             </div>
+            <div class="col-sm-12">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="form-control-label">등록여부</label>
+                <select class="form-select" aria-label="Default select example" id="rent_regit">
+                    <option value="등록" selected>등록</option>
+                    <option value="미등록">미등록</option>
+                    </select>
+                </div>
+            </div>
+                <div class="form-group">
+                    <label class="form-control-label">비고</label>
+                    <input class="form-control" type="text" id="rent_etc">
+                </div>
+            </div>
+
             <!--            파일첨부를 위한 기능 추가 start-->
             <div class="col-sm-12">
                 <div class="form-group">
@@ -150,7 +141,7 @@
 
             <!--            파일첨부를 위한 기능 추가 end-->
 
-            <input type="button" class="btn btn-primary" id="misuSubmitBtn" value="등록하기"/>
+            <input type="button" class="btn btn-primary" id="machineSubmitBtn" value="등록하기"/>
         </div>
     </div>
 </div>
@@ -254,84 +245,87 @@
         })
     }
 
+    const machineSubmitBtn = document.querySelector('#machineSubmitBtn');
 
-
-    const misuSubmitBtn = document.querySelector('#misuSubmitBtn');
-
-    misuSubmitBtn.addEventListener("click", () => {
-        const input_misu_div = document.querySelector('#misu_div').value;
-        const input_cp_name = document.querySelector('#cp_name').value;
+    machineSubmitBtn.addEventListener("click", () => {
         const input_cst_code = document.querySelector('#cst_code').value;
-        const input_misu_manager = document.querySelector('#misu_manager').value;
-        const input_misu_value = document.querySelector('#misu_value').value;
-        const input_misu_name = document.querySelector('#misu_name').value;
-        const input_misu_total_value = document.querySelector('#misu_total_value').value;
-        const input_misu_collect_date = document.querySelector('#datetimepicker1Input').value;
-        const input_misu_collect_value = document.querySelector('#misu_collect_value').value;
-        const input_misu_finished = document.querySelector('#misu_finished').value;
-        const input_misu_etc = document.querySelector('#misu_etc').value;
+        const input_rent_start = document.querySelector('#rent_start').value;
+        const input_rent_end = document.querySelector('#rent_end').value;
+        const input_m_name = document.querySelector('#m_name').value;
+        const input_rent_supp_value = document.querySelector('#rent_supp_value').value;
+        const input_rent_tax = document.querySelector('#rent_tax').value;
+        const input_rent_collect_date = document.querySelector('#datetimepicker1Input').value;
+        const input_rent_collect_value = document.querySelector('#rent_collect_value').value;
+        const input_rent_misu = document.querySelector('#rent_misu').value;
+        const input_rent_regit = document.querySelector('#rent_regit').value;
+        const input_rent_etc = document.querySelector('#rent_etc').value;
 
-
-
-        const misu1 = {
-            misu_div: input_misu_div,
-            cp_name: input_cp_name,
-            cst_code: input_cst_code,
-            misu_manager: input_misu_manager,
-            misu_value: input_misu_value,
-            misu_name: input_misu_name,
-            misu_total_value: input_misu_total_value,
-            misu_collect_date: input_misu_collect_date,
-            misu_collect_value: input_misu_collect_value,
-            misu_uuid : input_UUID,
-            misu_filename : input_Filename,
-            misu_finished: input_misu_finished,
-            misu_etc: input_misu_etc
+        const machine1 = {
+            cst_code : input_cst_code,
+            rent_start : input_rent_start,
+            rent_end : input_rent_end,
+            m_name : input_m_name,
+            rent_supp_value : input_rent_supp_value,
+            rent_tax : input_rent_tax,
+            rent_collect_date : input_rent_collect_date,
+            rent_collect_value : input_rent_collect_value,
+            rent_misu : input_rent_misu,
+            rent_regit : input_rent_regit,
+            rent_etc : input_rent_etc
         };
 
-        if (input_misu_div == "" || input_cp_name == "" ||
-            input_cst_code == "" || input_misu_manager == "" ||
-            input_misu_value == "" || input_misu_name == "" ||
-            input_misu_total_value == "") {
+        if(input_rent_supp_value == ""||
+            input_rent_tax == "" || input_rent_collect_value == "" ||
+            input_rent_misu == "" ){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
 
-        console.log(misu1);
+        var pattern_num = /[0-9]/;	// 숫자
+        var pattern_eng = /[a-zA-Z]/;	// 문자
+        var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+        var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
 
-        const url = "/api/admin/misu";
+        // 매입액 숫자 입력 유효성 체크
+        if( (pattern_num.test(input_rent_supp_value) || pattern_num.test(input_rent_tax) || pattern_num.test(input_rent_collect_value) || pattern_num.test(input_rent_regit))
+            && !(pattern_eng.test(input_rent_supp_value) || pattern_eng.test(input_rent_tax)|| pattern_num.test(input_rent_collect_value) || pattern_num.test(input_rent_regit))
+            && !(pattern_spc.test(input_rent_supp_value) || pattern_eng.test(input_rent_tax)|| pattern_num.test(input_rent_collect_value) || pattern_num.test(input_rent_regit))
+            && !(pattern_kor.test(input_rent_supp_value) || pattern_eng.test(input_rent_tax)|| pattern_num.test(input_rent_collect_value) || pattern_num.test(input_rent_regit)) ){
+
+        }else{
+            alert("금액은 숫자만 입력 가능합니다.");
+            return ;
+        }
+
+        console.log(machine1);
+
+        const url = "/api/worksite/rental";
 
         fetch(url, {
-            method: "POST",
-            body: JSON.stringify(misu1),
-            headers: {
-                "Content-Type": "application/json"
-            }
+           method : "POST",
+           body : JSON.stringify(machine1),
+           headers : {
+               "Content-Type" : "application/json"
+           }
         }).then(response => {
-            if (response.ok) {
-                response.text();
-                alert('등록이 완료되었습니다.');
-                window.location.reload();
-            } else {
-                alert('등록을 실패하였습니다.');
-            }
+           if(response.ok){
+               response.text();
+               alert('등록이 완료되었습니다.');
+               window.location.reload();
+           } else {
+               alert('등록을 실패하였습니다.');
+           }
         });
 
 
     });
-</script>
-
-<script>
-
 
     const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
-
         display: {
             components: {
-                clock: false,
-                seconds: false,
+                clock:false,
             },
             icons: {
                 type: 'icons',
@@ -347,7 +341,6 @@
             },
         },
     });
-
 </script>
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>

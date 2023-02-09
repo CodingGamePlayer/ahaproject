@@ -3,6 +3,7 @@ package kr.co.ahaproject.service.kjs.imp;
 import kr.co.ahaproject.dto.MisuDTO;
 import kr.co.ahaproject.entity.Misu;
 import kr.co.ahaproject.mapper.kjs.MisuMapper;
+import kr.co.ahaproject.service.AhaCommonMethod;
 import kr.co.ahaproject.service.kjs.MisuService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -23,6 +24,10 @@ public class MisuServiceImp implements MisuService {
 
     @Override
     public int register(MisuDTO misuDTO) {
+
+        String after = new AhaCommonMethod().changeDate(misuDTO.getMisu_collect_date());
+
+        misuDTO.setMisu_collect_date(after);
 
         int result = misuMapper.register(modelMapper.map(misuDTO, Misu.class));
 
