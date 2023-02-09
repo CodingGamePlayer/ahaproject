@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layout/default-template.html}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- default_layout.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+    <!--    <link rel="stylesheet" th:href="@{/css/page/home.css}" >-->
+</th:block>
+<!-- default_layout.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <!--    <script th:src="@{/js/page/home.js}"></script>-->
+</th:block>
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-12 pe-3">
+            <div class="card border shadow-xs mb-4">
+                <div class="card-header border-bottom pb-0">
+                    <div class="d-sm-flex align-items-center">
+                        <div>
+                            <h6 class="font-weight-semibold text-lg mb-0">자재 현황</h6>
+                            <p class="text-sm">자재 사용 내역보기</p>
+                        </div>
+                        <div class="ms-auto d-flex">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0 py-0">
+                    <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
+                        <table class="table align-items-center mb-0">
+                            <thead class="bg-gray-100">
+                            <tr>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7">번호</th>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">공사코드</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">자재코드</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">사용처</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">사용량</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">등록여부</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7"></th>
+                            </tr>
+                            </thead>
+                        </table>
+
+
+                    </div>
+                </div>
+                <div class="table-responsive p-0">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
