@@ -22,6 +22,6 @@ public interface CardService {
 	int update(CardDTO cardDTO);
 	
 	// 카드 정보 삭제
-	int delete(int card_id);
+	int delete(CardDTO cardDTO);
 
 }
