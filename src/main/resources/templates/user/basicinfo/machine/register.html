@@ -91,12 +91,6 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">파일</label>
-                    <input class="form-control" type="file" id="m_file">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
                     <label class="form-control-label">비고1</label>
                     <input class="form-control" type="text" id="m_etc1">
                 </div>
@@ -113,11 +107,129 @@
                     <input class="form-control" type="text" id="m_etc3">
                 </div>
             </div>
-            <input type="button" class="btn btn-primary" id="machineSubmitBtn" value="등록하기" />
+            <!--            파일첨부를 위한 기능 추가 start-->
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">파일</label><br>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        파일등록
+                    </button>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">
+                    </div>
+                </div>
+            </div>
+
+            <!--            파일첨부를 위한 기능 추가 end-->
+
+            <input type="button" class="btn btn-primary" id="machineSubmitBtn" value="등록하기"/>
         </div>
     </div>
 </div>
+<!-- 파일 첨부용 Modal start -->
+
+
+<div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">파일첨부</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">첨부파일을 선택하세요.</label>
+                    <input class="form-control" type="file" id="formFile" name="files">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUploadBtn">Close
+                </button>
+                <button type="button" class="btn btn-primary uploadBtn" id="uploadBtn">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 파일 첨부용 Modal end -->
+
+<!-- 파일 첨부용 JS start-->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/upload.js"></script>
+
+<!-- 파일 첨부용 JS end-->
+
 <script>
+    let input_UUID;
+    let input_Filename;
+
+    document.querySelector(".uploadBtn").addEventListener("click", function (e) {
+
+        const formObj = new FormData();
+
+        const fileInput = document.querySelector("input[name='files']")
+
+        console.log(fileInput.files)
+
+        const files = fileInput.files
+
+        for (let i = 0; i < files.length; i++) {
+            formObj.append("files", files[i]);
+        }
+
+
+        uploadToServer(formObj).then(result => {
+            console.log(result)
+            //console.log(result)
+            for (const uploadResult of result) {
+                showUploadFile(uploadResult)
+            }
+            document.getElementById('closeUploadBtn').click()
+        }).catch(e => {
+            document.getElementById('closeUploadBtn').click()
+
+        })
+
+    }, false)
+
+    const uploadResult = document.querySelector(".uploadResult")
+
+    function showUploadFile({uuid, fileName, link}) {
+        input_UUID = uuid;
+        input_Filename = fileName;
+        const str =
+            `<div class="card col-10 ">
+            <div class="card-header ">
+                ${fileName}
+                <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+            </div>
+            <div class="card-body">
+                 <img src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
+            </div>
+        </div><!-- card -->`
+
+        uploadResult.innerHTML += str
+    }
+
+
+    function removeFile(uuid, fileName, obj) {
+
+        console.log(uuid)
+        console.log(fileName)
+
+        console.log(obj)
+
+        const targetDiv = obj.closest(".card")
+
+        removeFileToServer(uuid, fileName).then(data => {
+            targetDiv.remove()
+        })
+    }
+
     const misuSubmitBtn = document.querySelector('#machineSubmitBtn');
 
     misuSubmitBtn.addEventListener("click", () => {
@@ -144,7 +256,8 @@
             m_file : input_m_file,
             m_etc1 : input_m_etc1,
             m_etc2 : input_m_etc2,
-            m_etc3 : input_m_etc3
+            m_etc3 : input_m_etc3,
+            m_uuid : input_UUID
         };
 
         if(input_m_code == ""||

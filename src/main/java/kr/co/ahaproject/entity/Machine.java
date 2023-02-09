@@ -22,4 +22,6 @@ public class Machine {
     String m_etc1;
     String m_etc2;
     String m_etc3;
+
+    String m_uuid;
 }
