@@ -8,5 +8,5 @@ public interface IncomeController {
     public String selectOne(int id, Model model);
     public String registerForm();
     public String editForm(int id, Model model);
-    public String delete(int id);
+
 }

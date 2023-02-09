@@ -23,6 +23,7 @@ public class IncomeControllerImp implements IncomeController {
         return "user/accounting/income/list";
     }
 
+
     @Override
     @GetMapping("/{id}/detail")
     public String selectOne(@PathVariable int id, Model model) {
@@ -46,16 +47,18 @@ public class IncomeControllerImp implements IncomeController {
         return "user/accounting/income/update";
     }
 
-    @Override
-    @GetMapping("{id}/delete")
-    public String delete(@PathVariable int id) {
-        incomeService.delete(id);
-        return "redirect:/user/accounting/income/list";
-    }
 
     @GetMapping("/jh")
-    public String test(Model model)
-    {
+    public String test(Model model) {
         return "detail-page";
     }
+
+    @GetMapping("/test")
+    public String test1(Model model) {
+        model.addAttribute("ioDTOs", incomeService.selectAll());
+        model.addAttribute("group", incomeService.selectGroup());
+        return "user/accounting/income/test";
+    }
+
 }
+

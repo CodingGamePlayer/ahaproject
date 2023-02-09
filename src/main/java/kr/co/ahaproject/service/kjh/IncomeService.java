@@ -3,6 +3,7 @@ package kr.co.ahaproject.service.kjh;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import kr.co.ahaproject.dto.IncomeOutcomeDTO;
 import kr.co.ahaproject.entity.IncomeOutcome;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,5 +16,8 @@ public interface IncomeService {
 
     int update(IncomeOutcomeDTO ioDTO);
 
-    int delete(int id);
+    int delete(IncomeOutcomeDTO ioDTO);
+    IncomeOutcomeDTO selectRecent(IncomeOutcomeDTO ioDTO);
+    List<IncomeOutcomeDTO> selectAllmod(IncomeOutcomeDTO ioDTO);
+    List<IncomeOutcomeDTO> selectGroup();
 }
