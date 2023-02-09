@@ -105,4 +105,5 @@ public interface CompanyMapper {
     @Delete("DELETE FROM ahaproject.company "
     		+ "WHERE cp_id = #{company.cp_id}")
     int delete(@Param("company") Company company);
+
 }

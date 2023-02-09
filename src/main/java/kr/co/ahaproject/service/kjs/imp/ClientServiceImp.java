@@ -24,6 +24,8 @@ public class ClientServiceImp implements ClientService {
 	
 	private ModelMapper modelMapper = new ModelMapper();
 
+	
+//	등록
 	@Override
 	public int register(ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
@@ -36,6 +38,7 @@ public class ClientServiceImp implements ClientService {
 	        return 1;
 	}
 
+//	전체조회
 	@Override
 	public List<ClientDTO> selectAll() {
 		// TODO Auto-generated method stub
@@ -46,6 +49,7 @@ public class ClientServiceImp implements ClientService {
 	                .collect(Collectors.toList());
 	}
 
+//	선택조회
 	@Override
 	public ClientDTO findById(ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
@@ -54,7 +58,7 @@ public class ClientServiceImp implements ClientService {
 	}
 
 
-
+//	수정
 	@Override
 	public int update(ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
@@ -68,6 +72,7 @@ public class ClientServiceImp implements ClientService {
         return update;
 	}
 
+//	삭제
 	@Override
 	public int delete(ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
@@ -78,6 +83,7 @@ public class ClientServiceImp implements ClientService {
 		return rs;
 	}
 
+//	코드넘버
 	@Override
 	public int maxNum() {
 		// TODO Auto-generated method stub

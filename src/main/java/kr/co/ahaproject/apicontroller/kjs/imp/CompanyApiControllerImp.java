@@ -73,6 +73,6 @@ public class CompanyApiControllerImp implements CompanyApiController{
 		}
 		
 		return ResponseEntity.status(HttpStatus.OK).build();
-	}
 
+	}
 }
