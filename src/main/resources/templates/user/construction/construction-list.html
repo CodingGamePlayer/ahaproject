@@ -50,7 +50,7 @@
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고1</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고2</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고3</th>
-                                
+                                <th class="text-secondary opacity-7"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -95,10 +95,14 @@
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${constructionDTO.cst_collect_date}"/>
                                     </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${constructionDTO.cst_finised}"/>
-                                    </td>
+                                    <th:block th:switch="${constructionDTO.cst_finised}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-danger text-danger bg-danger"
+                                                  th:case="false">공사중</span>
+                                            <span class="badge badge-sm border border-success text-success bg-success"
+                                                  th:case="true">공사완료</span>
+                                        </td>
+                                    </th:block>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${constructionDTO.cst_etc1}"/>

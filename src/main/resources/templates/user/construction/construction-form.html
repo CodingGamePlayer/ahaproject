@@ -129,12 +129,128 @@
                 	<textarea rows="3" cols="10" class="form-control" id="cst_etc3"></textarea>
                 </div>
             </div>
+            <!--            파일첨부를 위한 기능 추가 start-->
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">파일</label><br>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        파일등록
+                    </button>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">
+                    </div>
+                </div>
+            </div>
+
+            <!--            파일첨부를 위한 기능 추가 end-->
             <input type="button" class="btn btn-primary" id="cstSubmitBtn" value="등록하기" />
         </div>
     </div>
 </div>
+<!-- 파일 첨부용 Modal start -->
+
+
+<div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">파일첨부</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">첨부파일을 선택하세요.</label>
+                    <input class="form-control" type="file" id="formFile" name="files">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUploadBtn">Close
+                </button>
+                <button type="button" class="btn btn-primary uploadBtn" id="uploadBtn">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 파일 첨부용 Modal end -->
+
+<!-- 파일 첨부용 JS start-->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/upload.js"></script>
+
+<!-- 파일 첨부용 JS end-->
 <script>
-    const cstSubmitBtn = document.querySelector('#cstdSubmitBtn');
+let input_UUID;
+let input_Filename;
+
+document.querySelector(".uploadBtn").addEventListener("click", function (e) {
+
+    const formObj = new FormData();
+
+    const fileInput = document.querySelector("input[name='files']");
+
+    console.log(fileInput.files);
+
+    const files = fileInput.files;
+
+    for (let i = 0; i < files.length; i++) {
+        formObj.append("files", files[i]);
+    };
+
+
+    uploadToServer(formObj).then(result => {
+        console.log(result)
+        //console.log(result)
+        for (const uploadResult of result) {
+            showUploadFile(uploadResult)
+        };
+        document.getElementById('closeUploadBtn').click()
+    }).catch(e => {
+        document.getElementById('closeUploadBtn').click()
+
+    });
+
+}, false);
+
+const uploadResult = document.querySelector(".uploadResult");
+
+function showUploadFile({uuid, fileName, link}) {
+    input_UUID = uuid;
+    input_Filename = fileName;
+    const str =
+        `<div class="card col-10 ">
+        <div class="card-header ">
+            ${fileName}
+            <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+        </div>
+        <div class="card-body">
+             <img src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
+        </div>
+    </div><!-- card -->`
+
+    uploadResult.innerHTML += str;
+};
+
+
+function removeFile(uuid, fileName, obj) {
+
+    console.log(uuid);
+    console.log(fileName);
+
+    console.log(obj);
+
+    const targetDiv = obj.closest(".card");
+
+    removeFileToServer(uuid, fileName).then(data => {
+        targetDiv.remove();
+    });
+};
+
+    const cstSubmitBtn = document.querySelector('#cstSubmitBtn');
 
     cstSubmitBtn.addEventListener("click", () => {
         const input_cst_code = document.querySelector('#cst_code').value;
@@ -144,7 +260,7 @@
         const input_cst_end = document.querySelector('#datetimepicker2Input').value;
         const input_cst_toal_pay = document.querySelector('#cst_toal_pay').value;
         const input_cst_1st_pay = document.querySelector('#cst_1st_pay').value;
-        const input_cst_collect_date = document.querySelector('#cdatetimepicker3Input').value;
+        const input_cst_collect_date = document.querySelector('#datetimepicker3Input').value;
         const input_cst_finised = document.querySelector('#cst_finised').value;
         const input_cst_etc1 = document.querySelector('#cst_etc1').value;
         const input_cst_etc2 = document.querySelector('#cst_etc2').value;
@@ -162,7 +278,9 @@
         		cst_finised : input_cst_finised,
         		cst_etc1 : input_cst_etc1,
         		cst_etc2 : input_cst_etc2,
-        		cst_etc3 : input_cst_etc3
+        		cst_etc3 : input_cst_etc3,
+                cst_filename : input_Filename,
+                cst_uuid : input_UUID
             
         };
 
@@ -173,15 +291,15 @@
         		input_cst_finised == "" ){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
-        }
+        };
 
-        console.log(csfif);
+        console.log(cstif);
 
-        const url = "/api/user/worksite/construction/csfinfo";
+        const url = "/api/user/worksite/construction/cstinfo";
 
         fetch(url, {
            method : "POST",
-           body : JSON.stringify(csfif),
+           body : JSON.stringify(cstif),
            headers : {
                "Content-Type" : "application/json"
            }
