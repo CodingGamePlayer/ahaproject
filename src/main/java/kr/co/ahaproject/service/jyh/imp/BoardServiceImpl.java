@@ -2,12 +2,12 @@ package kr.co.ahaproject.service.jyh.imp;
 
 import java.util.List;
 
+import kr.co.ahaproject.service.jyh.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.ahaproject.dto.BoardDTO;
 import kr.co.ahaproject.mapper.jyh.Boardmapper;
-import kr.co.ahaproject.service.jyh.BoardService;
 
 @Service
 public class BoardServiceImpl implements BoardService {
