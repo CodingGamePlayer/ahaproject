@@ -57,4 +57,12 @@ public class CompanyServiceImp implements CompanyService {
 			if(!(rs>0)) return 0;
 		return rs;
 	}
+
+	@Override
+	public int delete(CompanyDTO companyDTO) {
+		// TODO Auto-generated method stub
+		int rs = companyMapper.delete(modelMapper.map(companyDTO, Company.class));
+		if(!(rs>0)) return 0;
+		return rs;
+	}
 }

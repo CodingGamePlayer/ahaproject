@@ -48,4 +48,18 @@ public class ClientApiControllerImp implements ClientApiController {
 		
 	        return ResponseEntity.status(HttpStatus.OK).build();
 	}
+
+	@Override
+	@DeleteMapping("client")
+	public ResponseEntity<ClientDTO> delete(@RequestBody ClientDTO clientDTO) {
+		// TODO Auto-generated method stub
+		int result = clientService.delete(clientDTO);
+		log.info(String.valueOf(result));
+		if (result == 0){
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	        }
+		
+	        return ResponseEntity.status(HttpStatus.OK).build();
+		
+	}
 }
