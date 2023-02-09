@@ -54,7 +54,8 @@ public interface CompanyMapper {
     		+ "cp_eng_address,"
     		+ "cp_eng_head_name,"
     		+ "cp_domain,"
-    		+ "cp_file)"
+    		+ "cp_filename,"
+    		+ "cp_uuid)"
     		+ " VALUES "
     		+ "(#{company.cp_name},"
     		+ "#{company.cp_num},"
@@ -70,7 +71,8 @@ public interface CompanyMapper {
     		+ "#{company.cp_eng_address},"
     		+ "#{company.cp_eng_head_name},"
     		+ "#{company.cp_domain},"
-    		+ "#{company.cp_file});")
+    		+ "#{company.cp_filename},"
+    		+ "#{company.cp_uuid});")
     int register(@Param("company")Company company);
     
 //  선택조회
@@ -97,8 +99,9 @@ public interface CompanyMapper {
     		+ "cp_eng_address = #{company.cp_eng_address},"
     		+ "cp_eng_head_name = #{company.cp_eng_head_name},"
     		+ "cp_domain = #{company.cp_domain},"
-    		+ "cp_file = #{company.cp_file}"
-    		+ "WHERE cp_id = #{company.cp_id};")
+    		+ "cp_filename = #{company.cp_filename},"
+    		+ "cp_uuid = #{company.cp_uuid}"
+    		+ " WHERE cp_id = #{company.cp_id};")
     int update(@Param("company") Company company);
     
 //    삭제

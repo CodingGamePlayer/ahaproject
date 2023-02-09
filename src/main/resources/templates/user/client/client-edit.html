@@ -82,7 +82,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*거래처코드</label>
-                    <input class="form-control" type="text" id="cl_code" disabled="disabled" th:value="${client.cl_code}">
+                    <input class="form-control" type="text" id="cl_code" disabled="disabled" th:value="${client.cl_code}" style="background: #ffffff">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -99,25 +99,19 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*파일</label>
-                    <input class="form-control" type="text" id="cl_file" th:value="${client.cl_file}">
+                    <label class="form-control-label">비고1</label>
+                    <input class="form-control" type="text" id="cl_etc1" th:value="${client.cl_etc1}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*비고1</label>
-                    <textarea style="resize: none;" rows="5" cols="50" id="cl_etc1">[[${client.cl_etc1}]]</textarea>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*비고2</label>
+                    <label class="form-control-label">비고2</label>
                     <input class="form-control" type="text" id="cl_etc2" th:value="${client.cl_etc2}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*비고3</label>
+                    <label class="form-control-label">비고3</label>
                     <input class="form-control" type="text" id="cl_etc3" th:value="${client.cl_etc3}">
                 </div>
             </div>
@@ -128,6 +122,8 @@
     </div>
 </div> 
 <script>
+
+	
     const clientSubmitBtn = document.querySelector('#clientSubmitBtn');
 
     clientSubmitBtn.addEventListener("click", () => {
@@ -139,7 +135,6 @@
         const input_cl_code = document.querySelector('#cl_code').value;
         const input_cl_email = document.querySelector('#cl_email').value;
         const input_cl_account = document.querySelector('#cl_account').value;
-        const input_cl_file = document.querySelector('#cl_file').value;
         const input_cl_etc1 = document.querySelector('#cl_etc1').value;
         const input_cl_etc2 = document.querySelector('#cl_etc2').value;
         const input_cl_etc3 = document.querySelector('#cl_etc3').value;
@@ -153,7 +148,6 @@
             cl_code : input_cl_code,
             cl_email : input_cl_email,
             cl_account : input_cl_account,
-            cl_file : input_cl_file,
             cl_etc1 : input_cl_etc1,
             cl_etc2 : input_cl_etc2,
             cl_etc3 : input_cl_etc3

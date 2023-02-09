@@ -66,6 +66,7 @@
                 <div class="form-group">
                    <label for="form-control-label">법인,개인</label>
 					 <select class="form-select" aria-label="Default select example"  id="cp_type">
+					 	<option th:value="${company.cp_type}" selected>[[${company.cp_type}]]</option>
 					    <option value="법인">법인</option>
 					    <option value="개인">개인</option>
 				    </select>
@@ -85,13 +86,13 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*업종</label>
+                    <label class="form-control-label">업종</label>
                     <input class="form-control" type="text" id="cp_sector" th:value="${company.cp_sector}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*설립연월일</label>
+                    <label class="form-control-label">설립연월일</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
                         <input id='cp_establish' type='text' class='form-control' data-td-target='#datetimepicker1' th:value="${company.cp_establish}"/>
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
@@ -102,7 +103,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*개업연월일</label>
+                    <label class="form-control-label">개업연월일</label>
                     <div class='input-group' id='datetimepicker2' data-td-target-input='nearest' data-td-target-toggle='nearest'>
                         <input id='cp_open' type='text' class='form-control' data-td-target='#datetimepicker2' th:value="${company.cp_open}" />
                         <span class='input-group-text' data-td-target='#datetimepicker2' data-td-toggle='datetimepicker' >
@@ -113,32 +114,26 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*영문 회사명</label>
+                    <label class="form-control-label">영문 회사명</label>
                     <input class="form-control" type="text" id="cp_eng_name" th:value="${company.cp_eng_name}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*영문 사업장주소</label>
+                    <label class="form-control-label">영문 사업장주소</label>
                     <input class="form-control" type="text" id="cp_eng_address" th:value="${company.cp_eng_address}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*영문 대표자명</label>
+                    <label class="form-control-label">영문 대표자명</label>
                     <input class="form-control" type="text" id="cp_eng_head_name" th:value="${company.cp_eng_head_name}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*도메인명</label>
+                    <label class="form-control-label">도메인명</label>
                     <input class="form-control" type="text" id="cp_domain" th:value="${company.cp_domain}">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*파일</label>
-                    <input class="form-control" type="text" id="cp_file" th:value="${company.cp_file}">
                 </div>
             </div>
             <input type="button" class="btn btn-primary" id="companySubmitBtn" value="수정하기" />
@@ -162,7 +157,6 @@
         const input_cp_type = document.querySelector('#cp_type').value;
         const input_cp_head_name = document.querySelector('#cp_head_name').value;
         const input_cp_head_id = document.querySelector('#cp_head_id').value;
-        const input_cp_file = document.querySelector('#cp_file').value;
         const input_cp_sector = document.querySelector('#cp_sector').value;
         const input_cp_establish = document.querySelector('#cp_establish').value;
         const input_cp_open = document.querySelector('#cp_open').value;
@@ -181,7 +175,6 @@
             cp_head_name : input_cp_head_name,
             cp_head_id : input_cp_head_id,
             
-            cp_file : input_cp_file,
             cp_sector : input_cp_sector,
             cp_establish : input_cp_establish,
             cp_open : input_cp_open,

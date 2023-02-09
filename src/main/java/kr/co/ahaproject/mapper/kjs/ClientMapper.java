@@ -23,8 +23,8 @@ import kr.co.ahaproject.entity.Company;
 public interface ClientMapper {
 	
 //	고객 등록
-    @Insert("INSERT INTO ahaproject.client (cp_num, cp_name, cp_address, cp_tel, cl_code, cl_email, cl_account, cl_file, cl_etc1, cl_etc2, cl_etc3) "
-    		+ " VALUES (#{client.cp_num},#{client.cp_name},#{client.cp_address},#{client.cp_tel},#{client.cl_code},#{client.cl_email},#{client.cl_account},#{client.cl_file},#{client.cl_etc1},#{client.cl_etc2},#{client.cl_etc3})")
+    @Insert("INSERT INTO ahaproject.client (cp_num, cp_name, cp_address, cp_tel, cl_code, cl_email, cl_account, cl_filename, cl_uuid, cl_etc1, cl_etc2, cl_etc3) "
+    		+ " VALUES (#{client.cp_num},#{client.cp_name},#{client.cp_address},#{client.cp_tel},#{client.cl_code},#{client.cl_email},#{client.cl_account},#{client.cl_filename},#{client.cl_uuid},#{client.cl_etc1},#{client.cl_etc2},#{client.cl_etc3})")
     int register(@Param("client") Client client);
 
 
@@ -40,7 +40,8 @@ public interface ClientMapper {
             @Result(property = "cl_code", column = "cl_code"),
             @Result(property = "cl_email", column = "cl_email"),
             @Result(property = "cl_account", column = "cl_account"),
-            @Result(property = "cl_file", column = "cl_file"),
+            @Result(property = "cl_filename", column = "cl_filename"),
+            @Result(property = "cl_uuid", column = "cl_uuid"),
             @Result(property = "cl_etc1", column = "cl_etc1"),
             @Result(property = "cl_etc2", column = "cl_etc2"),
             @Result(property = "cl_etc3", column = "cl_etc3")})
@@ -61,7 +62,8 @@ public interface ClientMapper {
     		+ "cl_code = #{client.cl_code},"
     		+ "cl_email = #{client.cl_email},"
     		+ "cl_account = #{client.cl_account},"
-    		+ "cl_file = #{client.cl_file},"
+    		+ "cl_filename = #{client.cl_filename},"
+    		+ "cl_uuid = #{client.cl_uuid},"
     		+ "cl_etc1 = #{client.cl_etc1},"
     		+ "cl_etc2 = #{client.cl_etc2},"
     		+ "cl_etc3 = #{client.cl_etc3}"
