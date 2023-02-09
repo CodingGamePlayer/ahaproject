@@ -31,12 +31,27 @@ public class MaterialServiceImp implements MaterialService{
 	// 자재 글생성
 	@Override
 	public int create(MaterialDTO dto) {
+		if(dto.getMt_file() == "" || dto.getMt_etc1() == "" || dto.getMt_etc2() == "" || dto.getMt_etc3() == "") {
+			dto.setMt_file("None");
+			dto.setMt_etc1("None");
+			dto.setMt_etc2("None");
+			dto.setMt_etc3("None");
+		}
+		
 		return materialMapper.create(dto);
+
 	}
 
 	// 자재 수정
 	@Override
 	public int update(MaterialDTO dto) {
+		
+		if(dto.getMt_file() == "" || dto.getMt_etc1() == "" || dto.getMt_etc2() == "" || dto.getMt_etc3() == "") {
+			dto.setMt_file("None");
+			dto.setMt_etc1("None");
+			dto.setMt_etc2("None");
+			dto.setMt_etc3("None");
+		}
 		return materialMapper.update(dto);
 	}
 

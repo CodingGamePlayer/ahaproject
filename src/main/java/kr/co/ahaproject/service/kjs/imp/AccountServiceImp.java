@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 public class AccountServiceImp implements AccountService {
@@ -50,5 +53,59 @@ public class AccountServiceImp implements AccountService {
         Account result = accountMapper.findByUsername(username);
 
         return modelMapper.map(result, AccountDTO.class);
+    }
+
+    @Override
+    public List<AccountDTO> selectAll() {
+
+        List<Account> accounts = accountMapper.selectAll();
+
+        return accounts.stream()
+                .map(account -> modelMapper.map(account, AccountDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public int changeRole(AccountDTO accountDTO) {
+
+        Account target = accountMapper.findByUsername(accountDTO.getUsername());
+
+        if (target == null){
+            return 0;
+        }
+
+        String role = target.getAc_role();
+
+        if (role.equals("ROLE_ADMIN")){
+            target.setAc_role("ROLE_USER");
+        } else if (role.equals("ROLE_USER")) {
+            target.setAc_role("ROLE_ADMIN");
+        }
+
+        int result = accountMapper.changeRole(target);
+
+        if (result==0){
+            return 0;
+        }
+
+        return 1;
+    }
+
+    @Override
+    public int delete(AccountDTO accountDTO) {
+
+        Account target = accountMapper.findByUsername(accountDTO.getUsername());
+        log.info("service target account : {}", target);
+        if(target == null) {
+            return 0;
+        }
+
+        int result = accountMapper.delete(target);
+
+        if (!(result>0)){
+            return 0;
+        }
+
+        return 1;
     }
 }

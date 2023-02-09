@@ -3,6 +3,8 @@ package kr.co.ahaproject.mapper.kjs;
 import kr.co.ahaproject.entity.Account;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface AccountMapper {
 
@@ -23,5 +25,13 @@ public interface AccountMapper {
             "VALUES (#{account.cp_name},#{account.username},#{account.ac_password}, #{account.ac_person_name})")
     int register(@Param("account") Account account);
 
+    @Select("SELECT * FROM account ORDER BY ac_id DESC")
+    @ResultMap("accountMap")
+    List<Account> selectAll();
 
+    @Update("UPDATE account SET ac_role = #{account.ac_role} WHERE ac_id = #{account.ac_id}")
+    int changeRole(@Param("account") Account account);
+
+    @Delete("DELETE FROM account WHERE ac_id = #{account.ac_id}")
+    int delete(@Param("account") Account account);
 }

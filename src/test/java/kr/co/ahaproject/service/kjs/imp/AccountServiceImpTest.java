@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @Slf4j
 @SpringBootTest
 class AccountServiceImpTest {
@@ -43,5 +45,35 @@ class AccountServiceImpTest {
         Account result = accountMapper.findByUsername(username);
 
         log.info("account : " + result);
+    }
+
+    @Test
+    void selectAll() {
+
+        List<AccountDTO> accountDTOS = accountService.selectAll();
+
+        accountDTOS.forEach(accountDTO -> log.info(String.valueOf(accountDTO)));
+    }
+
+    @Test
+    void changeRole() {
+
+        AccountDTO accountDTO = AccountDTO.builder()
+                .ac_id(6)
+                .ac_role("ROLE_USER")
+                .build();
+        int result = accountService.changeRole(accountDTO);
+        log.info(String.valueOf(result));
+    }
+
+    @Test
+    void delete() {
+
+        AccountDTO accountDTO = AccountDTO.builder()
+                .username("user1")
+                .build();
+
+        int delete = accountService.delete(accountDTO);
+        log.info(String.valueOf(delete));
     }
 }
