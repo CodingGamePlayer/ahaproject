@@ -9,5 +9,5 @@ public interface ClientApiController {
 
     ResponseEntity update(ClientDTO clientDTO);
 
-
+    ResponseEntity delete(ClientDTO clientDTO);
 }
