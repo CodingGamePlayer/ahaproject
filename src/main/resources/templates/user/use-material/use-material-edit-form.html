@@ -38,111 +38,91 @@
     <div class="card-body">
         <h5 class="card-title mt-3 mb-3">자재사용내역입력</h5>
         <div class="row">
-        	<input type="hidden" th:value="${selectData.mt_id}" id="mt_id"/>
+        	<input type="hidden" th:value="${selectData.um_id}" id="um_id"/>
+        	<div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*공사코드</label>
+                    <input class="input-group-sm form-control" type="text" id="cst_code" name="cst_code" th:value="${selectData.cst_code}">
+                </div>
+            </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*자재코드</label>
                     <input class="input-group-sm form-control" type="text" id="mt_code" name="mt_code" th:value="${selectData.mt_code}"/>
                 </div>
             </div>
-
-            <div class="col-sm-12">
+			
+			<div class="col-sm-12">
                 <div class="form-group">
-                      <label class="form-control-label">*자재명</label>
-                    <input class="form-control" type="text" id="mt_name" name="mt_name" th:value="${selectData.mt_name}"/>
+                    <label class="form-control-label">*사용량</label>
+                    <input class="form-control" type="text" id="um_amount" name="um_amount" th:value="${selectData.um_amount}" />
                 </div>
             </div>
             
             <div class="col-sm-12">
                 <div class="form-group">
-                     <label class="form-control-label">*규격(제품번호)</label>
-                    <input class="form-control" type="text" id="mt_standard" name="mt_standard" th:value="${selectData.mt_standard}"/>
+                     <label class="form-control-label">사용처</label>
+                    <input class="form-control" type="text" id="um_where" name="um_where" th:value="${selectData.um_where}" />
                 </div>
             </div>
             
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*재고</label>
-                    <input class="form-control" type="text" id="mt_remain" name="mt_remain" th:value="${selectData.mt_remain}"/>
-                </div>
-            </div>
             
+       <div class="col-sm-12">
+        <div class="form-group">
+          <label class="form-control-label">등록여부</label>
+          <select class="form-select" aria-label="Default select example" id="um_regit" >
+            <th:block th:if="${selectData.um_regit} == false">
+              <option value="false" selected>미사용</option>
+              <option value="true">사용</option>
+            </th:block>
+            <th:block th:unless="${selectData.um_regit} == false">
+              <option value="false" >미사용</option>
+              <option value="true" selected>사용</option>
+            </th:block>
+          </select>
+        </div>
+      </div>
+           <!--  
             <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">파일</label>
-                    <input class="form-control" type="file" id="mt_file" name="mt_file" th:value="${selectData.mt_file}"/>
-                </div>
-            </div>
-            
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">비고1</label>
-                    <input class="form-control" type="text" id="mt_etc1" name="mt_etc1" th:value="${selectData.mt_etc1}"/>
-                </div>
-            </div>
-            
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">비고2</label>
-                    <input class="form-control" type="text" id="mt_etc2" name="mt_etc2" th:value="${selectData.mt_etc2}"/>
-                </div>
-            </div>
-            
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">비고3</label>
-                    <input class="form-control" type="text" id="mt_etc3" name="mt_etc3" th:value="${selectData.mt_etc3}"/>
-                </div>
-            </div>
+	        <div class="form-group">
+	          <label class="form-control-label">등록여부</label>
+	          <select class="form-select" aria-label="Default select example" id="um_regit" name="um_regit" >
+	              <option value="true" th:attr="selected = ${selectData.um_regit} == 'true' ? 'true' : 'false' ">사용</option>
+	              <option value="false" th:attr="selected = ${selectData.um_regit} == 'false' ? 'false' : 'true' ">미사용</option>
+	          </select>
+	        </div>
+	      </div> -->
        
-            <input type="submit" class="btn btn-primary" value="등록하기" id="materialSubmitBtn" />
-			<input type="submit" class="btn btn-primary" value="삭제하기" id="materialDeleteBtn" />
+            <input type="submit" class="btn btn-primary" value="등록하기" id="useMaterialSubmitBtn" />
+			<input type="submit" class="btn btn-dark mt-2" value="삭제하기" id="useMaterialDeleteBtn" />
         </div> 
     </div>
 </div>
 <script>
 	  // 삭제버튼
-	  const materialDeleteBtn = document.querySelector("#materialDeleteBtn");
-	  const materialSubmitBtn = document.querySelector('#materialSubmitBtn');
+	  const useMaterialDeleteBtn = document.querySelector("#useMaterialDeleteBtn");
+	  const useMaterialSubmitBtn = document.querySelector('#useMaterialSubmitBtn');
 
-	  materialSubmitBtn.addEventListener("click", () => {
-	  const input_mt_id = document.querySelector('#mt_id').value; 
+	  // 수정버튼 클릭시 =======
+	  useMaterialSubmitBtn.addEventListener("click", () => {
+		  
+	  const input_um_id = document.querySelector('#um_id').value; 
+	  const input_cst_code = document.querySelector('#cst_code').value; 
       const input_mt_code = document.querySelector('#mt_code').value;
-      const input_mt_name = document.querySelector('#mt_name').value;
-      const input_mt_standard = document.querySelector('#mt_standard').value;
-      const input_mt_remain = document.querySelector('#mt_remain').value;
-      const input_mt_file = document.querySelector('#mt_file').value;
-      const input_mt_etc1 = document.querySelector('#mt_etc1').value;
-      const input_mt_etc2 = document.querySelector('#mt_etc2').value;
-      const input_mt_etc3 = document.querySelector('#mt_etc3').value;
-      
-      console.log(input_mt_id);
-      console.log(typeof(input_mt_id));
+      const input_um_amount = document.querySelector('#um_amount').value;
+      const input_um_where = document.querySelector('#um_where').value;
+      const input_um_regit = document.querySelector('#um_regit').value;     
 
       const material1 = {
-          mt_id : input_mt_id,
-          mt_code : input_mt_code,
-          mt_name : input_mt_name,
-          mt_standard : input_mt_standard,
-          mt_remain : input_mt_remain,
-          mt_file : input_mt_file,
-          mt_etc1 : input_mt_etc1,
-          mt_etc2 : input_mt_etc2,
-          mt_etc3 : input_mt_etc3
+    		  um_id : input_um_id,
+    		  cst_code : input_cst_code,
+    		  mt_code : input_mt_code,
+    		  um_amount : input_um_amount,
+    		  um_where : input_um_where,
+    		  um_regit : input_um_regit
       };
 
-      if(input_mt_code == "" || input_mt_name == "" ||
-         input_mt_standard == "" || input_mt_remain == "")
-      {
-          alert('*이 있는 칸은 채워주시기 바랍니다.');
-          return;
-      }
-      
-      
-
-      console.log(material1);
-
-      const url = "/api/user/material";
+      const url = "/api/user/worksite/useMaterial";
 
       fetch(url, {
          method : "PUT",
@@ -163,15 +143,15 @@
 	
 		
 		
-	  materialDeleteBtn.addEventListener("click", function(){
+  useMaterialDeleteBtn.addEventListener("click", function(){
 		  
-		  let input_mt_id = document.querySelector('#mt_id').value; 
+		  let input_um_id = document.querySelector('#um_id').value; 
 		  
 		   const material2 = {
-				mt_id : input_mt_id 
+				um_id : input_um_id 
 		   };
 			          
-		  const url = "/api/user/material";
+		  const url = "/api/user/worksite/useMaterial";
 
 	      fetch(url, {
 	         method : "DELETE",

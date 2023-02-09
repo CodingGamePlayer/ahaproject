@@ -40,22 +40,24 @@ public interface MaterialMapper {
             @Result(property = "mt_etc1", column = "mt_etc1"),
             @Result(property = "mt_etc2", column = "mt_etc2"),
             @Result(property = "mt_etc3", column = "mt_etc3"),
-            @Result(property = "mt_file", column = "mt_file")})
+            @Result(property = "mt_filename", column = "mt_filename"),
+            @Result(property = "mt_uuid", column = "mt_uuid")}
+	)
 	List<MaterialDTO> listAll(); // 전체조회
 	
 	@Select("SELECT * FROM material WHERE mt_id = #{mt_id}")
 	@ResultMap("MaterialMap")
 	MaterialDTO selectOne(int mt_id); // 선택조회
 	
-	@Insert("INSERT INTO material (mt_code, mt_name, mt_standard, mt_remain, mt_etc1, mt_etc2, mt_etc3, mt_file) "
-			+ "VALUES (#{mt_code}, #{mt_name}, #{mt_standard}, #{mt_remain}, #{mt_etc1}, #{mt_etc2}, #{mt_etc3}, #{mt_file})")
+	@Insert("INSERT INTO material (mt_code, mt_name, mt_standard, mt_remain, mt_etc1, mt_etc2, mt_etc3, mt_filename, mt_uuid) "
+			+ "VALUES (#{mt_code}, #{mt_name}, #{mt_standard}, #{mt_remain}, #{mt_etc1}, #{mt_etc2}, #{mt_etc3}, #{mt_filename}, #{mt_uuid})")
 	int create(MaterialDTO dto); // 글작성
 	
 
 	@Update("UPDATE `ahaproject`.`material` SET " +
             "`mt_code` = #{material.mt_code}, `mt_name` = #{material.mt_name}, `mt_standard` = #{material.mt_standard}, " +
             "`mt_remain` = #{material.mt_remain}, `mt_etc1` = #{material.mt_etc1}, `mt_etc2` = #{material.mt_etc2},  " +
-            "`mt_etc3` = #{material.mt_etc3}, `mt_file` = #{material.mt_file} WHERE (`mt_id` = #{material.mt_id})")
+            "`mt_etc3` = #{material.mt_etc3}, `mt_filename` = #{material.mt_filename}, `mt_uuid` = #{material.mt_uuid} WHERE (`mt_id` = #{material.mt_id})")
 	int update(@Param("material") MaterialDTO dto); // 글수정
 	
 	

@@ -35,6 +35,8 @@ public class UseMaterialControllerImp implements UseMaterialController {
 	@Override
 	@GetMapping("/user/worksite/use-material/detail")
 	public String detail(UseMaterialDTO dto, Model model) {
+		
+		model.addAttribute("selectData", useMaterialService.selectOne(dto.getUm_id()));
 		return "user/use-material/use-material-edit-form";
 	}
 
