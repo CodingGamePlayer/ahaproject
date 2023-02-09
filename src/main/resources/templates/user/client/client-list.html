@@ -38,9 +38,11 @@
                             <tr>
                         	    <th class="text-secondary text-xs font-weight-semibold opacity-7">회사명</th>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">사업자번호</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">전화번호</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">주소</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">전화번호</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처코드</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">이메일</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">계좌</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">파일</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고</th>
                                 <th class="text-secondary opacity-7"></th>
@@ -63,19 +65,26 @@
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${client.cp_num}"/>
                                     </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${client.cp_address}"/>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${client.cp_tel}"/>
                                     </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${client.cp_address}"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="'CL'+${client.cl_code}"/>
+                                              th:text="${client.cl_code}"/>
                                     </td>
-
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${client.cl_email}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${client.cl_account}"/>
+                                    </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${client.cl_file}"/>
