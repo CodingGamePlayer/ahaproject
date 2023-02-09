@@ -2,6 +2,7 @@ package kr.co.ahaproject.mapper.kjs;
 
 import kr.co.ahaproject.entity.Company;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -74,30 +75,35 @@ public interface CompanyMapper {
     
 //  선택조회
     @Select("SELECT * "
-    		+ "FROM `ahaproject`.`company`"
+    		+ "FROM ahaproject.company "
     		+ "where cp_id = #{company.cp_id}")
     @ResultMap("companyMap")
     Company findById(@Param("company")Company company);
     
 //  수정
-    @Update("UPDATE `ahaproject`.`company` "
+    @Update("UPDATE ahaproject.company "
     		+ "SET "
-    		+ "`cp_name` = #{cp_name},"
-    		+ "`cp_num` = #{cp_num},"
-    		+ "`cp_address` = #{cp_address},"
-    		+ "`cp_tel` = #{cp_tel},"
-    		+ "`cp_type` = #{cp_type},"
-    		+ "`cp_head_name` = #{cp_head_name},"
-    		+ "`cp_head_id` = #{cp_head_id},"
-    		+ "`cp_sector` = #{cp_sector},"
-    		+ "`cp_establish` = #{cp_establish},"
-    		+ "`cp_open` = #{cp_open},"
-    		+ "`cp_eng_name` = #{cp_eng_name},"
-    		+ "`cp_eng_address` = #{cp_eng_address},"
-    		+ "`cp_eng_head_name` = #{cp_eng_head_name},"
-    		+ "`cp_domain` = #{cp_domain},"
-    		+ "`cp_file` = #{cp_file}"
-    		+ "WHERE `cp_id` = #{comapany.cp_id;")
+    		+ "cp_name = #{company.cp_name},"
+    		+ "cp_num = #{company.cp_num},"
+    		+ "cp_address = #{company.cp_address},"
+    		+ "cp_tel = #{company.cp_tel},"
+    		+ "cp_type = #{company.cp_type},"
+    		+ "cp_head_name = #{company.cp_head_name},"
+    		+ "cp_head_id = #{company.cp_head_id},"
+    		+ "cp_sector = #{company.cp_sector},"
+    		+ "cp_establish = #{company.cp_establish},"
+    		+ "cp_open = #{company.cp_open},"
+    		+ "cp_eng_name = #{company.cp_eng_name},"
+    		+ "cp_eng_address = #{company.cp_eng_address},"
+    		+ "cp_eng_head_name = #{company.cp_eng_head_name},"
+    		+ "cp_domain = #{company.cp_domain},"
+    		+ "cp_file = #{company.cp_file}"
+    		+ "WHERE cp_id = #{company.cp_id};")
     int update(@Param("company") Company company);
+    
+//    삭제
+    @Delete("DELETE FROM ahaproject.company "
+    		+ "WHERE cp_id = #{company.cp_id}")
+    int delete(@Param("company") Company company);
 
 }
