@@ -37,50 +37,55 @@
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">장비정보 등록</h5>
+        <h5 class="card-title mt-3 mb-3">장비대여내역 등록</h5>
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*장비코드</label>
-                    <input class="form-control" th:value="'MC'+${m_code}" type="text" id="m_code" disabled>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*장비명</label>
-                    <input class="form-control" type="text" id="m_name">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*규격(제품번호)</label>
-                    <input class="form-control" type="text" id="m_equip_num">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*타입</label>
-                    <select class="form-select" aria-label="Default select example" id="m_type">
-                        <option value="자사" selected>자사</option>
-                        <option value="타사" >타사</option>
+                    <label class="form-control-label">*공사코드</label>
+                    <select class="form-select" aria-label="Default select example" id="cst_code">
+                        <th:block th:each="const : ${constructionDTOs}">
+                            <option th:value="${const.cst_code}">[[${const.cst_code}]]</option>
+                        </th:block>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*매입액</label>
-                    <input class="form-control" type="text" id="m_price">
+                    <label class="form-control-label">*렌트 시작일</label>
+                    <input class="form-control" type="text" id="rent_start">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*렌트 종료일</label>
+                    <input class="form-control" type="text" id="rent_end">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*장비명</label>
+                    <select class="form-select" aria-label="Default select example" id="m_name">
+                        <th:block th:each="machine : ${machineDTOs}">
+                            <option th:value="${machine.m_name}">[[${machine.m_name}]]</option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*공급가액</label>
+                    <input class="form-control" type="text" id="rent_supp_value">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*세액</label>
-                    <input class="form-control" type="text" id="m_tax">
+                    <input class="form-control" type="text" id="rent_tax">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*매입일자</label>
+                    <label class="form-control-label">*수금일자</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
                         <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
@@ -91,31 +96,32 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">사용여부</label>
-                    <select class="form-select" aria-label="Default select example" id="m_use">
-                        <option value="사용" selected>사용</option>
-                        <option value="미사용">미사용</option>
+                    <label class="form-control-label">*수금액</label>
+                    <input class="form-control" type="text" id="rent_collect_value">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">미수금</label>
+                    <input class="form-control" type="text" id="rent_misu">
+                </div>
+            </div>
+            <div class="col-sm-12">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="form-control-label">등록여부</label>
+                <select class="form-select" aria-label="Default select example" id="rent_regit">
+                    <option value="등록" selected>등록</option>
+                    <option value="미등록">미등록</option>
                     </select>
                 </div>
             </div>
-            <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">비고1</label>
-                    <input class="form-control" type="text" id="m_etc1">
+                    <label class="form-control-label">비고</label>
+                    <input class="form-control" type="text" id="rent_etc">
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">비고2</label>
-                    <input class="form-control" type="text" id="m_etc2">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">비고3</label>
-                    <input class="form-control" type="text" id="m_etc3">
-                </div>
-            </div>
+
             <!--            파일첨부를 위한 기능 추가 start-->
             <div class="col-sm-12">
                 <div class="form-group">
@@ -239,41 +245,38 @@
         })
     }
 
-    const misuSubmitBtn = document.querySelector('#machineSubmitBtn');
+    const machineSubmitBtn = document.querySelector('#machineSubmitBtn');
 
-    misuSubmitBtn.addEventListener("click", () => {
-        const input_m_code = document.querySelector('#m_code').value;
+    machineSubmitBtn.addEventListener("click", () => {
+        const input_cst_code = document.querySelector('#cst_code').value;
+        const input_rent_start = document.querySelector('#rent_start').value;
+        const input_rent_end = document.querySelector('#rent_end').value;
         const input_m_name = document.querySelector('#m_name').value;
-        const input_m_equip_num = document.querySelector('#m_equip_num').value;
-        const input_m_type = document.querySelector('#m_type').value;
-        const input_m_price = document.querySelector('#m_price').value;
-        const input_m_tax = document.querySelector('#m_tax').value;
-        const input_m_date = document.querySelector('#datetimepicker1Input').value;
-        const input_m_etc1 = document.querySelector('#m_etc1').value;
-        const input_m_etc2 = document.querySelector('#m_etc2').value;
-        const input_m_etc3 = document.querySelector('#m_etc3').value;
-        const input_m_use = document.querySelector('#m_use').value;
+        const input_rent_supp_value = document.querySelector('#rent_supp_value').value;
+        const input_rent_tax = document.querySelector('#rent_tax').value;
+        const input_rent_collect_date = document.querySelector('#datetimepicker1Input').value;
+        const input_rent_collect_value = document.querySelector('#rent_collect_value').value;
+        const input_rent_misu = document.querySelector('#rent_misu').value;
+        const input_rent_regit = document.querySelector('#rent_regit').value;
+        const input_rent_etc = document.querySelector('#rent_etc').value;
 
         const machine1 = {
-            m_code : input_m_code,
+            cst_code : input_cst_code,
+            rent_start : input_rent_start,
+            rent_end : input_rent_end,
             m_name : input_m_name,
-            m_equip_num : input_m_equip_num,
-            m_type : input_m_type,
-            m_price : input_m_price,
-            m_tax : input_m_tax,
-            m_date : input_m_date,
-            m_filename : input_Filename,
-            m_etc1 : input_m_etc1,
-            m_etc2 : input_m_etc2,
-            m_etc3 : input_m_etc3,
-            m_uuid : input_UUID,
-            m_use : input_m_use
+            rent_supp_value : input_rent_supp_value,
+            rent_tax : input_rent_tax,
+            rent_collect_date : input_rent_collect_date,
+            rent_collect_value : input_rent_collect_value,
+            rent_misu : input_rent_misu,
+            rent_regit : input_rent_regit,
+            rent_etc : input_rent_etc
         };
 
-        if(input_m_code == ""||
-            input_m_name == "" || input_m_equip_num == "" ||
-            input_m_type == "" || input_m_price == "" ||
-            input_m_tax == "" || input_m_date ==""){
+        if(input_rent_supp_value == ""||
+            input_rent_tax == "" || input_rent_collect_value == "" ||
+            input_rent_misu == "" ){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
@@ -284,16 +287,19 @@
         var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
 
         // 매입액 숫자 입력 유효성 체크
-        if( (pattern_num.test(input_m_price) || pattern_num.test(input_m_tax)) && !(pattern_eng.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_spc.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_kor.test(input_m_price) || pattern_eng.test(input_m_tax)) ){
+        if( (pattern_num.test(input_rent_supp_value) || pattern_num.test(input_rent_tax) || pattern_num.test(input_rent_collect_value) || pattern_num.test(input_rent_regit))
+            && !(pattern_eng.test(input_rent_supp_value) || pattern_eng.test(input_rent_tax)|| pattern_num.test(input_rent_collect_value) || pattern_num.test(input_rent_regit))
+            && !(pattern_spc.test(input_rent_supp_value) || pattern_eng.test(input_rent_tax)|| pattern_num.test(input_rent_collect_value) || pattern_num.test(input_rent_regit))
+            && !(pattern_kor.test(input_rent_supp_value) || pattern_eng.test(input_rent_tax)|| pattern_num.test(input_rent_collect_value) || pattern_num.test(input_rent_regit)) ){
 
         }else{
-            alert("매입액과 세액은 숫자만 입력 가능합니다.");
+            alert("금액은 숫자만 입력 가능합니다.");
             return ;
         }
 
         console.log(machine1);
 
-        const url = "/api/user/machine";
+        const url = "/api/worksite/rental";
 
         fetch(url, {
            method : "POST",

@@ -1,7 +1,10 @@
 package kr.co.ahaproject.controller.moo.imp;
 
 import kr.co.ahaproject.controller.moo.MachineController;
+import kr.co.ahaproject.dto.CompanyDTO;
+import kr.co.ahaproject.dto.ConstructionDTO;
 import kr.co.ahaproject.dto.MachineDTO;
+import kr.co.ahaproject.dto.MisuDTO;
 import kr.co.ahaproject.service.moo.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,16 +43,18 @@ public class MachineControllerImp implements MachineController {
 
         model.addAttribute("machineDTOs", machineDTOS);
         model.addAttribute("m_code", str);
-        return "/user/basicinfo/machine/register";
+        return "user/basicinfo/machine/register";
     }
 
     // 장비정보 수정
     @Override
     @GetMapping("/basicinfo/update")
-    public String update(Model model){
+    public String update(MachineDTO machineDTO, Model model){
 
+        MachineDTO result = machineService.findById(machineDTO);
 
+        model.addAttribute("machine", result);
 
-        return "/user/basicinfo/machine/update";
+        return "user/basicinfo/machine/update";
     }
 }
