@@ -21,10 +21,12 @@ public interface EmployeeMapper {
             @Result(property = "emp_email", column = "emp_email"),
             @Result(property = "emp_address", column = "emp_address"),
             @Result(property = "emp_account", column = "emp_account"),
-            @Result(property = "emp_file", column = "emp_file"),
+            @Result(property = "emp_uuid", column = "emp_uuid"),
+            @Result(property = "emp_filename", column = "emp_filename"),
             @Result(property = "emp_etc1", column = "emp_etc1"),
             @Result(property = "emp_etc2", column = "emp_etc2"),
             @Result(property = "emp_etc3", column = "emp_etc3"),
+            @Result(property = "emp_use", column = "emp_use")
     })
     List<Employee> listAll();
 
@@ -35,12 +37,13 @@ public interface EmployeeMapper {
     @Select("select emp_id from employee order by emp_id desc limit 1")
     int selectid();
 
-    @Insert("insert into employee (cp_name,emp_code,emp_name,emp_joining,emp_regid,emp_tel,emp_email,emp_address,emp_account,emp_file,emp_etc1,emp_etc2,emp_etc3)" +
-            " values (#{cp_name},#{emp_code},#{emp_name},#{emp_joining},#{emp_regid},#{emp_tel},#{emp_email},#{emp_address},#{emp_account},#{emp_file},#{emp_etc1},#{emp_etc2},#{emp_etc3})")
+    @Insert("insert into employee (cp_name,emp_code,emp_name,emp_joining,emp_regid,emp_tel,emp_email,emp_address,emp_account,emp_uuid,emp_filename,emp_etc1,emp_etc2,emp_etc3, emp_use)" +
+            " values (#{cp_name},#{emp_code},#{emp_name},#{emp_joining},#{emp_regid},#{emp_tel},#{emp_email},#{emp_address},#{emp_account},#{emp_uuid},#{emp_filename},#{emp_etc1},#{emp_etc2},#{emp_etc3},#{emp_use})")
     int insert(Employee employee);
 
     @Update("update employee set emp_code=#{emp_code},emp_name=#{emp_name},emp_regid=#{emp_regid},emp_joining=#{emp_joining},emp_tel=#{emp_tel},emp_email=#{emp_email}," +
-            "emp_address=#{emp_address},emp_account=#{emp_account},emp_file={emp_file},emp_etc1=#{emp_etc1},emp_etc2=#{emp_etc2},emp_etc3=#{emp_etc3}")
+            "emp_address=#{emp_address},emp_account=#{emp_account},emp_uuid=#{emp_uuid},emp_filename=#{emp_filename},emp_etc1=#{emp_etc1},emp_etc2=#{emp_etc2},emp_etc3=#{emp_etc3},emp_use=#{emp_use}" +
+            "where emp_id=#{emp_id}")
     int update(Employee employee);
 
     @Delete("delete from employee where emp_id=#{emp_id}")

@@ -17,6 +17,8 @@ public interface EmployeeController {
 
     String goInsert(Model model);
 
+    ResponseEntity delete(Employee employee);
+
     String emEditForm(Employee employee, Model model);
 
     ResponseEntity register(Employee employee);
