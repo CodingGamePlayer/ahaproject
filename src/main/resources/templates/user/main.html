@@ -16,8 +16,93 @@
 
 <!-- Content -->
 <div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card ">
+                <div class="card border shadow-xs pb-4">
 
-    <div id='calendar'></div>
+                    <div class="card-body p-5">
+                        <div class="card-title text-center ">
+                            <h4>월별 장비대여 횟수</h4>
+                        </div>
+
+                        <div class="card border shadow-x mt-5">
+                            <div class="card-body">
+                                <div class="table-responsive p-0">
+                                    <table class="table align-items-center mb-0">
+                                        <thead class="bg-gray-100">
+                                        <tr>
+                                            <th class="text-secondary text-center text-xs font-weight-semibold opacity-7">
+                                                월
+                                            </th>
+                                            <th class="text-secondary text-xs font-weight-semibold opacity-7">장비</th>
+                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">포장
+                                            </th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <th:block th:each="num : ${#numbers.sequence(1,12)}">
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${num}"/>
+                                                    <span>월</span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="2"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="3"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                            </tr>
+                                        </th:block>
+                                        <tr>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-sm font-weight-normal"/>
+                                                총합</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-sm font-weight-normal" th:text="24"/>
+                                                <span>건</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-sm font-weight-normal" th:text="36"/>
+                                                <span>건</span>
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card border shadow-xs ">
+                    <div class="card-body p-5">
+                        <div class="card-title text-center">
+                            <h4>장비대여 현황(캘린더)</h4>
+                        </div>
+                        <div id='calendar'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     var calendar = new Calendar(calendarEl, {
