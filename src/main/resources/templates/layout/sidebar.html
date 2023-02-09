@@ -92,7 +92,7 @@
                     <div><a href="/user/accounting/income/list" class="text-white text-sm">- 매입내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitIncome()">- 매입내역 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 인건비내역 보기</a></div>
+                    <div><a th:href="@{/user/accounting/laborcost}" class="text-white text-sm">- 인건비내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 인건비내역 입력</a></div>
                 </div>
                 <button sec:authorize="hasAuthority('ROLE_ADMIN')" class="btn btn-sm btn-warning mt-3 text-start mb-2 " type="button" data-bs-toggle="collapse" data-bs-target="#adminPage" aria-expanded="false" aria-controls="collapseExample1">

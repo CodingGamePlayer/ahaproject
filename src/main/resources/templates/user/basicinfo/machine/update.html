@@ -37,53 +37,52 @@
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">장비정보 등록</h5>
+        <h5 class="card-title mt-3 mb-3">장비정보 수정</h5>
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*장비코드</label>
-                    <input class="form-control" th:value="'MC'+${m_code}" type="text" id="m_code" disabled>
+                    <input class="input-group-sm form-control " type="text" id="m_code" th:value="${machine.m_code}" disabled/>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*장비명</label>
-                    <input class="form-control" type="text" id="m_name">
+                    <input class="form-control" type="text" id="m_name" th:value="${machine.m_name}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*규격(제품번호)</label>
-                    <input class="form-control" type="text" id="m_equip_num">
+                    <input class="form-control" type="text" id="m_equip_num" th:value="${machine.m_equip_num}">
                 </div>
             </div>
             <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*타입</label>
-                    <select class="form-select" aria-label="Default select example" id="m_type">
-                        <option value="자사" selected>자사</option>
-                        <option value="타사" >타사</option>
-                    </select>
+                <div class="form-group">*타입</label>
+                    <input class="form-control" type="text" id="m_type" th:value="${machine.m_type}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*매입액</label>
-                    <input class="form-control" type="text" id="m_price">
+                    <input class="form-control" type="text" id="m_price" th:value="${machine.m_price}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*세액</label>
-                    <input class="form-control" type="text" id="m_tax">
+                    <input class="form-control" type="text" id="m_tax" th:value="${machine.m_tax}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*매입일자</label>
-                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
-                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
+                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest'
+                         data-td-target-toggle='nearest'>
+                        <input id='datetimepicker1Input' th:value="${machine.m_date}" type='text' class='form-control'
+                               data-td-target='#datetimepicker1'/>
+                        <span class='input-group-text' data-td-target='#datetimepicker1'
+                              data-td-toggle='datetimepicker'>
                         <span class='fa-solid fa-calendar'></span>
                         </span>
                     </div>
@@ -91,38 +90,33 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">사용여부</label>
-                    <select class="form-select" aria-label="Default select example" id="m_use">
-                        <option value="사용" selected>사용</option>
-                        <option value="미사용">미사용</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
                     <label class="form-control-label">비고1</label>
-                    <input class="form-control" type="text" id="m_etc1">
+                    <input class="form-control" type="text" id="m_etc1" th:value="${machine.m_etc1}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고2</label>
-                    <input class="form-control" type="text" id="m_etc2">
+                    <input class="form-control" type="text" id="m_etc2" th:value="${machine.m_etc2}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고3</label>
-                    <input class="form-control" type="text" id="m_etc3">
+                    <input class="form-control" type="text" id="m_etc3" th:value="${machine.m_etc3}">
                 </div>
             </div>
-            <!--            파일첨부를 위한 기능 추가 start-->
+
+            <!--            파일등록을 위한 코드 start-->
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">파일</label><br>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        파일등록
+                        파일변경
                     </button>
+                    <a class="btn btn-secondary" href="#" onclick="resetImage()">
+                        기존사진삭제
+                    </a>
                 </div>
             </div>
 
@@ -132,10 +126,9 @@
                     </div>
                 </div>
             </div>
-
-            <!--            파일첨부를 위한 기능 추가 end-->
-
-            <input type="button" class="btn btn-primary" id="machineSubmitBtn" value="등록하기"/>
+            <!--            파일등록을 위한 코드 end-->
+            <input type="button" class="btn btn-primary" id="machineSubmitBtn" value="수정하기"/>
+            <input type="button" class="btn btn-dark mt-2" id="machineDeleteBtn" value="삭제하기"/>
         </div>
     </div>
 </div>
@@ -166,15 +159,16 @@
 </div>
 <!-- 파일 첨부용 Modal end -->
 
-<!-- 파일 첨부용 JS start-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/upload.js"></script>
 
-<!-- 파일 첨부용 JS end-->
-
 <script>
-    let input_UUID;
-    let input_Filename;
+
+    <!--    이미지 파일을 사용하기 위한 JS-->
+    /*<![CDATA[*/
+    let input_UUID = "[[${machine.m_id}]]";
+    let input_Filename= "[[${machine.m_filename}]]";
+    /*]]>*/
 
     document.querySelector(".uploadBtn").addEventListener("click", function (e) {
 
@@ -239,9 +233,54 @@
         })
     }
 
-    const misuSubmitBtn = document.querySelector('#machineSubmitBtn');
+    <!--    기존의 파일 경로들을 살리기 위한 내용-->
 
-    misuSubmitBtn.addEventListener("click", () => {
+
+    function resetImage(){
+
+        if(window.confirm('이미지 파일을 삭제하시겠습니까?')){
+            input_UUID = '';
+            input_Filename = '';
+            alert("이미지가 삭제되었습니다. 수정하기 버튼을 눌러 저장하시기 바랍니다.")
+        }
+
+    }
+    <!--    이미지 파일을 사용하기 위한 JS-->
+
+
+    const machineSubmitBtn = document.querySelector('#machineSubmitBtn');
+    const urlParams = new URL(location.href).searchParams;
+    const machineDeleteBtn = document.getElementById("machineDeleteBtn");
+
+    machineDeleteBtn.addEventListener("click", () => {
+        const input_m_id = urlParams.get('m_id');
+
+        const machine = {
+            m_id : input_m_id
+        }
+
+        const url = "/api/user/machine"
+
+        fetch(url, {
+            method : "DELETE",
+            body : JSON.stringify(machine),
+            headers : {
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            if (response.ok) {
+                response.text();
+                alert('삭제가 되었습니다.');
+                opener.location.reload();
+                window.close();
+            } else {
+                alert('삭제를 실패하였습니다.');
+            }
+        });
+    });
+
+    const input_m_id = urlParams.get('m_id');
+    machineSubmitBtn.addEventListener("click", () => {
         const input_m_code = document.querySelector('#m_code').value;
         const input_m_name = document.querySelector('#m_name').value;
         const input_m_equip_num = document.querySelector('#m_equip_num').value;
@@ -252,9 +291,9 @@
         const input_m_etc1 = document.querySelector('#m_etc1').value;
         const input_m_etc2 = document.querySelector('#m_etc2').value;
         const input_m_etc3 = document.querySelector('#m_etc3').value;
-        const input_m_use = document.querySelector('#m_use').value;
 
         const machine1 = {
+            m_id : input_m_id,
             m_code : input_m_code,
             m_name : input_m_name,
             m_equip_num : input_m_equip_num,
@@ -266,8 +305,7 @@
             m_etc1 : input_m_etc1,
             m_etc2 : input_m_etc2,
             m_etc3 : input_m_etc3,
-            m_uuid : input_UUID,
-            m_use : input_m_use
+            m_uuid : input_UUID
         };
 
         if(input_m_code == ""||
@@ -296,19 +334,20 @@
         const url = "/api/user/machine";
 
         fetch(url, {
-           method : "POST",
-           body : JSON.stringify(machine1),
-           headers : {
-               "Content-Type" : "application/json"
-           }
+            method: "PUT",
+            body: JSON.stringify(machine1),
+            headers: {
+                "Content-Type": "application/json"
+            }
         }).then(response => {
-           if(response.ok){
-               response.text();
-               alert('등록이 완료되었습니다.');
-               window.location.reload();
-           } else {
-               alert('등록을 실패하였습니다.');
-           }
+            if (response.ok) {
+                response.text();
+                alert('수정이 완료되었습니다.');
+                opener.location.reload();
+                window.close();
+            } else {
+                alert('수정을 실패하였습니다.');
+            }
         });
 
 
