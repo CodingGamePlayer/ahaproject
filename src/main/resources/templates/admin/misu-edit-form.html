@@ -138,8 +138,11 @@
                 <div class="form-group">
                     <label class="form-control-label">파일</label><br>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        파일등록
+                        파일변경
                     </button>
+                    <a class="btn btn-secondary" href="#" onclick="resetImage()">
+                        기존사진삭제
+                    </a>
                 </div>
             </div>
 
@@ -150,7 +153,7 @@
                 </div>
             </div>
 <!--            파일등록을 위한 코드 end-->
-            <input type="button" class="btn btn-primary" id="misuSubmitBtn" value="등록하기"/>
+            <input type="button" class="btn btn-primary" id="misuSubmitBtn" value="수정하기"/>
             <input type="button" class="btn btn-dark mt-2" id="misuDeleteBtn" value="삭제하기"/>
         </div>
     </div>
@@ -186,6 +189,8 @@
 <script src="/js/upload.js"></script>
 
 <script>
+
+<!--    이미지 파일을 사용하기 위한 JS-->
     /*<![CDATA[*/
     let input_UUID = "[[${misuDTO.misu_uuid}]]";
     let input_Filename= "[[${misuDTO.misu_filename}]]";
@@ -254,13 +259,25 @@
         })
     }
 
+<!--    기존의 파일 경로들을 살리기 위한 내용-->
 
 
+    function resetImage(){
 
-    const misuSubmitBtn = document.querySelector('#misuSubmitBtn');
+        if(window.confirm('이미지 파일을 삭제하시겠습니까?')){
+            input_UUID = '';
+            input_Filename = '';
+            alert("이미지가 삭제되었습니다. 수정하기 버튼을 눌러 저장하시기 바랍니다.")
+        }
+
+    }
+<!--    이미지 파일을 사용하기 위한 JS-->
+
+
+const misuSubmitBtn = document.querySelector('#misuSubmitBtn');
     const urlParams = new URL(location.href).searchParams;
-
     const misuDeleteBtn = document.getElementById("misuDeleteBtn");
+
     misuDeleteBtn.addEventListener("click", () => {
         const input_misu_id = urlParams.get('misu_id');
 
@@ -280,6 +297,7 @@
             if (response.ok) {
                 response.text();
                 alert('삭제가 되었습니다.');
+                opener.location.reload();
                 window.close();
             } else {
                 alert('삭제를 실패하였습니다.');
@@ -341,10 +359,11 @@
         }).then(response => {
             if (response.ok) {
                 response.text();
-                alert('등록이 완료되었습니다.');
+                alert('수정이 완료되었습니다.');
+                opener.location.reload();
                 window.close();
             } else {
-                alert('등록을 실패하였습니다.');
+                alert('수정을 실패하였습니다.');
             }
         });
 

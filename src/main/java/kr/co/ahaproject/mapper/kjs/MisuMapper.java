@@ -44,4 +44,7 @@ public interface MisuMapper {
             "`misu_finished` = #{misu.misu_finished}, `misu_uuid` = #{misu.misu_uuid}, `misu_filename` = #{misu.misu_filename}, " +
             "`misu_etc` = #{misu.misu_etc} WHERE (`misu_id` = #{misu.misu_id})")
     int update(@Param("misu") Misu misu);
+
+    @Delete("DELETE FROM misu WHERE misu_id = #{misu.misu_id}")
+    int delete(@Param("misu") Misu misu);
 }

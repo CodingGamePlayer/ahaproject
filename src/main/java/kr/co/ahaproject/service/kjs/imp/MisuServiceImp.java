@@ -61,4 +61,16 @@ public class MisuServiceImp implements MisuService {
 
         return update;
     }
+
+    @Override
+    public int delete(MisuDTO misuDTO) {
+
+        int result = misuMapper.delete(modelMapper.map(misuDTO, Misu.class));
+
+        if(!(result>0)){
+            return 0;
+        }
+
+        return result;
+    }
 }
