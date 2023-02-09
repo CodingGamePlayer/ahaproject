@@ -50,8 +50,8 @@
                     <div><a href="#" class="text-white text-sm">- 공사정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 공사정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 자재사용내역 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 자재사용내역 입력</a></div>
+                    <div><a href="/user/worksite/use-material/list" class="text-white text-sm">- 자재사용내역 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitUseMaterial()">- 자재사용내역 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 견적서정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 견적서정보 입력</a></div>
@@ -148,13 +148,21 @@
 
                 window.open("/user/client/form", "_blank", option);
             }
-
-            // 자재 등록하기
+            
+            // 현장 - 자재 입력 페이지 이동하기 
+            function regitUseMaterial(){
+				let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+				
+                window.open("/user/worksite/use-material/register", "_blank", option);
+            }
+            
+            // 자재정보 입력 페이지 이동하기
             function regitMaterial() {
             	let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+				
+                window.open("/user/material/register", "_blank", option);
+            }	
 
-                window.open("/user/basicinfo/material/register", "_blank", option);
-            }
 
             // 장비정보 입력
             function regitMachine(){
