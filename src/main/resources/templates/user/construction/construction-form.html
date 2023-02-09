@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <title>
+        아하포장건설
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700"
+          rel="stylesheet"/>
+    <!-- Nucleo Icons -->
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/assets/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+    <!— Tempus Dominus JavaScript —>
+    <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
+            crossorigin="anonymous"></script>
+
+    <!— Tempus Dominus Styles —>
+    <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
+          rel="stylesheet" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="card m-3">
+
+    <div class="card-body">
+        <h5 class="card-title mt-3 mb-3">공사 정보 등록</h5>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*공사코드</label>
+                    <input class="input-group-sm form-control " type="text" id="cst_code">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*공사명</label>
+                    <input class="input-group-sm form-control " type="text" id="cst_name">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*공사기간</label>
+                    <input class="input-group-sm form-control " type="text" id="cst_period">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*공사착수일</label>
+                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
+                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
+                        <span class='fa-solid fa-calendar'></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">공사완공일</label>
+                    <div class='input-group' id='datetimepicker2' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                        <input id='datetimepicker2Input' type='text' class='form-control' data-td-target='#datetimepicker2' />
+                        <span class='input-group-text' data-td-target='#datetimepicker2' data-td-toggle='datetimepicker' >
+                        <span class='fa-solid fa-calendar'></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*총계약금</label>
+                    <input class="form-control" type="text" id="cst_toal_pay">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*선수금</label>
+                    <input class="form-control" type="text" id="cst_1st_pay">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*수금일</label>
+                    <div class='input-group' id='datetimepicker3' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                        <input id='datetimepicker3Input' type='text' class='form-control' data-td-target='#datetimepicker3' />
+                        <span class='input-group-text' data-td-target='#datetimepicker3' data-td-toggle='datetimepicker' >
+                        <span class='fa-solid fa-calendar'></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">공사종료여부</label>
+                    <select class="form-select" aria-label="Default select example" id="cst_finised">
+                        <option value="false" selected>미완료</option>
+                        <option value="true">공사완료</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">비고1</label>
+                    <input class="form-control" type="text" id="cst_etc1">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">비고2</label>
+                    <input class="form-control" type="text" id="cst_etc2">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">비고3</label>
+                	<textarea rows="3" cols="10" class="form-control" id="cst_etc3"></textarea>
+                </div>
+            </div>
+            <input type="button" class="btn btn-primary" id="cstSubmitBtn" value="등록하기" />
+        </div>
+    </div>
+</div>
+<script>
+    const cstSubmitBtn = document.querySelector('#cstdSubmitBtn');
+
+    cstSubmitBtn.addEventListener("click", () => {
+        const input_cst_code = document.querySelector('#cst_code').value;
+        const input_cst_name = document.querySelector('#cst_name').value;
+        const input_cst_period = document.querySelector('#cst_period').value;
+        const input_cst_start = document.querySelector('#datetimepicker1Input').value;
+        const input_cst_end = document.querySelector('#datetimepicker2Input').value;
+        const input_cst_toal_pay = document.querySelector('#cst_toal_pay').value;
+        const input_cst_1st_pay = document.querySelector('#cst_1st_pay').value;
+        const input_cst_collect_date = document.querySelector('#cdatetimepicker3Input').value;
+        const input_cst_finised = document.querySelector('#cst_finised').value;
+        const input_cst_etc1 = document.querySelector('#cst_etc1').value;
+        const input_cst_etc2 = document.querySelector('#cst_etc2').value;
+        const input_cst_etc3 = document.querySelector('#cst_etc3').value;
+
+        const cstif = {
+        		cst_code : input_cst_code,
+        		cst_name : input_cst_name,
+        		cst_period : input_cst_period,
+        		cst_start : input_cst_start,
+        		cst_end : input_cst_end,
+        		cst_toal_pay : input_cst_toal_pay,
+        		cst_1st_pay : input_cst_1st_pay,
+        		cst_collect_date : input_cst_collect_date,
+        		cst_finised : input_cst_finised,
+        		cst_etc1 : input_cst_etc1,
+        		cst_etc2 : input_cst_etc2,
+        		cst_etc3 : input_cst_etc3
+            
+        };
+
+        if(input_cst_code == "" || input_cst_name == "" ||
+        		input_cst_period == "" || input_cst_start == "" ||
+        		input_cst_end == "" || input_cst_toal_pay =="" ||
+        		input_cst_1st_pay == "" || input_cst_collect_date =="" ||
+        		input_cst_finised == "" ){
+            alert('*이 있는 칸은 채워주시기 바랍니다.')
+            return;
+        }
+
+        console.log(csfif);
+
+        const url = "/api/user/worksite/construction/csfinfo";
+
+        fetch(url, {
+           method : "POST",
+           body : JSON.stringify(csfif),
+           headers : {
+               "Content-Type" : "application/json"
+           }
+        }).then(response => {
+           if(response.ok){
+               response.text();
+               alert('등록이 완료되었습니다.');
+               window.location.reload();
+           } else {
+               alert('등록을 실패하였습니다.');
+           }
+        });
+
+
+    });
+</script>
+
+<script>
+    const datevalue = document.querySelector('#datetimepicker1Input').value;
+    console.log(datevalue);
+    const datevalue2 = document.querySelector('#datetimepicker2Input').value;
+    console.log(datevalue2);
+    const datevalue3 = document.querySelector('#datetimepicker3Input').value;
+    console.log(datevalue3);
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
+    	display: {
+            components: {
+                clock: false
+            },
+            icons: {
+                type: 'icons',
+                time: 'fa fa-solid fa-clock',
+                date: 'fa fa-solid fa-calendar',
+                up: 'fa fa-solid fa-arrow-up',
+                down: 'fa fa-solid fa-arrow-down',
+                previous: 'fa fa-solid fa-chevron-left',
+                next: 'fa fa-solid fa-chevron-right',
+                today: 'fa fa-solid fa-calendar-check',
+                clear: 'fa fa-solid fa-trash',
+                close: 'fas fa-solid fa-xmark'
+            },
+        },
+    	 
+        
+    });
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker2'), {
+    	display: {
+            components: {
+                clock: false
+            },
+            icons: {
+                type: 'icons',
+                time: 'fa fa-solid fa-clock',
+                date: 'fa fa-solid fa-calendar',
+                up: 'fa fa-solid fa-arrow-up',
+                down: 'fa fa-solid fa-arrow-down',
+                previous: 'fa fa-solid fa-chevron-left',
+                next: 'fa fa-solid fa-chevron-right',
+                today: 'fa fa-solid fa-calendar-check',
+                clear: 'fa fa-solid fa-trash',
+                close: 'fas fa-solid fa-xmark'
+            },
+        },
+    	 
+        
+    });
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker3'), {
+    	display: {
+            components: {
+                clock: false
+            },
+            icons: {
+                type: 'icons',
+                time: 'fa fa-solid fa-clock',
+                date: 'fa fa-solid fa-calendar',
+                up: 'fa fa-solid fa-arrow-up',
+                down: 'fa fa-solid fa-arrow-down',
+                previous: 'fa fa-solid fa-chevron-left',
+                next: 'fa fa-solid fa-chevron-right',
+                today: 'fa fa-solid fa-calendar-check',
+                clear: 'fa fa-solid fa-trash',
+                close: 'fas fa-solid fa-xmark'
+            },
+        },
+    	 
+        
+    });
+    
+</script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<script
+        src="/assets/js/plugins/swiper-bundle.min.js"
+        type="text/javascript"
+></script>
+<script src="/assets/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
+</body>
+</html>
