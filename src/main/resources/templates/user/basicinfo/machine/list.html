@@ -40,8 +40,7 @@
                             <tr>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7">장비코드</th>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">장비명</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">규격(제품번호)
-                                </th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">규격(제품번호)</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">타입</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">세액</th>
@@ -107,7 +106,7 @@
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${machine.m_etc3}"/>
                                     </td>
-
+                                    </th:block>
 
                             <td class="align-middle">
                                 <a href="#" th:onclick="editMachine([[${machine.m_id}]])">
