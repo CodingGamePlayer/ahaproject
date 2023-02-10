@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.co.ahaproject.controller.cjw.UseMaterialController;
-import kr.co.ahaproject.dto.MaterialDTO;
 import kr.co.ahaproject.dto.UseMaterialDTO;
 import kr.co.ahaproject.service.cjw.UseMaterialService;
 

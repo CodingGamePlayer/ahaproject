@@ -31,87 +31,55 @@
     <!— Tempus Dominus Styles —>
     <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
           rel="stylesheet" crossorigin="anonymous">
-    <!-- Popperjs -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-            crossorigin="anonymous"></script>
-    <!-- Tempus Dominus JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.2.10/dist/js/tempus-dominus.min.js"
-            crossorigin="anonymous"></script>
-
-    <!-- Tempus Dominus Styles -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.2.10/dist/css/tempus-dominus.min.css"
-          crossorigin="anonymous">
 
 </head>
 <body>
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">미수금 등록</h5>
+        <h5 class="card-title mt-3 mb-3">장비정보 수정</h5>
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*구분</label>
-                    <input class="input-group-sm form-control " type="text" id="misu_div">
+                    <label class="form-control-label">*장비코드</label>
+                    <input class="input-group-sm form-control " type="text" id="m_code" th:value="${machine.m_code}" disabled/>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*회사명</label>
-                    <select class="form-select" aria-label="Default select example" id="cp_name">
-                        <th:block th:each="company : ${companyDTOs}">
-                            <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
-                        </th:block>
-                    </select>
+                    <label class="form-control-label">*장비명</label>
+                    <input class="form-control" type="text" id="m_name" th:value="${machine.m_name}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*공사코드</label>
-                    <select class="form-select" aria-label="Default select example" id="cst_code">
-                        <th:block th:each="const : ${constructionDTOs}">
-                            <option th:value="${const.cst_code}">[[${const.cst_code}]]</option>
-                        </th:block>
-                    </select>
+                    <label class="form-control-label">*규격(제품번호)</label>
+                    <input class="form-control" type="text" id="m_equip_num" th:value="${machine.m_equip_num}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">*타입</label>
+                    <input class="form-control" type="text" id="m_type" th:value="${machine.m_type}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*거래처명</label>
-                    <input class="form-control" type="text" id="misu_name">
+                    <label class="form-control-label">*매입액</label>
+                    <input class="form-control" type="text" id="m_price" th:value="${machine.m_price}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*담당자</label>
-                    <input class="form-control" type="text" id="misu_manager">
+                    <label class="form-control-label">*세액</label>
+                    <input class="form-control" type="text" id="m_tax" th:value="${machine.m_tax}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*미수금</label>
-                    <input class="form-control" type="text" id="misu_value">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">수금액</label>
-                    <input class="form-control" type="text" id="misu_collect_value">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">미수금잔액</label>
-                    <input class="form-control" type="text" id="misu_total_value">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">수금일</label>
+                    <label class="form-control-label">*매입일자</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest'
                          data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control'
+                        <input id='datetimepicker1Input' th:value="${machine.m_date}" type='text' class='form-control'
                                data-td-target='#datetimepicker1'/>
                         <span class='input-group-text' data-td-target='#datetimepicker1'
                               data-td-toggle='datetimepicker'>
@@ -122,26 +90,33 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">수금완료여부</label>
-                    <select class="form-select" aria-label="Default select example" id="misu_finished">
-                        <option value="false" selected>미완료</option>
-                        <option value="true">수금완료</option>
-                    </select>
+                    <label class="form-control-label">비고1</label>
+                    <input class="form-control" type="text" id="m_etc1" th:value="${machine.m_etc1}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">비고</label>
-                    <input class="form-control" type="text" id="misu_etc">
+                    <label class="form-control-label">비고2</label>
+                    <input class="form-control" type="text" id="m_etc2" th:value="${machine.m_etc2}">
                 </div>
             </div>
-            <!--            파일첨부를 위한 기능 추가 start-->
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">비고3</label>
+                    <input class="form-control" type="text" id="m_etc3" th:value="${machine.m_etc3}">
+                </div>
+            </div>
+
+            <!--            파일등록을 위한 코드 start-->
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">파일</label><br>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        파일등록
+                        파일변경
                     </button>
+                    <a class="btn btn-secondary" href="#" onclick="resetImage()">
+                        기존사진삭제
+                    </a>
                 </div>
             </div>
 
@@ -151,10 +126,9 @@
                     </div>
                 </div>
             </div>
-
-            <!--            파일첨부를 위한 기능 추가 end-->
-
-            <input type="button" class="btn btn-primary" id="misuSubmitBtn" value="등록하기"/>
+            <!--            파일등록을 위한 코드 end-->
+            <input type="button" class="btn btn-primary" id="machineSubmitBtn" value="수정하기"/>
+            <input type="button" class="btn btn-dark mt-2" id="machineDeleteBtn" value="삭제하기"/>
         </div>
     </div>
 </div>
@@ -185,15 +159,16 @@
 </div>
 <!-- 파일 첨부용 Modal end -->
 
-<!-- 파일 첨부용 JS start-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/upload.js"></script>
 
-<!-- 파일 첨부용 JS end-->
-
 <script>
-    let input_UUID;
-    let input_Filename;
+
+    <!--    이미지 파일을 사용하기 위한 JS-->
+    /*<![CDATA[*/
+    let input_UUID = "[[${machine.m_id}]]";
+    let input_Filename= "[[${machine.m_filename}]]";
+    /*]]>*/
 
     document.querySelector(".uploadBtn").addEventListener("click", function (e) {
 
@@ -230,21 +205,15 @@
         input_UUID = uuid;
         input_Filename = fileName;
         const str =
-            `
-            <div class="row d-flex justify-content-center">
-                <div class="col-sm-12">
-                    <div class="card border shadow-x mb-4">
-                        <div class="card-header ">
-                            ${fileName}
-                            <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
-                        </div>
-                        <div class="card-body">
-                             <img style="width: 300px; height: 100px;" src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
-                        </div>
-                    </div>
-                </div>
+            `<div class="card col-10 ">
+            <div class="card-header ">
+                ${fileName}
+                <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
             </div>
-        <!-- card -->`
+            <div class="card-body">
+                 <img src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
+            </div>
+        </div><!-- card -->`
 
         uploadResult.innerHTML += str
     }
@@ -264,82 +233,132 @@
         })
     }
 
-
-    const misuSubmitBtn = document.querySelector('#misuSubmitBtn');
-
-    misuSubmitBtn.addEventListener("click", () => {
-        const input_misu_div = document.querySelector('#misu_div').value;
-        const input_cp_name = document.querySelector('#cp_name').value;
-        const input_cst_code = document.querySelector('#cst_code').value;
-        const input_misu_manager = document.querySelector('#misu_manager').value;
-        const input_misu_value = document.querySelector('#misu_value').value;
-        const input_misu_name = document.querySelector('#misu_name').value;
-        const input_misu_total_value = document.querySelector('#misu_total_value').value;
-        const input_misu_collect_date = document.querySelector('#datetimepicker1Input').value;
-        const input_misu_collect_value = document.querySelector('#misu_collect_value').value;
-        const input_misu_finished = document.querySelector('#misu_finished').value;
-        const input_misu_etc = document.querySelector('#misu_etc').value;
+    <!--    기존의 파일 경로들을 살리기 위한 내용-->
 
 
-        const misu1 = {
-            misu_div: input_misu_div,
-            cp_name: input_cp_name,
-            cst_code: input_cst_code,
-            misu_manager: input_misu_manager,
-            misu_value: input_misu_value,
-            misu_name: input_misu_name,
-            misu_total_value: input_misu_total_value,
-            misu_collect_date: input_misu_collect_date,
-            misu_collect_value: input_misu_collect_value,
-            misu_uuid: input_UUID,
-            misu_filename: input_Filename,
-            misu_finished: input_misu_finished,
-            misu_etc: input_misu_etc
+    function resetImage(){
+
+        if(window.confirm('이미지 파일을 삭제하시겠습니까?')){
+            input_UUID = '';
+            input_Filename = '';
+            alert("이미지가 삭제되었습니다. 수정하기 버튼을 눌러 저장하시기 바랍니다.")
+        }
+
+    }
+    <!--    이미지 파일을 사용하기 위한 JS-->
+
+
+    const machineSubmitBtn = document.querySelector('#machineSubmitBtn');
+    const urlParams = new URL(location.href).searchParams;
+    const machineDeleteBtn = document.getElementById("machineDeleteBtn");
+
+    machineDeleteBtn.addEventListener("click", () => {
+        const input_m_id = urlParams.get('m_id');
+
+        const machine = {
+            m_id : input_m_id
+        }
+
+        const url = "/api/user/machine"
+
+        fetch(url, {
+            method : "DELETE",
+            body : JSON.stringify(machine),
+            headers : {
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            if (response.ok) {
+                response.text();
+                alert('삭제가 되었습니다.');
+                opener.location.reload();
+                window.close();
+            } else {
+                alert('삭제를 실패하였습니다.');
+            }
+        });
+    });
+
+    const input_m_id = urlParams.get('m_id');
+    machineSubmitBtn.addEventListener("click", () => {
+        const input_m_code = document.querySelector('#m_code').value;
+        const input_m_name = document.querySelector('#m_name').value;
+        const input_m_equip_num = document.querySelector('#m_equip_num').value;
+        const input_m_type = document.querySelector('#m_type').value;
+        const input_m_price = document.querySelector('#m_price').value;
+        const input_m_tax = document.querySelector('#m_tax').value;
+        const input_m_date = document.querySelector('#datetimepicker1Input').value;
+        const input_m_etc1 = document.querySelector('#m_etc1').value;
+        const input_m_etc2 = document.querySelector('#m_etc2').value;
+        const input_m_etc3 = document.querySelector('#m_etc3').value;
+
+        const machine1 = {
+            m_id : input_m_id,
+            m_code : input_m_code,
+            m_name : input_m_name,
+            m_equip_num : input_m_equip_num,
+            m_type : input_m_type,
+            m_price : input_m_price,
+            m_tax : input_m_tax,
+            m_date : input_m_date,
+            m_filename : input_Filename,
+            m_etc1 : input_m_etc1,
+            m_etc2 : input_m_etc2,
+            m_etc3 : input_m_etc3,
+            m_uuid : input_UUID
         };
 
-        if (input_misu_div == "" || input_cp_name == "" ||
-            input_cst_code == "" || input_misu_manager == "" ||
-            input_misu_value == "" || input_misu_name == "" ||
-            input_misu_total_value == "") {
+        if(input_m_code == ""||
+            input_m_name == "" || input_m_equip_num == "" ||
+            input_m_type == "" || input_m_price == "" ||
+            input_m_tax == "" || input_m_date ==""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
 
-        console.log(misu1);
+        var pattern_num = /[0-9]/;	// 숫자
+        var pattern_eng = /[a-zA-Z]/;	// 문자
+        var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+        var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
 
-        const url = "/api/admin/misu";
+        // 매입액 숫자 입력 유효성 체크
+        if( (pattern_num.test(input_m_price) || pattern_num.test(input_m_tax)) && !(pattern_eng.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_spc.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_kor.test(input_m_price) || pattern_eng.test(input_m_tax)) ){
+
+        }else{
+            alert("매입액과 세액은 숫자만 입력 가능합니다.");
+            return ;
+        }
+
+        console.log(machine1);
+
+        const url = "/api/user/machine";
 
         fetch(url, {
-            method: "POST",
-            body: JSON.stringify(misu1),
+            method: "PUT",
+            body: JSON.stringify(machine1),
             headers: {
                 "Content-Type": "application/json"
             }
         }).then(response => {
             if (response.ok) {
                 response.text();
-                alert('등록이 완료되었습니다.');
-                window.location.reload();
+                alert('수정이 완료되었습니다.');
+                opener.location.reload();
+                window.close();
             } else {
-                alert('등록을 실패하였습니다.');
+                alert('수정을 실패하였습니다.');
             }
         });
 
 
     });
-</script>
-
-<script>
-
 
     const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
-
         display: {
             components: {
-                clock: false,
-                seconds: false,
+                clock:false,
             },
             icons: {
                 type: 'icons',
@@ -355,7 +374,6 @@
             },
         },
     });
-
 </script>
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>
