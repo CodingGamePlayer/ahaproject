@@ -98,7 +98,7 @@
                                     <th:block th:switch="${constructionDTO.cst_finised}">
                                         <td class="align-middle text-center">
                                             <span class="badge badge-sm border border-danger text-danger bg-danger"
-                                                  th:case="false">공사중</span>
+                                                  th:case="false">미완료</span>
                                             <span class="badge badge-sm border border-success text-success bg-success"
                                                   th:case="true">공사완료</span>
                                         </td>
@@ -128,7 +128,7 @@
                                         function editConstruction(id){
                                             let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-                                            window.open("/user/worksite/construction-edit?cst_id=" + id, "_blank", option);
+                                            window.open("/user/worksite/construction/cst-edit?cst_id=" + id, "_blank", option);
                                         }
                                     </script>
                                 </tr>

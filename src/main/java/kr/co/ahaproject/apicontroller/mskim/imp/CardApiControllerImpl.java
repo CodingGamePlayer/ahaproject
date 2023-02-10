@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.ahaproject.apicontroller.mskim.CardApiController;
 import kr.co.ahaproject.dto.CardDTO;
+import kr.co.ahaproject.service.AhaCommonMethod;
 import kr.co.ahaproject.service.mskim.CardService;
 
 
@@ -25,6 +26,9 @@ public class CardApiControllerImpl implements CardApiController {
 	@Override
 	@PostMapping("/cardinfo")
 	public ResponseEntity<CardDTO> register(@RequestBody CardDTO cardDTO) {
+		
+		String after = new AhaCommonMethod().changeDate(cardDTO.getCard_exp_date());
+		cardDTO.setCard_exp_date(after);
 		
 		if(cardDTO==null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

@@ -42,26 +42,26 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*공사코드</label>
-                    <input class="input-group-sm form-control " type="text" id="cst_code" >
+                    <input class="input-group-sm form-control " type="text" id="cst_code" th:value="${cstDTO.cst_code}" >
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*공사명</label>
-                    <input class="input-group-sm form-control " type="text" id="cst_name">
+                    <input class="input-group-sm form-control " type="text" id="cst_name" th:value="${cstDTO.cst_name}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*공사기간</label>
-                    <input class="input-group-sm form-control " type="text" id="cst_period">
+                    <input class="input-group-sm form-control " type="text" id="cst_period" th:value="${cstDTO.cst_period}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*공사착수일</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
+                        <input id='datetimepicker1Input' type='text' th:value="${cstDTO.cst_start}" class='form-control' data-td-target='#datetimepicker1' />
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <label class="form-control-label">공사완공일</label>
                     <div class='input-group' id='datetimepicker2' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker2Input' type='text' class='form-control' data-td-target='#datetimepicker2' />
+                        <input id='datetimepicker2Input' type='text' th:value="${cstDTO.cst_end}" class='form-control' data-td-target='#datetimepicker2' />
                         <span class='input-group-text' data-td-target='#datetimepicker2' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
@@ -82,20 +82,20 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*총계약금</label>
-                    <input class="form-control" type="text" id="cst_toal_pay">
+                    <input class="form-control" type="text" id="cst_toal_pay" th:value="${cstDTO.cst_toal_pay}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*선수금</label>
-                    <input class="form-control" type="text" id="cst_1st_pay">
+                    <input class="form-control" type="text" id="cst_1st_pay" th:value="${cstDTO.cst_1st_pay}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*수금일</label>
                     <div class='input-group' id='datetimepicker3' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker3Input' type='text' class='form-control' data-td-target='#datetimepicker3' />
+                        <input id='datetimepicker3Input' type='text' th:value="${cstDTO.cst_collect_date}" class='form-control' data-td-target='#datetimepicker3' />
                         <span class='input-group-text' data-td-target='#datetimepicker3' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
@@ -106,27 +106,27 @@
                 <div class="form-group">
                     <label class="form-control-label">공사종료여부</label>
                     <select class="form-select" aria-label="Default select example" id="cst_finised">
-                        <option th:attr="selected=${constructionDTO.cst_finised} == 'false' ? 'true': 'false'" value="false">공사중</option>
-                        <option th:attr="selected=${constructionDTO.cst_finised} == 'ture' ? 'true': 'false'"  value="true">공사완료</option>
+                        <option th:attr="selected=${cstDTO.cst_finised} ? 'true': 'false'" value="false">미완료</option>
+                        <option th:attr="selected=${cstDTO.cst_finised} ? 'true': 'false'"  value="true">공사완료</option>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고1</label>
-                    <input class="form-control" type="text" id="cst_etc1">
+                    <input class="form-control" type="text" id="cst_etc1" th:value="${cstDTO.cst_etc1}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고2</label>
-                    <input class="form-control" type="text" id="cst_etc2">
+                    <input class="form-control" type="text" id="cst_etc2" th:value="${cstDTO.cst_etc2}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고3</label>
-                	<textarea rows="3" cols="10" class="form-control" id="cst_etc3"></textarea>
+                	<textarea rows="3" cols="10" class="form-control" id="cst_etc3" th:value="${cstDTO.cst_etc3}"></textarea>
                 </div>
             </div>
             <!--            파일첨부를 위한 기능 추가 start-->
@@ -136,6 +136,9 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         파일등록
                     </button>
+                    <a class="btn btn-secondary" href="#" onclick="resetImage()">
+                        기존사진삭제
+                    </a>
                 </div>
             </div>
 
@@ -148,6 +151,7 @@
 
             <!--            파일첨부를 위한 기능 추가 end-->
             <input type="button" class="btn btn-primary" id="cstSubmitBtn" value="수정하기" />
+            <input type="button" class="btn btn-dark mt-2" id="cstDeleteBtn" value="삭제하기"/>
         </div>
     </div>
 </div>
@@ -184,8 +188,8 @@
 
 <!-- 파일 첨부용 JS end-->
 <script>
-let input_UUID;
-let input_Filename;
+let input_UUID = "[[${cstDTO.cst_uuid}]]";
+let input_Filename = "[[${cstDTO.cst_filename}]]";
 
 document.querySelector(".uploadBtn").addEventListener("click", function (e) {
 
@@ -250,9 +254,60 @@ function removeFile(uuid, fileName, obj) {
     });
 };
 
+		//기존의 파일 경로들을 살리기 위한 내용
+
+
+function resetImage(){
+
+    if(window.confirm('이미지 파일을 삭제하시겠습니까?')){
+        input_UUID = '';
+        input_Filename = '';
+        alert("이미지가 삭제되었습니다. 수정하기 버튼을 눌러 저장하시기 바랍니다.")
+    }
+
+}
+	    //이미지 파일을 사용하기 위한 JS
+	    
+	const urlParams = new URL(location.href).searchParams;
+    
+    const cstDeleteBtn = document.getElementById('cstDeleteBtn');
+    					  
+    cstDeleteBtn.addEventListener("click", () => {
+    	const input_cst_id = urlParams.get('cst_id');
+        
+
+        const cstif = {
+        	cst_id : input_cst_id
+            
+        };
+
+        console.log(cstif);
+
+        const url = "/api/user/worksite/construction/cstinfo";
+
+        fetch(url, {
+           method : "DELETE",
+           body : JSON.stringify(cstif),
+           headers : {
+               "Content-Type" : "application/json"
+           }
+        }).then(response => {
+           if(response.ok){
+               response.text();
+               alert('삭제가 되었습니다.');
+               opener.location.reload();
+               window.close();
+           } else {
+               alert('삭제를 실패하였습니다.');
+           }
+        });
+
+    });
+
     const cstSubmitBtn = document.querySelector('#cstSubmitBtn');
 
     cstSubmitBtn.addEventListener("click", () => {
+    	const input_cst_id = "[[${cstDTO.cst_id}]]";
         const input_cst_code = document.querySelector('#cst_code').value;
         const input_cst_name = document.querySelector('#cst_name').value;
         const input_cst_period = document.querySelector('#cst_period').value;
@@ -267,6 +322,7 @@ function removeFile(uuid, fileName, obj) {
         const input_cst_etc3 = document.querySelector('#cst_etc3').value;
 
         const cstif = {
+        		cst_id : input_cst_id,
         		cst_code : input_cst_code,
         		cst_name : input_cst_name,
         		cst_period : input_cst_period,
@@ -308,6 +364,8 @@ function removeFile(uuid, fileName, obj) {
                response.text();
                alert('수정이 완료되었습니다.');
                window.location.reload();
+               opener.location.reload();
+               //self.close();
            } else {
                alert('수정을 실패하였습니다.');
            }
