@@ -39,6 +39,29 @@ public class BoardControllerImp implements BoardController {
 		return "user/board/register";
 	}
 	
+	//게시판 상세보기페이지로 이동
+	@Override
+	@GetMapping("/user/board/SelectOne/{b_id}")
+	public String detail(Model model ,BoardDTO dto) {
+		
+		model.addAttribute("selectdata", service.SelectOne(dto.getB_id()));
+		return "user/board/board-detail";
+	}
+
+	//게시판 업데이트 페이지로 이동
+	@Override
+	@GetMapping("/user/board/detail")
+	public String update(Model model, BoardDTO dto) {
+		
+		model.addAttribute("update", service.SelectOne(dto.getB_id()));
+		return "user/board/board-edit-form";
+	}
+	
+	
+	
+	
+	
+	
 	
 
 

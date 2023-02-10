@@ -37,58 +37,58 @@
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">게시판 수정</h5>
+        <h5 class="card-title mt-3 mb-3">게시판 상세보기</h5>
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                 <input type = "hidden" th:value="${update.b_id}" name="b_id" id="b_id">
+                 <input type = "hidden" th:value="${selectdata.b_id}" name="b_id" id="b_id">
                  <label class="form-control-label">*카테고리</label>
                  <select class="form-select" aria-label="Default select example" id="ct_id">
-                        <option th:text="공지사항" th:value="${update.ct_id}"></option>
-                        <option th:text="자유게시판" th:value="${update.ct_id}"></option>
-                        <option th:text="QnA" th:value="${update.ct_id}"></option>
+                        <option th:text="공지사항" th:value="${selectdata.ct_id}"></option>
+                        <option th:text="자유게시판" th:value="${selectdata.ct_id}"></option>
+                        <option th:text="QnA" th:value="${selectdata.ct_id}"></option>
                     </select>
                 </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*유저</label>
-                    <input class = "form-control" type="text" id="us_id" name="us_id" th:value="${update.us_id}" readonly="readonly" >
+                    <input class = "form-control" type="text" id="us_id" name="us_id" th:value="${selectdata.us_id}" readonly="readonly" >
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*제목</label>
-                    <input class="form-control" type="text" id="b_title" name="b_title" th:value="${update.b_title}">
+                    <input class="form-control" type="text" id="b_title" name="b_title" th:value="${selectdata.b_title}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*본문</label>
-                    <input class="form-control" type="text" id="b_body" name="b_body" size="10" th:value="${update.b_body}">
+                    <input class="form-control" type="text" id="b_body" name="b_body" size="10" th:value="${selectdata.b_body}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고</label>
-                    <input class="form-control" type="text" id="b_etc" name="b_etc" th:value="${update.b_etc}">
+                    <input class="form-control" type="text" id="b_etc" name="b_etc" th:value="${selectdata.b_etc}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">파일</label>
-                    <input class="form-control" type="file" id="b_file" name="b_file" th:value="${update.b_file}">
+                    <input class="form-control" type="file" id="b_file" name="b_file" th:value="${selectdata.b_file}">
                 </div>
             </div>
             </div>
            
-            <input type="submit" class="btn btn-primary" value="수정하기" id="boardSubmitBtn"/>
-            <input type="submit" class="btn btn-primary" value="삭제하기" id="boardDeleteBtn"/>
+           
+            <input type="submit" class="btn btn-primary" value="댓글작성" id="boardDeleteBtn"/>
           
         </div>
     </div>
 </div>
 <script>
-    const boardSubmitBtn = document.querySelector('#boardSubmitBtn');
+   
     const boardDeleteBtn = document.querySelector('#boardDeleteBtn');
     
 

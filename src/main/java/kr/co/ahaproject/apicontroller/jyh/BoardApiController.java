@@ -11,4 +11,7 @@ public interface BoardApiController {
 	 ResponseEntity create(BoardDTO dto);
 
 	 ResponseEntity update(BoardDTO dto);
+	
+	 ResponseEntity delete(BoardDTO dto);
+	 
 }

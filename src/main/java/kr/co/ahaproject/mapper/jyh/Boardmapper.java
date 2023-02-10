@@ -1,3 +1,8 @@
+//  int rp_id;
+//    int b_id;
+//    String rp_body;
+//    int us_id;
+
 package kr.co.ahaproject.mapper.jyh;
 
 import java.util.List;
@@ -12,6 +17,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import kr.co.ahaproject.dto.BoardDTO;
+import kr.co.ahaproject.dto.MaterialDTO;
+import kr.co.ahaproject.dto.ReplyDTO;
 import kr.co.ahaproject.entity.Board;
 
 @Mapper
@@ -30,13 +37,13 @@ public interface Boardmapper {
             @Result(property = "b_file", column = "b_file")})
     List<BoardDTO> listAll();
 	
-	@Select("SELECT * FROM board WHERE b_id = #{board.b_id}")
+	@Select("SELECT * FROM board WHERE b_id = #{b_id}")
     @ResultMap("BoardMap")
-    Board findById(@Param("board") Board board);
+	BoardDTO SelectOne(int b_id); //선택조회
+    
 	
 	
 	//글 작성 
-	
 	@Insert("insert into board(ct_id,us_id,b_title,b_body,b_etc,b_file) values(#{ct_id},#{us_id},#{b_title},#{b_body},#{b_etc},#{b_file})")
       int create(BoardDTO dto);
 	
@@ -45,14 +52,10 @@ public interface Boardmapper {
 	            "`ct_id` = #{board.ct_id}, `us_id` = #{board.us_id}, " +
 	            "`b_title` = #{board.b_title}, `b_body` = #{board.b_body}, `b_etc` = #{board.b_etc}, " +
 	            "`b_file` = #{board.b_file} WHERE (`b_id` = #{board.b_id})")
-	    int update(BoardDTO dto);
-
+	    int update(@Param("board") BoardDTO board); 
 	
-	//선택조회
-	@Select("select* from board where b_id = #{board.b_id}")
-	BoardDTO SelectOne(int b_id);
 	
 	//글 삭제 
-	@Delete("delete from board where b_id =#{board.b_id}")
-	int delete(int b_id);
+	@Delete("delete from `ahaproject`.`board` where b_id = #{b_id}")
+	int delete(@Param("b_id") int b_id);
 }

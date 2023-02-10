@@ -20,6 +20,16 @@ public interface BoardController {
 	//작성
 	String create();
 	
+	//상세조회
+	String detail(Model model,BoardDTO dto);
+	
+	String update(Model model,BoardDTO dto);
+	
+	
+
+	
+	
+	
 	
 	
 	
