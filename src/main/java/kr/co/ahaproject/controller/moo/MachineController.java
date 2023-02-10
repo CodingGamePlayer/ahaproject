@@ -2,7 +2,6 @@ package kr.co.ahaproject.controller.moo;
 
 import kr.co.ahaproject.dto.MachineDTO;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 public interface MachineController {
     // 장비정보 보기

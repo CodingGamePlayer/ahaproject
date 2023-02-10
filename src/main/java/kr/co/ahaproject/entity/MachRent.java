@@ -12,10 +12,9 @@ import lombok.NoArgsConstructor;
 public class MachRent {
 
     Long rent_id;
-    String cst_code;
+    String cst_name;
     String rent_start;
     String rent_end;
-
     String m_name;
     Long rent_supp_value;
     Long rent_tax;
