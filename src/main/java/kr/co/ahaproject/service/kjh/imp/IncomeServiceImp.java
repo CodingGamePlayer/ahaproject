@@ -29,8 +29,8 @@ public class IncomeServiceImp implements IncomeService {
     }
 
     @Override
-    public IncomeOutcomeDTO selectOne(long io_id) {
-        IncomeOutcomeDTO ioDTO = modelMapper.map(incomeMapper.selectOne(io_id), IncomeOutcomeDTO.class);
+    public IncomeOutcomeDTO selectOne(int id) {
+        IncomeOutcomeDTO ioDTO = modelMapper.map(incomeMapper.selectOne(id), IncomeOutcomeDTO.class);
         return ioDTO;
     }
 
@@ -57,43 +57,12 @@ public class IncomeServiceImp implements IncomeService {
     }
 
     @Override
-    public int delete(IncomeOutcomeDTO ioDTO) {
-        IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
-        int result = incomeMapper.delete(io);
+    public int delete(int id) {
+
+        int result = incomeMapper.delete(id);
         if (result < 0) {
             return 0;
         }
         return 1;
-    }
-
-
-
-    @Override
-    public IncomeOutcomeDTO selectRecent(IncomeOutcomeDTO ioDTO) {
-        IncomeOutcome io = incomeMapper.selectRecent(modelMapper.map(ioDTO,IncomeOutcome.class));
-        IncomeOutcomeDTO ioDTO1 = modelMapper.map(io, IncomeOutcomeDTO.class);
-        return ioDTO1;
-    }
-
-    @Override
-    public List<IncomeOutcomeDTO> selectAllmod(IncomeOutcomeDTO ioDTO) {
-        List<IncomeOutcome> ios = incomeMapper.selectAllmod(modelMapper.map(ioDTO,IncomeOutcome.class));
-        ios.forEach(io -> io.toString());
-        List<IncomeOutcomeDTO> list = ios.stream()
-                .map(io -> modelMapper.map(io, IncomeOutcomeDTO.class))
-                .collect(Collectors.toList());
-        list.forEach(ioDTO2 -> ioDTO2.toString());
-        return list;
-    }
-
-    @Override
-    public List<IncomeOutcomeDTO> selectGroup() {
-        List<IncomeOutcome> ios = incomeMapper.selectGroup();
-        ios.forEach(io -> io.toString());
-        List<IncomeOutcomeDTO> list = ios.stream()
-                .map(io -> modelMapper.map(io, IncomeOutcomeDTO.class))
-                .collect(Collectors.toList());
-        list.forEach(ioDTO2 -> ioDTO2.toString());
-        return list;
     }
 }
