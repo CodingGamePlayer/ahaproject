@@ -59,8 +59,8 @@
                     <div><a href="#" class="text-white text-sm">- 카드사용내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 카드사용내역 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 장비대여내역 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 장비대여내역 입력</a></div>
+                    <div><a th:href="@{/user/worksite/rental}" class="text-white text-sm">- 장비대여내역 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitMachineRent()">- 장비대여내역 입력</a></div>
                 </div>
                 <button class="btn btn-sm  btn-primary mt-3 text-start mb-2 " type="button" data-bs-toggle="collapse" data-bs-target="#gboard" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text me-1" viewBox="0 0 16 16">
@@ -169,6 +169,12 @@
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                 window.open("/user/basicinfo/register", "_blank", option);
+            }
+            // 장비임대 입력
+            function regitMachineRent(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/worksite/rental/register", "_blank", option);
             }
             function regitCompany(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";

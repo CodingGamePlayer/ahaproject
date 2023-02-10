@@ -5,6 +5,7 @@ import kr.co.ahaproject.dto.MisuDTO;
 import kr.co.ahaproject.entity.Machine;
 import kr.co.ahaproject.entity.Misu;
 import kr.co.ahaproject.mapper.moo.MachineMapper;
+import kr.co.ahaproject.service.AhaCommonMethod;
 import kr.co.ahaproject.service.moo.MachineService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -24,6 +25,10 @@ public class MachineServiceImp implements MachineService {
 
     @Override
     public int register(MachineDTO machineDTO) {
+        String m_date = new AhaCommonMethod().changeDate(machineDTO.getM_date());
+
+        machineDTO.setM_date(m_date);
+
         int result = machineMapper.register(modelMapper.map(machineDTO, Machine.class));
 
         if(!(result > 0)){
@@ -44,6 +49,10 @@ public class MachineServiceImp implements MachineService {
 
     @Override
     public int update(MachineDTO machineDTO) {
+        String m_date = new AhaCommonMethod().changeDate(machineDTO.getM_date());
+
+        machineDTO.setM_date(m_date);
+
         Machine machine = modelMapper.map(machineDTO, Machine.class);
         int update = machineMapper.update(machine);
 

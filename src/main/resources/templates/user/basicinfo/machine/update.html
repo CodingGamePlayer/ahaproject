@@ -316,13 +316,16 @@
             return;
         }
 
+        // 숫자 입력 유효성 체크
         var pattern_num = /[0-9]/;	// 숫자
         var pattern_eng = /[a-zA-Z]/;	// 문자
         var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
         var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
 
-        // 매입액 숫자 입력 유효성 체크
-        if( (pattern_num.test(input_m_price) || pattern_num.test(input_m_tax)) && !(pattern_eng.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_spc.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_kor.test(input_m_price) || pattern_eng.test(input_m_tax)) ){
+        if( (pattern_num.test(input_m_price) && pattern_num.test(input_m_tax))
+            && !(pattern_eng.test(input_m_price) && pattern_eng.test(input_m_tax))
+            && !(pattern_spc.test(input_m_price) && pattern_eng.test(input_m_tax))
+            && !(pattern_kor.test(input_m_price) && pattern_eng.test(input_m_tax)) ){
 
         }else{
             alert("매입액과 세액은 숫자만 입력 가능합니다.");
