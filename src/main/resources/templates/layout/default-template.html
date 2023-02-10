@@ -27,7 +27,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             const calendarEl = document.getElementById('calendar')
             const calendar = new FullCalendar.Calendar(calendarEl, {
-                height: 800,
+
+                height: 700,
                 initialView: 'dayGridMonth',
 
                 headerToolbar: {
@@ -42,7 +43,6 @@
                         title:  '서울시보수공사 - 재설',
                         start:  '2023-02-01',
                         end: '2023-02-03',
-                        color: 'sky',
                         textColor: 'black',
                         allDay: true,
                         default: true
@@ -52,7 +52,6 @@
                         title:  '서울시보수공사 - 재설',
                         start:  '2023-02-01',
                         end: '2023-02-03',
-                        color: 'sky',
                         textColor: 'black',
                         allDay: true,
                         default: true
@@ -62,13 +61,15 @@
                         title:  '평택초등학교 준공 - 레미콘',
                         start:  '2023-02-10',
                         end: '2023-02-12',
-                        color: 'sky',
                         textColor: 'black',
                         allDay: true,
                         default: true
 
                     },
+
                 ],
+                backgroundColor: 'red'
+
 
                 // 시간 format 지정하는 것들
                 // eventTimeFormat: { // like '14:30:00'
@@ -77,7 +78,9 @@
                 //     second: '0-digit',
                 //     hour12: false
                 // }
-            })
+
+            });
+
             calendar.render()
         })
 
