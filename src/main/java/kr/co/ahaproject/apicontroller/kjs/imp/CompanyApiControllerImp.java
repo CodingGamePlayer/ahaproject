@@ -2,6 +2,7 @@ package kr.co.ahaproject.apicontroller.kjs.imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import kr.co.ahaproject.apicontroller.kjs.CompanyApiController;
 import kr.co.ahaproject.dto.CompanyDTO;
 import kr.co.ahaproject.service.kjs.CompanyService;
@@ -23,8 +25,11 @@ public class CompanyApiControllerImp implements CompanyApiController{
 	@Autowired
 	CompanyService companyService;
 	
+	
+//	회사 정보 등록
 	@Override
-	@PostMapping("/company")
+	@Operation(summary = "register of company,post", description = "회사정보 등록")
+	@PostMapping(value = "/company", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CompanyDTO> register(@RequestBody CompanyDTO companyDTO) {
 		// TODO Auto-generated method stub
 		if(companyDTO == null) {
@@ -41,7 +46,8 @@ public class CompanyApiControllerImp implements CompanyApiController{
 	}
 
 	@Override
-	@PutMapping("/company")
+	@Operation(summary = "update for company,put", description = "회사정보 수정")
+	@PutMapping(value = "/company", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CompanyDTO> update(@RequestBody CompanyDTO companyDTO) {
 		// TODO Auto-generated method stub
 		if(companyDTO == null) {
@@ -59,7 +65,8 @@ public class CompanyApiControllerImp implements CompanyApiController{
 	}
 
 	@Override
-	@DeleteMapping("/company")
+	@Operation(summary = "delete for company,delete", description = "회사정보 삭제")
+	@DeleteMapping(value = "/company", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CompanyDTO> delete(@RequestBody CompanyDTO companyDTO) {
 		// TODO Auto-generated method stub
 		if(companyDTO == null) {
