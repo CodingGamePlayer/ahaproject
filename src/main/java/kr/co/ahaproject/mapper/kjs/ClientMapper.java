@@ -2,6 +2,7 @@ package kr.co.ahaproject.mapper.kjs;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,6 +16,7 @@ import com.mysql.cj.x.protobuf.MysqlxCrud.Column;
 
 import kr.co.ahaproject.dto.ClientDTO;
 import kr.co.ahaproject.entity.Client;
+import kr.co.ahaproject.entity.Company;
 
 
 @Mapper
@@ -65,4 +67,14 @@ public interface ClientMapper {
     		+ "cl_etc3 = #{client.cl_etc3}"
     		+ "WHERE cl_id = #{client.cl_id}")
     int update(@Param("client") Client client);
+    
+//  고객 삭제
+//  삭제
+  @Delete("DELETE FROM ahaproject.client "
+  		+ "WHERE cl_id = #{client.cl_id}")
+  int delete(@Param("client") Client client);
+  
+// 거래처 코드
+  @Select ("select max(cl_id)+1 from ahaproject.client")
+  int maxNum();
 }

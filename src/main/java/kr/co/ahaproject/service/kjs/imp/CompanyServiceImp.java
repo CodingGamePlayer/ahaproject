@@ -9,8 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import groovyjarjarpicocli.CommandLine.Model;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,6 +53,14 @@ public class CompanyServiceImp implements CompanyService {
 		// TODO Auto-generated method stub
 		int  rs = companyMapper.update(modelMapper.map(companyDTO, Company.class));
 			if(!(rs>0)) return 0;
+		return rs;
+	}
+
+	@Override
+	public int delete(CompanyDTO companyDTO) {
+		// TODO Auto-generated method stub
+		int rs = companyMapper.delete(modelMapper.map(companyDTO, Company.class));
+		if(!(rs>0)) return 0;
 		return rs;
 	}
 }

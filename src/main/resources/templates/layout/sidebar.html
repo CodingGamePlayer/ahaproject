@@ -92,7 +92,7 @@
                     <div><a href="/user/accounting/income/list" class="text-white text-sm">- 매입내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitIncome()">- 매입내역 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 인건비내역 보기</a></div>
+                    <div><a th:href="@{/user/accounting/laborcost}" class="text-white text-sm">- 인건비내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 인건비내역 입력</a></div>
                 </div>
                 <button sec:authorize="hasAuthority('ROLE_ADMIN')" class="btn btn-sm btn-warning mt-3 text-start mb-2 " type="button" data-bs-toggle="collapse" data-bs-target="#adminPage" aria-expanded="false" aria-controls="collapseExample1">
@@ -149,19 +149,19 @@
                 window.open("/user/client/form", "_blank", option);
             }
             
-            // 현장 - 자재 입력 페이지 이동하기 
+            // 현장 - 자재 입력 페이지 이동하기
             function regitUseMaterial(){
 				let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
-				
+
                 window.open("/user/worksite/use-material/register", "_blank", option);
             }
-            
+
             // 자재정보 입력 페이지 이동하기
             function regitMaterial() {
             	let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 				
                 window.open("/user/material/register", "_blank", option);
-            }	
+            }
 
 
             // 장비정보 입력
@@ -191,12 +191,6 @@
 
                 window.open("/user/employee/emform", "_blank", option);
             }
-
-
-            
-            
-
-
             
 			//카드정보 입력
             function regitCard(){
@@ -204,7 +198,6 @@
 
                 window.open("/user/basicinfo/card/card-form", "_blank", option);
             }
-            
 
             //매입,매출 등록
             function regitIncome(){
@@ -217,7 +210,7 @@
 
                 window.open("/user/accounting/outcome/register", "_blank", option);
             }
-            
+
             // 공사정보 입력
             function regitConstruction(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";

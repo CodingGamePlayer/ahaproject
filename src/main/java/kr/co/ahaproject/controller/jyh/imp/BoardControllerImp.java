@@ -1,15 +1,11 @@
 package kr.co.ahaproject.controller.jyh.imp;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import kr.co.ahaproject.controller.jyh.BoardController;
 import kr.co.ahaproject.dto.BoardDTO;
-import kr.co.ahaproject.dto.CategoryDTO;
 import kr.co.ahaproject.service.jyh.BoardService;
 
 @Controller
