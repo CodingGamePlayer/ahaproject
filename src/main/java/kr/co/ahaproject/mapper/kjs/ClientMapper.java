@@ -77,6 +77,6 @@ public interface ClientMapper {
   int delete(@Param("client") Client client);
   
 // 거래처 코드
-  @Select ("select ifnull(max(cl_id)+1, 0) from ahaproject.client")
+  @Select ("select ifnull(max(cl_id)+1, 1) from ahaproject.client")
   int maxNum();
 }
