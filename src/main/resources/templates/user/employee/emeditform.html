@@ -206,7 +206,7 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">사용여부</label>
-          <select class="form-select" aria-label="Default select example" id="emp_use" >
+          <select class="form-select" aria-label="Default select example" id="emp_use">
             <th:block th:if="${eDTO.emp_use} == false">
               <option value="false" selected>사용안함</option>
               <option value="true">사용중</option>
@@ -333,6 +333,7 @@
 
 
   empSubmitBtn.addEventListener("click", () => {
+    const input_emp_id = urlParams.get('emp_id');
     // const input_emp_id = document.querySelector('#emp_id').value;
     const input_cp_name = document.querySelector('#cp_name').value;
     const input_emp_code = document.querySelector('#emp_code').value;
@@ -364,7 +365,8 @@
       emp_etc1 : input_emp_etc1,
       emp_etc2 : input_emp_etc2,
       emp_etc3 : input_emp_etc3,
-      emp_use : input_emp_use
+      emp_use : input_emp_use,
+      emp_id : input_emp_id,
     };
 
     if(input_cp_name == "" ||
@@ -373,7 +375,6 @@
       alert('*이 있는 칸은 채워주시기 바랍니다.')
       return;
     }
-
 
     console.log(emp1);
 
