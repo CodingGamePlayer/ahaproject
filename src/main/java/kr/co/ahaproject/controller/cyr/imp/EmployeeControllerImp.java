@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -45,15 +42,28 @@ public class EmployeeControllerImp implements EmployeeController {
         return "user/employee/emform";
     }
 
+    @Override
+    @DeleteMapping("user/employee/delete")
+    public ResponseEntity<Employee> delete(@RequestBody Employee employee) {
+        int id = employee.getEmp_id().intValue();
+        int result = employeeService.delete(id);
+        if (result == 0){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 
     @Override
     @GetMapping("user/employee/emeditform")
     public String emEditForm(Employee employee, Model model) {
         model.addAttribute("companyDTOs", companyService.selectAll());
-
+        int id = employee.getEmp_id().intValue();
+        model.addAttribute("eDTO",employeeService.selectOne(id));
 
         return "user/employee/emeditform";
     }
+
 
 
     @Override
@@ -76,7 +86,7 @@ public class EmployeeControllerImp implements EmployeeController {
 
 
     @Override
-    @PutMapping("employee/emeditform")
+    @PutMapping("user/employee/emeditform")
     public ResponseEntity<Employee> update(@RequestBody Employee employee) {
 
         int result = employeeService.update(employee);
@@ -84,7 +94,6 @@ public class EmployeeControllerImp implements EmployeeController {
         if (result == 1){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
