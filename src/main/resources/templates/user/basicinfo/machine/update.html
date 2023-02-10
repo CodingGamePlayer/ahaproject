@@ -42,7 +42,8 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*장비코드</label>
-                    <input class="input-group-sm form-control " type="text" id="m_code" th:value="${machine.m_code}" disabled/>
+                    <input class="input-group-sm form-control " type="text" id="m_code" th:value="${machine.m_code}"
+                           disabled/>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -164,10 +165,10 @@
 
 <script>
 
-    <!--    이미지 파일을 사용하기 위한 JS-->
+<!--    이미지 파일을 사용하기 위한 JS-->
     /*<![CDATA[*/
-    let input_UUID = "[[${machine.m_id}]]";
-    let input_Filename= "[[${machine.m_filename}]]";
+    let input_UUID = "[[${machine.m_uuid}]]";
+    let input_Filename = "[[${machine.m_filename}]]";
     /*]]>*/
 
     document.querySelector(".uploadBtn").addEventListener("click", function (e) {
@@ -205,15 +206,21 @@
         input_UUID = uuid;
         input_Filename = fileName;
         const str =
-            `<div class="card col-10 ">
-            <div class="card-header ">
-                ${fileName}
-                <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+            `
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12">
+                    <div class="card border shadow-x mb-4">
+                        <div class="card-header ">
+                            ${fileName}
+                            <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+                        </div>
+                        <div class="card-body">
+                             <img style="width: 300px; height: 100px;" src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                 <img src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
-            </div>
-        </div><!-- card -->`
+        <!-- card -->`
 
         uploadResult.innerHTML += str
     }
@@ -236,15 +243,16 @@
     <!--    기존의 파일 경로들을 살리기 위한 내용-->
 
 
-    function resetImage(){
+    function resetImage() {
 
-        if(window.confirm('이미지 파일을 삭제하시겠습니까?')){
+        if (window.confirm('이미지 파일을 삭제하시겠습니까?')) {
             input_UUID = '';
             input_Filename = '';
             alert("이미지가 삭제되었습니다. 수정하기 버튼을 눌러 저장하시기 바랍니다.")
         }
 
     }
+
     <!--    이미지 파일을 사용하기 위한 JS-->
 
 
@@ -256,15 +264,15 @@
         const input_m_id = urlParams.get('m_id');
 
         const machine = {
-            m_id : input_m_id
+            m_id: input_m_id
         }
 
         const url = "/api/user/machine"
 
         fetch(url, {
-            method : "DELETE",
-            body : JSON.stringify(machine),
-            headers : {
+            method: "DELETE",
+            body: JSON.stringify(machine),
+            headers: {
                 "Content-Type": "application/json"
             }
         }).then(response => {
@@ -279,8 +287,9 @@
         });
     });
 
-    const input_m_id = urlParams.get('m_id');
+
     machineSubmitBtn.addEventListener("click", () => {
+        const input_m_id = urlParams.get('m_id');
         const input_m_code = document.querySelector('#m_code').value;
         const input_m_name = document.querySelector('#m_name').value;
         const input_m_equip_num = document.querySelector('#m_equip_num').value;
@@ -293,40 +302,43 @@
         const input_m_etc3 = document.querySelector('#m_etc3').value;
 
         const machine1 = {
-            m_id : input_m_id,
-            m_code : input_m_code,
-            m_name : input_m_name,
-            m_equip_num : input_m_equip_num,
-            m_type : input_m_type,
-            m_price : input_m_price,
-            m_tax : input_m_tax,
-            m_date : input_m_date,
-            m_filename : input_Filename,
-            m_etc1 : input_m_etc1,
-            m_etc2 : input_m_etc2,
-            m_etc3 : input_m_etc3,
-            m_uuid : input_UUID
+            m_id: input_m_id,
+            m_code: input_m_code,
+            m_name: input_m_name,
+            m_equip_num: input_m_equip_num,
+            m_type: input_m_type,
+            m_price: input_m_price,
+            m_tax: input_m_tax,
+            m_date: input_m_date,
+            m_filename: input_Filename,
+            m_etc1: input_m_etc1,
+            m_etc2: input_m_etc2,
+            m_etc3: input_m_etc3,
+            m_uuid: input_UUID
         };
 
-        if(input_m_code == ""||
+        if (input_m_code == "" ||
             input_m_name == "" || input_m_equip_num == "" ||
             input_m_type == "" || input_m_price == "" ||
-            input_m_tax == "" || input_m_date ==""){
+            input_m_tax == "" || input_m_date == "") {
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
 
+        // 숫자 입력 유효성 체크
         var pattern_num = /[0-9]/;	// 숫자
         var pattern_eng = /[a-zA-Z]/;	// 문자
         var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
         var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
 
-        // 매입액 숫자 입력 유효성 체크
-        if( (pattern_num.test(input_m_price) || pattern_num.test(input_m_tax)) && !(pattern_eng.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_spc.test(input_m_price) || pattern_eng.test(input_m_tax)) && !(pattern_kor.test(input_m_price) || pattern_eng.test(input_m_tax)) ){
+        if ((pattern_num.test(input_m_price) && pattern_num.test(input_m_tax))
+            && !(pattern_eng.test(input_m_price) && pattern_eng.test(input_m_tax))
+            && !(pattern_spc.test(input_m_price) && pattern_eng.test(input_m_tax))
+            && !(pattern_kor.test(input_m_price) && pattern_eng.test(input_m_tax))) {
 
-        }else{
+        } else {
             alert("매입액과 세액은 숫자만 입력 가능합니다.");
-            return ;
+            return;
         }
 
         console.log(machine1);
@@ -358,7 +370,7 @@
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
         display: {
             components: {
-                clock:false,
+                clock: false,
             },
             icons: {
                 type: 'icons',
