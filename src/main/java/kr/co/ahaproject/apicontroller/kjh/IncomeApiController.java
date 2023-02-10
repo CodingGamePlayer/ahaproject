@@ -8,4 +8,7 @@ public interface IncomeApiController {
     ResponseEntity register(IncomeOutcomeDTO ioDTO);
 
     ResponseEntity update(IncomeOutcomeDTO ioDTO);
+    ResponseEntity delete(IncomeOutcomeDTO ioDTO);
+
+
 }

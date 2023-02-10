@@ -1,5 +1,6 @@
 package kr.co.ahaproject.mapper.kjh;
 
+import kr.co.ahaproject.dto.IncomeOutcomeDTO;
 import kr.co.ahaproject.entity.IncomeOutcome;
 import org.apache.ibatis.annotations.*;
 
@@ -22,7 +23,7 @@ public interface IncomeMapper {
 
     @Select("select * from ahaproject.income_outcome where io_id = #{io_id}")
     @ResultMap("ioMap")
-    IncomeOutcome selectOne(int io_id);
+    IncomeOutcome selectOne(long io_id);
 
     @Insert("insert into ahaproject.income_outcome (cl_code, cst_code, cp_name, in_supp_value, in_total_value, in_collect_value, in_collect_remain) " +
             "values(#{io.cl_code}, #{io.cst_code}, #{io.cp_name}, #{io.in_supp_value}, #{io.in_total_value}, #{io.in_collect_value}, #{io.in_collect_remain})")
@@ -39,6 +40,6 @@ public interface IncomeMapper {
             "in_collect_remain = #{io.in_collect_remain}")
     int update(@Param("io") IncomeOutcome io);
 
-    @Delete("delete from ahaproject.income_outcome where io_id = #{io_id}")
-    int delete(int io_id);
+    @Delete("delete from ahaproject.income_outcome where io_id = #{io.io_id}")
+    int delete(@Param("io") IncomeOutcome io);
 }
