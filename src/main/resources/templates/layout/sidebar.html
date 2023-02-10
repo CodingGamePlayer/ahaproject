@@ -1,5 +1,7 @@
 <html lagn="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
 <!--headerFragment 선언-->
 <div th:fragment="SidebarFragment">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start " id="sidenav-main">
@@ -84,12 +86,12 @@
                     Accounting
                 </button>
                 <div class="collapse ms-3 mb-3" id="accounting" >
-                    <div><a href="#" class="text-white text-sm">- 공사정보 전체보기</a></div>
+                    <div><a th:href="@{/user/accounting/summary}" class="text-white text-sm" target="_blank">- 공사정보 전체보기</a></div>
                     <div><hr></div>
-                    <div><a href="/user/accounting/outcome/list" class="text-white text-sm">- 매출내역 보기</a></div>
+                    <div><a th:href="@{/user/accounting/outcome}" class="text-white text-sm">- 매출내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitOutcome()">- 매출내역 입력</a></div>
                     <div><hr></div>
-                    <div><a href="/user/accounting/income/list" class="text-white text-sm">- 매입내역 보기</a></div>
+                    <div><a th:href="@{/user/accounting/income}" class="text-white text-sm">- 매입내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitIncome()">- 매입내역 입력</a></div>
                     <div><hr></div>
                     <div><a th:href="@{/user/accounting/laborcost}" class="text-white text-sm">- 인건비내역 보기</a></div>
@@ -203,12 +205,12 @@
             function regitIncome(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-                window.open("/user/accounting/income/register", "_blank", option);
+                window.open("/user/accounting/income-form", "_blank", option);
             }
             function regitOutcome(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-                window.open("/user/accounting/outcome/register", "_blank", option);
+                window.open("/user/accounting/outcome-form", "_blank", option);
             }
 
             // 공사정보 입력
