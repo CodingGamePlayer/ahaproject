@@ -29,8 +29,8 @@ public class IncomeServiceImp implements IncomeService {
     }
 
     @Override
-    public IncomeOutcomeDTO selectOne(int id) {
-        IncomeOutcomeDTO ioDTO = modelMapper.map(incomeMapper.selectOne(id), IncomeOutcomeDTO.class);
+    public IncomeOutcomeDTO selectOne(long io_id) {
+        IncomeOutcomeDTO ioDTO = modelMapper.map(incomeMapper.selectOne(io_id), IncomeOutcomeDTO.class);
         return ioDTO;
     }
 
@@ -59,13 +59,14 @@ public class IncomeServiceImp implements IncomeService {
     @Override
     public int delete(IncomeOutcomeDTO ioDTO) {
         IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
-
         int result = incomeMapper.delete(io);
         if (result < 0) {
             return 0;
         }
         return 1;
     }
+
+
 
     @Override
     public IncomeOutcomeDTO selectRecent(IncomeOutcomeDTO ioDTO) {

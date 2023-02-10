@@ -41,10 +41,20 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
+                    <label class="form-control-label">*회사명</label>
+                    <select class="form-select" aria-label="Default select example"  id="cp_name">
+                        <th:block th:each="company : ${companyDTOs}">
+                            <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
                     <label class="form-control-label">*거래처코드</label>
                     <select class="form-select" aria-label="Default select example" id="cl_code">
-                        <th:block th:each="const : ${constructionDTOs}">
-                            <option th:value="${const.cst_code}" >[[${const.cst_code}]]</option>
+                        <th:block th:each="client : ${clientDTOs}">
+                            <option th:value="${client.cl_code}" >[[${client.cl_code}]]</option>
                         </th:block>
                     </select>
                 </div>
@@ -61,36 +71,26 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*회사명</label>
-                    <select class="form-select" aria-label="Default select example"  id="cp_name">
-                        <th:block th:each="company : ${companyDTOs}">
-                            <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
-                        </th:block>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*매입 공급가액</label>
+                    <label class="form-control-label">매입 공급가액</label>
                     <input class="form-control" type="text" id="in_supp_value">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*매입 합계금액</label>
-                    <input class="form-control" type="text" id="in_total_value">
+                    <label class="form-control-label">매입 합계금액</label>
+                    <input class="form-control" type="hidden" id="in_total_value" th:value="0">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*매입 지급액</label>
+                    <label class="form-control-label">매입 지급액</label>
                     <input class="form-control" type="text" id="in_collect_value">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*매입잔액</label>
-                    <input class="form-control" type="text" id="in_collect_remain">
+                    <label class="form-control-label">매입잔액</label>
+                    <input class="form-control" type="hidden" id="in_collect_remain" th:value="0">
                 </div>
             </div>
             <input type="button" class="btn btn-primary" id="incomeSubmitBtn" value="등록하기" />
@@ -100,19 +100,19 @@
 <script>
     const incomeSubmitBtn = document.querySelector('#incomeSubmitBtn');
 
-    misuSubmitBtn.addEventListener("click", () => {
+    incomeSubmitBtn.addEventListener("click", () => {
+        const input_cp_name = document.querySelector('#cp_name').value;
         const input_cl_code = document.querySelector('#cl_code').value;
         const input_cst_code = document.querySelector('#cst_code').value;
-        const input_cp_name = document.querySelector('#cp_name').value;
         const input_in_supp_value = document.querySelector('#in_supp_value').value;
         const input_in_total_value = document.querySelector('#in_total_value').value;
         const input_in_collect_value = document.querySelector('#in_collect_value').value;
         const input_in_collect_remain = document.querySelector('#in_collect_remain').value;
 
         const income1 = {
+            cp_name : input_cp_name,
             cl_code : input_cl_code,
             cst_code : input_cst_code,
-            cp_name : input_cp_name,
             in_supp_value : input_in_supp_value,
             in_total_value : input_in_total_value,
             in_collect_value : input_in_collect_value,
@@ -120,9 +120,7 @@
         };
 
         if(input_cl_code == "" || input_cst_code == "" ||
-            input_cp_name == "" || input_in_supp_value == "" ||
-            input_in_total_value == "" || input_in_collect_value =="" ||
-            input_in_collect_remain == ""){
+            input_cp_name == ""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
