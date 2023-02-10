@@ -17,7 +17,6 @@ public class EmployeeServiceImp implements EmployeeService {
     public List<Employee> listAll() {
         return employeeMapper.listAll();
     }
-
     @Override
     public int selectid(){
         return employeeMapper.selectid();
@@ -41,5 +40,10 @@ public class EmployeeServiceImp implements EmployeeService {
     @Override
     public int delete(int emp_id) {
         return employeeMapper.delete(emp_id);
+    }
+
+    @Override
+    public int count() {
+        return employeeMapper.count();
     }
 }

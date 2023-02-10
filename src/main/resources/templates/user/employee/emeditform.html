@@ -151,35 +151,35 @@
       </div>
       <!--            파일등록을 위한 코드 end-->
 
-<!-- 파일 첨부용 Modal start -->
+      <!-- 파일 첨부용 Modal start -->
 
 
-<div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">파일첨부</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label for="formFile" class="form-label">첨부파일을 선택하세요.</label>
-          <input class="form-control" type="file" id="formFile" name="files">
+      <div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">파일첨부</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">첨부파일을 선택하세요.</label>
+                <input class="form-control" type="file" id="formFile" name="files">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUploadBtn">Close
+              </button>
+              <button type="button" class="btn btn-primary uploadBtn" id="uploadBtn">Upload</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUploadBtn">Close
-        </button>
-        <button type="button" class="btn btn-primary uploadBtn" id="uploadBtn">Upload</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- 파일 첨부용 Modal end -->
+      <!-- 파일 첨부용 Modal end -->
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/js/upload.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="/js/upload.js"></script>
 
 
       <div class="col-sm-12">
@@ -206,7 +206,7 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">사용여부</label>
-          <select class="form-select" aria-label="Default select example" id="emp_use" >
+          <select class="form-select" aria-label="Default select example" id="emp_use">
             <th:block th:if="${eDTO.emp_use} == false">
               <option value="false" selected>사용안함</option>
               <option value="true">사용중</option>
@@ -227,11 +227,8 @@
 
 <script>
 
-  <!--    이미지 파일을 사용하기 위한 JS-->
-  /*<![CDATA[*/
   let input_UUID = "[[${eDTO.emp_uuid}]]";
   let input_Filename= "[[${eDTO.emp_filename}]]";
-  /*]]>*/
 
   document.querySelector(".uploadBtn").addEventListener("click", function (e) {
 
@@ -336,21 +333,22 @@
 
 
   empSubmitBtn.addEventListener("click", () => {
-      // const input_emp_id = document.querySelector('#emp_id').value;
-      const input_cp_name = document.querySelector('#cp_name').value;
-      const input_emp_code = document.querySelector('#emp_code').value;
-      const input_emp_name = document.querySelector('#emp_name').value;
-      const input_emp_joining = document.querySelector('#emp_joining').value;
-      const input_emp_regid = document.querySelector('#emp_regid').value;
-      const input_emp_tel = document.querySelector('#emp_tel').value;
-      const input_emp_email = document.querySelector('#emp_email').value;
-      const input_emp_address = document.querySelector('#emp_address').value;
-      const input_emp_account = document.querySelector('#emp_account').value;
-      // const input_emp_file = document.querySelector('#emp_file').value;
-      const input_emp_etc1 = document.querySelector('#emp_etc1').value;
-      const input_emp_etc2 = document.querySelector('#emp_etc2').value;
-      const input_emp_etc3 = document.querySelector('#emp_etc3').value;
-      const input_emp_use = document.querySelector('#emp_use').value;
+    const input_emp_id = urlParams.get('emp_id');
+    // const input_emp_id = document.querySelector('#emp_id').value;
+    const input_cp_name = document.querySelector('#cp_name').value;
+    const input_emp_code = document.querySelector('#emp_code').value;
+    const input_emp_name = document.querySelector('#emp_name').value;
+    const input_emp_joining = document.querySelector('#emp_joining').value;
+    const input_emp_regid = document.querySelector('#emp_regid').value;
+    const input_emp_tel = document.querySelector('#emp_tel').value;
+    const input_emp_email = document.querySelector('#emp_email').value;
+    const input_emp_address = document.querySelector('#emp_address').value;
+    const input_emp_account = document.querySelector('#emp_account').value;
+    // const input_emp_file = document.querySelector('#emp_file').value;
+    const input_emp_etc1 = document.querySelector('#emp_etc1').value;
+    const input_emp_etc2 = document.querySelector('#emp_etc2').value;
+    const input_emp_etc3 = document.querySelector('#emp_etc3').value;
+    const input_emp_use = document.querySelector('#emp_use').value;
 
     const emp1 = {
       cp_name : input_cp_name,
@@ -367,7 +365,8 @@
       emp_etc1 : input_emp_etc1,
       emp_etc2 : input_emp_etc2,
       emp_etc3 : input_emp_etc3,
-      emp_use : input_emp_use
+      emp_use : input_emp_use,
+      emp_id : input_emp_id,
     };
 
     if(input_cp_name == "" ||
@@ -375,8 +374,8 @@
             input_emp_regid == ""){
       alert('*이 있는 칸은 채워주시기 바랍니다.')
       return;
-    }
 
+    }
 
     console.log(emp1);
 

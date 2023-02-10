@@ -22,19 +22,18 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="/assets/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet"/>
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
-          crossorigin="anonymous"></script>
-<!--  <!— Tempus Dominus JavaScript —>-->
-  <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
-          crossorigin="anonymous"></script>
-
   <!--  제이쿼리 datepicker 사용시 3줄 복사해서 페이지 붙여놓을 것!-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
- <!-- 복붙 end -->
 
-<!--  <!— Tempus Dominus Styles —>-->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+          crossorigin="anonymous"></script>
+  <!— Tempus Dominus JavaScript —>
+  <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
+          crossorigin="anonymous"></script>
+
+  <!— Tempus Dominus Styles —>
   <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
         rel="stylesheet" crossorigin="anonymous">
 
@@ -43,38 +42,34 @@
 <div class="card m-3">
 
   <div class="card-body">
-    <h5 class="card-title mt-3 mb-3">인사 정보 등록</h5>
-
+    <h5 class="card-title mt-3 mb-3">견적서 상세/수정</h5>
     <div class="row">
+
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="form-control-label">*회사명</label>
-          <select class="form-select" aria-label="Default select example"  id="cp_name">
-            <th:block th:each="company : ${companyDTOs}">
-              <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
-            </th:block>
-          </select>
+          <label class="form-control-label">*견적번호</label>
+          <input class="input-group-sm form-control" th:value="${eDTO.es_code}" type="text" id="es_code">
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="form-control-label">*사원번호</label>
-          <input class="input-group-sm form-control" th:value="'HR'+${idkey}" placeholder="ex) EM0001" type="text" id="emp_code">
+          <label class="form-control-label">*제목</label>
+          <input class="form-control" th:value="${eDTO.es_title}" type="text" id="es_title">
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="form-control-label">*사원명</label>
-          <input class="form-control" type="text" id="emp_name">
+          <label class="form-control-label">*내용</label>
+          <input class="form-control" th:value="${eDTO.es_title}" type="text" id="es_body">
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="form-control-label">*입사일자</label>
-          <input class="datepicker form-control" id='emp_joining'>
+          <label class="form-control-label">*견적일자</label>
+          <input class="datepicker form-control" th:value="${eDTO.es_date}" id='es_date'>
           <script>
 
             $.datepicker.setDefaults({
@@ -100,44 +95,36 @@
 
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="form-control-label">*주민등록번호</label>
-          <input class="form-control" type="text" placeholder="ex) 980704-1234567" id="emp_regid">
-        </div>
-      </div>
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label class="form-control-label">이메일</label>
-          <input class="form-control" type="text" placeholder="ex) aha@gmail.com" id="emp_email">
-        </div>
-      </div>
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label class="form-control-label">전화번호</label>
-          <input class="form-control" type="text" placeholder="ex) 010-1234-5678" id="emp_tel">
+          <label class="form-control-label">*작성자</label>
+          <input class="form-control" th:value="${eDTO.us_id}" type="text" id="us_id">
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="form-control-label">주소</label>
-          <input class="form-control" type="text" id="emp_address" >
+          <label class="form-control-label">비고</label>
+          <input class="form-control" th:value="${eDTO.es_etc1}" type="text" id="es_etc1">
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="form-control-label">계좌번호</label>
-          <input class="form-control" type="text" placeholder="ex) OO은행 110-111-2245454 김계좌" id="emp_account">
+          <label class="form-control-label">비고2</label>
+          <textarea class="form-control" th:text="${eDTO.es_etc2}" type="text" id="es_etc2"></textarea>
         </div>
       </div>
 
-      <!--            파일첨부를 위한 기능 추가 start-->
+
+      <!--            파일등록을 위한 코드 start-->
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="form-control-label">파일</label><br>
+          <label class="form-control-label">견적서파일 등록</label><br>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            파일등록
+            파일변경
           </button>
+          <a class="btn btn-secondary" href="#" onclick="resetImage()">
+            기존파일삭제
+          </a>
         </div>
       </div>
 
@@ -147,11 +134,9 @@
           </div>
         </div>
       </div>
-      <!--            파일첨부를 위한 기능 추가 end-->
+      <!--            파일등록을 위한 코드 end-->
 
       <!-- 파일 첨부용 Modal start -->
-
-
       <div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
            aria-hidden="true">
         <div class="modal-dialog">
@@ -175,44 +160,19 @@
         </div>
       </div>
       <!-- 파일 첨부용 Modal end -->
-
-      <!-- 파일 첨부용 JS start-->
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
       <script src="/js/upload.js"></script>
 
-      <!-- 파일 첨부용 JS end-->
-
-
-
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label class="form-control-label">비고</label>
-          <input class="form-control" type="text" id="emp_etc1">
-        </div>
-      </div>
-
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label class="form-control-label">비고2</label>
-          <input class="form-control" type="text" id="emp_etc2">
-        </div>
-      </div>
-
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label class="form-control-label">비고3</label>
-          <textarea class="form-control" type="text" id="emp_etc3"></textarea>
-        </div>
-      </div>
-
-      <input type="button" class="btn btn-primary" id="empSubmitBtn" value="등록하기" />
+      <input type="button" class="btn btn-primary" id="esSubmitBtn" value="수정하기"/>
+      <input type="button" class="btn btn-dark mt-2" id="esDeleteBtn" value="삭제하기"/>
     </div>
   </div>
 </div>
 
 <script>
-  let input_UUID;
-  let input_Filename;
+
+  let input_UUID = "[[${eDTO.es_uuid}]]";
+  let input_Filename= "[[${eDTO.es_filename}]]";
 
   document.querySelector(".uploadBtn").addEventListener("click", function (e) {
 
@@ -228,7 +188,6 @@
       formObj.append("files", files[i]);
     }
 
-
     uploadToServer(formObj).then(result => {
       console.log(result)
       //console.log(result)
@@ -238,9 +197,7 @@
       document.getElementById('closeUploadBtn').click()
     }).catch(e => {
       document.getElementById('closeUploadBtn').click()
-
     })
-
   }, false)
 
   const uploadResult = document.querySelector(".uploadResult")
@@ -262,7 +219,6 @@
     uploadResult.innerHTML += str
   }
 
-
   function removeFile(uuid, fileName, obj) {
 
     console.log(uuid)
@@ -277,76 +233,96 @@
     })
   }
 
+  function resetImage(){
 
-  const empSubmitBtn = document.querySelector('#empSubmitBtn');
+    if(window.confirm('이미지 파일을 삭제하시겠습니까?')){
+      input_UUID = '';
+      input_Filename = '';
+      alert("이미지가 삭제되었습니다. 수정하기 버튼을 눌러 저장하시기 바랍니다.")
+    }
+  }
 
-    empSubmitBtn.addEventListener("click", () => {
-    // const input_emp_id = document.querySelector('#emp_id').value;
-    const input_cp_name = document.querySelector('#cp_name').value;
-    const input_emp_code = document.querySelector('#emp_code').value;
-    const input_emp_name = document.querySelector('#emp_name').value;
-    const input_emp_joining = document.querySelector('#emp_joining').value;
-    const input_emp_regid = document.querySelector('#emp_regid').value;
-    const input_emp_tel = document.querySelector('#emp_tel').value;
-    const input_emp_email = document.querySelector('#emp_email').value;
-    const input_emp_address = document.querySelector('#emp_address').value;
-    const input_emp_account = document.querySelector('#emp_account').value;
-    // const input_emp_file = document.querySelector('#emp_file').value;
-    const input_emp_etc1 = document.querySelector('#emp_etc1').value;
-    const input_emp_etc2 = document.querySelector('#emp_etc2').value;
-    const input_emp_etc3 = document.querySelector('#emp_etc3').value;
+  const esSubmitBtn = document.querySelector('#esSubmitBtn');
+  const urlParams = new URL(location.href).searchParams;
+  const esDeleteBtn = document.getElementById("esDeleteBtn");
 
-    const emp1 = {
-      // emp_id: input_emp_id,
-      cp_name : input_cp_name,
-      emp_name : input_emp_name,
-      emp_code : input_emp_code,
-      emp_tel : input_emp_tel,
-      emp_joining : input_emp_joining,
-      emp_regid : input_emp_regid,
-      emp_email : input_emp_email,
-      emp_address : input_emp_address,
-      emp_account : input_emp_account,
-      emp_uuid : input_UUID,
-      emp_filename : input_Filename,
-      emp_etc1 : input_emp_etc1,
-      emp_etc2 : input_emp_etc2,
-      emp_etc3 : input_emp_etc3
+  esDeleteBtn.addEventListener("click", () => {
+    const input_es_id = urlParams.get('es_id');
+
+    const es = {
+      es_id : input_es_id
+    }
+
+    const url = "/update"
+
+    fetch(url, {
+      method : "DELETE",
+      body : JSON.stringify(es),
+      headers : {
+        "Content-Type": "application/json"
+      }
+    }).then(response => {
+      if (response.ok) {
+        response.text();
+        alert('삭제가 되었습니다.');
+        opener.location.reload();
+        window.close();
+      } else {
+        alert('삭제를 실패하였습니다.');
+      }
+    });
+  });
+
+  esSubmitBtn.addEventListener("click", () => {
+    const input_es_code = document.querySelector('#es_code').value;
+    const input_es_title = document.querySelector('#es_title').value;
+    const input_es_body = document.querySelector('#es_body').value;
+    const input_es_date = document.querySelector('#es_date').value;
+    const input_us_id = document.querySelector('#us_id').value;
+    const input_es_etc1 = document.querySelector('#es_etc1').value;
+    const input_es_etc2 = document.querySelector('#es_etc2').value;
+
+    const es1 = {
+      es_code: input_es_code,
+      es_title: input_es_title,
+      es_body : input_es_body,
+      es_date : input_es_date,
+      us_id : input_us_id,
+      es_uuid : input_UUID,
+      es_filename : input_Filename,
+      es_etc1 : input_es_etc1,
+      es_etc2 : input_es_etc2,
     };
 
-    if(input_cp_name == "" ||
-            input_emp_name == "" || input_emp_joining == "" ||
-            input_emp_regid == ""){
+    if(input_es_code == "" ||
+            input_es_title == "" || input_es_date == "" ||
+            input_us_id == ""){
       alert('*이 있는 칸은 채워주시기 바랍니다.')
       return;
     }
+    console.log(es1);
 
-    console.log(emp1);
-
-    const url = "/user/employee/emform";
+    const url = "/update";
 
     fetch(url, {
-      method : "POST",
-      body : JSON.stringify(emp1),
-      headers : {
-        "Content-Type" : "application/json"
+      method: "PUT",
+      body: JSON.stringify(es1),
+      headers: {
+        "Content-Type": "application/json"
       }
     }).then(response => {
-      if(response.ok){
+      if (response.ok) {
         response.text();
-        alert('등록이 완료되었습니다.');
-        window.location.reload();
+        alert('수정이 완료되었습니다.');
         opener.location.reload();
+        window.close();
       } else {
-        alert('등록을 실패하였습니다.');
+        alert('수정을 실패하였습니다.');
       }
     });
-
-
   });
 
 </script>
-
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
