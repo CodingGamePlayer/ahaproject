@@ -25,17 +25,24 @@ public class MaterialServiceImp implements MaterialService{
 	// 자재 선택조회
 	@Override
 	public MaterialDTO selectOne(int mt_id) {
+		
 		return materialMapper.selectOne(mt_id);
 	}
+	
+	
+	
 
 	// 자재 글생성
 	@Override
 	public int create(MaterialDTO dto) {
+
 		if(dto.getMt_etc1() == "" || dto.getMt_etc2() == "" || dto.getMt_etc3() == "") {
 			dto.setMt_etc1("None");
 			dto.setMt_etc2("None");
 			dto.setMt_etc3("None");
 		}
+		
+		
 		
 		return materialMapper.create(dto);
 
@@ -58,6 +65,14 @@ public class MaterialServiceImp implements MaterialService{
 	public int delete(int mt_id) {
 		return materialMapper.delete(mt_id);
 	}
+
+	// count
+	@Override
+	public int selectCount() {
+		// TODO Auto-generated method stub
+		return materialMapper.selectCount();
+	}
+
 	
 	
 

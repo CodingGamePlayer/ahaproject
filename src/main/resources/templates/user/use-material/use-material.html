@@ -76,10 +76,20 @@
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${data.um_amount}"></span>
                                     </td>
-                                    <td class="align-middle text-center">
+                                    
+                                    <th:block th:switch="${data.um_regit}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-danger text-danger bg-danger"
+                                                  th:case="false">미사용</span>
+                                            <span class="badge badge-sm border border-success text-success bg-success"
+                                                  th:case="true">사용</span>
+                                        </td>
+                                    </th:block>
+                                    
+                                    <!-- <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${data.um_regit}"></span>
-                                    </td>
+                                    </td> -->
 
                                     <td class="align-middle">
                                         <a href="#" th:onclick="useEditMaterial([[${data.um_id}]])">

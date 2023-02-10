@@ -44,6 +44,10 @@ public interface MaterialMapper {
             @Result(property = "mt_uuid", column = "mt_uuid")}
 	)
 	List<MaterialDTO> listAll(); // 전체조회
+
+	
+	@Select("SELECT count(*) FROM material")
+	int selectCount();
 	
 	@Select("SELECT * FROM material WHERE mt_id = #{mt_id}")
 	@ResultMap("MaterialMap")
@@ -63,5 +67,9 @@ public interface MaterialMapper {
 	
 	@Delete("DELETE FROM `ahaproject`.`material` WHERE mt_id = #{mt_id}")
 	int delete(@Param("mt_id") int mt_id); // 글삭제
+	
+	
+
+
 
 }
