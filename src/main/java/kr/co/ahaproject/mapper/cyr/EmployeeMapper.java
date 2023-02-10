@@ -37,6 +37,9 @@ public interface EmployeeMapper {
     @Select("select emp_id from employee order by emp_id desc limit 1")
     int selectid();
 
+    @Select("select count(*) from employee")
+    int count();
+
     @Insert("insert into employee (cp_name,emp_code,emp_name,emp_joining,emp_regid,emp_tel,emp_email,emp_address,emp_account,emp_uuid,emp_filename,emp_etc1,emp_etc2,emp_etc3, emp_use)" +
             " values (#{cp_name},#{emp_code},#{emp_name},#{emp_joining},#{emp_regid},#{emp_tel},#{emp_email},#{emp_address},#{emp_account},#{emp_uuid},#{emp_filename},#{emp_etc1},#{emp_etc2},#{emp_etc3},#{emp_use})")
     int insert(Employee employee);
