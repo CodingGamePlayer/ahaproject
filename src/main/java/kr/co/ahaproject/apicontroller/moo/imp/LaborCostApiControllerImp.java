@@ -35,7 +35,7 @@ public class LaborCostApiControllerImp implements LaborCostApiController {
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
+// 주석
     @Override
     @ApiOperation(value = "인건비 PUT", notes = "PUT 방식으로 인건비 수정")
     @PutMapping("/laborcost")
