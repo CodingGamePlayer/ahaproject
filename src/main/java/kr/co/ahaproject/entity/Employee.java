@@ -22,8 +22,11 @@ public class Employee {
     String emp_email;
     String emp_address;
     String emp_account;
-    String emp_file;
+    String emp_uuid;
+    String emp_filename;
     String emp_etc1;
     String emp_etc2;
     String emp_etc3;
+    Boolean emp_use;
+
 }
