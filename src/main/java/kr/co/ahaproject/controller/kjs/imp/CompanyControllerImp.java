@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.ahaproject.controller.kjs.CompanyController;
 import kr.co.ahaproject.dto.CompanyDTO;
-import kr.co.ahaproject.entity.Company;
 import kr.co.ahaproject.service.kjs.imp.CompanyServiceImp;
 import lombok.extern.slf4j.Slf4j;
 

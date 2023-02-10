@@ -3,6 +3,7 @@ package kr.co.ahaproject.service.mskim.imp;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import kr.co.ahaproject.service.mskim.CardService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,13 +11,11 @@ import org.springframework.stereotype.Service;
 import kr.co.ahaproject.dto.CardDTO;
 import kr.co.ahaproject.entity.Card;
 import kr.co.ahaproject.mapper.mskim.CardMapper;
-import kr.co.ahaproject.service.kjs.imp.MisuServiceImp;
-import kr.co.ahaproject.service.mskim.CardService;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class CardServiceImpl implements CardService{
+public class CardServiceImpl implements CardService {
 	
 	@Autowired
 	private CardMapper cardMapper;

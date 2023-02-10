@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.ahaproject.dto.ClientDTO;
-import kr.co.ahaproject.dto.MisuDTO;
 import kr.co.ahaproject.entity.Client;
-import kr.co.ahaproject.entity.Misu;
 import kr.co.ahaproject.mapper.kjs.ClientMapper;
 import kr.co.ahaproject.service.kjs.ClientService;
 import lombok.extern.slf4j.Slf4j;

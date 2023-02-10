@@ -12,7 +12,10 @@ public interface MachineService {
 
     int update(MachineDTO machineDTO);
 
+    MachineDTO findById(MachineDTO machineDTO);
 
-   Integer getm_code();
+    Integer getm_code();
+
+    int delete(MachineDTO machineDTO);
 
 }
