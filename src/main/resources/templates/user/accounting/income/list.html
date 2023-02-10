@@ -38,9 +38,9 @@
                         <table class="table align-items-center mb-0">
                             <thead class="bg-gray-100">
                             <tr>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">회사명</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처코드</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사코드</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">회사명</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 공급가액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 합계금액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 지급액</th>
@@ -53,15 +53,15 @@
                                 <tr>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${ioDTO.cp_name}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${ioDTO.cl_code}"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${ioDTO.cst_code}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${ioDTO.cp_name}"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
@@ -91,7 +91,7 @@
                                         function editIncome(id){
                                             let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-                                            window.open("/user/income-edit?io_id=" + id, "_blank", option);
+                                            window.open("/user/accounting/income-edit?io_id=" + id, "_blank", option);
                                         }
                                     </script>
                                 </tr>
