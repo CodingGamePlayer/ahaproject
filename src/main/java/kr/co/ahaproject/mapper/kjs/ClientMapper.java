@@ -30,7 +30,7 @@ public interface ClientMapper {
 
     
 //    고객 리스트
-    @Select("SELECT * FROM client")
+    @Select("SELECT * FROM client order by cl_id desc")
     @Results(id = "clientMap", value = {
     		@Result(property = "cl_id", column = "cl_id"),
             @Result(property = "cp_name", column = "cp_name"),
@@ -77,6 +77,6 @@ public interface ClientMapper {
   int delete(@Param("client") Client client);
   
 // 거래처 코드
-  @Select ("select max(cl_id)+1 from ahaproject.client")
+  @Select ("select ifnull(max(cl_id)+1, 0) from ahaproject.client")
   int maxNum();
 }

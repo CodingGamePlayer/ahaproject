@@ -18,7 +18,7 @@ import java.util.List;
 public interface CompanyMapper {
 
 //	전체조회
-    @Select("SELECT * FROM company")
+    @Select("SELECT * FROM company oder by cp_id desc")
     @Results(id = "companyMap", value = {
             @Result(property = "cp_id", column = "cp_id"),
             @Result(property = "cp_name", column = "cp_name"),
