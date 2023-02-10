@@ -59,6 +59,7 @@ public class IncomeControllerImp implements IncomeController {
     public String test1(IncomeOutcomeDTO ioDTO, Model model) {
         IncomeOutcomeDTO ioDTO1 = incomeService.selectRecent(ioDTO);
         System.out.println(ioDTO1.getIo_id());
+        // gkgkgk
         if(ioDTO1.getIo_id()==null) {
             ioDTO.setIn_total_value(ioDTO.getIn_supp_value());
             ioDTO.setIn_collect_remain(ioDTO.getIn_supp_value() - ioDTO.getIn_collect_value());
