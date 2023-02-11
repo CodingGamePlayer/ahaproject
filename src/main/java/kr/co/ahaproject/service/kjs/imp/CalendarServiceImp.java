@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,5 +30,17 @@ public class CalendarServiceImp implements CalendarService {
                 .collect(Collectors.toList());
 
         return calendarDTOS;
+    }
+
+    @Override
+    public Map<String, Integer> countRent() {
+
+        Map<String, Integer> map = new HashMap<>();
+        int[] jangbi;
+        int[] pojang;
+
+
+
+        return null;
     }
 }
