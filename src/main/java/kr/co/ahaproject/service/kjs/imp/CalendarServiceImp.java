@@ -1,6 +1,7 @@
 package kr.co.ahaproject.service.kjs.imp;
 
 import kr.co.ahaproject.dto.CalendarDTO;
+import kr.co.ahaproject.dto.CountMachRentDTO;
 import kr.co.ahaproject.dto.MachRentDTO;
 import kr.co.ahaproject.service.kjs.CalendarService;
 import kr.co.ahaproject.service.moo.MachRentService;
@@ -8,9 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,14 +33,50 @@ public class CalendarServiceImp implements CalendarService {
     }
 
     @Override
-    public Map<String, Integer> countRent() {
+    public List<CountMachRentDTO> countRent() {
+        List<CalendarDTO> calendarDTOS = selectAll();
 
-        Map<String, Integer> map = new HashMap<>();
-        int[] jangbi;
-        int[] pojang;
+        List<String> yearArr = new ArrayList<>();
+        List<CountMachRentDTO> resultDTOS = new ArrayList<>();
+
+        for (int i = 0; i < calendarDTOS.size(); i++) {
+            String year = calendarDTOS.get(i).getStart().substring(0, 4);
+
+            if (!yearArr.contains(year)) {
+                yearArr.add(year);
+            }
+        }
+
+//        log.info(yearArr.toString());
+
+        List<CountMachRentDTO> machRentDTOList = yearArr.stream()
+                .map(s -> new CountMachRentDTO(s))
+                .collect(Collectors.toList());
+
+//        log.info(machRentDTOList.toString());
+
+        for (int i = 0; i < calendarDTOS.size(); i++) {
+            String year = calendarDTOS.get(i).getStart().substring(0, 4);
+            String month = calendarDTOS.get(i).getStart().substring(5, 7);
+
+            for (int j = 0; j < machRentDTOList.size(); j++) {
+                if (machRentDTOList.get(j).getYear().equals(year)) {
+                    machRentDTOList.get(j).increaseCount(month);
+                }
+            }
+        }
+
+        for (int i = 0; i < machRentDTOList.size(); i++) {
+            if (machRentDTOList.get(i).getYear().equals("2023")){
+                resultDTOS.add(machRentDTOList.get(i));
+            }
+        }
+
+//        machRentDTOList.forEach(countMachRentDTO -> log.info(String.valueOf(countMachRentDTO)));
+//        resultDTOS.forEach(countMachRentDTO -> log.info(String.valueOf(countMachRentDTO)));
+//        log.info((String) map.get("2023"));
 
 
-
-        return null;
+        return resultDTOS;
     }
 }
