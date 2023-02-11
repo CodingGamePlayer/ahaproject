@@ -30,10 +30,12 @@ public class MachRentServiceImp implements MachRentService {
         String rent_start = new AhaCommonMethod().changeDate(machRentDTO.getRent_start());
         String rent_end = new AhaCommonMethod().changeDate(machRentDTO.getRent_end());
         String rent_collect_date = new AhaCommonMethod().changeDate(machRentDTO.getRent_collect_date());
+        String rent_bill_date = new AhaCommonMethod().changeDate(machRentDTO.getRent_bill_date());
 
         machRentDTO.setRent_start(rent_start);
         machRentDTO.setRent_end(rent_end);
         machRentDTO.setRent_collect_date(rent_collect_date);
+        machRentDTO.setRent_bill_date(rent_bill_date);
 
         int result = machrentMapper.register(modelMapper.map(machRentDTO, MachRent.class));
 
@@ -57,10 +59,12 @@ public class MachRentServiceImp implements MachRentService {
         String rent_start = new AhaCommonMethod().changeDate(machRentDTO.getRent_start());
         String rent_end = new AhaCommonMethod().changeDate(machRentDTO.getRent_end());
         String rent_collect_date = new AhaCommonMethod().changeDate(machRentDTO.getRent_collect_date());
+        String rent_bill_date = new AhaCommonMethod().changeDate(machRentDTO.getRent_bill_date());
 
         machRentDTO.setRent_start(rent_start);
         machRentDTO.setRent_end(rent_end);
         machRentDTO.setRent_collect_date(rent_collect_date);
+        machRentDTO.setRent_bill_date(rent_bill_date);
 
         MachRent machRent = modelMapper.map(machRentDTO, MachRent.class);
         int update = machrentMapper.update(machRent);

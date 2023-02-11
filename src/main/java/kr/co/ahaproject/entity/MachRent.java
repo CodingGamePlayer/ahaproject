@@ -12,9 +12,10 @@ import lombok.NoArgsConstructor;
 public class MachRent {
 
     Long rent_id;
-    String cst_name;
+    String cst_code;
     String rent_start;
     String rent_end;
+    String rent_bill_date;
     String m_name;
     Long rent_supp_value;
     Long rent_tax;
@@ -23,4 +24,5 @@ public class MachRent {
     Long rent_misu;
     Boolean rent_regit;
     String rent_etc;
+    String rent_type;
 }

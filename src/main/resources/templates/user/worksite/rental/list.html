@@ -38,11 +38,13 @@
                         <table class="table align-items-center mb-0">
                             <thead class="bg-gray-100">
                             <tr>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7">장비명</th>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">공사명</th>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7">임대구분</th>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">공사코드</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">렌트 시작일
                                 </th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">렌트 종료일</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">견적서 발행일</th>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7">장비명</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공급가액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">세액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금일자</th>
@@ -64,13 +66,13 @@
                                             </div>
                                             <div class="d-flex flex-column justify-content-center ms-1">
                                                 <span class="text-secondary text-sm font-weight-normal"
-                                                      th:text="${machRent.m_name}"/>
+                                                      th:text="${machRent.rent_type}"/>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${machRent.cst_name}"/>
+                                              th:text="${machRent.cst_code}"/>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-sm font-weight-normal"
@@ -79,6 +81,14 @@
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${machRent.rent_end}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machRent.rent_bill_date}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machRent.m_name}"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
