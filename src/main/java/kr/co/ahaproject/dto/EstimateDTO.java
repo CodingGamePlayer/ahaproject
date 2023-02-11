@@ -1,4 +1,4 @@
-package kr.co.ahaproject.entity;
+package kr.co.ahaproject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Estimate {
+public class EstimateDTO {
 
     Long es_id;
     String es_code;
@@ -21,5 +21,6 @@ public class Estimate {
     String us_id;
     String es_etc1;
     String es_etc2;
+
 
 }

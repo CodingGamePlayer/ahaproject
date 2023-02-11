@@ -7,6 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface MachrentMapper {
+
     @Insert("INSERT INTO `ahaproject`.`mach_rent` (`cst_name`,`rent_start`, `rent_end`, `rent_bill_date`, `m_name`,`rent_supp_value`,`rent_tax`,`rent_collect_date`,`rent_collect_value`,`rent_misu`,`rent_etc`, `rent_regit`)" +
     "VALUES (#{machRent.cst_name}, #{machRent.rent_start}, #{machRent.rent_end}, #{machRent.rent_bill_date}, #{machRent.m_name}, #{machRent.rent_supp_value}, #{machRent.rent_tax}, #{machRent.rent_collect_date}, #{machRent.rent_collect_value}, #{machRent.rent_misu}, #{machRent.rent_etc}, #{machRent.rent_regit})")
     int register(@Param("machRent") MachRent machRent);
@@ -35,6 +36,7 @@ public interface MachrentMapper {
     @Update("UPDATE `ahaproject`.`mach_rent` SET " +
             "`cst_name` = #{machRent.cst_name}, `rent_start` = #{machRent.rent_start}, `rent_end` = #{machRent.rent_end}, " +
             "`rent_bill_date` = #{machRent.rent_bill_date}, `m_name` = #{machRent.m_name}, `rent_supp_value` = #{machRent.rent_supp_value}, " +
+            "`m_name` = #{machRent.m_name}, `rent_supp_value` = #{machRent.rent_supp_value}, " +
             "`rent_tax` = #{machRent.rent_tax}, `rent_collect_date` = #{machRent.rent_collect_date}, `rent_collect_value` = #{machRent.rent_collect_value}, " +
             "`rent_misu` = #{machRent.rent_misu}, `rent_etc` = #{machRent.rent_etc}, `rent_regit` = #{machRent.rent_regit} WHERE `rent_id` = #{machRent.rent_id}")
     int update(@Param("machRent") MachRent machRent);

@@ -37,13 +37,15 @@ public interface EmployeeMapper {
     @Select("select emp_id from employee order by emp_id desc limit 1")
     int selectid();
 
+    @Select("select count(*) from employee")
+    int count();
+
     @Insert("insert into employee (cp_name,emp_code,emp_name,emp_joining,emp_regid,emp_tel,emp_email,emp_address,emp_account,emp_uuid,emp_filename,emp_etc1,emp_etc2,emp_etc3, emp_use)" +
-            " values (#{cp_name},#{emp_code},#{emp_name},#{emp_joining},#{emp_regid},#{emp_tel},#{emp_email},#{emp_address},#{emp_account},#{emp_uuid},#{emp_filename},#{emp_etc1},#{emp_etc2},#{emp_etc3},#{emp_use})")
+            " values (#{cp_name},#{emp_code},#{emp_name},#{emp_joining},#{emp_regid},#{emp_tel},#{emp_email},#{emp_address},#{emp_account},#{emp_uuid},#{emp_filename},#{emp_etc1},#{emp_etc2},#{emp_etc3},'true')")
     int insert(Employee employee);
 
-    @Update("update employee set emp_code=#{emp_code},emp_name=#{emp_name},emp_regid=#{emp_regid},emp_joining=#{emp_joining},emp_tel=#{emp_tel},emp_email=#{emp_email}," +
-            "emp_address=#{emp_address},emp_account=#{emp_account},emp_uuid=#{emp_uuid},emp_filename=#{emp_filename},emp_etc1=#{emp_etc1},emp_etc2=#{emp_etc2},emp_etc3=#{emp_etc3},emp_use=#{emp_use}" +
-            "where emp_id=#{emp_id}")
+    @Update("update employee set cp_name=#{cp_name},emp_code=#{emp_code},emp_name=#{emp_name},emp_regid=#{emp_regid},emp_joining=#{emp_joining},emp_tel=#{emp_tel},emp_email=#{emp_email}," +
+            "emp_address=#{emp_address},emp_account=#{emp_account},emp_uuid=#{emp_uuid},emp_filename=#{emp_filename},emp_etc1=#{emp_etc1},emp_etc2=#{emp_etc2},emp_etc3=#{emp_etc3},emp_use=#{emp_use} where emp_id=#{emp_id}")
     int update(Employee employee);
 
     @Delete("delete from employee where emp_id=#{emp_id}")
