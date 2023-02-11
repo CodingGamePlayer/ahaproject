@@ -23,9 +23,16 @@
                     <div class="d-sm-flex align-items-center">
                         <div>
                             <h6 class="font-weight-semibold text-lg mb-0">매입 현황</h6>
-                            <p class="text-sm">매입별 현황 전체보기</p>
+                            <p class="text-sm">매입 현황 전체보기</p>
                         </div>
-                        <div class="ms-auto d-flex">
+                        <div class="ms-auto d-flex col-sm-2">
+                            <select class="form-select" aria-label="Default select example" id="cl_code">
+                                <th:block th:each="client : ${clientDTOs}">
+                                    <option th:value="${client.cl_code}">[[${client.cp_name}]]</option>
+                                   <!-- <a th:href="@{/user/accounting/income/${client.cl_code}}">
+                                    </a> -->
+                                </th:block>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -34,13 +41,16 @@
                         <table class="table align-items-center mb-0">
                             <thead class="bg-gray-100">
                             <tr>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">회사명</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처코드</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사코드</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">회사명</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처명</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사명</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 날짜</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 내용</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 공급가액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 합계금액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 지급액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 잔액</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">지급완료여부</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                             </thead>
@@ -56,6 +66,12 @@
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.cst_code}"/>
                                     </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.io_date}"/>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.io_content}"/>
+                                    </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.in_supp_value}"/>
                                     </td>
@@ -68,6 +84,16 @@
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.in_collect_remain}"/>
                                     </td>
+                                    <th:block th:if="${ioDTO.in_collect_remain == 0}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-success text-success bg-success">완료</span>
+                                        </td>
+                                    </th:block>
+                                    <th:block th:unless="${ioDTO.in_collect_remain == 0}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-danger text-danger bg-danger">미완료</span>
+                                        </td>
+                                    </th:block>
 
                                     <td class="align-middle">
                                         <a href="#" th:onclick="editIncome([[${ioDTO.io_id}]])">
