@@ -28,6 +28,11 @@ public class LaborCostControllerImp implements LaborCostController {
     }
 
     @Override
+    public String delete(Model model) {
+        return null;
+    }
+
+    @Override
     public String register(Model model) {
         return null;
     }

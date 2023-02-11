@@ -43,9 +43,10 @@
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">렌트 시작일
                                 </th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">렌트 종료일</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">견적서 발행일</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공급가액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">세액</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금일자</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금일</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">미수금
                                 </th>
@@ -79,6 +80,10 @@
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${machRent.rent_end}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machRent.rent_bill_date}"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
