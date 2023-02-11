@@ -21,7 +21,7 @@ public interface LaborCostMapper {
     List<LaborCost> selectAll();
 
     @Select("SELECT * FROM labor_cost WHERE lc_id = #{laborCost.lc_id}")
-    @ResultMap("laborCost")
+    @ResultMap("laborCostMap")
     LaborCost findById(@Param("laborCost") LaborCost laborCost);
 
     @Update("UPDATE lobor_cost SET emp_name = #{emp_name}, cp_name = #{cp_name}, cst_name = #{cst_name}, lc_value = #{lc_value}, lc_date = #{lc_date}")
