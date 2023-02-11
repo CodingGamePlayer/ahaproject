@@ -35,9 +35,13 @@ public class CalendarServiceImp implements CalendarService {
     @Override
     public Map<String, Integer> countRent() {
 
-        Map<String, Integer> map = new HashMap<>();
-        int[] jangbi;
-        int[] pojang;
+        Map<String, List> map = new HashMap<>();
+
+
+
+        for(int i=1; i <= 12; i++){
+
+        }
 
 
 

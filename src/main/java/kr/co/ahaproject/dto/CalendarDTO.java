@@ -25,7 +25,7 @@ public class CalendarDTO {
 
         CalendarDTO calendarDTO = new CalendarDTO();
 
-        calendarDTO.setTitle(machRentDTO.getCst_name() + "-" + machRentDTO.getM_name());
+        calendarDTO.setTitle(machRentDTO.getCst_code() + "-" + machRentDTO.getM_name());
         calendarDTO.setStart(machRentDTO.getRent_start());
         calendarDTO.setEnd(machRentDTO.getRent_end());
 
