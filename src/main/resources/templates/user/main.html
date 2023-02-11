@@ -19,14 +19,14 @@
     <div class="row">
         <div class="col-md-3">
             <div class="card ">
-                <div class="card border shadow-xs pb-4">
+                <div class="card border shadow-xs mt-3">
 
                     <div class="card-body p-5">
                         <div class="card-title text-center ">
-                            <h4>월별 장비대여 횟수</h4>
+                            <h4>월별 장비대여 건수</h4>
                         </div>
 
-                        <div class="card border shadow-x mt-5">
+                        <div class="card border shadow-x mt-4">
                             <div class="card-body">
                                 <div class="table-responsive p-0">
                                     <table class="table align-items-center mb-0">
@@ -42,42 +42,240 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <th:block th:each="num : ${#numbers.sequence(1,12)}">
+                                        <th:block th:with="jangBi = ${rentDTOs.get(0)}">
                                             <tr>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="${num}"/>
-                                                    <span>월</span>
+                                                          th:text="1월"/>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="2"/>
+                                                          th:text="${jangBi.getJanuary()}"/>
                                                     <span>건</span>
 
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="3"/>
-                                                    <span>건</span>
+                                                          th:text="0건"/>
+                                                    <span></span>
 
                                                 </td>
                                             </tr>
-                                        </th:block>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="2월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getFebruary()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="3월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getMarch()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="4월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getApril()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="5월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getMay()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="6월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getJune()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="7월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getJuly()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="8월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getAugust()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="9월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getSeptember()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="10월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getOctober()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="11월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getNovember()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="12월"/>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="${jangBi.getDecember()}"/>
+                                                    <span>건</span>
+
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-sm font-weight-normal"
+                                                          th:text="0건"/>
+                                                    <span></span>
+
+                                                </td>
+                                            </tr>
+
                                         <tr>
                                             <td class="align-middle text-center">
                                                 <span class="text-secondary text-sm font-weight-normal"/>
                                                 총합</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-sm font-weight-normal" th:text="24"/>
+                                                <span class="text-secondary text-sm font-weight-normal" th:text="${jangBi.total}"/>
                                                 <span>건</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-sm font-weight-normal" th:text="36"/>
+                                                <span class="text-secondary text-sm font-weight-normal" th:text="0"/>
                                                 <span>건</span>
 
                                             </td>
                                         </tr>
+                                        </th:block>
                                         </tbody>
                                     </table>
 
@@ -94,7 +292,7 @@
             <div class="card">
                 <div class="card border shadow-xs ">
                     <div class="card-body p-5">
-                        <div class="card-title text-center">
+                        <div class="card-title text-center mb-4">
                             <h4>장비대여 현황(캘린더)</h4>
                         </div>
                         <div id='calendar'></div>

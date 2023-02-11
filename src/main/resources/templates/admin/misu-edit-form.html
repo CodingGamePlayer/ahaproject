@@ -37,7 +37,7 @@
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">미수금 등록</h5>
+        <h5 class="card-title mt-3 mb-3">미수금 수정</h5>
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
@@ -190,7 +190,7 @@
 
 <script>
 
-<!--    이미지 파일을 사용하기 위한 JS-->
+// <!--    이미지 파일을 사용하기 위한 JS-->
     /*<![CDATA[*/
     let input_UUID = "[[${misuDTO.misu_uuid}]]";
     let input_Filename= "[[${misuDTO.misu_filename}]]";
@@ -231,15 +231,21 @@
         input_UUID = uuid;
         input_Filename = fileName;
         const str =
-            `<div class="card col-10 ">
-            <div class="card-header ">
-                ${fileName}
-                <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+            `
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12">
+                    <div class="card border shadow-x mb-4">
+                        <div class="card-header d-flex justify-content-between">
+                            ${fileName}
+                            <button class="btn btn-sm btn-primary"  onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+                        </div>
+                        <div class="card-body">
+                             <img style="width: 300px; height: 100px;" src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                 <img src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
-            </div>
-        </div><!-- card -->`
+        <!-- card -->`
 
         uploadResult.innerHTML += str
     }
