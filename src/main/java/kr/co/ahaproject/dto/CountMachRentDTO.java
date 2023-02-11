@@ -28,6 +28,8 @@ public class CountMachRentDTO {
     int november;
     int december;
 
+    int total;
+
     public CountMachRentDTO(String year) {
         this.year = year;
     }
@@ -72,6 +74,14 @@ public class CountMachRentDTO {
                 break;
 
         }
+        sumAll();
+    }
+
+    void sumAll () {
+        this.total = january + february + march +
+                    april + may + june + july +
+                    august + september + october +
+                    november + december;
     }
 
 
