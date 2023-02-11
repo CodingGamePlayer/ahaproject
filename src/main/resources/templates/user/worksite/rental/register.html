@@ -41,10 +41,19 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*공사명</label>
-                    <select class="form-select" aria-label="Default select example" id="cst_name">
+                    <label class="form-control-label">*임대구분</label>
+                    <select class="form-select" aria-label="Default select example" id="rent_type">
+                        <option value="장비">장비</option>
+                        <option value="포장" selected>포장</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*공사코드</label>
+                    <select class="form-select" aria-label="Default select example" id="cst_code">
                         <th:block th:each="const : ${constructionDTOs}">
-                            <option th:value="${const.cst_name}">[[${const.cst_name}]]</option>
+                            <option th:value="${const.cst_code}">[[${const.cst_code}]]</option>
                         </th:block>
                     </select>
                 </div>
@@ -160,7 +169,8 @@
         const machineSubmitBtn = document.querySelector('#machineSubmitBtn');
 
         machineSubmitBtn.addEventListener("click", () => {
-            const input_cst_name = document.querySelector('#cst_name').value;
+            const input_rent_type = document.querySelector('#rent_type').value;
+            const input_cst_code = document.querySelector('#cst_code').value;
             const input_rent_start = document.querySelector('#datetimepicker2Input').value;
             const input_rent_end = document.querySelector('#datetimepicker3Input').value;
             const input_rent_bill_date = document.querySelector('#datetimepicker4Input').value;
@@ -174,7 +184,8 @@
             const input_rent_etc = document.querySelector('#rent_etc').value;
 
             const machine1 = {
-                cst_name: input_cst_name,
+                rent_type: input_rent_type,
+                cst_code: input_cst_code,
                 rent_start: input_rent_start,
                 rent_end: input_rent_end,
                 rent_bill_date: input_rent_bill_date,
@@ -188,7 +199,7 @@
                 rent_etc: input_rent_etc
             };
 
-            if (input_cst_name == "" || input_rent_start == "" || input_rent_end == "" || input_rent_bill_date == "" || input_m_name == "" ||
+            if (input_rent_type == "" || input_cst_code == "" || input_rent_start == "" || input_rent_end == "" || input_rent_bill_date == "" || input_m_name == "" ||
                 input_rent_supp_value == "" || input_rent_tax == "" || input_rent_collect_date == "" ||
                 input_rent_collect_value == "" || input_rent_misu == "") {
                 alert('*이 있는 칸은 채워주시기 바랍니다.')
