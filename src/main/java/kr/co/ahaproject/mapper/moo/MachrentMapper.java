@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface MachrentMapper {
 
-    @Insert("INSERT INTO `ahaproject`.`mach_rent` (`cst_code`,`rent_start`, `rent_end`, `rent_bill_date`, `m_name`,`rent_supp_value`,`rent_tax`,`rent_collect_date`,`rent_collect_value`,`rent_misu`,`rent_etc`, `rent_regit`, rent_type)" +
+@Insert("INSERT INTO `ahaproject`.`mach_rent` (`cst_code`,`rent_start`, `rent_end`, `rent_bill_date`, `m_name`,`rent_supp_value`,`rent_tax`,`rent_collect_date`,`rent_collect_value`,`rent_misu`,`rent_etc`, `rent_regit`, rent_type)" +
     "VALUES (#{machRent.cst_code}, #{machRent.rent_start}, #{machRent.rent_end}, #{machRent.rent_bill_date}, #{machRent.m_name}, #{machRent.rent_supp_value}, #{machRent.rent_tax}, #{machRent.rent_collect_date}, #{machRent.rent_collect_value}, #{machRent.rent_misu}, #{machRent.rent_etc}, #{machRent.rent_regit}, #{machRent.rent_type})")
     int register(@Param("machRent") MachRent machRent);
 
