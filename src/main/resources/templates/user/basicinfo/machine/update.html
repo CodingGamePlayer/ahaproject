@@ -59,14 +59,21 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <div class="form-group">*타입</label>
+                <div class="form-group">
+                    <label class="form-control-label">*타입</label>
                     <input class="form-control" type="text" id="m_type" th:value="${machine.m_type}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
+                    <label class="form-control-label">*종류</label>
+                    <input class="form-control" type="text" id="m_kind" th:value="${machine.m_kind}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
                     <label class="form-control-label">*매입액</label>
-                    <input class="form-control" type="text" id="m_price" th:value="${machine.m_price}">
+                    <input class="form-control" type="text" id="m_price" th:value="${machine.m_price}" onkeyup="calculateTax()">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -163,9 +170,23 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/upload.js"></script>
 
+
+<!--세금 자동계산 JS-->
+<script>
+    function calculateTax(){
+        const price = document.querySelector("#m_price").value;
+        const target = document.querySelector("#m_tax");
+        const tax = price * 0.1;
+        console.log(price);
+        console.log(target);
+        console.log(`tax = ${tax}`);
+        target.value = Math.floor(tax);
+    }
+</script>
+
 <script>
 
-<!--    이미지 파일을 사용하기 위한 JS-->
+// <!--    이미지 파일을 사용하기 위한 JS-->
     /*<![CDATA[*/
     let input_UUID = "[[${machine.m_uuid}]]";
     let input_Filename = "[[${machine.m_filename}]]";
@@ -294,6 +315,7 @@
         const input_m_name = document.querySelector('#m_name').value;
         const input_m_equip_num = document.querySelector('#m_equip_num').value;
         const input_m_type = document.querySelector('#m_type').value;
+        const input_m_kind = document.querySelector('#m_kind').value;
         const input_m_price = document.querySelector('#m_price').value;
         const input_m_tax = document.querySelector('#m_tax').value;
         const input_m_date = document.querySelector('#datetimepicker1Input').value;
@@ -307,6 +329,7 @@
             m_name: input_m_name,
             m_equip_num: input_m_equip_num,
             m_type: input_m_type,
+            m_kind: input_m_kind,
             m_price: input_m_price,
             m_tax: input_m_tax,
             m_date: input_m_date,

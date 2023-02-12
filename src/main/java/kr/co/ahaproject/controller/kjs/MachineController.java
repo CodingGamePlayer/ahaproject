@@ -12,4 +12,7 @@ public interface MachineController {
 
     // 장비정보 수정
     String update(MachineDTO machineDTO, Model model);
+
+    String image(MachineDTO machineDTO, Model model);
+
 }

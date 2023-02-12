@@ -54,4 +54,14 @@ public class MachineControllerImp implements MachineController {
 
         return "user/basicinfo/machine/update";
     }
+
+    @Override
+    @GetMapping("/basicinfo/machine/image")
+    public String image(MachineDTO machineDTO, Model model) {
+
+        MachineDTO result = machineService.findById(machineDTO);
+
+        model.addAttribute("machineDTO", result);
+        return "user/basicinfo/machine/image";
+    }
 }
