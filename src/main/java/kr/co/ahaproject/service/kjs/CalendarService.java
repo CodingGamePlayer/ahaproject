@@ -10,5 +10,5 @@ public interface CalendarService {
     List<CalendarDTO> selectAll(String kind);
     List<CalendarDTO> selectAllWithoutKind();
 
-    CountMachRentDTO countRent(String kind);
+    CountMachRentDTO countRent(String requestYear,String kind);
 }

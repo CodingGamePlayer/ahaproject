@@ -14,6 +14,7 @@ public class CalendarDTO {
     String title;
     String start;
     String end;
+    String url ="http://localhost:9000/user/worksite/rental" ;
     final String textColor = "black";
     final boolean allDay = true;
 

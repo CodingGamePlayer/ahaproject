@@ -31,9 +31,9 @@ class CalendarServiceImpTest {
     @Test
     void countRent() {
 
-        String kind = "포장";
+        String kind = "장비";
 
-        CountMachRentDTO rentDTOS = calendarService.countRent(kind);
+        CountMachRentDTO rentDTOS = calendarService.countRent("2022",kind);
 
        log.info(String.valueOf(rentDTOS));
 
