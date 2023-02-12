@@ -71,6 +71,9 @@ public class IncomeServiceImp implements IncomeService {
 
     @Override
     public int update(IncomeOutcomeDTO ioDTO) {
+        String after = new AhaCommonMethod().changeDate(ioDTO.getIo_date());
+        ioDTO.setIo_date(after);
+
         IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
 
         int result = incomeMapper.update(io);

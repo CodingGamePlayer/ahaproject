@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/user/accounting")
 public class IncomeControllerImp implements IncomeController {
@@ -60,11 +62,16 @@ public class IncomeControllerImp implements IncomeController {
     @Override
     @GetMapping ("/incomeclcode/{cl_code}")
     public String findByClcode(@PathVariable String cl_code, Model model) {
+        List<IncomeOutcomeDTO> list = incomeService.findByClcode(cl_code);
+        if(list.isEmpty()){
+            model.addAttribute("msg","조회할 데이터가 없습니다.");
+        }
 
-        model.addAttribute("ioDTOs", incomeService.findByClcode(cl_code));
-
-        return "user/accounting/income/";
+        model.addAttribute("ioDTOs", list);
+        model.addAttribute("clientDTOs", clientService.selectAll());
+        return "user/accounting/income/list";
     }
+
 
 
 }

@@ -56,7 +56,7 @@
                     <select class="form-select" aria-label="Default select example" id="cl_code">
                         <option th:text="${ioDTO.cl_code}" selected></option>
                         <th:block th:each="client : ${clientDTOs}">
-                            <option th:value="${client.cl_code}" >[[${client.cp_name}]]</option>
+                            <option th:value="${client.cp_name}" >[[${client.cp_name}]]</option>
                         </th:block>
                     </select>
                 </div>
@@ -67,7 +67,7 @@
                     <select class="form-select" aria-label="Default select example" id="cst_code">
                         <option th:text="${ioDTO.cst_code}" selected></option>
                         <th:block th:each="const : ${constructionDTOs}">
-                            <option th:value="${const.cst_code}" >[[${const.cst_name}]]</option>
+                            <option th:value="${const.cst_name}" >[[${const.cst_name}]]</option>
                         </th:block>
                     </select>
                 </div>
@@ -147,6 +147,7 @@
 
 
     incomeSubmitBtn.addEventListener("click", () => {
+        const input_io_id = urlParams.get('io_id');
         const input_cp_name = document.querySelector('#cp_name').value;
         const input_cl_code = document.querySelector('#cl_code').value;
         const input_cst_code = document.querySelector('#cst_code').value;
@@ -157,6 +158,7 @@
 
 
         const income1 = {
+            io_id : input_io_id,
             cp_name : input_cp_name,
             cl_code : input_cl_code,
             cst_code : input_cst_code,

@@ -100,47 +100,46 @@
                                           th:text="${ioDTO.cst_code}"/>
                                 </td>
                             </th:block>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-sm font-weight-normal"
-                                      th:text="${ioDTO.out_supp_value}"/>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-sm font-weight-normal"
-                                      th:text="${ioDTO.out_collect_value}"/>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-sm font-weight-bold"
-                                      th:text="${ioDTO.out_collect_remain}"/>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-sm font-weight-normal"
-                                      th:text="${ioDTO.in_supp_value}"/>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-sm font-weight-normal"
-                                      th:text="${ioDTO.in_collect_value}"/>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-sm font-weight-bold"
-                                      th:text="${ioDTO.in_collect_remain}"/>
-                            </td>
-                            <th:block
-                                    th:if="${ioDTO.cst_code != null and ioDTO.cl_code != null and ioDTO.cp_name != null}">
-                                <th:block th:if="${ioDTO.out_collect_remain == 0 and ioDTO.in_collect_remain == 0}">
-                                    <td class="align-middle text-center">
-                                        <span class="badge badge-sm border border-success text-success bg-success">완료</span>
-                                    </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-normal"
+                                          th:text="${ioDTO.out_supp_value}"/>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-normal"
+                                          th:text="${ioDTO.out_collect_value}"/>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-bold"
+                                          th:text="${ioDTO.out_collect_remain}"/>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-normal"
+                                          th:text="${ioDTO.in_supp_value}"/>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-normal"
+                                          th:text="${ioDTO.in_collect_value}"/>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-bold"
+                                          th:text="${ioDTO.in_collect_remain}"/>
+                                </td>
+
+                                <th:block th:if="${ioDTO.cst_code != null and ioDTO.cl_code != null and ioDTO.cp_name != null}">
+                                    <th:block th:if="${ioDTO.out_collect_remain == 0 and ioDTO.in_collect_remain == 0}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-success text-success bg-success">완료</span>
+                                        </td>
+                                    </th:block>
+                                    <th:block th:unless="${ioDTO.out_collect_remain == 0 and ioDTO.in_collect_remain == 0}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-danger text-danger bg-danger">미완료</span>
+                                        </td>
+                                    </th:block>
                                 </th:block>
-                                <th:block th:unless="${ioDTO.out_collect_remain == 0 and ioDTO.in_collect_remain == 0}">
-                                    <td class="align-middle text-center">
-                                        <span class="badge badge-sm border border-danger text-danger bg-danger">미완료</span>
-                                    </td>
+                                <th:block th:unless="${ioDTO.cst_code != null and ioDTO.cl_code != null and ioDTO.cp_name != null}">
+                                    <td class="align-middle text-center"></td>
                                 </th:block>
-                            </th:block>
-                            <th:block
-                                    th:unless="${ioDTO.cst_code != null and ioDTO.cl_code != null and ioDTO.cp_name != null}">
-                                <td class="align-middle text-center"></td>
-                            </th:block>
                             </tr>
                         </th:block>
                         </tbody>
