@@ -30,7 +30,7 @@ public class CalendarApiControllerImp implements CalendarApiController {
 
         Gson gson = new Gson();
 
-        List<CalendarDTO> calendarDTOS = calendarService.selectAll();
+        List<CalendarDTO> calendarDTOS = calendarService.selectAllWithoutKind();
         String jsonList = gson.toJson(calendarDTOS);
 
         return ResponseEntity.status(HttpStatus.OK).body(jsonList);

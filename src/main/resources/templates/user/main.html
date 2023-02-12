@@ -42,7 +42,6 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <th:block th:with="jangBi = ${rentDTOs.get(0)}">
                                             <tr>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
@@ -56,8 +55,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getJanuary()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -74,8 +73,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getFebruary()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -92,8 +91,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getMarch()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -110,8 +109,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getApril()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -128,8 +127,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getMay()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -146,8 +145,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getJune()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -164,8 +163,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getJuly()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -182,8 +181,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getAugust()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -200,8 +199,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getSeptember()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -218,8 +217,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getOctober()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -236,8 +235,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getNovember()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -254,8 +253,8 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
-                                                          th:text="0건"/>
-                                                    <span></span>
+                                                          th:text="${poJang.getDecember()}"/>
+                                                    <span>건</span>
 
                                                 </td>
                                             </tr>
@@ -270,7 +269,7 @@
                                                 <span>건</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-sm font-weight-normal" th:text="0"/>
+                                                <span class="text-secondary text-sm font-weight-normal" th:text="${poJang.total}"/>
                                                 <span>건</span>
 
                                             </td>

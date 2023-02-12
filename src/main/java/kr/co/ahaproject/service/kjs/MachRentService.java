@@ -1,6 +1,7 @@
-package kr.co.ahaproject.service.moo;
+package kr.co.ahaproject.service.kjs;
 
 import kr.co.ahaproject.dto.MachRentDTO;
+import kr.co.ahaproject.dto.MachRentListDTO;
 
 import java.util.List;
 
@@ -14,4 +15,9 @@ public interface MachRentService {
     MachRentDTO findById(MachRentDTO machRentDTO);
 
     int delete(MachRentDTO machRentDTO);
+
+    List<MachRentListDTO> selectAllForList();
+
+    List<MachRentListDTO> selectAllFindByKind(String kind);
+    List<MachRentListDTO> selectAllWithoutKind();
 }

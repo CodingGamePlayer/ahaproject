@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
-
 
 @Slf4j
 @Controller
@@ -18,13 +16,19 @@ import java.util.List;
 public class MainControllerImp implements MainController {
 
     private final CalendarService calendarService;
+    private String kind;
     @Override
     @GetMapping("/")
     public String main(Model model) {
 
-        List<CountMachRentDTO> rentDTOS = calendarService.countRent();
+        kind = "장비";
+        CountMachRentDTO jangbiDTO = calendarService.countRent(kind);
+        kind = "포장";
+        CountMachRentDTO pojangDTO = calendarService.countRent(kind);
 
-        model.addAttribute("rentDTOs", rentDTOS);
+
+        model.addAttribute("jangBi", jangbiDTO);
+        model.addAttribute("poJang", pojangDTO);
 
         return "user/main";
     }

@@ -1,13 +1,13 @@
-package kr.co.ahaproject.controller.moo.imp;
+package kr.co.ahaproject.controller.kjs.imp;
 
-import kr.co.ahaproject.controller.moo.MachRentController;
+import kr.co.ahaproject.controller.kjs.MachRentController;
 import kr.co.ahaproject.dto.ConstructionDTO;
 import kr.co.ahaproject.dto.MachRentDTO;
+import kr.co.ahaproject.dto.MachRentListDTO;
 import kr.co.ahaproject.dto.MachineDTO;
-import kr.co.ahaproject.service.kjs.CompanyService;
 import kr.co.ahaproject.service.kjs.ConstructionService;
-import kr.co.ahaproject.service.moo.MachRentService;
-import kr.co.ahaproject.service.moo.MachineService;
+import kr.co.ahaproject.service.kjs.MachRentService;
+import kr.co.ahaproject.service.kjs.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,9 +33,9 @@ public class MachRentControllerImp implements MachRentController {
     @Override
     @GetMapping("/rental")
     public String list(Model model) {
-        List<MachRentDTO> machRentDTOList = machRentService.selectAll();
+        List<MachRentListDTO> machRentListDTOS = machRentService.selectAllForList();
 
-        model.addAttribute("machRentDTOs",machRentDTOList);
+        model.addAttribute("machRentDTOs",machRentListDTOS);
         return "user/worksite/rental/list";
     }
     

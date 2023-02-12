@@ -17,18 +17,17 @@ public class CalendarDTO {
     final String textColor = "black";
     final boolean allDay = true;
 
-    public CalendarDTO(String title, String start, String end, String textColor, boolean allDay) {
-    }
 
 
-    public CalendarDTO convert(MachRentDTO machRentDTO){
+    public CalendarDTO convert(MachRentListDTO machRentListDTO){
 
         CalendarDTO calendarDTO = new CalendarDTO();
 
-        calendarDTO.setTitle(machRentDTO.getCst_code() + "-" + machRentDTO.getM_name());
-        calendarDTO.setStart(machRentDTO.getRent_start());
-        calendarDTO.setEnd(machRentDTO.getRent_end());
+        calendarDTO.setTitle(machRentListDTO.getCst_name() + "-" + machRentListDTO.getM_name() + "(" + machRentListDTO.getM_kind() + ")");
+        calendarDTO.setStart(machRentListDTO.getRent_start());
+        calendarDTO.setEnd(machRentListDTO.getRent_end());
 
         return calendarDTO;
     }
+
 }

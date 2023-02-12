@@ -1,4 +1,4 @@
-package kr.co.ahaproject.controller.moo;
+package kr.co.ahaproject.controller.kjs;
 
 import kr.co.ahaproject.dto.MachineDTO;
 import org.springframework.ui.Model;
@@ -12,4 +12,7 @@ public interface MachineController {
 
     // 장비정보 수정
     String update(MachineDTO machineDTO, Model model);
+
+    String image(MachineDTO machineDTO, Model model);
+
 }
