@@ -17,4 +17,7 @@ public interface MachRentService {
     int delete(MachRentDTO machRentDTO);
 
     List<MachRentListDTO> selectAllForList();
+
+    List<MachRentListDTO> selectAllFindByKind(String kind);
+    List<MachRentListDTO> selectAllWithoutKind();
 }

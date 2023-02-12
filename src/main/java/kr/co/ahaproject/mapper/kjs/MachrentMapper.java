@@ -52,9 +52,27 @@ public interface MachrentMapper {
     int delete(@Param("machRent")MachRent machRent);
 
     @Select("SELECT A.rent_id, C.cst_name, A.rent_start, A.rent_end, A.rent_bill_date, B.m_name, A.rent_supp_value, " +
-            "A.rent_tax, A.rent_collect_date, A.rent_collect_value, A.rent_misu, A.rent_finished, A.rent_etc " +
+            "A.rent_tax, A.rent_collect_date, A.rent_collect_value, A.rent_misu, A.rent_finished, A.rent_etc, B.m_kind " +
             "FROM mach_rent A JOIN machine B " +
             "ON A.m_code = B.m_code JOIN construction C " +
             "ON A.cst_code = C.cst_code ORDER BY A.rent_id DESC")
     List<MachRentListDTO> selectAllForList();
+
+    @Select("SELECT A.rent_id, C.cst_name, A.rent_start, A.rent_end, A.rent_bill_date, B.m_name, A.rent_supp_value, " +
+            "A.rent_tax, A.rent_collect_date, A.rent_collect_value, A.rent_misu, A.rent_finished, A.rent_etc, B.m_kind " +
+            "FROM mach_rent A JOIN machine B " +
+            "ON A.m_code = B.m_code JOIN construction C " +
+            "ON A.cst_code = C.cst_code " +
+            "WHERE B.m_kind = #{kind} " +
+            "ORDER BY A.rent_id DESC ")
+    List<MachRentListDTO> selectAllFindByKind(String kind);
+
+    @Select("SELECT A.rent_id, C.cst_name, A.rent_start, A.rent_end, A.rent_bill_date, B.m_name, A.rent_supp_value, " +
+            "A.rent_tax, A.rent_collect_date, A.rent_collect_value, A.rent_misu, A.rent_finished, A.rent_etc, B.m_kind " +
+            "FROM mach_rent A JOIN machine B " +
+            "ON A.m_code = B.m_code JOIN construction C " +
+            "ON A.cst_code = C.cst_code " +
+            "ORDER BY A.rent_id DESC ")
+    List<MachRentListDTO> selectAllWithoutKind();
+
 }

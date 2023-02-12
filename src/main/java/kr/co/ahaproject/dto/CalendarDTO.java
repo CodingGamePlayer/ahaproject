@@ -19,14 +19,15 @@ public class CalendarDTO {
 
 
 
-    public CalendarDTO convert(MachRentDTO machRentDTO){
+    public CalendarDTO convert(MachRentListDTO machRentListDTO){
 
         CalendarDTO calendarDTO = new CalendarDTO();
 
-        calendarDTO.setTitle(machRentDTO.getCst_code() + "-" + machRentDTO.getM_code());
-        calendarDTO.setStart(machRentDTO.getRent_start());
-        calendarDTO.setEnd(machRentDTO.getRent_end());
+        calendarDTO.setTitle(machRentListDTO.getCst_name() + "-" + machRentListDTO.getM_name() + "(" + machRentListDTO.getM_kind() + ")");
+        calendarDTO.setStart(machRentListDTO.getRent_start());
+        calendarDTO.setEnd(machRentListDTO.getRent_end());
 
         return calendarDTO;
     }
+
 }

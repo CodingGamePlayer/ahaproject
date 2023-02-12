@@ -105,4 +105,20 @@ public class MachRentServiceImp implements MachRentService {
 
         return machRentListDTOS;
     }
+
+    @Override
+    public List<MachRentListDTO> selectAllFindByKind(String kind) {
+
+        List<MachRentListDTO> machRentListDTOS = machrentMapper.selectAllFindByKind(kind);
+
+        return machRentListDTOS;
+    }
+
+    @Override
+    public List<MachRentListDTO> selectAllWithoutKind() {
+
+        List<MachRentListDTO> machRentListDTOS = machrentMapper.selectAllWithoutKind();
+
+        return machRentListDTOS;
+    }
 }

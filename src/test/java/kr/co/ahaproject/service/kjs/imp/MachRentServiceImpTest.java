@@ -49,4 +49,12 @@ class MachRentServiceImpTest {
 
         machRentListDTOS.forEach(machRentListDTO -> log.info(String.valueOf(machRentListDTO)));
     }
+
+    @Test
+    void selectAllFindByKind() {
+
+        List<MachRentListDTO> machRentListDTOS = machRentService.selectAllFindByKind("포장");
+
+        machRentListDTOS.forEach(machRentListDTO -> log.info(String.valueOf(machRentListDTO)));
+    }
 }

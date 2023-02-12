@@ -17,6 +17,7 @@ public class MachRentListDTO {
     String rent_end;
     String rent_bill_date;
     String m_name;
+    String m_kind;
     Long rent_supp_value;
     Long rent_tax;
     String rent_collect_date;
