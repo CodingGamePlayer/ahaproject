@@ -1,13 +1,10 @@
-package kr.co.ahaproject.service.moo.imp;
+package kr.co.ahaproject.service.kjs.imp;
 
 import kr.co.ahaproject.dto.MachRentDTO;
-import kr.co.ahaproject.dto.MachineDTO;
 import kr.co.ahaproject.entity.MachRent;
-import kr.co.ahaproject.entity.Machine;
-import kr.co.ahaproject.mapper.moo.MachineMapper;
-import kr.co.ahaproject.mapper.moo.MachrentMapper;
+import kr.co.ahaproject.mapper.kjs.MachrentMapper;
 import kr.co.ahaproject.service.AhaCommonMethod;
-import kr.co.ahaproject.service.moo.MachRentService;
+import kr.co.ahaproject.service.kjs.MachRentService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

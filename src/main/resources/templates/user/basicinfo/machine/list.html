@@ -44,13 +44,15 @@
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">규격(제품번호)
                                 </th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">타입</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">종류</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">세액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입일자</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">사용여부</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">사용현황</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고1</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고2</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고3</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7"></th>
 
                             </tr>
                             </thead>
@@ -92,6 +94,10 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${machineDTO.m_kind}"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${machineDTO.m_price}"/>
                                     </td>
                                     <td class="align-middle text-center">
@@ -105,9 +111,9 @@
                                     <th:block th:switch="${machineDTO.m_use}">
                                         <td class="align-middle text-center">
                                             <span class="badge badge-sm border border-danger text-danger bg-danger"
-                                                  th:case="미사용">미사용</span>
+                                                  th:case="0">미사용중</span>
                                             <span class="badge badge-sm border border-success text-success bg-success"
-                                                  th:case="사용">사용</span>
+                                                  th:case="1">사용중</span>
 
                                         </td>
                                     </th:block>

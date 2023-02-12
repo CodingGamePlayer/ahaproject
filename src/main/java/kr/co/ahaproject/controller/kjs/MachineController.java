@@ -1,4 +1,4 @@
-package kr.co.ahaproject.controller.moo;
+package kr.co.ahaproject.controller.kjs;
 
 import kr.co.ahaproject.dto.MachineDTO;
 import org.springframework.ui.Model;

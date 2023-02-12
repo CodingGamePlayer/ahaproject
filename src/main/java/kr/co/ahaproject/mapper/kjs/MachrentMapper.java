@@ -1,4 +1,4 @@
-package kr.co.ahaproject.mapper.moo;
+package kr.co.ahaproject.mapper.kjs;
 
 import kr.co.ahaproject.entity.MachRent;
 import org.apache.ibatis.annotations.*;
