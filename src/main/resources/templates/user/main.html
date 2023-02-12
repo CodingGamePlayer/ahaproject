@@ -23,7 +23,23 @@
 
                     <div class="card-body p-5">
                         <div class="card-title text-center ">
-                            <h4>월별 장비대여 건수</h4>
+                            <h6>
+                                <span class="d-inline-block">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="selectYear"
+                                            onchange="if(this.value) location.href='/?year=' + (this.value)">
+                                        <th:block th:if="${param.year} == null">
+                                            <option th:value="${jangBi.year}">[[${jangBi.year}]]</option>
+                                        </th:block>
+                                        <th:block th:unless="${param.year} == ''">
+                                            <option th:value="${param.year}">[[${param.year}]]</option>
+                                        </th:block>
+                                        <th:block th:each="num : ${#numbers.sequence(2000, 2100)}">
+                                            <option th:value="${num}">[[${num}]]</option>
+                                        </th:block>
+                                    </select>
+                                </span>
+                                년 월별 장비대여 건수
+                            </h6>
                         </div>
 
                         <div class="card border shadow-x mt-4">
@@ -42,222 +58,222 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="1월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getJanuary()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getJanuary()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="2월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getFebruary()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getFebruary()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="3월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getMarch()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getMarch()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="4월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getApril()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getApril()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="5월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getMay()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getMay()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="6월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getJune()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getJune()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="7월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getJuly()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getJuly()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="8월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getAugust()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getAugust()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="9월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getSeptember()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getSeptember()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="10월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getOctober()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getOctober()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="11월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getNovember()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getNovember()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="12월"/>
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${jangBi.getDecember()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                                <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                     <span class="text-secondary text-sm font-weight-normal"
                                                           th:text="${poJang.getDecember()}"/>
-                                                    <span>건</span>
+                                                <span>건</span>
 
-                                                </td>
-                                            </tr>
+                                            </td>
+                                        </tr>
 
                                         <tr>
                                             <td class="align-middle text-center">
@@ -265,11 +281,13 @@
                                                 총합</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-sm font-weight-normal" th:text="${jangBi.total}"/>
+                                                <span class="text-secondary text-sm font-weight-normal"
+                                                      th:text="${jangBi.total}"/>
                                                 <span>건</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-sm font-weight-normal" th:text="${poJang.total}"/>
+                                                <span class="text-secondary text-sm font-weight-normal"
+                                                      th:text="${poJang.total}"/>
                                                 <span>건</span>
 
                                             </td>
@@ -300,9 +318,11 @@
             </div>
         </div>
     </div>
-
+<!--//-->
 </div>
 <script>
+
+
     var calendar = new Calendar(calendarEl, {
         views: {
             dayGrid: {

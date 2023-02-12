@@ -44,7 +44,7 @@ public class CalendarServiceImp implements CalendarService {
     }
 
     @Override
-    public CountMachRentDTO countRent(String kind) {
+    public CountMachRentDTO countRent(String requestYear, String kind) {
         List<CalendarDTO> calendarDTOS = selectAll(kind);
 
         List<String> yearArr = new ArrayList<>();
@@ -77,7 +77,7 @@ public class CalendarServiceImp implements CalendarService {
         }
 
         for (int i = 0; i < countMachRentDTOS.size(); i++) {
-            if (countMachRentDTOS.get(i).getYear().equals("2023")){
+            if (countMachRentDTOS.get(i).getYear().equals(requestYear)){
                 return countMachRentDTOS.get(i);
             }
         }
