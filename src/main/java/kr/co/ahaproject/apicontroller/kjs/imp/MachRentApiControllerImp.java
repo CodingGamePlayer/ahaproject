@@ -21,7 +21,7 @@ public class MachRentApiControllerImp implements MachRentApiController {
 
     @Override
     @ApiOperation(value = "장비임대 POST", notes = "POST 방식으로 장비임대 등록")
-    @PostMapping("/rental")
+    @PostMapping(value = "/rental", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity register(@RequestBody MachRentDTO machRentDTO) {
 
         if(machRentService ==  null){
@@ -30,7 +30,7 @@ public class MachRentApiControllerImp implements MachRentApiController {
         int result = machRentService.register(machRentDTO);
 
         if(result == 0){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }

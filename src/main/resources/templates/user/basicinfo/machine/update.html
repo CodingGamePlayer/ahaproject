@@ -282,30 +282,32 @@
     const machineDeleteBtn = document.getElementById("machineDeleteBtn");
 
     machineDeleteBtn.addEventListener("click", () => {
-        const input_m_id = urlParams.get('m_id');
+        if(window.confirm('삭제하시겠습니까?')){
+            const input_m_id = urlParams.get('m_id');
 
-        const machine = {
-            m_id: input_m_id
+            const machine = {
+                m_id: input_m_id
+            }
+
+            const url = "/api/user/machine"
+
+            fetch(url, {
+                method: "DELETE",
+                body: JSON.stringify(machine),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                if (response.ok) {
+                    response.text();
+                    alert('삭제가 되었습니다.');
+                    opener.location.reload();
+                    window.close();
+                } else {
+                    alert('삭제를 실패하였습니다.');
+                }
+            });
         }
-
-        const url = "/api/user/machine"
-
-        fetch(url, {
-            method: "DELETE",
-            body: JSON.stringify(machine),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(response => {
-            if (response.ok) {
-                response.text();
-                alert('삭제가 되었습니다.');
-                opener.location.reload();
-                window.close();
-            } else {
-                alert('삭제를 실패하였습니다.');
-            }
-        });
     });
 
 

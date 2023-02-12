@@ -37,17 +37,8 @@
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">장비대여내역 등록</h5>
+        <h5 class="card-title mt-3 mb-3">장비대여 등록</h5>
         <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*임대구분</label>
-                    <select class="form-select" aria-label="Default select example" id="rent_type">
-                        <option value="장비">장비</option>
-                        <option value="포장" selected>포장</option>
-                    </select>
-                </div>
-            </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*공사코드</label>
@@ -102,10 +93,10 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*장비명</label>
-                    <select class="form-select" aria-label="Default select example" id="m_name">
+                    <label class="form-control-label">*장비코드</label>
+                    <select class="form-select" aria-label="Default select example" id="m_code">
                         <th:block th:each="machine : ${machineDTOs}">
-                            <option th:value="${machine.m_name}">[[${machine.m_name}]]</option>
+                            <option th:value="${machine.m_code}">[[${machine.m_code}]]</option>
                         </th:block>
                     </select>
                 </div>
@@ -113,7 +104,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*공급가액</label>
-                    <input class="form-control" type="text" id="rent_supp_value">
+                    <input class="form-control" type="text" id="rent_supp_value" onkeyup="calculateTax()">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -124,7 +115,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*수금일자</label>
+                    <label class="form-control-label">수금일자</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest'
                          data-td-target-toggle='nearest'>
                         <input id='datetimepicker1Input' type='text' class='form-control'
@@ -139,7 +130,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*수금액</label>
-                    <input class="form-control" type="text" id="rent_collect_value">
+                    <input class="form-control" type="text" id="rent_collect_value" onkeyup="calculateMisu()">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -150,10 +141,10 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">임대여부</label>
-                    <select class="form-select" aria-label="Default select example" id="rent_regit">
-                        <option value="false">임대완료</option>
-                        <option value="true" selected>임대중</option>
+                    <label class="form-control-label">*임대현황</label>
+                    <select class="form-select" aria-label="Default select example" id="rent_finished">
+                        <option value="false" selected>임대중</option>
+                        <option value="ture">임대완료</option>
                     </select>
                 </div>
             </div>
@@ -166,41 +157,67 @@
     <input type="button" class="btn btn-primary" id="machineSubmitBtn" value="등록하기"/>
     <script>
 
+
+
+        function calculateTax() {
+            const supp_value = document.querySelector("#rent_supp_value").value;
+            let target = document.querySelector("#rent_tax");
+            const tax = supp_value * 0.1;
+
+            target.value = Math.floor(tax);
+        }
+
+        function calculateMisu() {
+            const sum1 = document.querySelector("#rent_supp_value").value;
+            const sum2 = document.querySelector("#rent_tax").value;
+            const totalSum = Number(sum1) + Number(sum2);
+            const collect_value = document.querySelector("#rent_collect_value").value;
+            const target = document.querySelector("#rent_misu");
+            console.log(totalSum)
+            console.log(collect_value)
+
+            target.value = Math.floor(Number(totalSum) - Number(collect_value));
+
+        }
+    </script>
+
+    <script>
+
         const machineSubmitBtn = document.querySelector('#machineSubmitBtn');
 
         machineSubmitBtn.addEventListener("click", () => {
-            const input_rent_type = document.querySelector('#rent_type').value;
+
             const input_cst_code = document.querySelector('#cst_code').value;
             const input_rent_start = document.querySelector('#datetimepicker2Input').value;
             const input_rent_end = document.querySelector('#datetimepicker3Input').value;
             const input_rent_bill_date = document.querySelector('#datetimepicker4Input').value;
-            const input_m_name = document.querySelector('#m_name').value;
+            const input_m_code = document.querySelector('#m_code').value;
             const input_rent_supp_value = document.querySelector('#rent_supp_value').value;
             const input_rent_tax = document.querySelector('#rent_tax').value;
             const input_rent_collect_date = document.querySelector('#datetimepicker1Input').value;
             const input_rent_collect_value = document.querySelector('#rent_collect_value').value;
             const input_rent_misu = document.querySelector('#rent_misu').value;
-            const input_rent_regit = document.querySelector('#rent_regit').value;
+            const input_rent_finished = document.querySelector('#rent_finished').value;
             const input_rent_etc = document.querySelector('#rent_etc').value;
+            console.log(input_m_code)
 
             const machine1 = {
-                rent_type: input_rent_type,
                 cst_code: input_cst_code,
                 rent_start: input_rent_start,
                 rent_end: input_rent_end,
                 rent_bill_date: input_rent_bill_date,
-                m_name: input_m_name,
+                m_code: input_m_code,
                 rent_supp_value: input_rent_supp_value,
                 rent_tax: input_rent_tax,
                 rent_collect_date: input_rent_collect_date,
                 rent_collect_value: input_rent_collect_value,
                 rent_misu: input_rent_misu,
-                rent_regit: input_rent_regit,
+                rent_finished: input_rent_finished,
                 rent_etc: input_rent_etc
             };
 
-if (input_rent_type == "" || input_cst_code == "" || input_rent_start == "" || input_rent_end == "" || input_rent_bill_date == "" || input_m_name == "" ||
-                input_rent_supp_value == "" || input_rent_tax == "" || input_rent_collect_date == "" ||
+            if (input_cst_code == "" || input_rent_start == "" || input_rent_end == "" || input_rent_bill_date == "" || input_m_code == "" ||
+                input_rent_supp_value == "" || input_rent_tax == "" ||
                 input_rent_collect_value == "" || input_rent_misu == "") {
                 alert('*이 있는 칸은 채워주시기 바랍니다.')
                 return;
@@ -216,12 +233,10 @@ if (input_rent_type == "" || input_cst_code == "" || input_rent_start == "" || i
                 && !(pattern_eng.test(input_rent_supp_value) && pattern_eng.test(input_rent_tax) && pattern_num.test(input_rent_collect_value) && pattern_num.test(input_rent_misu))
                 && !(pattern_spc.test(input_rent_supp_value) && pattern_eng.test(input_rent_tax) && pattern_num.test(input_rent_collect_value) && pattern_num.test(input_rent_misu))
                 && !(pattern_kor.test(input_rent_supp_value) && pattern_eng.test(input_rent_tax) && pattern_num.test(input_rent_collect_value) && pattern_num.test(input_rent_misu))) {
-
-            } else {
-                alert("금액은 숫자만 입력 가능합니다.");
-                return;
+            }else{
+                alert("매입액과 세액은 숫자만 입력 가능합니다.");
+                return ;
             }
-
             console.log(machine1);
 
             const url = "/api/worksite/rental";
@@ -237,6 +252,7 @@ if (input_rent_type == "" || input_cst_code == "" || input_rent_start == "" || i
                     response.text();
                     alert('등록이 완료되었습니다.');
                     window.location.reload();
+                    opener.location.reload();
                 } else {
                     alert('등록을 실패하였습니다.');
                 }

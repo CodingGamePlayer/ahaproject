@@ -17,15 +17,13 @@ public class CalendarDTO {
     final String textColor = "black";
     final boolean allDay = true;
 
-    public CalendarDTO(String title, String start, String end, String textColor, boolean allDay) {
-    }
 
 
     public CalendarDTO convert(MachRentDTO machRentDTO){
 
         CalendarDTO calendarDTO = new CalendarDTO();
 
-        calendarDTO.setTitle(machRentDTO.getCst_code() + "-" + machRentDTO.getM_name());
+        calendarDTO.setTitle(machRentDTO.getCst_code() + "-" + machRentDTO.getM_code());
         calendarDTO.setStart(machRentDTO.getRent_start());
         calendarDTO.setEnd(machRentDTO.getRent_end());
 

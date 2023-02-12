@@ -3,6 +3,7 @@ package kr.co.ahaproject.controller.kjs.imp;
 import kr.co.ahaproject.controller.kjs.MachRentController;
 import kr.co.ahaproject.dto.ConstructionDTO;
 import kr.co.ahaproject.dto.MachRentDTO;
+import kr.co.ahaproject.dto.MachRentListDTO;
 import kr.co.ahaproject.dto.MachineDTO;
 import kr.co.ahaproject.service.kjs.ConstructionService;
 import kr.co.ahaproject.service.kjs.MachRentService;
@@ -32,9 +33,9 @@ public class MachRentControllerImp implements MachRentController {
     @Override
     @GetMapping("/rental")
     public String list(Model model) {
-        List<MachRentDTO> machRentDTOList = machRentService.selectAll();
+        List<MachRentListDTO> machRentListDTOS = machRentService.selectAllForList();
 
-        model.addAttribute("machRentDTOs",machRentDTOList);
+        model.addAttribute("machRentDTOs",machRentListDTOS);
         return "user/worksite/rental/list";
     }
     
