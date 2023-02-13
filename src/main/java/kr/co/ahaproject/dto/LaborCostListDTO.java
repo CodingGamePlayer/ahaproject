@@ -1,4 +1,4 @@
-package kr.co.ahaproject.entity;
+package kr.co.ahaproject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LaborCost {
+public class LaborCostListDTO {
     Long lc_id;
-    String emp_code;
-    String cst_code;
-    String cl_code;
+    String emp_name;
+    String cst_name;
+    String cp_name;
     Long lc_value;
     String lc_date;
     boolean lc_regit;
