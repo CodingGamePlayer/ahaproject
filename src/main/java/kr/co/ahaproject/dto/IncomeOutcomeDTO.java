@@ -22,4 +22,6 @@ public class IncomeOutcomeDTO {
     Long in_total_value;
     Long in_collect_value;
     Long in_collect_remain;
+    String io_date;
+    String io_content;
 }

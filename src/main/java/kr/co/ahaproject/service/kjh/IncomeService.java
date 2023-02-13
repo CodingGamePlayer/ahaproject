@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IncomeService {
     List<IncomeOutcomeDTO> selectAll();
+    List<IncomeOutcomeDTO> findByClcode(String cl_code);
 
     IncomeOutcomeDTO selectOne(long io_id);
 
@@ -16,4 +17,6 @@ public interface IncomeService {
     int update(IncomeOutcomeDTO ioDTO);
 
     int delete(IncomeOutcomeDTO ioDTO);
+
+
 }
