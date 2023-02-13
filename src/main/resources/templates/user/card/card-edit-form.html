@@ -49,9 +49,9 @@
                 <div class="form-group">
                     <label class="form-control-label">*카드구분</label>
                     <select class="form-select" aria-label="Default select example"  id="card_class">
-                    	<option ${cardDTO.card_class == '개인카드'? selected :''} th:value="개인카드">개인카드</option>
-                    	<option ${cardDTO.card_class == '법인카드'? selected :''} th:value="법인카드">법인카드</option>
-                    	<option ${cardDTO.card_class == '사업비카드'? selected:''} th:value="사업비카드">사업비카드</option>
+                    	<option th:attr="selected=${cardDTO.card_class} == '개인카드' ? 'true': 'false'" th:value="개인카드">개인카드</option>
+                    	<option th:attr="selected=${cardDTO.card_class} == '법인카드' ? 'true': 'false'" th:value="법인카드">법인카드</option>
+                    	<option th:attr="selected=${cardDTO.card_class} == '사업비카드' ? 'true': 'false'" th:value="사업비카드">사업비카드</option>
                     </select>
                 </div>
             </div>
@@ -59,8 +59,8 @@
                 <div class="form-group">
                     <label class="form-control-label">*카드유형</label>
                     <select class="form-select" aria-label="Default select example" id="card_type">
-                        <option ${cardDTO.card_type == '체크카드'? selected : ''} th:value="체크카드" >체크카드</option>
-                        <option ${cardDTO.card_type == '신용카드'? selected : ''} th:value="신용카드" >신용카드</option>
+                        <option th:attr="selected=${cardDTO.card_type} == '체크카드' ? 'true': 'false'" th:value="체크카드" >체크카드</option>
+                        <option th:attr="selected=${cardDTO.card_type} == '신용카드' ? 'true': 'false'" th:value="신용카드" >신용카드</option>
                     </select>
                 </div>
             </div>
@@ -133,6 +133,7 @@
            if(response.ok){
                response.text();
                alert('삭제가 되었습니다.');
+               opener.location.reload();
                window.close();
            } else {
                alert('삭제를 실패하였습니다.');
@@ -188,6 +189,7 @@
                response.text();
                alert('수정이 완료되었습니다.');
                window.location.reload();
+               opener.location.reload();
            } else {
                alert('수정을 실패하였습니다.');
            }
