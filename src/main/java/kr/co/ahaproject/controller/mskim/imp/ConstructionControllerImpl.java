@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.ahaproject.controller.mskim.ConstructionController;
 import kr.co.ahaproject.dto.ConstructionDTO;
-import kr.co.ahaproject.service.mskim.ConstructionService2;
+import kr.co.ahaproject.service.mskim.ConstructionService;
 
 
 @Controller
@@ -16,7 +16,7 @@ import kr.co.ahaproject.service.mskim.ConstructionService2;
 public class ConstructionControllerImpl implements ConstructionController {
 
 	@Autowired
-	private ConstructionService2 constructionService;
+	private ConstructionService constructionService;
 	
 	@Override
 	@GetMapping("/cst-list")

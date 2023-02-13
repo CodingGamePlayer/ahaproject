@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import kr.co.ahaproject.apicontroller.mskim.ConstructionApiController;
 import kr.co.ahaproject.dto.ConstructionDTO;
 import kr.co.ahaproject.service.AhaCommonMethod;
-import kr.co.ahaproject.service.mskim.ConstructionService2;
+import kr.co.ahaproject.service.mskim.ConstructionService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ConstructionApiControllerImpl implements ConstructionApiController{
 
 	@Autowired
-	private ConstructionService2 cstService;
+	private ConstructionService cstService;
 	
 	@Override
 	@ApiOperation(value="공사 POST", notes="fetch를 이용하여 POST방식으로 공사정보 등록")
