@@ -4,7 +4,7 @@ import org.springframework.ui.Model;
 
 import kr.co.ahaproject.dto.MaterialDTO;
 
-public interface MaterialController {
+public interface MaterialController { 
 	
 	 /* 기초정보 CRUD 작업 
      * 재원 23.02.07
