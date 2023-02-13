@@ -52,10 +52,9 @@ public interface ConstructionMapper {
     
     @Delete("delete from construction where cst_id = #{cst.cst_id}")
     int delete(@Param("cst") Construction cst);
-<<<<<<< HEAD
+
     
     @Select("select count(*) from construction")
     int codeCount();
-=======
->>>>>>> branch 'master' of https://github.com/CodingGamePlayer/ahaproject.git
+
 }

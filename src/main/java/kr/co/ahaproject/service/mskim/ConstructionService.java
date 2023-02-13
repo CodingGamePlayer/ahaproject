@@ -15,9 +15,7 @@ public interface ConstructionService {
     int update(ConstructionDTO cstDTO);
     
     int delete(ConstructionDTO cstDTO);
-<<<<<<< HEAD
     
     int codeCount();
-=======
->>>>>>> branch 'master' of https://github.com/CodingGamePlayer/ahaproject.git
+
 }
