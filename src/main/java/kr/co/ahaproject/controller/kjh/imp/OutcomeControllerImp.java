@@ -1,7 +1,8 @@
 package kr.co.ahaproject.controller.kjh.imp;
 
-import kr.co.ahaproject.controller.kjh.IncomeController;
-import kr.co.ahaproject.service.kjh.IncomeService;
+import kr.co.ahaproject.controller.kjh.OutcomeController;
+import kr.co.ahaproject.service.kjh.OutcomeService;
+import kr.co.ahaproject.service.kjh.OutcomeService;
 import kr.co.ahaproject.service.kjs.ClientService;
 import kr.co.ahaproject.service.kjs.CompanyService;
 import kr.co.ahaproject.service.mskim.ConstructionService;
@@ -15,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @RequestMapping("/user/accounting")
-public class IncomeControllerImp implements IncomeController {
+public class OutcomeControllerImp implements OutcomeController {
+
     @Autowired
-    IncomeService incomeService;
+    OutcomeService outcomeService;
     @Autowired
     CompanyService companyService;
     @Autowired
@@ -26,36 +28,30 @@ public class IncomeControllerImp implements IncomeController {
     ConstructionService constructionService;
 
     @Override
-    @GetMapping("/income")
+    @GetMapping("/outcome")
     public String selectAll(Model model) {
 
-        model.addAttribute("inDTOs", incomeService.selectAll());
-        return "user/accounting/income/list";
+        model.addAttribute("outDTOs", outcomeService.selectAll());
+        return "user/accounting/outcome/list";
     }
 
     @Override
-    @GetMapping("/income-form")
+    @GetMapping("/outcome-form")
     public String registerForm(Model model) {
         model.addAttribute("companyDTOs", companyService.selectAll());
         model.addAttribute("clientDTOs", clientService.selectAll());
         model.addAttribute("constructionDTOs", constructionService.selectAll());
-        return "user/accounting/income/form";
+        return "user/accounting/outcome/form";
     }
 
 
     @Override
-    @GetMapping("/income-edit")
-    public String editForm(long in_id, Model model) {
-        model.addAttribute("inDTO", incomeService.selectOne(in_id));
+    @GetMapping("/outcome-edit")
+    public String editForm(long out_id, Model model) {
+        model.addAttribute("outDTO", outcomeService.selectOne(out_id));
         model.addAttribute("companyDTOs", companyService.selectAll());
         model.addAttribute("clientDTOs", clientService.selectAll());
         model.addAttribute("constructionDTOs", constructionService.selectAll());
-        return "user/accounting/income/edit-form";
+        return "user/accounting/outcome/edit-form";
     }
-
-
-
-
-
 }
-

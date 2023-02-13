@@ -1,8 +1,8 @@
 package kr.co.ahaproject.apicontroller.kjh.imp;
 
-import kr.co.ahaproject.apicontroller.kjh.IncomeApiController;
-import kr.co.ahaproject.dto.IncomeDTO;
-import kr.co.ahaproject.service.kjh.IncomeService;
+import kr.co.ahaproject.apicontroller.kjh.OutcomeApiController;
+import kr.co.ahaproject.dto.OutcomeDTO;
+import kr.co.ahaproject.service.kjh.OutcomeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/api/user/accounting")
-public class IncomeApiControllerImp implements IncomeApiController {
+public class OutcomeApiControllerImp implements OutcomeApiController {
     @Autowired
-    IncomeService incomeService;
+    OutcomeService outcomeService;
     @Override
-    @PostMapping("/income")
-    public ResponseEntity<IncomeDTO> register(@RequestBody IncomeDTO inDTO) {
-        int result = incomeService.insert(inDTO);
+    @PostMapping("/outcome")
+    public ResponseEntity<OutcomeDTO> register(@RequestBody OutcomeDTO outDTO) {
+        int result = outcomeService.insert(outDTO);
 
         if(result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -28,9 +28,9 @@ public class IncomeApiControllerImp implements IncomeApiController {
     }
 
     @Override
-    @PutMapping("/income")
-    public ResponseEntity<IncomeDTO> update(@RequestBody IncomeDTO inDTO) {
-        int result = incomeService.update(inDTO);
+    @PutMapping("/outcome")
+    public ResponseEntity<OutcomeDTO> update(@RequestBody OutcomeDTO outDTO) {
+        int result = outcomeService.update(outDTO);
 
         if(result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -40,9 +40,9 @@ public class IncomeApiControllerImp implements IncomeApiController {
     }
 
     @Override
-    @DeleteMapping ("/income")
-    public ResponseEntity delete(@RequestBody IncomeDTO inDTO) {
-        int result = incomeService.delete(inDTO);
+    @DeleteMapping ("/outcome")
+    public ResponseEntity delete(@RequestBody OutcomeDTO outDTO) {
+        int result = outcomeService.delete(outDTO);
 
         if(result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -50,6 +50,5 @@ public class IncomeApiControllerImp implements IncomeApiController {
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
 
 }
