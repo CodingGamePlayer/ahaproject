@@ -3,6 +3,7 @@ package kr.co.ahaproject.controller.jyh;
 
 import org.springframework.ui.Model;
 
+import kr.co.ahaproject.dto.AccountDTO;
 import kr.co.ahaproject.dto.BoardDTO;
 
 public interface BoardController {
@@ -21,7 +22,7 @@ public interface BoardController {
 	String create();
 	
 	//상세조회
-	String detail(int b_id, Model model, BoardDTO dto);
+	String detail(int b_id, Model model);
 	
 	//수정
 	String update(Model model,BoardDTO dto);

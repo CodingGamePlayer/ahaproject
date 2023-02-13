@@ -54,7 +54,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">유저</label>
-                    <input class = "form-control" th:value="1" id="us_id" readonly="readonly" placeholder="유저 아이디">
+                    <input class = "form-control" th:value="1" id="ac_id" readonly="readonly" placeholder="유저 아이디">
                 </div>
             </div>
             
@@ -73,7 +73,7 @@
        
         const input_b_id = document.querySelector('#b_id').value;
         const input_rp_body = document.querySelector('#rp_body').value;
-        const input_us_id = document.querySelector('#us_id').value;
+        const input_ac_id = document.querySelector('#ac_id').value;
         
         
         
@@ -81,7 +81,7 @@
         	
         	b_id : input_b_id,
         	rp_body:input_rp_body,
-            us_id : input_us_id  
+            ac_id : input_ac_id  
         };
 
         if( input_rp_body == "")

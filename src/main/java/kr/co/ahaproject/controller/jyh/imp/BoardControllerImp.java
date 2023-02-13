@@ -47,7 +47,7 @@ public class BoardControllerImp implements BoardController {
 	
 	@Override
 	@GetMapping("/user/board/SelectOne/{b_id}")
-	public String detail(@PathVariable("b_id") int b_id, Model model ,BoardDTO dto) {
+	public String detail(@PathVariable("b_id") int b_id, Model model) {
 		
 		model.addAttribute("selectdata", service.SelectOne(b_id));
 		model.addAttribute("replydata",replyservice.getdetail(b_id));
@@ -73,6 +73,7 @@ public class BoardControllerImp implements BoardController {
 	}
 
 	@Override
+	@GetMapping
 	public String register() {
 		// TODO Auto-generated method stub
 		return null;

@@ -1,40 +1,25 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
-    <title>
-        아하포장건설
-    </title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700"
-          rel="stylesheet"/>
-    <!-- Nucleo Icons -->
-    <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
-    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
-    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
-    <!-- CSS Files -->
-    <link id="pagestyle" href="/assets/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet"/>
+      layout:decorate="~{layout/default-template.html}">
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
-            crossorigin="anonymous"></script>
-    <!— Tempus Dominus JavaScript —>
-    <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
-            crossorigin="anonymous"></script>
+<!-- default_layout.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+    <!--    <link rel="stylesheet" th:href="@{/css/page/home.css}" >-->
+</th:block>
+<!-- default_layout.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <!--    <script th:src="@{/js/page/home.js}"></script>-->
+</th:block>
+<style>
 
-    <!— Tempus Dominus Styles —>
-    <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
-          rel="stylesheet" crossorigin="anonymous">
-
-</head>
+</style>
 <body>
-<div class="card m-3">
+<!-- Content -->
+<div layout:fragment="content">
+	<div class="card m-3">
 
     <div class="card-body">
         <h5 class="card-title mt-3 mb-3">게시판 상세보기</h5>
@@ -52,7 +37,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*유저</label>
-                    <input class = "form-control" type="text" id="us_id" name="us_id" th:value="${selectdata.us_id}" readonly="readonly" >
+                    <input class = "form-control" type="text" id="ac_id" name="ac_id" th:value="${selectdata.ac_id}" readonly="readonly" >
                 </div>
             </div>
             <div class="col-sm-12">
@@ -73,11 +58,7 @@
                     <input class="form-control" type="text" id="b_etc" name="b_etc" th:value="${selectdata.b_etc}" readonly="readonly">
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">파일</label>
-                    <input class="form-control" type="file" id="b_file" name="b_file" th:value="${selectdata.b_file}" disabled="disabled">
-                </div>
+          
             </div>
             </div>
             
@@ -87,11 +68,10 @@
           
         </div>
         
-        </div>
         
         <!-- 댓글시작 -->
      <div>
-        <h2 style="margin-left:870px">댓글</h2>
+        <h5 class="card-title mt-3 mb-3">게시판 상세보기</h5>
     </div>
       <div class=" d-flex justify-content-end" style="padding-right: 40px">
                <button class="btn btn-primary" th:onclick="replyboard([[${selectdata.b_id}]])">댓글작성</button>
@@ -108,6 +88,7 @@
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">유저</th>
                             </tr>
                             </thead>
+        </div>
                             <tbody>
                             <th:block th:each="data:${replydata}">
                                 <tr>
@@ -123,25 +104,25 @@
                                         </div>
                                     </td>
                                     <td style="padding-left: 30px" >
-                                    	<span class="text-secondary text-sm font-weight-normal"
-                                              	th:text ="${data.b_id}"></span>
-                                              	  
+                                       <span class="text-secondary text-sm font-weight-normal"
+                                                 th:text ="${data.b_id}"></span>
+                                                   
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                          		th:text ="${data.rp_body}"></span>
+                                                th:text ="${data.rp_body}"></span>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text ="${data.us_id}"></span>
+                                              th:text ="${data.ac_id}"></span>
                                     </td>
                                     
                                     
                                  
-										<td class="align-middle">
+                              <td class="align-middle">
                                         <a href="#" th:onclick="replyedit([[${data.rp_id}]])">
                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-  											<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-											</svg>
+                                   <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                                 </svg>
                                        </a>
                                     </td>
                                
@@ -152,39 +133,30 @@
                         </div>
                         </div>
 
-			
-		
+         
+      
       
 <script>
-			//댓글 등록
+         //댓글 등록
             function replyboard(id){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                 window.open("/user/board/replyregister?b_id="+id, "_blank", option);
             }
-			
+         
             </script>
             
             <script>
-			//댓글 수정
+         //댓글 수정
             function replyedit(id){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                 window.open("/user/board/replyupdate?rp_id="+id, "_blank", option);
             }
-			
+         
             </script>
-
-
-                    </div>
-                   
-                <div class="table-responsive p-0">
-                </div>
-           
-       
-
-    
-
+	
+</div>
 
 </body>
 

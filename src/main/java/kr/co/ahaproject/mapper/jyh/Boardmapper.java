@@ -30,11 +30,13 @@ public interface Boardmapper {
     @Results(id = "BoardMap", value = {
             @Result(property = "b_id", column = "b_id"),
             @Result(property = "ct_id", column = "ct_id"),
-            @Result(property = "us_id", column = "us_id"),
+            @Result(property = "ac_id", column = "ac_id"),
             @Result(property = "b_title", column = "b_title"),
             @Result(property = "b_body", column = "b_body"),
             @Result(property = "b_etc", column = "b_etc"),
-            @Result(property = "b_file", column = "b_file")})
+            @Result(property = "b_filename", column = "b_filename"),
+			@Result(property = "b_uuid", column = "b_uuid")})
+	
     List<BoardDTO> listAll();
 	
 	@Select("SELECT * FROM board WHERE b_id = #{b_id}")
@@ -44,14 +46,14 @@ public interface Boardmapper {
 	
 	
 	//글 작성 
-	@Insert("insert into board(ct_id,us_id,b_title,b_body,b_etc,b_file) values(#{ct_id},#{us_id},#{b_title},#{b_body},#{b_etc},#{b_file})")
+	@Insert("insert into board(ct_id,ac_id,b_title,b_body,b_etc,b_filename,b_uuid) values(#{ct_id},#{ac_id},#{b_title},#{b_body},#{b_etc},#{b_filename},#{b_uuid})")
       int create(BoardDTO dto);
 	
 	//글 수정
 	 @Update("UPDATE `ahaproject`.`board` SET " +
-	            "`ct_id` = #{board.ct_id}, `us_id` = #{board.us_id}, " +
+	            "`ct_id` = #{board.ct_id}, `ac_id` = #{board.ac_id}, " +
 	            "`b_title` = #{board.b_title}, `b_body` = #{board.b_body}, `b_etc` = #{board.b_etc}, " +
-	            "`b_file` = #{board.b_file} WHERE (`b_id` = #{board.b_id})")
+	            "`b_filename` = #{board.b_filename}, `b_uuid`= #{board.b_uuid} WHERE (`b_id` = #{board.b_id})")
 	    int update(@Param("board") BoardDTO board); 
 	
 	
