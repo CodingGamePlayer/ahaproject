@@ -10,7 +10,7 @@ public interface ConstructionController {
 	ModelAndView construction(ModelAndView mav);
 	
 	// 공사 등록 폼 이동
-	String construction_form();
+	ModelAndView construction_form(ModelAndView mav);
 	
 	// 공사 정보 수정
 	ModelAndView construction_edit(ModelAndView mav, ConstructionDTO cstDTO);

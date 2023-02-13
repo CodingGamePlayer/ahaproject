@@ -75,4 +75,11 @@ public class ConstructionServiceImp implements ConstructionService {
 		
 		return 1;
 	}
+
+	@Override
+	public int codeCount() {
+		
+		
+		return constructionMapper.codeCount();
+	}
 }
