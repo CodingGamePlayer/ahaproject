@@ -27,7 +27,21 @@
                             <p class="text-sm">계정 현황 전체보기</p>
                         </div>
                         <div class="ms-auto d-flex">
-
+                            <form class="row g-3" action="/admin/manage-account" method="get">
+                                <div class="col-auto">
+                                    <select class="form-select" aria-label="Default select example" id="category" name="type">
+                                        <option value="username">아이디 검색</option>
+                                        <option value="cp_name">회사 검색</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="keyword" class="visually-hidden">search</label>
+                                    <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">검색</button>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
@@ -42,12 +56,16 @@
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">가입자명</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">권한</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">가입일</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 w-lg-5">권한변경</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 w-lg-5">계정삭제</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 w-lg-5">
+                                    권한변경
+                                </th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 w-lg-5">
+                                    계정삭제
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <th:block th:each="account : ${accountDTOs}">
+                            <th:block th:each="account : ${accountDTOs.dtoList}">
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
@@ -84,7 +102,8 @@
                                     <td class="align-middle">
                                         <div class="d-flex justify-content-center">
                                             <a href="#" th:onclick="changeApproval([[${account.username}]])">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-gear" viewBox="0 0 16 16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-person-gear" viewBox="0 0 16 16">
                                                     <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm.256 7a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"/>
                                                 </svg>
                                             </a>
@@ -94,7 +113,8 @@
                                     <td class="align-middle">
                                         <div class="d-flex justify-content-center">
                                             <a href="#" th:onclick="deleteAccount([[${account.username}]])">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-dash" viewBox="0 0 16 16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-person-dash" viewBox="0 0 16 16">
                                                     <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1Zm0-7a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
                                                     <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
                                                 </svg>
@@ -107,9 +127,9 @@
 
                                     function deleteAccount(username) {
 
-                                        if (window.confirm('계정을 삭제 하시겠습니까?')){
+                                        if (window.confirm('계정을 삭제 하시겠습니까?')) {
                                             const account = {
-                                                username : username
+                                                username: username
                                             }
 
                                             console.log(account);
@@ -119,7 +139,7 @@
                                                 method: "DELETE",
                                                 body: JSON.stringify(account),
                                                 headers: {
-                                                    "Content-Type" : "application/json"
+                                                    "Content-Type": "application/json"
                                                 }
                                             }).then(response => {
                                                 if (response.ok) {
@@ -132,6 +152,27 @@
                                         }
 
                                     }
+
+                                    function changeApproval(username) {
+                                        const account = {
+                                            username: username
+                                        };
+                                        const url = "/api/admin/auth";
+                                        fetch(url, {
+                                            method: "PUT",
+                                            body: JSON.stringify(account),
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            }
+                                        }).then(response => {
+                                            if (response.ok) {
+                                                alert('권한 변경이 완료되었습니다.')
+                                                window.location.reload();
+                                            } else {
+                                                alert('권한 변경에 실패하였습니다.')
+                                            }
+                                        });
+                                    }
                                 </script>
 
                             </th:block>
@@ -141,30 +182,51 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4"></div>
 
+        <div class="col-sm-4 d-flex justify-content-center">
+            <th:block
+                    th:with="start=${accountDTOs.start}, end=${accountDTOs.end}, keyword =${param.keyword}, type = ${param.type}">
+                    <ul class="pagination">
+                        <li th:if="${start} == '1'" class="page-item disabled">
+                            <a class="page-link"
+                               th:href="@{/admin/manage-account(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◁</a>
+                        </li>
+                        <li th:if="${start} > '1'" class="page-item ">
+                            <a class="page-link"
+                               th:href="@{/admin/manage-account(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◀</a>
+
+                        </li>
+
+                        <th:block th:each="num : ${#numbers.sequence(start,end)}">
+                            <li class="page-item" th:if="${num} != ${accountDTOs.page}">
+
+                                <a class="page-link text-info" th:text="${num}"
+                                   th:href="@{/admin/manage-account(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                            </li>
+                            <li class="page-item active " th:if="${num} == ${accountDTOs.page}">
+                                <a class="page-link text-info" th:text="${num}"
+                                   th:href="@{/admin/manage-account(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                            </li>
+                        </th:block>
+
+                        <li th:if="${end} >= ${accountDTOs.total} / 10" class="page-item disabled">
+                            <a class="page-link"
+                               th:href="@{/admin/manage-account(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▷</a>
+                        </li>
+                        <li th:if="${end} < ${accountDTOs.total} / 10" class="page-item">
+                            <a class="page-link"
+                               th:href="@{/admin/manage-account(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▶</a>
+                        </li>
+                    </ul>
+            </th:block>
+        </div>
+        <div class="col-md-3">
+
+        </div>
     </div>
 </div>
 <script>
-    function changeApproval(username) {
 
-        const account = {
-            username: username
-        };
-        const url = "/api/admin/auth";
-        fetch(url, {
-            method: "PUT",
-            body: JSON.stringify(account),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(response => {
-            if (response.ok) {
-                alert('권한 변경이 완료되었습니다.')
-                window.location.reload();
-            } else {
-                alert('권한 변경에 실패하였습니다.')
-            }
-        });
-    }
 </script>
 </html>

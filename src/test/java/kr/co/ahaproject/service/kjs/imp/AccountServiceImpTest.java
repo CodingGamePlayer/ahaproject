@@ -82,11 +82,15 @@ class AccountServiceImpTest {
     @Test
     void selectAllForPaging() {
 
+
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .page(1)
                 .size(10)
                 .build();
 
+//        List<Account> accounts = accountMapper.selectAllForPaging(pageRequestDTO);
+//
+//        accounts.forEach(account -> log.info(String.valueOf(account)));
         PageResponseDTO<AccountDTO> pageResponseDTO = accountService.selectAllForPaging(pageRequestDTO);
 
         List<AccountDTO> dtoList = pageResponseDTO.getDtoList();

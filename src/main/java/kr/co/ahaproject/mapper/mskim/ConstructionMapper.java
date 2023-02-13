@@ -1,4 +1,4 @@
-package kr.co.ahaproject.mapper.kjs;
+package kr.co.ahaproject.mapper.mskim;
 
 import kr.co.ahaproject.entity.Construction;
 import org.apache.ibatis.annotations.Mapper;

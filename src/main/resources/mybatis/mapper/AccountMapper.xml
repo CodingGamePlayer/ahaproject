@@ -17,8 +17,8 @@
 
     <select id="selectAllForPaging" resultMap="AccountMap">
         SELECT * FROM account
-        ORDER BY ac_id DESC
         <include refid="search"/>
+        ORDER BY ac_id DESC
         LIMIT #{skip}, #{size}
     </select>
     
@@ -38,5 +38,5 @@
             </if>
         </where>
     </sql>
-//
+
 </mapper>
