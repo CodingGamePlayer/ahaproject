@@ -16,10 +16,12 @@ public interface UseMaterialController {
     String list(Model model);
     
     // 현장 자재 글생성 이동
-    String register();
+    String register(Model model, UseMaterialDTO useMaterialDTO);
     
     // 현장 자재 상세보기 이동
     String detail(UseMaterialDTO dto, Model model);
+
+	
 
 	
 }
