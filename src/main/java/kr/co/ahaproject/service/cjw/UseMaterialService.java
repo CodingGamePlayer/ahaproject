@@ -10,7 +10,10 @@ public interface UseMaterialService {
 			List<UseMaterialDTO> listAll();
 			
 			// 현장 자재 선택조회
-			UseMaterialDTO selectOne(int um_id);
+			UseMaterialDTO selectOne(Long um_id);
+			
+			// 현장 자재 count 수
+			int selectCount();
 			
 			// 현장 자재 글생성
 			int create(UseMaterialDTO dto);
@@ -19,5 +22,5 @@ public interface UseMaterialService {
 			int update(UseMaterialDTO dto);
 			
 			// 현장 자재 글삭제
-			int delete(int um_id);
+			int delete(Long um_id);
 }

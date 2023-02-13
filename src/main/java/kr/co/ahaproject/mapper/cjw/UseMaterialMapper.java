@@ -38,9 +38,12 @@ public interface UseMaterialMapper {
             })
 	List<UseMaterialDTO> listAll(); // 전체조회
 	
+	@Select("SELECT count(*) FROM use_material")
+	int selectCount();
+	
 	@Select("SELECT * FROM use_material WHERE um_id = #{um_id}")
 	@ResultMap("use_materialMap")
-	UseMaterialDTO selectOne(int um_id); // 선택조회
+	UseMaterialDTO selectOne(Long um_id); // 선택조회
 	
 	@Insert("INSERT INTO use_material (mt_code, cst_code, um_where, um_amount, um_regit) "
 			+ "VALUES (#{mt_code}, #{cst_code}, #{um_where}, #{um_amount}, #{um_regit})")
@@ -55,6 +58,6 @@ public interface UseMaterialMapper {
 	
 	
 	@Delete("DELETE FROM `ahaproject`.`use_material` WHERE um_id = #{um_id}")
-	int delete(@Param("um_id") int um_id); // 글삭제
+	int delete(@Param("um_id") Long um_id); // 글삭제
 
 }
