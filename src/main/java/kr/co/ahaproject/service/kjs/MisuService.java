@@ -1,6 +1,9 @@
 package kr.co.ahaproject.service.kjs;
 
+import kr.co.ahaproject.dto.AccountDTO;
 import kr.co.ahaproject.dto.MisuDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 
 import java.util.List;
 
@@ -15,4 +18,7 @@ public interface MisuService {
     int update(MisuDTO misuDTO);
 
     int delete(MisuDTO misuDTO);
+
+    PageResponseDTO<AccountDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
 }

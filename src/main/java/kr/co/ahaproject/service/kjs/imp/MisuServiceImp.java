@@ -1,6 +1,9 @@
 package kr.co.ahaproject.service.kjs.imp;
 
+import kr.co.ahaproject.dto.AccountDTO;
 import kr.co.ahaproject.dto.MisuDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.Misu;
 import kr.co.ahaproject.mapper.kjs.MisuMapper;
 import kr.co.ahaproject.service.AhaCommonMethod;
@@ -77,5 +80,10 @@ public class MisuServiceImp implements MisuService {
         }
 
         return result;
+    }
+
+    @Override
+    public PageResponseDTO<AccountDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+        return null;
     }
 }
