@@ -37,7 +37,7 @@
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">매입 수정</h5>
+        <h5 class="card-title mt-3 mb-3">매출 수정</h5>
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
@@ -74,7 +74,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*매입 날짜</label>
+                    <label class="form-control-label">*매출 날짜</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
                         <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' th:value="${ioDTO.io_date}"/>
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
@@ -85,26 +85,26 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*매입 내용</label>
+                    <label class="form-control-label">*매출 내용</label>
                     <input class="form-control" type="text" id="io_content" th:value="${ioDTO.io_content}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*매입 공급가액</label>
-                    <input class="form-control" type="text" id="in_supp_value" th:value="${ioDTO.in_supp_value}">
+                    <label class="form-control-label">*매출 공급가액</label>
+                    <input class="form-control" type="text" id="in_supp_value" th:value="${ioDTO.out_supp_value}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*매입 지급액</label>
-                    <input class="form-control" type="text" id="in_collect_value" th:value="${ioDTO.in_collect_value}">
+                    <label class="form-control-label">*매출 지급액</label>
+                    <input class="form-control" type="text" id="in_collect_value" th:value="${ioDTO.out_collect_value}">
                 </div>
             </div>
-            <input class="form-control" type="hidden" id="in_total_value" th:value="${ioDTO.in_total_value}">
-            <input class="form-control" type="hidden" id="in_collect_remain" th:value="${ioDTO.in_collect_remain}">
-            <input type="button" class="btn btn-primary" id="incomeSubmitBtn" value="수정하기"/>
-            <input type="button" class="btn btn-dark mt-2" id="incomeDeleteBtn" value="삭제하기"/>
+            <input class="form-control" type="hidden" id="in_total_value" th:value="${ioDTO.out_total_value}">
+            <input class="form-control" type="hidden" id="in_collect_remain" th:value="${ioDTO.out_collect_remain}">
+            <input type="button" class="btn btn-primary" id="outcomeSubmitBtn" value="수정하기"/>
+            <input type="button" class="btn btn-dark mt-2" id="outcomeDeleteBtn" value="삭제하기"/>
         </div>
     </div>
 </div>
@@ -115,22 +115,22 @@
 
 <script>
 
-    const incomeSubmitBtn = document.querySelector('#incomeSubmitBtn');
+    const outcomeSubmitBtn = document.querySelector('#outcomeSubmitBtn');
     const urlParams = new URL(location.href).searchParams;
 
-    const incomeDeleteBtn = document.getElementById("incomeDeleteBtn");
-    incomeDeleteBtn.addEventListener("click", () => {
+    const outcomeDeleteBtn = document.getElementById("outcomeDeleteBtn");
+    outcomeDeleteBtn.addEventListener("click", () => {
         const input_io_id = urlParams.get('io_id');
 
-        const income = {
+        const outcome = {
             io_id : input_io_id
         }
 
-        const url = "/api/user/accounting/income";
+        const url = "/api/user/accounting/outcome";
 
         fetch(url, {
             method : "DELETE",
-            body : JSON.stringify(income),
+            body : JSON.stringify(outcome),
             headers : {
                 "Content-Type": "application/json"
             }
@@ -154,37 +154,37 @@
         const input_cst_code = document.querySelector('#cst_code').value;
         const input_io_date = document.querySelector('#datetimepicker1Input').value;
         const input_io_content = document.querySelector('#io_content').value;
-        const input_in_supp_value = document.querySelector('#in_supp_value').value;
-        const input_in_collect_value = document.querySelector('#in_collect_value').value;
+        const input_out_supp_value = document.querySelector('#out_supp_value').value;
+        const input_out_collect_value = document.querySelector('#out_collect_value').value;
 
 
-        const income1 = {
+        const outcome1 = {
             io_id : input_io_id,
             cp_name : input_cp_name,
             cl_code : input_cl_code,
             cst_code : input_cst_code,
             io_date : input_io_date,
             io_content : input_io_content,
-            in_supp_value : input_in_supp_value,
-            in_collect_value : input_in_collect_value
+            out_supp_value : input_out_supp_value,
+            out_collect_value : input_out_collect_value
         };
 
         if (input_cp_name == "" || input_cl_code == "" ||
             input_cst_code == "" || input_io_date == "" ||
-            input_io_content == "" || input_in_supp_value == "" ||
-            input_in_collect_value == ""){
+            input_io_content == "" || input_out_supp_value == "" ||
+            input_out_collect_value == ""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
 
 
-        console.log(income1);
+        console.log(outcome1);
 
-        const url = "/api/user/accounting/income";
+        const url = "/api/user/accounting/outcome";
 
         fetch(url, {
             method: "PUT",
-            body: JSON.stringify(income1),
+            body: JSON.stringify(outcome1),
             headers: {
                 "Content-Type": "application/json"
             }
