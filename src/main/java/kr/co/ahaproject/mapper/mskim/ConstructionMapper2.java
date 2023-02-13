@@ -25,9 +25,6 @@ public interface ConstructionMapper2 {
             @Result(property = "cst_period", column = "cst_period"),
             @Result(property = "cst_start", column = "cst_start"),
             @Result(property = "cst_end", column = "cst_end"),
-            @Result(property = "cst_toal_pay", column = "cst_toal_pay"),
-            @Result(property = "cst_1st_pay", column = "cst_1st_pay"),
-            @Result(property = "cst_collect_date", column = "cst_collect_date"),
             @Result(property = "cst_finised", column = "cst_finised"),
             @Result(property = "cst_etc1", column = "cst_etc1"),
             @Result(property = "cst_etc2", column = "cst_etc2"),
@@ -41,15 +38,14 @@ public interface ConstructionMapper2 {
     Construction findByCst(@Param("cst") Construction cst);
     
     @Insert("insert into construction( cst_code, cst_name, cst_period, cst_start, cst_end, "+ 
-    		"cst_toal_pay, cst_1st_pay, cst_collect_date, cst_finised, cst_etc1, cst_etc2, "+ 
-    		"cst_etc3, cst_filename, cst_uuid) values ( #{cst.cst_code}, #{cst.cst_name}, #{cst.cst_period}, #{cst.cst_start}, "+ 
-    		"#{cst.cst_end}, #{cst.cst_toal_pay}, #{cst.cst_1st_pay}, #{cst.cst_collect_date}, #{cst.cst_finised}, "+ 
-    		"#{cst.cst_etc1}, #{cst.cst_etc2}, #{cst.cst_etc3}, #{cst.cst_filename}, #{cst.cst_uuid})")
+    		"cst_finised, cst_etc1, cst_etc2, cst_etc3, cst_filename, cst_uuid) "+ 
+    		"values ( #{cst.cst_code}, #{cst.cst_name}, #{cst.cst_period}, #{cst.cst_start}, "+ 
+    		"#{cst.cst_end}, #{cst.cst_finised}, #{cst.cst_etc1}, #{cst.cst_etc2}, #{cst.cst_etc3}, "+ 
+    		"#{cst.cst_filename}, #{cst.cst_uuid})")
     int register(@Param("cst") Construction cst);
     
     @Update("update construction set cst_code=#{cst.cst_code}, cst_name=#{cst.cst_name}, "+
     		"cst_period=#{cst.cst_period}, cst_start=#{cst.cst_start}, cst_end=#{cst.cst_end}, "+ 
-    		"cst_toal_pay=#{cst.cst_toal_pay}, cst_1st_pay=#{cst.cst_1st_pay}, cst_collect_date=#{cst.cst_collect_date}, "+ 
     		"cst_finised=#{cst.cst_finised}, cst_etc1=#{cst.cst_etc1}, cst_etc2=#{cst.cst_etc2}, "+ 
     		"cst_etc3= #{cst.cst_etc3}, cst_filename=#{cst.cst_filename}, cst_uuid=#{cst.cst_uuid} where cst_id = #{cst.cst_id}")
     int update(@Param("cst") Construction cst);

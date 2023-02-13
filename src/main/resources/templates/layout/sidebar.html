@@ -56,8 +56,8 @@
                     <div><a href="#" class="text-white text-sm">- 견적서정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 견적서정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 카드사용내역 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 카드사용내역 입력</a></div>
+                    <div><a th:href="@{/user/worksite/use-card/uc-list}" class="text-white text-sm">- 카드사용내역 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitUseCard()">- 카드사용내역 입력</a></div>
                     <div><hr></div>
                     <div><a href="#" class="text-white text-sm">- 장비대여내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm">- 장비대여내역 입력</a></div>
@@ -216,6 +216,13 @@
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                 window.open("/user/worksite/construction/cst-form", "_blank", option);
+            }
+            
+          //카드사용 내역 입력
+            function regitUseCard(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/worksite/use-card/uc-form", "_blank", option);
             }
 
 

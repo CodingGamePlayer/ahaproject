@@ -17,9 +17,6 @@ public class ConstructionDTO {
     String cst_period;
     String cst_start;
     String cst_end;
-    Long cst_toal_pay;
-    Long cst_1st_pay;
-    String cst_collect_date;
     boolean cst_finised;
     String cst_etc1;
     String cst_etc2;
