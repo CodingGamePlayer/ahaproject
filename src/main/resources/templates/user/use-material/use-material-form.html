@@ -50,7 +50,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                       <label class="form-control-label">*자재코드</label>
-                    <input class="form-control" type="text" id="mt_code" name="mt_code">
+                    <input class="form-control" type="text" id="mt_code" name="mt_code" th:value="${idkey}" disabled="disabled">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -65,13 +65,17 @@
                     <input class="form-control" type="text" id="um_where" name="um_where">
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">등록여부</label>
-                    <input class="form-control" type="text" id="um_regit" name="um_regit">
-                </div>
-            </div>
-       
+          
+           <div class="col-sm-12">
+	        <div class="form-group">
+	          <label class="form-control-label">등록여부</label>
+	          <select class="form-select" aria-label="Default select example" id="um_regit" name="um_regit">
+	              <option value="true">사용</option>
+	              <option value="false">미사용</option>
+	          </select>
+	        </div>
+	      </div>
+       		
             <input type="submit" class="btn btn-primary" value="등록하기" id="useMaterialSubmitBtn" />
         </div>
     </div>
@@ -87,16 +91,7 @@
         const input_mt_code = document.querySelector('#mt_code').value;
         const input_um_where = document.querySelector('#um_where').value;
         const input_um_amount = document.querySelector('#um_amount').value;
-        const input_um_regit = document.querySelector('#um_regit').value;
-
-
-        const material1 = {
-        		cst_code : input_cst_code,
-        		mt_code : input_mt_code,
-        		um_where : input_um_where,
-        		um_amount : input_um_amount,
-        		um_regit : input_um_regit
-        };
+        const input_um_regit = document.querySelector('#um_regit').value; 
 
         if(input_cst_code == "" || input_mt_code == "" ||
            input_um_amount == "") {
@@ -104,6 +99,14 @@
             return;
         }
         
+        
+        const material1 = {
+        		cst_code : input_cst_code,
+        		mt_code : input_mt_code,
+        		um_where : input_um_where,
+        		um_amount : input_um_amount,
+        		um_regit : input_um_regit
+        };
         
 
         console.log(material1);
