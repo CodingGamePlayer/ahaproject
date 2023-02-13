@@ -19,8 +19,9 @@ public class ClientDTO {
     String cl_code;
     String cl_email;
     String cl_account;
-    String cl_file;
     String cl_etc1;
     String cl_etc2;
     String cl_etc3;
+    String cl_uuid;
+    String cl_filename;
 }

@@ -26,5 +26,6 @@ public class Company {
     String cp_eng_address;
     String cp_eng_head_name;
     String cp_domain;
-    String cp_file;
+    String cp_uuid;
+    String cp_filename;
 }

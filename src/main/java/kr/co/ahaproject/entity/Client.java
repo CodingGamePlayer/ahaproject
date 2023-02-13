@@ -23,4 +23,6 @@ public class Client {
     String cl_etc1;
     String cl_etc2;
     String cl_etc3;
+    String cl_uuid;
+    String cl_filename;
 }
