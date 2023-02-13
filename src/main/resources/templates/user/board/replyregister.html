@@ -40,19 +40,20 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
+                
                    	<label class="form-control-label">게시판번호</label>
-                    <input class = "form-control" th:value = "${data.b_id}"  id="b_id">
+                    <input class = "form-control"id="b_id" th:value=${update.b_id} readonly="readonly">
                 </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">댓글내용</label>
+                    <label class="form-control-label">*댓글내용</label>
                     <input class="form-control" type="text" id="rp_body">
                 </div>
             </div>
                 
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*유저</label>
+                    <label class="form-control-label">유저</label>
                     <input class = "form-control" th:value="1" id="us_id" readonly="readonly" placeholder="유저 아이디">
                 </div>
             </div>
@@ -68,6 +69,8 @@
 
     replySubmitBtn.addEventListener("click", () => {
     	console.log("클릭");
+    	
+       
         const input_b_id = document.querySelector('#b_id').value;
         const input_rp_body = document.querySelector('#rp_body').value;
         const input_us_id = document.querySelector('#us_id').value;
@@ -75,6 +78,7 @@
         
         
         const reply1 = {
+        	
         	b_id : input_b_id,
         	rp_body:input_rp_body,
             us_id : input_us_id  
@@ -88,7 +92,7 @@
 
         console.log(reply1);
 
-        const url = "/api/user/reply";
+        const url = "/api/user/board/detail";
 
         fetch(url, {
            method : "POST",
@@ -100,6 +104,7 @@
            if(response.ok){
                response.text();
                alert('등록이 완료되었습니다.');
+               opener.location.reload();
                window.location.reload();
            } else {
                alert('등록을 실패하였습니다.');

@@ -80,9 +80,11 @@
                 </div>
             </div>
             </div>
-           
+          
             <input type="submit" class="btn btn-primary" value="수정하기" id="boardSubmitBtn"/>
-            <input type="submit" class="btn btn-primary" value="삭제하기" id="boardDeleteBtn"/>
+         
+            <input style="margin-top: 10px" type="submit" class="btn btn-primary" value="삭제하기" id="boardDeleteBtn"/>
+          
           
         </div>
     </div>
@@ -136,6 +138,7 @@
                response.text();
                alert('수정이 완료되었습니다.');
                window.location.reload();
+               opener.location.reload();
            } else {
                alert('수정을 실패하였습니다.');
            }
@@ -163,6 +166,7 @@
 	         if(response.ok){
 	             response.text();
 	             alert('삭제가 완료되었습니다.');
+	             opener.location.reload();
 	             window.open('','_self').close();
 	             
 	         } else {

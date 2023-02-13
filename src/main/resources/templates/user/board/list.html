@@ -71,12 +71,14 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal">
- 											 <a th:text ="${data.b_title}" th:href="@{/user/board/SelectOne/{b_id}(b_id=${data.b_id})}"></a>
+ 											 <a th:text ="${data.b_title}"  th:href="@{/user/board/SelectOne/{b_id}(b_id=${data.b_id})}"></a>
                                         </span>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                             th:text ="${data.b_body}" ></span>
+                                        <span class="text-secondary text-sm font-weight-normal">
+                                             <a th:text ="${data.b_body}"></a>
+                                             
+                                             </span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
@@ -101,6 +103,8 @@
                             </th:block>
                             </tbody>
                         </table>
+                        
+                  
         
              <script>
              //상세보기 새창

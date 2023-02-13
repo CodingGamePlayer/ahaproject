@@ -1,6 +1,5 @@
 package kr.co.ahaproject.controller.jyh;
 
-import java.util.List;
 
 import org.springframework.ui.Model;
 
@@ -13,6 +12,7 @@ public interface BoardController {
 	 *  noticeboard:자유게시판
 	 *  qnaboard:qna
 	 * */
+	//공지사항
 	
 	//전체조회
 	String list(Model model);
@@ -21,9 +21,34 @@ public interface BoardController {
 	String create();
 	
 	//상세조회
-	String detail(Model model,BoardDTO dto);
+	String detail(int b_id, Model model, BoardDTO dto);
 	
+	//수정
 	String update(Model model,BoardDTO dto);
+	
+	
+	//자유게시판
+	
+	//전체조회
+	String listAll(Model model);
+	
+	//작성
+	String register();
+		
+	//상세조회
+	String selectone(int b_id, Model model, BoardDTO dto);
+		
+	//수정
+	String freeupdate(Model model,BoardDTO dto);
+		
+	
+	
+	
+
+	
+
+
+	
 	
 	
 

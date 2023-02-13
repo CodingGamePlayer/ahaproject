@@ -25,8 +25,8 @@ public class ReplyApiControllerImpl implements ReplyApiController {
 	private ReplyService service;
 	
 	@Override
-	@PostMapping("/reply")
-	public ResponseEntity<ReplyDTO> create(ReplyDTO dto) {
+	@PostMapping("/board/detail")
+	public ResponseEntity<ReplyDTO> create(@RequestBody ReplyDTO dto) {
 		System.out.println("API 컨트롤러 테스트 로그");
 		
 		  if(dto == null){
@@ -45,15 +45,27 @@ public class ReplyApiControllerImpl implements ReplyApiController {
 	}
 
 	@Override
-	public ResponseEntity update(ReplyDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@PutMapping("/board/detail")
+	public ResponseEntity<ReplyDTO> update(@RequestBody ReplyDTO dto) {
+		System.out.println(dto.getRp_id());
+	    int result = service.update(dto);
+	    System.out.println(String.valueOf(result));
+        if (result == 0){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
 
+        return ResponseEntity.status(HttpStatus.OK).build();
+	}
 	@Override
-	public ResponseEntity delete(ReplyDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+	@DeleteMapping("/board/detail")
+	public ResponseEntity<ReplyDTO> delete(@RequestBody ReplyDTO dto) {
+		int rp_id = dto.getRp_id();
+		int result = service.delete(rp_id);
+		if (result == 0){ 
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
+		}
+
+        return ResponseEntity.status(HttpStatus.OK).build();
 	}
 }
 

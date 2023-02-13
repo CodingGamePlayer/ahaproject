@@ -39,7 +39,7 @@ public interface Replymapper {
 	
 	
 	//댓글 작성
-	@Insert("insert into reply(b_id,rp_body, us_id) values(#{b_id},#{rp_body}, #{us_id}")
+	@Insert("insert into reply (b_id,rp_body, us_id) values (#{b_id},#{rp_body}, #{us_id})")
 	int replycreate(ReplyDTO dto);
 	
 	

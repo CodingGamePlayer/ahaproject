@@ -24,25 +24,25 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int create(ReplyDTO dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		return mapper.replycreate(dto);
 	}
 
 	@Override
 	public ReplyDTO SelectOne(int rp_id) {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.replySelectOne(rp_id);
 	}
 
 	@Override
 	public int update(ReplyDTO dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		return mapper.replyupdate(dto);
 	}
 
 	@Override
 	public int delete(int rp_id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return mapper.replydelete(rp_id);
 	}
 	
 	

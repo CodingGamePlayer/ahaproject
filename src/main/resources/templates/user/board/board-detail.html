@@ -43,7 +43,7 @@
                 <div class="form-group">
                  <input type = "hidden" th:value="${selectdata.b_id}" name="b_id" id="b_id">
                  <label class="form-control-label">*카테고리</label>
-                 <select class="form-select" aria-label="Default select example" id="ct_id">
+                 <select class="form-select" aria-label="Default select example" id="ct_id" disabled="disabled" >
                         <option th:text="공지사항" th:value="${selectdata.ct_id}"></option>
                         <option th:text="자유게시판" th:value="${selectdata.ct_id}"></option>
                         <option th:text="QnA" th:value="${selectdata.ct_id}"></option>
@@ -58,156 +58,134 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*제목</label>
-                    <input class="form-control" type="text" id="b_title" name="b_title" th:value="${selectdata.b_title}">
+                    <input class="form-control" type="text" id="b_title" name="b_title" th:value="${selectdata.b_title}" readonly="readonly">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*본문</label>
-                    <input class="form-control" type="text" id="b_body" name="b_body" size="10" th:value="${selectdata.b_body}">
+                    <input class="form-control" type="text" id="b_body" name="b_body" size="10" th:value="${selectdata.b_body}" readonly="readonly">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고</label>
-                    <input class="form-control" type="text" id="b_etc" name="b_etc" th:value="${selectdata.b_etc}">
+                    <input class="form-control" type="text" id="b_etc" name="b_etc" th:value="${selectdata.b_etc}" readonly="readonly">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">파일</label>
-                    <input class="form-control" type="file" id="b_file" name="b_file" th:value="${selectdata.b_file}">
+                    <input class="form-control" type="file" id="b_file" name="b_file" th:value="${selectdata.b_file}" disabled="disabled">
                 </div>
             </div>
             </div>
+            
+            <hr>
            
            
-            <input type="submit" class="btn btn-primary" value="댓글작성" id="boardDeleteBtn"/>
           
         </div>
+        
+        </div>
+        
+        <!-- 댓글시작 -->
+     <div>
+        <h2 style="margin-left:870px">댓글</h2>
     </div>
-</div>
+      <div class=" d-flex justify-content-end" style="padding-right: 40px">
+               <button class="btn btn-primary" th:onclick="replyboard([[${selectdata.b_id}]])">댓글작성</button>
+      </div>
+      
+           <div class="card-body px-0 py-0">
+                    <div class="border-bottom py-3 px-3 d-sm-flex align-items-center" style="border-bottom: 2px">
+                        <table class="table align-items-center mb-0">
+                            <thead class="bg-gray-100">
+                            <tr>
+                                <td class="text-secondary text-xs font-weight-semibold opacity-7">번호</td>
+                                <th style="padding-left: 50px" class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">게시판 번호</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">댓글 내용</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">유저</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="data:${replydata}">
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex align-items-center">
+
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center ms-1">
+                                            </div>
+                                                <span class="text-secondary text-sm font-weight-normal"
+                                                     th:text ="${data.rp_id}"></span>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left: 30px" >
+                                    	<span class="text-secondary text-sm font-weight-normal"
+                                              	th:text ="${data.b_id}"></span>
+                                              	  
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                          		th:text ="${data.rp_body}"></span>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text ="${data.us_id}"></span>
+                                    </td>
+                                    
+                                    
+                                 
+										<td class="align-middle">
+                                        <a href="#" th:onclick="replyedit([[${data.rp_id}]])">
+                                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+  											<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+											</svg>
+                                       </a>
+                                    </td>
+                               
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                        </div>
+                        </div>
+
+			
+		
+      
 <script>
-   
-    const boardDeleteBtn = document.querySelector('#boardDeleteBtn');
-    
+			//댓글 등록
+            function replyboard(id){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-    boardSubmitBtn.addEventListener("click", () => {
-    	console.log("클릭");
-    	const input_b_id = document.querySelector('#b_id').value;
-        const input_ct_id = document.querySelector('#ct_id').value;
-        const input_us_id = document.querySelector('#us_id').value;
-        const input_b_title = document.querySelector('#b_title').value;
-        const input_b_body = document.querySelector('#b_body').value;
-        const input_b_etc = document.querySelector('#b_etc').value;
-        const input_b_file = document.querySelector('#b_file').value;
+                window.open("/user/board/replyregister?b_id="+id, "_blank", option);
+            }
+			
+            </script>
+            
+            <script>
+			//댓글 수정
+            function replyedit(id){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-        const board1 = {
-        	b_id : input_b_id,
-            ct_id : input_ct_id,
-            us_id : input_us_id,
-            b_title : input_b_title,
-           	b_body : input_b_body,
-            b_etc : input_b_etc,
-            b_file : input_b_file
+                window.open("/user/board/replyupdate?rp_id="+id, "_blank", option);
+            }
+			
+            </script>
+
+
+                    </div>
+                   
+                <div class="table-responsive p-0">
+                </div>
            
-        };
+       
 
-        if( input_ct_id == "" ||input_us_id == "" ||
-        	input_b_title == "" ||input_b_body == "" ||
-        	input_b_etc =="" ||input_b_file == "")
-        {
-            alert('*이 있는 칸은 채워주시기 바랍니다.')
-            return;
-        }
-
-        console.log(board1);
-
-        const url = "/api/user/board";
-
-        fetch(url, {
-           method : "PUT",
-           body : JSON.stringify(board1),
-           headers : {
-               "Content-Type" : "application/json"
-           }
-        }).then(response => {
-           if(response.ok){
-               response.text();
-               alert('수정이 완료되었습니다.');
-               window.location.reload();
-           } else {
-               alert('수정을 실패하였습니다.');
-           }
-        });
-    });//수정 끝
     
-    
-    boardDeleteBtn.addEventListener("click", function(){
-		  
-		  let input_b_id = document.querySelector('#b_id').value; 
-		  
-		   const board2 = {
-				b_id : input_b_id 
-		   };
-			          
-		  const url = "/api/user/board";
 
-	      fetch(url, {
-	         method : "DELETE",
-	         body : JSON.stringify(board2),
-	         headers : {
-	             "Content-Type" : "application/json"
-	         }
-	      }).then(response => {
-	         if(response.ok){
-	             response.text();
-	             alert('삭제가 완료되었습니다.');
-	             window.open('','_self').close();
-	             
-	         } else {
-	             alert('삭제를 실패하였습니다.');
-	         }
-	      });
-	  });
 
-   // 삭제 끝 ============
-
-</script>
-
-<!-- <script>
-    const datevalue = document.querySelector('#datetimepicker1Input').value;
-    console.log(datevalue);
-    new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
-        display: {
-            components: {
-                seconds: false,
-                useTwentyfourHour: false,
-            },
-            icons: {
-                type: 'icons',
-                time: 'fa fa-solid fa-clock',
-                date: 'fa fa-solid fa-calendar',
-                up: 'fa fa-solid fa-arrow-up',
-                down: 'fa fa-solid fa-arrow-down',
-                previous: 'fa fa-solid fa-chevron-left',
-                next: 'fa fa-solid fa-chevron-right',
-                today: 'fa fa-solid fa-calendar-check',
-                clear: 'fa fa-solid fa-trash',
-                close: 'fas fa-solid fa-xmark'
-            },
-        },
-    });
-</script> -->
-<script src="/assets/js/core/popper.min.js"></script>
-<script src="/assets/js/core/bootstrap.min.js"></script>
-<script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
-<script src="/assets/js/plugins/chartjs.min.js"></script>
-<script
-        src="/assets/js/plugins/swiper-bundle.min.js"
-        type="text/javascript"
-></script>
-<script src="/assets/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
 </body>
+
 </html>
