@@ -52,14 +52,31 @@ public class UseCardServiceImpl implements UseCardService {
 
 	@Override
 	public int update(UseCardDTO ucDTO) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = ucm.update(modelMapper.map(ucDTO, UseCard.class));
+		
+		if(!(result>0)) {
+			return 0;
+		}
+		
+		return 1;
 	}
 
 	@Override
 	public int delete(UseCardDTO ucDTO) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int result = ucm.delete(modelMapper.map(ucDTO, UseCard.class));
+		
+		if(!(result>0)) {
+			return 0;
+		}
+		
+		return 1;
+	}
+
+	@Override
+	public UseCardJoinDTO getFindUcId(int uc_id) {
+		
+		return ucm.getFindUcId(uc_id);
 	}
 
 }

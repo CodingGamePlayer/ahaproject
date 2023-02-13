@@ -49,4 +49,14 @@ public class UseCardControllerImpl implements UseCardController {
 		return mav;
 	}
 
+	@Override
+	@GetMapping("/uc-edit")
+	public ModelAndView getFindUcId(ModelAndView mav, @RequestParam("uc_id") int uc_id) {
+		mav.addObject("ucinfo", ucs.getFindUcId(uc_id));
+		mav.addObject("cardDTOs", cs.selectAll());
+		mav.setViewName("user/use-card/use-edit-form");
+		return mav;
+	}
+	
+
 }

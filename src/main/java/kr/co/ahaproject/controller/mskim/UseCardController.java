@@ -11,5 +11,7 @@ public interface UseCardController {
 	ModelAndView selectOne(ModelAndView mav, int card_id);
 	
 	ModelAndView use_card_form(ModelAndView mav);
+	
+	ModelAndView getFindUcId(ModelAndView mav, int uc_id);
 
 }

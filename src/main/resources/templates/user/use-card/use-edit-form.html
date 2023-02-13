@@ -42,51 +42,31 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*카드명</label>
-                    <input class="input-group-sm form-control " type="text" id="card_name" th:value="${cardDTO.card_name}">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*카드구분</label>
-                    <select class="form-select" aria-label="Default select example"  id="card_class">
-                    	<option th:attr="selected=${cardDTO.card_class} == '개인카드' ? 'true': 'false'" th:value="개인카드">개인카드</option>
-                    	<option th:attr="selected=${cardDTO.card_class} == '법인카드' ? 'true': 'false'" th:value="법인카드">법인카드</option>
-                    	<option th:attr="selected=${cardDTO.card_class} == '사업비카드' ? 'true': 'false'" th:value="사업비카드">사업비카드</option>
+                    <select class="form-select" aria-label="Default select example" id="card_id">
+                        <th:block th:each="card : ${cardDTOs}">
+                            <option th:attr="selected =${card.card_id} == ${ucinfo.card_id} ? true:false" 
+                            th:value="${card.card_id}" >[[${card.card_name}]]</option>
+                        </th:block>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*카드유형</label>
-                    <select class="form-select" aria-label="Default select example" id="card_type">
-                        <option th:attr="selected=${cardDTO.card_type} == '체크카드' ? 'true': 'false'" th:value="체크카드" >체크카드</option>
-                        <option th:attr="selected=${cardDTO.card_type} == '신용카드' ? 'true': 'false'" th:value="신용카드" >신용카드</option>
-                    </select>
+                    <label class="form-control-label">*사용금액</label>
+                    <input class="form-control" th:value="${ucinfo.uc_money}" type="text" id="uc_money">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*카드회사</label>
-                    <input class="form-control" type="text" id="card_company" th:value="${cardDTO.card_company}">
+                    <label class="form-control-label">*사용처</label>
+                    <input class="form-control" th:value="${ucinfo.uc_where}" type="text" id="uc_where">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*카드번호</label>
-                    <input class="form-control" type="text" id="card_num" th:value="${cardDTO.card_num}">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*카드 끝번호(4자리)</label>
-                    <input class="form-control" type="t`ext" id="card_endnum" th:value="${cardDTO.card_endnum}">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*카드 만료일</label>
+                    <label class="form-control-label">*사용일</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' th:value="${cardDTO.card_exp_date}" class='form-control' data-td-target='#datetimepicker1' />
+                        <input id='datetimepicker1Input' th:value="${ucinfo.uc_date}" type='text' class='form-control' data-td-target='#datetimepicker1' />
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
@@ -95,37 +75,37 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*거래처 코드</label>
-                    <input class="form-control" th:value="${cardDTO.cl_code}" type="text" id="cl_code">
+                    <label class="form-control-label">비고</label>
+                    <input class="form-control"  th:value="${ucinfo.uc_etc}" type="text" id="uc_etc">
                 </div>
             </div>
-            <input type="button" class="btn btn-primary" id="cardSubmitBtn" value="수정하기" />
-            <input type="button" class="btn btn-dark mt-2" id="cardDeleteBtn" value="삭제하기"/>
+            <input type="button" class="btn btn-primary" id="useCardSubmitBtn" value="수정하기" />
+            <input type="button" class="btn btn-dark mt-2" id="useCardDeleteBtn" value="삭제하기"/>
         </div>
     </div>
 </div>
 <script>
-    const cardSubmitBtn = document.querySelector('#cardSubmitBtn');
+    const useCardSubmitBtn = document.querySelector('#useCardSubmitBtn');
     const urlParams = new URL(location.href).searchParams;
     
-    const cardDeleteBtn = document.getElementById('cardDeleteBtn');
+    const useCardDeleteBtn = document.getElementById('useCardDeleteBtn');
     					  
-    cardDeleteBtn.addEventListener("click", () => {
-    	const input_card_id = urlParams.get('card_id');
+    useCardDeleteBtn.addEventListener("click", () => {
+    	const input_uc_id = urlParams.get('uc_id');
         
 
-        const cardif = {
-        	card_id : input_card_id
+        const ucif = {
+        	uc_id : input_uc_id
             
         };
 
-        console.log(cardif);
+        console.log(ucif);
 
-        const url = "/api/user/basicinfo/card/cardinfo";
+        const url = "/api/user/worksite/use-card/ucinfo";
 
         fetch(url, {
            method : "DELETE",
-           body : JSON.stringify(cardif),
+           body : JSON.stringify(ucif),
            headers : {
                "Content-Type" : "application/json"
            }
@@ -142,45 +122,37 @@
 
 
     });
-    cardSubmitBtn.addEventListener("click", () => {
-    	const input_card_id = urlParams.get('card_id');
-        const input_card_name = document.querySelector('#card_name').value;
-        const input_card_class = document.querySelector('#card_class').value;
-        const input_card_type = document.querySelector('#card_type').value;
-        const input_card_company = document.querySelector('#card_company').value;
-        const input_card_num = document.querySelector('#card_num').value;
-        const input_card_endnum = document.querySelector('#card_endnum').value;
-        const input_card_exp_date = document.querySelector('#datetimepicker1Input').value;
-        const input_cl_code = document.querySelector('#cl_code').value;
+    useCardSubmitBtn.addEventListener("click", () => {
+    	const input_uc_id = urlParams.get("uc_id");
+    	const input_card_id = document.querySelector('#card_id').value;
+        const input_uc_money = document.querySelector('#uc_money').value;
+        const input_uc_where = document.querySelector('#uc_where').value;
+        const input_uc_date = document.querySelector('#datetimepicker1Input').value;
+        const input_uc_etc = document.querySelector('#uc_etc').value;
 
-        const cardif = {
-        	card_id : input_card_id,
-        	cl_code : input_cl_code,
-            card_name : input_card_name,
-            card_class : input_card_class,
-            card_type : input_card_type,
-            card_company : input_card_company,
-            card_num : input_card_num,
-            card_endnum : input_card_endnum,
-            card_exp_date : input_card_exp_date
+        const ucif = {
+       		uc_id : input_uc_id,
+       		card_id : input_card_id,
+           	uc_money : input_uc_money,
+           	uc_where : input_uc_where,
+           	uc_date : input_uc_date,
+           	uc_etc : input_uc_etc
             
         };
 
-        if(input_card_name == "" || input_card_class == "" ||
-        	input_card_type == "" || input_cl_code == "" ||
-        	input_card_company == "" || input_card_num =="" ||
-        	input_card_endnum == "" || input_card_exp_date == ""){
-            alert('*이 있는 칸은 채워주시기 바랍니다.')
-            return;
+        if(input_card_id == "" || input_uc_money == "" ||
+			input_uc_where == "" || input_uc_date == "" ){
+             alert('*이 있는 칸은 채워주시기 바랍니다.')
+             return;
         }
 
-        console.log(cardif);
+        console.log(ucif);
 
-        const url = "/api/user/basicinfo/card/cardinfo";
+        const url = "/api/user/worksite/use-card/ucinfo";
 
         fetch(url, {
            method : "PUT",
-           body : JSON.stringify(cardif),
+           body : JSON.stringify(ucif),
            headers : {
                "Content-Type" : "application/json"
            }
@@ -188,7 +160,7 @@
            if(response.ok){
                response.text();
                alert('수정이 완료되었습니다.');
-               window.location.reload();
+               window.close();
                opener.location.reload();
            } else {
                alert('수정을 실패하였습니다.');

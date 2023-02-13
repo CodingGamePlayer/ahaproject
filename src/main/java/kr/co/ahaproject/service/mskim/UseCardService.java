@@ -15,6 +15,8 @@ public interface UseCardService {
     
     int update(UseCardDTO ucDTO);
     
-    int delete(UseCardDTO ucDTO);	
+    int delete(UseCardDTO ucDTO);
+    
+    UseCardJoinDTO getFindUcId(int uc_id);
 
 }
