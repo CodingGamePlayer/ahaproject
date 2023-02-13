@@ -174,8 +174,8 @@
            if(response.ok){
                response.text();
                alert('수정이 완료되었습니다.');
-               window.close();
-               opener.location.reload()
+               window.location.reload();
+               opener.location.reload();
            } else {
                alert('수정을 실패하였습니다.');
            }
@@ -205,6 +205,7 @@
     		response.text();
     		alert('삭제 완료되었습니다.');
     		window.close();
+            opener.location.reload();
     	}else{
     		alert('삭제를 실패하였습니다')
     	}

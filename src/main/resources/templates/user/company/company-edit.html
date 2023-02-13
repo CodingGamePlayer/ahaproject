@@ -207,7 +207,7 @@
                response.text();
                alert('수정이 완료되었습니다.');
                window.location.reload();
-               opener.location.reload()
+               opener.location.reload();
            } else {
                alert('수정을 실패하였습니다.');
            }
@@ -237,7 +237,7 @@
                response.text();
                alert('삭제 완료되었습니다.');
                window.close();
-               window.location.reload();
+               opener.location.reload();
            } else {
                alert('삭제 실패하였습니다.');
            }
@@ -246,6 +246,8 @@
 
     });
 </script>
+
+<!-- 셀렉트 구문에 자동 selected  추가 -->
 <script  th:inline="javascript">
     /*<![CDATA[*/
     function selectOne(){
