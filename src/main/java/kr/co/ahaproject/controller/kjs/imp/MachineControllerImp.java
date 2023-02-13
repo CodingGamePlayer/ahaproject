@@ -1,8 +1,8 @@
-package kr.co.ahaproject.controller.moo.imp;
+package kr.co.ahaproject.controller.kjs.imp;
 
-import kr.co.ahaproject.controller.moo.MachineController;
+import kr.co.ahaproject.controller.kjs.MachineController;
 import kr.co.ahaproject.dto.MachineDTO;
-import kr.co.ahaproject.service.moo.MachineService;
+import kr.co.ahaproject.service.kjs.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,5 +53,15 @@ public class MachineControllerImp implements MachineController {
         model.addAttribute("machine", result);
 
         return "user/basicinfo/machine/update";
+    }
+
+    @Override
+    @GetMapping("/basicinfo/machine/image")
+    public String image(MachineDTO machineDTO, Model model) {
+
+        MachineDTO result = machineService.findById(machineDTO);
+
+        model.addAttribute("machineDTO", result);
+        return "user/basicinfo/machine/image";
     }
 }

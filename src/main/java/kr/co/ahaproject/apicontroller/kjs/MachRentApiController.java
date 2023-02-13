@@ -1,4 +1,4 @@
-package kr.co.ahaproject.apicontroller.moo;
+package kr.co.ahaproject.apicontroller.kjs;
 
 import kr.co.ahaproject.dto.MachRentDTO;
 import org.springframework.http.ResponseEntity;

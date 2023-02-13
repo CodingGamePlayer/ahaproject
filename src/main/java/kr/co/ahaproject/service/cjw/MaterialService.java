@@ -12,6 +12,9 @@ public interface MaterialService {
 		// 자재 기초정보 선택조회
 		MaterialDTO selectOne(int mt_id);
 		
+		// 자재 기초정보 count 수
+		int selectCount();
+		
 		// 자재 기초정보 글작성
 		int create(MaterialDTO dto);
 		
@@ -20,5 +23,8 @@ public interface MaterialService {
 		
 		// 자재 기초정보 글삭제
 		int delete(int mt_id);
+
+
+		
 
 }

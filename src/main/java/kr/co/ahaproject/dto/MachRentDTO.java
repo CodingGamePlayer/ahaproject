@@ -15,13 +15,12 @@ public class MachRentDTO {
     String rent_start;
     String rent_end;
     String rent_bill_date;
-    String m_name;
+    String m_code;
     Long rent_supp_value;
     Long rent_tax;
     String rent_collect_date;
     Long rent_collect_value;
     Long rent_misu;
-    Boolean rent_regit;
+    Boolean rent_finished;
     String rent_etc;
-    String rent_type;
 }

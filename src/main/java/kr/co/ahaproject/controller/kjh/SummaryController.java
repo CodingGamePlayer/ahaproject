@@ -1,6 +1,8 @@
 package kr.co.ahaproject.controller.kjh;
 
+import org.springframework.ui.Model;
+
 public interface SummaryController {
 
-    public String summaryList();
+    String summaryList(Model model);
 }

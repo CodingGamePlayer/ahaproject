@@ -59,8 +59,7 @@ public class MaterialApiControllerImp implements MaterialApiController {
 	@Override
 	@DeleteMapping("/material")
 	public ResponseEntity delete(@RequestBody MaterialDTO materialDTO) {
-			System.out.println("로그으으으으으으으으으으으으 : "+materialDTO.getMt_id());
-			System.out.println("로그으으으으으으으으으으으으 : "+materialDTO.toString());
+		
 			int mt_id = materialDTO.getMt_id();
 			int result = materialService.delete(mt_id);
 	        

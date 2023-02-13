@@ -4,11 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{layout/default-template.html}">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+
 <!-- default_layout.html 고유 CSS 추가 -->
 <th:block layout:fragment="css">
     <!--    <link rel="stylesheet" th:href="@{/css/page/home.css}" >-->
@@ -17,8 +13,12 @@
 <th:block layout:fragment="script">
     <!--    <script th:src="@{/js/page/home.js}"></script>-->
 </th:block>
+<style>
 
+</style>
+<!-- Content -->
 <div layout:fragment="content">
+    
     <div class="row">
         <div class="col-sm-12 pe-3">
             <div class="card border shadow-xs mb-4">
@@ -26,9 +26,11 @@
                     <div class="d-sm-flex align-items-center">
                         <div>
                             <h6 class="font-weight-semibold text-lg mb-0">자재 현황</h6>
-                            <p class="text-sm">자재 현황 전체보기</p>
+                            <p class="text-sm">자재별 현황 전체보기</p>
                         </div>
                         <div class="ms-auto d-flex">
+
+
                         </div>
                     </div>
                 </div>
@@ -37,21 +39,31 @@
                         <table class="table align-items-center mb-0">
                             <thead class="bg-gray-100">
                             <tr>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7">번호</th>
+                                <th class="text-secondary text-center text-xs font-weight-semibold opacity-7">사진</th>
+ 								<th class="text-secondary text-xs font-weight-semibold opacity-7">번호</th>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">자재코드</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">자재명</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">규격(제품번호)</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">재고</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">파일</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고1</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고2</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고3</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7"></th>
+                                <th class="text-secondary opacity-7"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <th:block th:each="data : ${listData}">
                                 <tr>
+                                    <th:block th:if="${data.mt_filename} == ''">
+                                    <td class="d-flex justify-content-center">
+                                        <img class="rounded-2" style="width: 200px; height: 100px;" src="https://via.placeholder.com/200x100">
+                                    </td>
+                                    </th:block>
+                                    <th:block th:unless="${data.mt_filename} == ''">
+                                        <td class="d-flex justify-content-center">
+                                            <img class="rounded-2" style="width: 200px; height: 100px;" th:src="|/user/view/s_${data.mt_uuid}_${data.mt_filename}|">
+                                        </td>
+                                    </th:block>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex align-items-center">
@@ -59,42 +71,40 @@
                                             </div>
                                             <div class="d-flex flex-column justify-content-center ms-1">
                                                 <span class="text-secondary text-sm font-weight-normal"
-                                                      th:text="${data.mt_id}"></span>
+                                                      th:text="${data.mt_id}"/>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${data.mt_code}"></span>
+                                              th:text="${data.mt_code}"/>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${data.mt_name}"></span>
+                                              th:text="${data.mt_name}"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${data.mt_standard}"></span>
+                                              th:text="${data.mt_standard}"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${data.mt_remain}"></span>
+                                              th:text="${data.mt_remain}"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${data.mt_file}"></span>
+                                              th:text="${data.mt_etc1}"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${data.mt_etc1}"></span>
+                                              th:text="${data.mt_etc2}"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${data.mt_etc2}"></span>
+                                              th:text="${data.mt_etc3}"/>
                                     </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${data.mt_etc3}"></span>
-                                    </td>
+                                    
+                       
 
                                     <td class="align-middle">
                                         <a href="#" th:onclick="editMaterial([[${data.mt_id}]])">
@@ -110,12 +120,11 @@
 										    window.open("/user/material/detail?mt_id=" + id, "_blank", option);
 										    
 										}
-									</script>
+                                    </script>
                                 </tr>
                             </th:block>
                             </tbody>
                         </table>
-
 
                     </div>
                 </div>
@@ -125,9 +134,7 @@
         </div>
 
     </div>
+
 </div>
-
-
-
-</body>
+</div>
 </html>

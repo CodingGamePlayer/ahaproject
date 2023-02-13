@@ -1,4 +1,4 @@
-package kr.co.ahaproject.entity;
+package kr.co.ahaproject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,20 +9,20 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MachRent {
+public class MachRentListDTO {
 
     Long rent_id;
-    String cst_code;
+    String cst_name;
     String rent_start;
     String rent_end;
     String rent_bill_date;
-    String m_code;
+    String m_name;
+    String m_kind;
     Long rent_supp_value;
     Long rent_tax;
     String rent_collect_date;
     Long rent_collect_value;
     Long rent_misu;
-    Boolean rent_finished;
     String rent_etc;
-    String rent_type;
+    boolean rent_finished;
 }
