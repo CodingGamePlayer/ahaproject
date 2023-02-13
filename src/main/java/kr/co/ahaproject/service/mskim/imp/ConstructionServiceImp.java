@@ -75,6 +75,7 @@ public class ConstructionServiceImp implements ConstructionService {
 		
 		return 1;
 	}
+<<<<<<< HEAD
 
 	@Override
 	public int codeCount() {
@@ -82,4 +83,6 @@ public class ConstructionServiceImp implements ConstructionService {
 		
 		return constructionMapper.codeCount();
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/CodingGamePlayer/ahaproject.git
 }
