@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,4 +64,27 @@ public class CompanyServiceImp implements CompanyService {
 		if(!(rs>0)) return 0;
 		return rs;
 	}
+	
+//	페이징 연습중..
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return companyMapper.count();
+	}
+
+	@Override
+	public List<CompanyDTO> pageList(int displayPost, int postNum) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		List<Company> companyList = companyMapper.listPage(data);
+				
+		return companyList.stream()
+				.map(company -> modelMapper.map(company, CompanyDTO.class))
+				.collect(Collectors.toList());
+	}
 }
+

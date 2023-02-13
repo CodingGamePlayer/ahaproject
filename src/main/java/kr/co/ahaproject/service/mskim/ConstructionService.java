@@ -4,7 +4,7 @@ import kr.co.ahaproject.dto.ConstructionDTO;
 
 import java.util.List;
 
-public interface ConstructionService2 {
+public interface ConstructionService {
 
     List<ConstructionDTO> selectAll();
     

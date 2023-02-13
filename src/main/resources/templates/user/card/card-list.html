@@ -47,6 +47,7 @@
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">카드끝자리</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">만료일</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처코드</th>
+                                <th class="text-secondary opacity-7"></th>
                                 
                             </tr>
                             </thead>
@@ -59,8 +60,9 @@
 
                                             </div>
                                             <div class="d-flex flex-column justify-content-center ms-1">
-                                                <span class="text-secondary text-sm font-weight-normal"
-                                                      th:text="${cardDTO.card_name}"/>
+                                                <a class="text-sm text-primary font-weight-normal"
+                                                href="#" th:onclick="useCardLink([[${cardDTO.card_id}]])"
+                                                      th:text="${cardDTO.card_name}"></a>
                                             </div>
                                         </div>
                                     </td>
@@ -106,6 +108,10 @@
                                             let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                                             window.open("/user/basicinfo/card/card-edit?card_id=" + id, "_blank", option);
+                                        }
+                                        function useCardLink(id){
+                                        	window.location.href = "/user/worksite/use-card/c-list?card_id=" + id;
+
                                         }
                                     </script>
                                 </tr>

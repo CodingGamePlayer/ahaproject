@@ -5,7 +5,7 @@ import kr.co.ahaproject.dto.ConstructionDTO;
 import kr.co.ahaproject.dto.MachRentDTO;
 import kr.co.ahaproject.dto.MachRentListDTO;
 import kr.co.ahaproject.dto.MachineDTO;
-import kr.co.ahaproject.service.kjs.ConstructionService;
+import kr.co.ahaproject.service.mskim.ConstructionService;
 import kr.co.ahaproject.service.kjs.MachRentService;
 import kr.co.ahaproject.service.kjs.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
