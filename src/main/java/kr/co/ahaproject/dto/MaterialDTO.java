@@ -19,5 +19,6 @@ public class MaterialDTO {
     String mt_etc1;
     String mt_etc2;
     String mt_etc3;
-    String mt_file;
+    String mt_filename; 
+    String mt_uuid;
 }
