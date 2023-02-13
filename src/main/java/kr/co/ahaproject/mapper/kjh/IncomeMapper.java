@@ -41,25 +41,6 @@ public interface IncomeMapper {
             "`a`.`in_total_value`, `a`.`in_collect_value`, `a`.`in_collect_remain`, " +
             "`b`.`cp_name` AS `cl_code`, `c`.`cst_name` AS `cst_code` " +
             "FROM (SELECT `io_id`, `cp_name`, `cl_code`, `cst_code`, `io_date`, `io_content`, `in_supp_value`, " +
-            "sum(`in_supp_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `io_id`) " +
-            "AS `in_total_value`, " +
-            "`in_collect_value`, " +
-            "sum(`in_supp_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `io_id`) " +
-            "- sum(`in_collect_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `io_id`) " +
-            "AS `in_collect_remain` " +
-            "FROM `ahaproject`.`income_outcome` WHERE `cl_code` = #{cl_code} " +
-            "ORDER BY `cp_name`, `cl_code`, `cst_code`) AS `a` " +
-            "LEFT OUTER JOIN `client` AS `b` " +
-            "ON `a`.`cl_code` = `b`.`cl_code` " +
-            "LEFT OUTER JOIN `construction` AS `c` " +
-            "ON `a`.`cst_code` = `c`.`cst_code`")
-    @ResultMap("ioMap")
-    List<IncomeOutcome> findByClcode(String cl_code);
-
-    @Select("SELECT `a`.`io_id`, `a`.`cp_name`, `a`.`io_date`, `a`.`io_content`, `a`.`in_supp_value`, " +
-            "`a`.`in_total_value`, `a`.`in_collect_value`, `a`.`in_collect_remain`, " +
-            "`b`.`cp_name` AS `cl_code`, `c`.`cst_name` AS `cst_code` " +
-            "FROM (SELECT `io_id`, `cp_name`, `cl_code`, `cst_code`, `io_date`, `io_content`, `in_supp_value`, " +
             "`in_total_value`, `in_collect_value`, `in_collect_remain` " +
             "FROM `ahaproject`.`income_outcome` WHERE `io_id` = #{io_id}) AS `a` " +
             "LEFT OUTER JOIN `client` AS `b` " +

@@ -3,8 +3,9 @@ package kr.co.ahaproject.service.kjh.imp;
 import kr.co.ahaproject.dto.IncomeOutcomeDTO;
 import kr.co.ahaproject.entity.IncomeOutcome;
 import kr.co.ahaproject.mapper.kjh.IncomeMapper;
+import kr.co.ahaproject.mapper.kjh.OutcomeMapper;
 import kr.co.ahaproject.service.AhaCommonMethod;
-import kr.co.ahaproject.service.kjh.IncomeService;
+import kr.co.ahaproject.service.kjh.OutcomeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class IncomeServiceImp implements IncomeService {
+public class OutcomeServiceImp implements OutcomeService {
     @Autowired
-    IncomeMapper incomeMapper;
+    OutcomeMapper outcomeMapper;
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public List<IncomeOutcomeDTO> selectAll() {
-        List<IncomeOutcome> ios = incomeMapper.selectAll();
+        List<IncomeOutcome> ios = outcomeMapper.selectAll();
 
         ios.forEach(io -> io.toString());
         List<IncomeOutcomeDTO> list = ios.stream()
@@ -33,7 +34,7 @@ public class IncomeServiceImp implements IncomeService {
 
     @Override
     public IncomeOutcomeDTO selectOne(long io_id) {
-        IncomeOutcome io = incomeMapper.selectOne(io_id);
+        IncomeOutcome io = outcomeMapper.selectOne(io_id);
         IncomeOutcomeDTO ioDTO = modelMapper.map(io, IncomeOutcomeDTO.class);
         return ioDTO;
     }
@@ -51,7 +52,7 @@ public class IncomeServiceImp implements IncomeService {
 
         IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
 
-        int result = incomeMapper.insert(io);
+        int result = outcomeMapper.insert(io);
         if (result < 0) {
             return 0;
         }
@@ -65,7 +66,7 @@ public class IncomeServiceImp implements IncomeService {
 
         IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
 
-        int result = incomeMapper.update(io);
+        int result = outcomeMapper.update(io);
         if (result < 0) {
             return 0;
         }
@@ -75,7 +76,7 @@ public class IncomeServiceImp implements IncomeService {
     @Override
     public int delete(IncomeOutcomeDTO ioDTO) {
         IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
-        int result = incomeMapper.delete(io);
+        int result = outcomeMapper.delete(io);
         if (result < 0) {
             return 0;
         }
