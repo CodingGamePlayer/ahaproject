@@ -39,11 +39,13 @@
                             <thead class="bg-gray-100">
                             <tr>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7">사원명</th>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">회사명</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사명
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">공사명</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처명
                                 </th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">지급액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">지급일</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">작업여부</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -76,6 +78,15 @@
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${laborCost.lc_date}"/>
                                     </td>
+                                    <th:block th:switch="${laborCost.lc_regit}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-danger text-danger bg-danger"
+                                                  th:case="true">작업완료</span>
+                                            <span class="badge badge-sm border border-success text-success bg-success"
+                                                  th:case="false">작업중</span>
+
+                                        </td>
+                                    </th:block>
 
                                     <td class="align-middle">
                                         <a href="#" th:onclick="editLaborCost([[${laborCost.lc_id}]])">
@@ -90,7 +101,7 @@
                                         function editLaborCost(id) {
                                             let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-                                            window.open("/user/accounting/laborcost/lc_id=" + id, "_blank", option);
+                                            window.open("/user/accounting/laborcost/update?lc_id=" + id, "_blank", option);
                                         }
                                     </script>
                                 </tr>

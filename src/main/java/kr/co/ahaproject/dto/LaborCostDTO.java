@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LaborCostDTO {
     Long lc_id;
-    String emp_name;
-    String cst_name;
-    String cp_name;
+    String emp_code;
+    String cst_code;
+    String cl_code;
     Long lc_value;
     String lc_date;
+    boolean lc_regit;
 }
