@@ -1,5 +1,6 @@
 package kr.co.ahaproject.mapper.kjs;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.Account;
 import org.apache.ibatis.annotations.*;
 
@@ -34,4 +35,8 @@ public interface AccountMapper {
 
     @Delete("DELETE FROM account WHERE ac_id = #{account.ac_id}")
     int delete(@Param("account") Account account);
+
+    List<Account> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+    int getCount(PageRequestDTO pageRequestDTO);
 }

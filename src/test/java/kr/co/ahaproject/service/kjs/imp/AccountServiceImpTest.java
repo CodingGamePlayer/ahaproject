@@ -1,6 +1,8 @@
 package kr.co.ahaproject.service.kjs.imp;
 
 import kr.co.ahaproject.dto.AccountDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.Account;
 import kr.co.ahaproject.mapper.kjs.AccountMapper;
 import kr.co.ahaproject.service.kjs.AccountService;
@@ -75,5 +77,20 @@ class AccountServiceImpTest {
 
         int delete = accountService.delete(accountDTO);
         log.info(String.valueOf(delete));
+    }
+
+    @Test
+    void selectAllForPaging() {
+
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .build();
+
+        PageResponseDTO<AccountDTO> pageResponseDTO = accountService.selectAllForPaging(pageRequestDTO);
+
+        List<AccountDTO> dtoList = pageResponseDTO.getDtoList();
+
+        dtoList.forEach(accountDTO -> log.info(String.valueOf(accountDTO)));
     }
 }
