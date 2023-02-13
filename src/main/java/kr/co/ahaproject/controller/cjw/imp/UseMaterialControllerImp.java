@@ -26,7 +26,17 @@ public class UseMaterialControllerImp implements UseMaterialController {
 	//현장 자재 글생성 - 이동하기
 	@Override
 	@GetMapping("/user/worksite/use-material/register")
-	public String register() {
+	public String register(Model model, UseMaterialDTO useMaterialDTO) {
+		 if(useMaterialService.selectCount() > 0) {
+		        int id = useMaterialService.selectCount() + 1;
+		        String idkey = String.format("%04d",id);
+		        model.addAttribute("idkey", "MT"+idkey);
+		    } else {
+		        String idkey = "0001";
+		        model.addAttribute("idkey","MT"+idkey);
+		    }
+			
+		
 		return "/user/use-material/use-material-form";
 	}
 
@@ -34,6 +44,8 @@ public class UseMaterialControllerImp implements UseMaterialController {
 	@Override
 	@GetMapping("/user/worksite/use-material/detail")
 	public String detail(UseMaterialDTO dto, Model model) {
+		
+		model.addAttribute("selectData", useMaterialService.selectOne(dto.getUm_id()));
 		return "user/use-material/use-material-edit-form";
 	}
 

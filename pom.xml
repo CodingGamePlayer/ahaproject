@@ -95,11 +95,6 @@
 
 
         <!--        Rest API 통신을 문서화 하기 위한 lib-->
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-ui</artifactId>-->
-<!--            <version>1.6.7</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
@@ -110,6 +105,7 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <!--  이미지 파일 사이즈를 조절해주는 lib-->
         <dependency>
             <groupId>net.coobird</groupId>
             <artifactId>thumbnailator</artifactId>
@@ -120,8 +116,6 @@
 
 
         <!--        Json 객체들을 쉽게 만들거나 자료구조에 담을 수 있게 하기 위한 lib-->
-
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

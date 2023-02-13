@@ -12,9 +12,14 @@ import lombok.NoArgsConstructor;
 public class Estimate {
 
     Long es_id;
+    String es_code;
     String es_title;
     String es_body;
-    String es_file;
+    String es_uuid;
+    String es_filename;
     String es_date;
-    int us_id;
+    String us_id;
+    String es_etc1;
+    String es_etc2;
+
 }
