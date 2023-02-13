@@ -42,5 +42,10 @@ public class UseMaterialServiceImp implements UseMaterialService {
 		return useMaterialMapper.delete(um_id);
 	}
 
+	@Override
+	public int selectCount() {
+		return useMaterialMapper.selectCount();
+	}
+
 	
 }

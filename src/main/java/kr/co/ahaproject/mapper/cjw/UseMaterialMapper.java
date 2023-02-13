@@ -38,6 +38,9 @@ public interface UseMaterialMapper {
             })
 	List<UseMaterialDTO> listAll(); // 전체조회
 	
+	@Select("SELECT count(*) FROM use_material")
+	int selectCount();
+	
 	@Select("SELECT * FROM use_material WHERE um_id = #{um_id}")
 	@ResultMap("use_materialMap")
 	UseMaterialDTO selectOne(Long um_id); // 선택조회

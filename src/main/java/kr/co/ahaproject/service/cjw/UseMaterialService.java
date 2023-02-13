@@ -12,6 +12,9 @@ public interface UseMaterialService {
 			// 현장 자재 선택조회
 			UseMaterialDTO selectOne(Long um_id);
 			
+			// 현장 자재 count 수
+			int selectCount();
+			
 			// 현장 자재 글생성
 			int create(UseMaterialDTO dto);
 			
