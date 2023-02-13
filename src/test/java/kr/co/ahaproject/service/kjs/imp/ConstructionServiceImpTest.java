@@ -1,7 +1,7 @@
 package kr.co.ahaproject.service.kjs.imp;
 
 import kr.co.ahaproject.dto.ConstructionDTO;
-import kr.co.ahaproject.service.kjs.ConstructionService;
+import kr.co.ahaproject.service.mskim.ConstructionService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
