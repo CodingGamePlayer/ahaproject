@@ -1,9 +1,9 @@
 package kr.co.ahaproject.service.kjh;
 
-import kr.co.ahaproject.dto.IncomeOutcomeDTO;
+import kr.co.ahaproject.dto.OutcomeDTO;
 
 import java.util.List;
 
 public interface SummaryService {
-    List<IncomeOutcomeDTO> selectAll();
+    List<OutcomeDTO> selectAll();
 }

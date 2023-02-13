@@ -1,6 +1,6 @@
 package kr.co.ahaproject.mapper.kjh;
 
-import kr.co.ahaproject.entity.IncomeOutcome;
+import kr.co.ahaproject.entity.Outcome;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -38,5 +38,5 @@ public interface SummaryMapper {
             @Result(property = "in_collect_value", column = "in_collect_value"),
             @Result(property = "in_collect_remain", column = "in_collect_remain"),
     })
-    List<IncomeOutcome> selectAll();
+    List<Outcome> selectAll();
 }

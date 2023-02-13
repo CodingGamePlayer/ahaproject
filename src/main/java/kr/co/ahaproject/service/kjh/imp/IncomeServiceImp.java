@@ -1,7 +1,7 @@
 package kr.co.ahaproject.service.kjh.imp;
 
-import kr.co.ahaproject.dto.IncomeOutcomeDTO;
-import kr.co.ahaproject.entity.IncomeOutcome;
+import kr.co.ahaproject.dto.IncomeDTO;
+import kr.co.ahaproject.entity.Income;
 import kr.co.ahaproject.mapper.kjh.IncomeMapper;
 import kr.co.ahaproject.service.AhaCommonMethod;
 import kr.co.ahaproject.service.kjh.IncomeService;
@@ -19,50 +19,39 @@ public class IncomeServiceImp implements IncomeService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public List<IncomeOutcomeDTO> selectAll() {
-        List<IncomeOutcome> ios = incomeMapper.selectAll();
+    public List<IncomeDTO> selectAll() {
+        List<Income> ins = incomeMapper.selectAll();
 
-        ios.forEach(io -> io.toString());
-        List<IncomeOutcomeDTO> list = ios.stream()
-                .map(io -> modelMapper.map(io, IncomeOutcomeDTO.class))
+        ins.forEach(in -> in.toString());
+        List<IncomeDTO> list = ins.stream()
+                .map(in -> modelMapper.map(in, IncomeDTO.class))
                 .collect(Collectors.toList());
-        list.forEach(ioDTO -> ioDTO.toString());
+        list.forEach(inDTO -> inDTO.toString());
         return list;
     }
 
-    @Override
-    public List<IncomeOutcomeDTO> findByClcode(String cl_code) {
-        List<IncomeOutcome> ios = incomeMapper.findByClcode(cl_code);
-
-        ios.forEach(io -> io.toString());
-        List<IncomeOutcomeDTO> list = ios.stream()
-                .map(io -> modelMapper.map(io, IncomeOutcomeDTO.class))
-                .collect(Collectors.toList());
-        list.forEach(ioDTO -> ioDTO.toString());
-        return list;
-    }
 
     @Override
-    public IncomeOutcomeDTO selectOne(long io_id) {
-        IncomeOutcome io = incomeMapper.selectOne(io_id);
-        IncomeOutcomeDTO ioDTO = modelMapper.map(io, IncomeOutcomeDTO.class);
-        return ioDTO;
+    public IncomeDTO selectOne(long in_id) {
+        Income in = incomeMapper.selectOne(in_id);
+        IncomeDTO inDTO = modelMapper.map(in, IncomeDTO.class);
+        return inDTO;
     }
 
 
     @Override
-    public int insert(IncomeOutcomeDTO ioDTO) {
+    public int insert(IncomeDTO inDTO) {
 
-        String after = new AhaCommonMethod().changeDate(ioDTO.getIo_date());
-        ioDTO.setIo_date(after);
+        String after = new AhaCommonMethod().changeDate(inDTO.getIn_date());
+        inDTO.setIn_date(after);
 
         long total = 0;
-        ioDTO.setIn_total_value(total);
-        ioDTO.setIn_collect_remain(total);
+        inDTO.setIn_total_value(total);
+        inDTO.setIn_collect_remain(total);
 
-        IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
+        Income in = modelMapper.map(inDTO, Income.class);
 
-        int result = incomeMapper.insert(io);
+        int result = incomeMapper.insert(in);
         if (result < 0) {
             return 0;
         }
@@ -70,13 +59,13 @@ public class IncomeServiceImp implements IncomeService {
     }
 
     @Override
-    public int update(IncomeOutcomeDTO ioDTO) {
-        String after = new AhaCommonMethod().changeDate(ioDTO.getIo_date());
-        ioDTO.setIo_date(after);
+    public int update(IncomeDTO inDTO) {
+        String after = new AhaCommonMethod().changeDate(inDTO.getIn_date());
+        inDTO.setIn_date(after);
 
-        IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
+        Income in = modelMapper.map(inDTO, Income.class);
 
-        int result = incomeMapper.update(io);
+        int result = incomeMapper.update(in);
         if (result < 0) {
             return 0;
         }
@@ -84,9 +73,9 @@ public class IncomeServiceImp implements IncomeService {
     }
 
     @Override
-    public int delete(IncomeOutcomeDTO ioDTO) {
-        IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
-        int result = incomeMapper.delete(io);
+    public int delete(IncomeDTO inDTO) {
+        Income in = modelMapper.map(inDTO, Income.class);
+        int result = incomeMapper.delete(in);
         if (result < 0) {
             return 0;
         }
