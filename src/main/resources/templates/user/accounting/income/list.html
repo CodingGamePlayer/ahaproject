@@ -23,24 +23,33 @@
                     <div class="d-sm-flex align-items-center">
                         <div>
                             <h6 class="font-weight-semibold text-lg mb-0">매입 현황</h6>
-                            <p class="text-sm">매입별 현황 전체보기</p>
+                            <p class="text-sm">매입 현황 전체보기</p>
                         </div>
-                        <div class="ms-auto d-flex">
+                        <div class="ms-auto d-flex col-sm-2">
+                            <select th:onchange="clientSelect()" class="form-select" aria-label="Default select example" id="cl_code">
+                                <option selected>거래처 선택보기</option>
+                                <th:block th:each="client : ${clientDTOs}">
+                                    <option th:value="${client.cl_code}">[[${client.cp_name}]]</option>
+                                </th:block>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="card-body px-0 py-0">
                     <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
-                        <table class="table align-items-center mb-0">
+                        <table class="table align-items-center mb-0 table-hover">
                             <thead class="bg-gray-100">
                             <tr>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">회사명</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처코드</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사코드</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">회사명</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처명</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사명</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 내용</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 날짜</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 공급가액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 합계금액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 지급액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 잔액</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">지급완료여부</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                             </thead>
@@ -56,6 +65,12 @@
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.cst_code}"/>
                                     </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.io_content}"/>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.io_date}"/>
+                                    </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.in_supp_value}"/>
                                     </td>
@@ -68,6 +83,16 @@
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.in_collect_remain}"/>
                                     </td>
+                                    <th:block th:if="${ioDTO.in_collect_remain == 0}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-success text-success bg-success">완료</span>
+                                        </td>
+                                    </th:block>
+                                    <th:block th:unless="${ioDTO.in_collect_remain == 0}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-danger text-danger bg-danger">미완료</span>
+                                        </td>
+                                    </th:block>
 
                                     <td class="align-middle">
                                         <a href="#" th:onclick="editIncome([[${ioDTO.io_id}]])">
@@ -77,11 +102,26 @@
                                         </a>
                                     </td>
                                     <script>
+
+
                                         function editIncome(id) {
                                             let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                                             window.open("/user/accounting/income-edit?io_id=" + id, "_blank", option);
-                                        }
+                                        };
+
+                                        function clientSelect() {
+
+                                            const cl_code = document.getElementById('cl_code');
+                                            const elSelectedOption = cl_code.options[cl_code.selectedIndex];
+
+                                            const selectedText = elSelectedOption.text;
+                                            const selectedValue = elSelectedOption.value;
+
+                                            window.location.href = "/user/accounting/incomeclcode/"+selectedValue;
+
+                                        };
+
                                     </script>
                                 </tr>
                             </th:block>
