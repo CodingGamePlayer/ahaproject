@@ -2772,7 +2772,7 @@ progress {
 
 .form-control:disabled,
 .form-control[readonly] {
-  background-color: #ffffff;
+  background-color: #e9ecef;
   opacity: 1;
 }
 
@@ -27577,4 +27577,10 @@ button.swiper-pagination-bullet {
   color: #0f172a;
 }
 
+.a img {
+  transition: all 0.2s linear;
+}
+.a:hover img {
+  transform: scale(1.4);
+}
 /*# sourceMappingURL=dashboard-free.css.map */

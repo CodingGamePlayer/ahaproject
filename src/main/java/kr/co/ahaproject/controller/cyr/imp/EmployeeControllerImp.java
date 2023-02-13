@@ -36,9 +36,15 @@ public class EmployeeControllerImp implements EmployeeController {
     @GetMapping("user/employee/emform")
     public String goInsert(Model model) {
         model.addAttribute("companyDTOs", companyService.selectAll());
+        int count = employeeService.count();
+        if(count>0){
         int id = employeeService.selectid() +1;
         String idkey = String.format("%04d",id);
-        model.addAttribute("idkey",idkey);
+            model.addAttribute("idkey",idkey);
+       } else {
+            String idkey = "0001";
+            model.addAttribute("idkey",idkey);
+            }
         return "user/employee/emform";
     }
 
@@ -56,12 +62,9 @@ public class EmployeeControllerImp implements EmployeeController {
 
     @Override
     @GetMapping("user/employee/emeditform")
-    public String emEditForm(Employee employee, Model model) {
+    public void emEditForm(Employee employee, Model model) {
         model.addAttribute("companyDTOs", companyService.selectAll());
-        int id = employee.getEmp_id().intValue();
-        model.addAttribute("eDTO",employeeService.selectOne(id));
-
-        return "user/employee/emeditform";
+        model.addAttribute("eDTO",employeeService.selectOne(employee.getEmp_id().intValue()));
     }
 
 
@@ -91,7 +94,7 @@ public class EmployeeControllerImp implements EmployeeController {
 
         int result = employeeService.update(employee);
 //        log.info(String.valueOf(result));
-        if (result == 1){
+        if (result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         return ResponseEntity.status(HttpStatus.OK).build();

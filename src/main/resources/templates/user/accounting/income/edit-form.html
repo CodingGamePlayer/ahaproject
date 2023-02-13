@@ -131,7 +131,6 @@
             if (response.ok) {
                 response.text();
                 alert('삭제가 되었습니다.');
-                opener.location.reload();
                 window.close();
             } else {
                 alert('삭제를 실패하였습니다.');
@@ -183,7 +182,6 @@
             if (response.ok) {
                 response.text();
                 alert('수정이 완료되었습니다.');
-                opener.location.reload();
                 window.close();
             } else {
                 alert('수정을 실패하였습니다.');

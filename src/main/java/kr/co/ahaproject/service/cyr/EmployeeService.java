@@ -12,6 +12,6 @@ public interface EmployeeService {
     int insert(Employee employee);
     int update(Employee employee);
     int delete(int emp_id);
-
+    int count();
 
 }

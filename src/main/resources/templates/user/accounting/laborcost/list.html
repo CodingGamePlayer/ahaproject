@@ -38,13 +38,12 @@
                         <table class="table align-items-center mb-0">
                             <thead class="bg-gray-100">
                             <tr>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7">사원코드</th>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7">사원명</th>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">회사명</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사코드
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사명
                                 </th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">지급액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">지급일</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">등록여부</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -57,13 +56,13 @@
                                             </div>
                                             <div class="d-flex flex-column justify-content-center ms-1">
                                                 <span class="text-secondary text-sm font-weight-normal"
-                                                      th:text="${laborCost.emp_code}"/>
+                                                      th:text="${laborCost.emp_name}"/>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${laborCost.cst_code}"/>
+                                              th:text="${laborCost.cst_name}"/>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-sm font-weight-normal"
@@ -76,10 +75,6 @@
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${laborCost.lc_date}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${laborCost.lc_regit}"/>
                                     </td>
 
                                     <td class="align-middle">
@@ -95,7 +90,7 @@
                                         function editLaborCost(id) {
                                             let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-                                            window.open("/admin/laborCost-edit?lc_id=" + id, "_blank", option);
+                                            window.open("/user/accounting/laborcost/lc_id=" + id, "_blank", option);
                                         }
                                     </script>
                                 </tr>

@@ -65,35 +65,4 @@ public class IncomeServiceImp implements IncomeService {
         }
         return 1;
     }
-
-
-
-    @Override
-    public IncomeOutcomeDTO selectRecent(IncomeOutcomeDTO ioDTO) {
-        IncomeOutcome io = incomeMapper.selectRecent(modelMapper.map(ioDTO,IncomeOutcome.class));
-        IncomeOutcomeDTO ioDTO1 = modelMapper.map(io, IncomeOutcomeDTO.class);
-        return ioDTO1;
-    }
-
-    @Override
-    public List<IncomeOutcomeDTO> selectAllmod(IncomeOutcomeDTO ioDTO) {
-        List<IncomeOutcome> ios = incomeMapper.selectAllmod(modelMapper.map(ioDTO,IncomeOutcome.class));
-        ios.forEach(io -> io.toString());
-        List<IncomeOutcomeDTO> list = ios.stream()
-                .map(io -> modelMapper.map(io, IncomeOutcomeDTO.class))
-                .collect(Collectors.toList());
-        list.forEach(ioDTO2 -> ioDTO2.toString());
-        return list;
-    }
-
-    @Override
-    public List<IncomeOutcomeDTO> selectGroup() {
-        List<IncomeOutcome> ios = incomeMapper.selectGroup();
-        ios.forEach(io -> io.toString());
-        List<IncomeOutcomeDTO> list = ios.stream()
-                .map(io -> modelMapper.map(io, IncomeOutcomeDTO.class))
-                .collect(Collectors.toList());
-        list.forEach(ioDTO2 -> ioDTO2.toString());
-        return list;
-    }
 }
