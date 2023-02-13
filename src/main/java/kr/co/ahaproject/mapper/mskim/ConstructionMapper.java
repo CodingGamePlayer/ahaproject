@@ -52,4 +52,9 @@ public interface ConstructionMapper {
     
     @Delete("delete from construction where cst_id = #{cst.cst_id}")
     int delete(@Param("cst") Construction cst);
+
+    
+    @Select("select count(*) from construction")
+    int codeCount();
+
 }
