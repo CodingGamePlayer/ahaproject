@@ -38,11 +38,10 @@
                         <table class="table align-items-center mb-0">
                             <thead class="bg-gray-100">
                             <tr>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7">임대구분</th>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">공사코드</th>
+                                <th class="text-secondary text-xs text-center font-weight-semibold opacity-7 ps-2">공사명</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">렌트 시작일
                                 </th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">렌트 종료일</th>
+                                <th class="text-center text-secondary text-xs  font-weight-semibold opacity-7">렌트 종료일</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">견적서 발행일</th>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7">장비명</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공급가액</th>
@@ -51,7 +50,7 @@
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">미수금
                                 </th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">임대여부</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">임대현황</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
@@ -61,24 +60,17 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            <div class="d-flex align-items-center">
-
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center ms-1">
-                                                <span class="text-secondary text-sm font-weight-normal"
-                                                      th:text="${machRent.rent_type}"/>
+                                            <div class="d-flex flex-column text-center justify-content-center ms-1">
+                                                <span class="text-secondary  text-sm font-weight-normal"
+                                                      th:text="${machRent.cst_name}"/>
                                             </div>
                                         </div>
-                                    </td>
-                                    <td>
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${machRent.cst_code}"/>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${machRent.rent_start}"/>
                                     </td>
-                                    <td class="align-middle text-center">
+                                    <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${machRent.rent_end}"/>
                                     </td>
@@ -110,12 +102,12 @@
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${machRent.rent_misu}"/>
                                     </td>
-                                    <th:block th:switch="${machRent.rent_regit}">
+                                    <th:block th:switch="${machRent.rent_finished}">
                                         <td class="align-middle text-center">
                                             <span class="badge badge-sm border border-danger text-danger bg-danger"
-                                                  th:case="false">임대완료</span>
+                                                  th:case="true">임대종료</span>
                                             <span class="badge badge-sm border border-success text-success bg-success"
-                                                  th:case="true">임대중</span>
+                                                  th:case="false">임대중</span>
 
                                         </td>
                                     </th:block>

@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface CalendarService {
 
-    List<CalendarDTO> selectAll();
+    List<CalendarDTO> selectAll(String kind);
+    List<CalendarDTO> selectAllWithoutKind();
 
-    List<CountMachRentDTO> countRent();
+    CountMachRentDTO countRent(String requestYear,String kind);
 }

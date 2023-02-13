@@ -22,7 +22,7 @@ class CalendarServiceImpTest {
     @Test
     void selectAll() {
 
-        List<CalendarDTO> calendarDTOS = calendarService.selectAll();
+        List<CalendarDTO> calendarDTOS = calendarService.selectAll("장비");
 
         calendarDTOS.forEach(calendarDTO -> calendarDTO.toString());
 
@@ -31,49 +31,14 @@ class CalendarServiceImpTest {
     @Test
     void countRent() {
 
-        List<CalendarDTO> calendarDTOS = calendarService.selectAll();
+        String kind = "장비";
 
-        List<String> yearArr = new ArrayList<>();
-        List<CountMachRentDTO> rentDTOS = new ArrayList<>();
+        CountMachRentDTO rentDTOS = calendarService.countRent("2022",kind);
 
-        for (int i = 0; i < calendarDTOS.size(); i++) {
-            String year = calendarDTOS.get(i).getStart().substring(0, 4);
-
-
-            if (!yearArr.contains(year)) {
-                yearArr.add(year);
-            }
-        }
-
-//        log.info(yearArr.toString());
-
-        List<CountMachRentDTO> machRentDTOList = yearArr.stream()
-                .map(s -> new CountMachRentDTO(s))
-                .collect(Collectors.toList());
-
-//        log.info(machRentDTOList.toString());
-
-        for (int i = 0; i < calendarDTOS.size(); i++) {
-            String year = calendarDTOS.get(i).getStart().substring(0, 4);
-            String month = calendarDTOS.get(i).getStart().substring(5, 7);
-
-            for (int j = 0; j < machRentDTOList.size(); j++) {
-                if (machRentDTOList.get(j).getYear().equals(year)) {
-                    machRentDTOList.get(j).increaseCount(month);
-                }
-            }
-        }
-
-        for (int i = 0; i < machRentDTOList.size(); i++) {
-            if (machRentDTOList.get(i).getYear().equals("2023")){
-                rentDTOS.add(machRentDTOList.get(i));
-            }
-        }
-
-//        machRentDTOList.forEach(countMachRentDTO -> log.info(String.valueOf(countMachRentDTO)));
-        rentDTOS.forEach(countMachRentDTO -> log.info(String.valueOf(countMachRentDTO)));
-//        log.info((String) map.get("2023"));
+       log.info(String.valueOf(rentDTOS));
 
 
     }
+
+
 }

@@ -1,10 +1,9 @@
-package kr.co.ahaproject.apicontroller.moo.imp;
+package kr.co.ahaproject.apicontroller.kjs.imp;
 
 import io.swagger.annotations.ApiOperation;
-import kr.co.ahaproject.apicontroller.moo.MachRentApiController;
+import kr.co.ahaproject.apicontroller.kjs.MachRentApiController;
 import kr.co.ahaproject.dto.MachRentDTO;
-import kr.co.ahaproject.service.moo.MachRentService;
-import kr.co.ahaproject.service.moo.MachineService;
+import kr.co.ahaproject.service.kjs.MachRentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,7 @@ public class MachRentApiControllerImp implements MachRentApiController {
 
     @Override
     @ApiOperation(value = "장비임대 POST", notes = "POST 방식으로 장비임대 등록")
-    @PostMapping("/rental")
+    @PostMapping(value = "/rental", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity register(@RequestBody MachRentDTO machRentDTO) {
 
         if(machRentService ==  null){
@@ -31,7 +30,7 @@ public class MachRentApiControllerImp implements MachRentApiController {
         int result = machRentService.register(machRentDTO);
 
         if(result == 0){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }

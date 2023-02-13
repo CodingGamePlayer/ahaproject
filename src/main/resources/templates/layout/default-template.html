@@ -30,8 +30,11 @@
             integrity="sha384-yBhgDqxM50qJV5JPdayci8wCfooqvhFYbIKhv0hTtLvfeeyJMJCscRfFNKIxt43M" crossorigin="anonymous">
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            $(function () {
+
+        document.addEventListener('DOMContentLoaded', function (message) {
+
+
+            $(function (message) {
                 let request = $.ajax({
                     url: "/api/user/calendar", // 변경하기
                     method: "GET",
@@ -41,13 +44,16 @@
                 request.done(function (data) {
                     var calendarEl = document.getElementById('calendar');
                     var calendar = new FullCalendar.Calendar(calendarEl, {
-                        height : 650,
+
+
+                        height: 650,
                         displayEventTime: false,
+                        dayMaxEvent: true,
                         initialView: 'dayGridMonth',
                         // contentHeight: "auto",
                         headerToolbar: {
-                            left: 'title',
-
+                            left: 'dayGridMonth,listWeek',
+                            center: 'title',
                             right: 'today prev,next'
                         },
 
@@ -66,6 +72,13 @@
                          * data 로 값이 넘어온다. log 값 전달.
                          */
                         events: data
+
+                        , function (event) {
+                            if (event.url) {
+                                window.open(event.url);
+                                return false;
+                            }
+                        }
                     });
                     calendar.render();
                 });
@@ -73,6 +86,7 @@
                     alert("Request failed: " + textStatus);
                 });
             });
+
         });
     </script>
 </head>

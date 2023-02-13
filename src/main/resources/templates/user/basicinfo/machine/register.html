@@ -68,14 +68,23 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
+                    <label class="form-control-label">*종류</label>
+                    <select class="form-select" aria-label="Default select example" id="m_kind">
+                        <option value="장비" selected>장비</option>
+                        <option value="포장" >포장</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
                     <label class="form-control-label">*매입액</label>
-                    <input class="form-control" type="text" id="m_price">
+                    <input class="form-control" type="text" id="m_price" onkeyup="calculateTax()">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*세액</label>
-                    <input class="form-control" type="text" id="m_tax">
+                    <input class="form-control" type="text" id="m_tax"/>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -89,15 +98,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">사용여부</label>
-                    <select class="form-select" aria-label="Default select example" id="m_use">
-                        <option value="사용" selected>사용</option>
-                        <option value="미사용">미사용</option>
-                    </select>
-                </div>
-            </div>
+<!--            <div class="col-sm-12">-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label">사용여부</label>-->
+<!--                    <select class="form-select" aria-label="Default select example" id="m_use">-->
+<!--                        <option value="사용" selected>사용</option>-->
+<!--                        <option value="미사용">미사용</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고1</label>
@@ -172,6 +181,21 @@
 
 <!-- 파일 첨부용 JS end-->
 
+<!--세금 자동계산 JS-->
+<script>
+    function calculateTax(){
+        const price = document.querySelector("#m_price").value;
+        const target = document.querySelector("#m_tax");
+        const tax = price * 0.1;
+        console.log(price);
+        console.log(target);
+        console.log(`tax = ${tax}`);
+        target.value = Math.floor(tax);
+    }
+</script>
+
+
+<!--파일첨부 및 등록을 위한 JS-->
 <script>
     let input_UUID;
     let input_Filename;
@@ -252,19 +276,21 @@
         const input_m_name = document.querySelector('#m_name').value;
         const input_m_equip_num = document.querySelector('#m_equip_num').value;
         const input_m_type = document.querySelector('#m_type').value;
+        const input_m_kind = document.querySelector('#m_kind').value;
         const input_m_price = document.querySelector('#m_price').value;
         const input_m_tax = document.querySelector('#m_tax').value;
         const input_m_date = document.querySelector('#datetimepicker1Input').value;
         const input_m_etc1 = document.querySelector('#m_etc1').value;
         const input_m_etc2 = document.querySelector('#m_etc2').value;
         const input_m_etc3 = document.querySelector('#m_etc3').value;
-        const input_m_use = document.querySelector('#m_use').value;
+        // const input_m_use = document.querySelector('#m_use').value;
 
         const machine1 = {
             m_code : input_m_code,
             m_name : input_m_name,
             m_equip_num : input_m_equip_num,
             m_type : input_m_type,
+            m_kind : input_m_kind,
             m_price : input_m_price,
             m_tax : input_m_tax,
             m_date : input_m_date,
@@ -273,10 +299,9 @@
             m_etc2 : input_m_etc2,
             m_etc3 : input_m_etc3,
             m_uuid : input_UUID,
-            m_use : input_m_use
         };
 
-        if(input_m_code == ""||
+        if(input_m_code == ""|| input_m_kind =="" ||
             input_m_name == "" || input_m_equip_num == "" ||
             input_m_type == "" || input_m_price == "" ||
             input_m_tax == "" || input_m_date ==""){
@@ -315,6 +340,7 @@
                response.text();
                alert('등록이 완료되었습니다.');
                window.location.reload();
+               opener.location.reload();
            } else {
                alert('등록을 실패하였습니다.');
            }
