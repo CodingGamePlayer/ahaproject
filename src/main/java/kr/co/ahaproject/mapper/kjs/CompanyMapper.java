@@ -12,13 +12,15 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface CompanyMapper {
 
 //	전체조회
-    @Select("SELECT * FROM company")
+    @Select("SELECT * FROM company order by cp_id desc")
     @Results(id = "companyMap", value = {
             @Result(property = "cp_id", column = "cp_id"),
             @Result(property = "cp_name", column = "cp_name"),
@@ -35,7 +37,8 @@ public interface CompanyMapper {
             @Result(property = "cp_eng_address", column = "cp_eng_address"),
             @Result(property = "cp_eng_head_name", column = "cp_eng_head_name"),
             @Result(property = "cp_domain", column = "cp_domain"),
-            @Result(property = "cp_file", column = "cp_file") })
+            @Result(property = "cp_uuid", column = "cp_uuid"),
+            @Result(property = "cp_filename", column = "cp_filename") })
     List<Company> selectAll();
     
 //  등록
@@ -54,7 +57,8 @@ public interface CompanyMapper {
     		+ "cp_eng_address,"
     		+ "cp_eng_head_name,"
     		+ "cp_domain,"
-    		+ "cp_file)"
+    		+ "cp_filename,"
+    		+ "cp_uuid)"
     		+ " VALUES "
     		+ "(#{company.cp_name},"
     		+ "#{company.cp_num},"
@@ -70,7 +74,8 @@ public interface CompanyMapper {
     		+ "#{company.cp_eng_address},"
     		+ "#{company.cp_eng_head_name},"
     		+ "#{company.cp_domain},"
-    		+ "#{company.cp_file});")
+    		+ "#{company.cp_filename},"
+    		+ "#{company.cp_uuid});")
     int register(@Param("company")Company company);
     
 //  선택조회
@@ -97,13 +102,23 @@ public interface CompanyMapper {
     		+ "cp_eng_address = #{company.cp_eng_address},"
     		+ "cp_eng_head_name = #{company.cp_eng_head_name},"
     		+ "cp_domain = #{company.cp_domain},"
-    		+ "cp_file = #{company.cp_file}"
-    		+ "WHERE cp_id = #{company.cp_id};")
+    		+ "cp_filename = #{company.cp_filename},"
+    		+ "cp_uuid = #{company.cp_uuid}"
+    		+ " WHERE cp_id = #{company.cp_id};")
     int update(@Param("company") Company company);
     
 //    삭제
     @Delete("DELETE FROM ahaproject.company "
     		+ "WHERE cp_id = #{company.cp_id}")
     int delete(@Param("company") Company company);
+    
+//    --------------페이징연습용----------
+    @Select("SELECT * FROM ahaproject.company order by cp_id desc limit #{displayPost}, #{postNum}")
+    @ResultMap("companyMap")
+    List<Company> listPage(HashMap<String, Integer> map );
+    
+//    카운트
+    @Select("select count(cp_id) from ahaproject.company")
+    int count();
 
 }

@@ -44,7 +44,7 @@ public class ClientControllerImp implements ClientController {
 		List<CompanyDTO> companyList = companyService.selectAll();
 		model.addAttribute("companys", companyList);
 		int rs = clientService.maxNum();
-		String maxNum = String.format("%04d", rs);
+		String maxNum = String.format("%04d", rs); // % 0Xd >> 0x X자리 > 0000 
 		model.addAttribute("maxNum", maxNum);
 		return "user/client/client-form";
 	}

@@ -7,8 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import io.swagger.v3.oas.annotations.Operation;
 
 @Slf4j
 @RestController
@@ -19,7 +22,8 @@ public class ClientApiControllerImp implements ClientApiController {
 	private ClientService clientService;
 	
 	@Override
-	@PostMapping("/client")
+	@Operation(summary = "register for client,post", description = "고객정보 등록")
+	@PostMapping(value="/client", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ClientDTO> register(@RequestBody ClientDTO clientDTO) {
 
 		if(clientDTO == null) {
@@ -36,7 +40,8 @@ public class ClientApiControllerImp implements ClientApiController {
 	}
 
 	@Override
-	@PutMapping("/client")
+	@Operation(summary = "update for client,put", description = "고객정보 수정")
+	@PutMapping(value="/client", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ClientDTO> update(@RequestBody ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
 		 
@@ -50,7 +55,8 @@ public class ClientApiControllerImp implements ClientApiController {
 	}
 
 	@Override
-	@DeleteMapping("client")
+	@Operation(summary = "delete for client,delete", description = "고객정보 삭제")
+	@DeleteMapping(value="/client", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ClientDTO> delete(@RequestBody ClientDTO clientDTO) {
 		// TODO Auto-generated method stub
 		int result = clientService.delete(clientDTO);

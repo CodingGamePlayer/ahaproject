@@ -18,4 +18,12 @@ public interface CompanyService {
     
     int delete(CompanyDTO companyDTO);
     
+    
+//  페이징 연습 중 ..
+    
+    int count();
+    
+    List<CompanyDTO> pageList(int displayPost, int postNum);
+    
+    
 }
