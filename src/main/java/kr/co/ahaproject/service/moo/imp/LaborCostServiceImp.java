@@ -29,12 +29,13 @@ public class LaborCostServiceImp implements LaborCostService {
 
     @Override
     public List<LaborCostDTO> selectAll() {
-        List<LaborCost> laborCostList = laborCostMapper.selectAll();
+//        List<LaborCost> laborCostList = laborCostMapper.selectAll();
+//
+//        return laborCostList.stream()
+//                .map(laborCost -> modelMapper.map(laborCost, LaborCostDTO.class))
+//                .collect(Collectors.toList());
 
-        return laborCostList.stream()
-                .map(laborCost -> modelMapper.map(laborCost, LaborCostDTO.class))
-                .collect(Collectors.toList());
-    }
+    return null;}
 
     @Override
     public int update(LaborCostDTO laborCostDTO) {

@@ -22,12 +22,13 @@ public class UseMaterialServiceImp implements UseMaterialService {
 	}
 
 	@Override
-	public UseMaterialDTO selectOne(int um_id) {
+	public UseMaterialDTO selectOne(Long um_id) {
 		return useMaterialMapper.selectOne(um_id);
 	}
 
 	@Override
 	public int create(UseMaterialDTO dto) {
+
 		return useMaterialMapper.create(dto);
 	}
 
@@ -37,8 +38,13 @@ public class UseMaterialServiceImp implements UseMaterialService {
 	}
 
 	@Override
-	public int delete(int um_id) {
+	public int delete(Long um_id) {
 		return useMaterialMapper.delete(um_id);
+	}
+
+	@Override
+	public int selectCount() {
+		return useMaterialMapper.selectCount();
 	}
 
 	

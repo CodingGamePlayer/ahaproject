@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <title>
+        아하포장건설
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700"
+          rel="stylesheet"/>
+    <!-- Nucleo Icons -->
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/assets/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet"/>
+</head>
+<body style="overflow-x: hidden; overflow-y: scroll;">
+<div class="row d-flex justify-content-center m-5 my-5">
+    <div class="col-md-12 col-sm-12 pe-3">
+        <div class="card border shadow-xs mb-4">
+            <div class="card-header border-bottom pb-0">
+                <div class="d-sm-flex align-items-center">
+                    <div>
+                        <h6 class="font-weight-semibold text-lg mb-0">매입 매출 현황</h6>
+                        <p class="text-sm">공사별 현황 전체보기</p>
+                    </div>
+                    <div class="ms-auto d-flex">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body px-0 py-0">
+                <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
+                    <table class="table align-items-center mb-0 table-hover">
+                        <thead class="bg-gray-100">
+                        <tr>
+                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">회사명</th>
+                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처명</th>
+                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사명</th>
+                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매출 공급가액</th>
+                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금액</th>
+                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금 잔액</th>
+                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 공급가액</th>
+                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 지급액</th>
+                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매입 잔액</th>
+                            <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">완료여부</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="ioDTO : ${ioDTOs}">
+                            <div th:if="${(ioDTO.cst_code == null and ioDTO.cl_code != null and ioDTO.cp_name != null) or
+                                (ioDTO.cst_code == null and ioDTO.cl_code == null and ioDTO.cp_name != null) or
+                                (ioDTO.cst_code == null and ioDTO.cl_code == null and ioDTO.cp_name == null)}">
+                                <tr class="bg-gray-100">
+                            </div>
+                            <th:block
+                                    th:if="${ioDTO.cst_code == null and ioDTO.cl_code != null and ioDTO.cp_name != null}">
+                                <td class="align-middle text-center"></td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="text-secondary text-xs font-weight-semibold opacity-7"
+                                          th:text="|${ioDTO.cl_code} 합계|"/>
+                                </td>
+                                <td class="align-middle text-center text-sm"></td>
+                            </th:block>
+                            <th:block
+                                    th:if="${ioDTO.cst_code == null and ioDTO.cl_code == null and ioDTO.cp_name != null}">
+                                <td class="align-middle text-center"></td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="text-secondary text-xs font-weight-semibold opacity-7"
+                                          th:text="|${ioDTO.cp_name} 합계|"/>
+                                </td>
+                                <td class="align-middle text-center text-sm"></td>
+                            </th:block>
+                            <th:block
+                                    th:if="${ioDTO.cst_code == null and ioDTO.cl_code == null and ioDTO.cp_name == null}">
+                                <td class="align-middle text-center"></td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="text-secondary text-xs font-weight-semibold opacity-7"
+                                          th:text="'총 합계'"/>
+                                </td>
+                                <td class="align-middle text-center text-sm"></td>
+                            </th:block>
+                            <th:block
+                                    th:if="${ioDTO.cst_code != null and ioDTO.cl_code != null and ioDTO.cp_name != null}">
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.cp_name}"/>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="text-secondary text-sm font-weight-normal" th:text="${ioDTO.cl_code}"/>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="text-secondary text-sm font-weight-normal"
+                                          th:text="${ioDTO.cst_code}"/>
+                                </td>
+                            </th:block>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-normal"
+                                          th:text="${ioDTO.out_supp_value}"/>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-normal"
+                                          th:text="${ioDTO.out_collect_value}"/>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-bold"
+                                          th:text="${ioDTO.out_collect_remain}"/>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-normal"
+                                          th:text="${ioDTO.in_supp_value}"/>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-normal"
+                                          th:text="${ioDTO.in_collect_value}"/>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-sm font-weight-bold"
+                                          th:text="${ioDTO.in_collect_remain}"/>
+                                </td>
+
+                                <th:block th:if="${ioDTO.cst_code != null and ioDTO.cl_code != null and ioDTO.cp_name != null}">
+                                    <th:block th:if="${ioDTO.out_collect_remain == 0 and ioDTO.in_collect_remain == 0}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-success text-success bg-success">완료</span>
+                                        </td>
+                                    </th:block>
+                                    <th:block th:unless="${ioDTO.out_collect_remain == 0 and ioDTO.in_collect_remain == 0}">
+                                        <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-danger text-danger bg-danger">미완료</span>
+                                        </td>
+                                    </th:block>
+                                </th:block>
+                                <th:block th:unless="${ioDTO.cst_code != null and ioDTO.cl_code != null and ioDTO.cp_name != null}">
+                                    <td class="align-middle text-center"></td>
+                                </th:block>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="table-responsive p-0">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<script src="/assets/js/plugins/swiper-bundle.min.js" type="text/javascript"></script>
+<script src="/assets/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
+</body>
+</html>

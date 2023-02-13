@@ -1,8 +1,8 @@
-package kr.co.ahaproject.apicontroller.moo.imp;
+package kr.co.ahaproject.apicontroller.kjs.imp;
 import io.swagger.annotations.ApiOperation;
-import kr.co.ahaproject.apicontroller.moo.MachineApiController;
+import kr.co.ahaproject.apicontroller.kjs.MachineApiController;
 import kr.co.ahaproject.dto.MachineDTO;
-import kr.co.ahaproject.service.moo.MachineService;
+import kr.co.ahaproject.service.kjs.MachineService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,9 +23,6 @@ public class MachineApiControllerImp implements MachineApiController {
     @PostMapping("/machine")
     public ResponseEntity register(@RequestBody MachineDTO machineDTO) {
 
-        if(machineDTO ==  null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
         int result = machineService.register(machineDTO);
 
         if(result == 0){
