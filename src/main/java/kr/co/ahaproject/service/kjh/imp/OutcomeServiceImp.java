@@ -1,8 +1,7 @@
 package kr.co.ahaproject.service.kjh.imp;
 
-import kr.co.ahaproject.dto.IncomeOutcomeDTO;
-import kr.co.ahaproject.entity.IncomeOutcome;
-import kr.co.ahaproject.mapper.kjh.IncomeMapper;
+import kr.co.ahaproject.dto.OutcomeDTO;
+import kr.co.ahaproject.entity.Outcome;
 import kr.co.ahaproject.mapper.kjh.OutcomeMapper;
 import kr.co.ahaproject.service.AhaCommonMethod;
 import kr.co.ahaproject.service.kjh.OutcomeService;
@@ -20,39 +19,39 @@ public class OutcomeServiceImp implements OutcomeService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public List<IncomeOutcomeDTO> selectAll() {
-        List<IncomeOutcome> ios = outcomeMapper.selectAll();
+    public List<OutcomeDTO> selectAll() {
+        List<Outcome> outs = outcomeMapper.selectAll();
 
-        ios.forEach(io -> io.toString());
-        List<IncomeOutcomeDTO> list = ios.stream()
-                .map(io -> modelMapper.map(io, IncomeOutcomeDTO.class))
+        outs.forEach(out -> out.toString());
+        List<OutcomeDTO> list = outs.stream()
+                .map(out -> modelMapper.map(out, OutcomeDTO.class))
                 .collect(Collectors.toList());
-        list.forEach(ioDTO -> ioDTO.toString());
+        list.forEach(outDTO -> outDTO.toString());
         return list;
     }
 
 
     @Override
-    public IncomeOutcomeDTO selectOne(long io_id) {
-        IncomeOutcome io = outcomeMapper.selectOne(io_id);
-        IncomeOutcomeDTO ioDTO = modelMapper.map(io, IncomeOutcomeDTO.class);
-        return ioDTO;
+    public OutcomeDTO selectOne(long out_id) {
+        Outcome out = outcomeMapper.selectOne(out_id);
+        OutcomeDTO outDTO = modelMapper.map(out, OutcomeDTO.class);
+        return outDTO;
     }
 
 
     @Override
-    public int insert(IncomeOutcomeDTO ioDTO) {
+    public int insert(OutcomeDTO outDTO) {
 
-        String after = new AhaCommonMethod().changeDate(ioDTO.getIo_date());
-        ioDTO.setIo_date(after);
+        String after = new AhaCommonMethod().changeDate(outDTO.getOut_date());
+        outDTO.setOut_date(after);
 
         long total = 0;
-        ioDTO.setIn_total_value(total);
-        ioDTO.setIn_collect_remain(total);
+        outDTO.setOut_total_value(total);
+        outDTO.setOut_collect_remain(total);
 
-        IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
+        Outcome out = modelMapper.map(outDTO, Outcome.class);
 
-        int result = outcomeMapper.insert(io);
+        int result = outcomeMapper.insert(out);
         if (result < 0) {
             return 0;
         }
@@ -60,13 +59,13 @@ public class OutcomeServiceImp implements OutcomeService {
     }
 
     @Override
-    public int update(IncomeOutcomeDTO ioDTO) {
-        String after = new AhaCommonMethod().changeDate(ioDTO.getIo_date());
-        ioDTO.setIo_date(after);
+    public int update(OutcomeDTO outDTO) {
+        String after = new AhaCommonMethod().changeDate(outDTO.getOut_date());
+        outDTO.setOut_date(after);
 
-        IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
+        Outcome out = modelMapper.map(outDTO, Outcome.class);
 
-        int result = outcomeMapper.update(io);
+        int result = outcomeMapper.update(out);
         if (result < 0) {
             return 0;
         }
@@ -74,9 +73,9 @@ public class OutcomeServiceImp implements OutcomeService {
     }
 
     @Override
-    public int delete(IncomeOutcomeDTO ioDTO) {
-        IncomeOutcome io = modelMapper.map(ioDTO, IncomeOutcome.class);
-        int result = outcomeMapper.delete(io);
+    public int delete(OutcomeDTO outDTO) {
+        Outcome out = modelMapper.map(outDTO, Outcome.class);
+        int result = outcomeMapper.delete(out);
         if (result < 0) {
             return 0;
         }

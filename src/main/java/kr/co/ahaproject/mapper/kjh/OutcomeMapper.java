@@ -1,6 +1,6 @@
 package kr.co.ahaproject.mapper.kjh;
 
-import kr.co.ahaproject.entity.IncomeOutcome;
+import kr.co.ahaproject.entity.Outcome;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -8,64 +8,64 @@ import java.util.List;
 @Mapper
 public interface OutcomeMapper {
 
-    @Select("SELECT `a`.`io_id`, `a`.`cp_name`, `a`.`io_date`, `a`.`io_content`, `a`.`out_supp_value`, `a`.`out_total_value`, \n" +
+    @Select("SELECT `a`.`out_id`, `a`.`cp_name`, `a`.`out_date`, `a`.`out_content`, `a`.`out_supp_value`, `a`.`out_total_value`, \n" +
             "`a`.`out_collect_value`, `a`.`out_collect_remain`, `b`.`cp_name` AS `cl_code`, `c`.`cst_name` AS `cst_code` \n" +
-            "FROM (SELECT `io_id`, `cp_name`, `cl_code`, `cst_code`, `io_date`, `io_content`, `out_supp_value`, \n" +
-            "sum(`out_supp_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `io_id`) AS `out_total_value` \n" +
+            "FROM (SELECT `out_id`, `cp_name`, `cl_code`, `cst_code`, `out_date`, `out_content`, `out_supp_value`, \n" +
+            "sum(`out_supp_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`) AS `out_total_value` \n" +
             ", `out_collect_value`, \n" +
-            "sum(`out_supp_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `io_id`) \n" +
-            "- sum(`out_collect_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `io_id`) AS `out_collect_remain` \n" +
-            "FROM `ahaproject`.`income_outcome` ORDER BY `cp_name`, `cl_code`, `cst_code`) AS `a` \n" +
+            "sum(`out_supp_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`) \n" +
+            "- sum(`out_collect_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`) AS `out_collect_remain` \n" +
+            "FROM `ahaproject`.`outcome` ORDER BY `cp_name`, `cl_code`, `cst_code`) AS `a` \n" +
             "LEFT OUTER JOIN `client` AS `b` \n" +
             "ON `a`.`cl_code` = `b`.`cl_code` \n" +
             "LEFT OUTER JOIN `construction` AS `c` \n" +
             "ON `a`.`cst_code` = `c`.`cst_code`;")
-    @Results(id = "ioMap", value = {
-            @Result(property = "io_id", column = "io_id"),
+    @Results(id = "outMap", value = {
+            @Result(property = "out_id", column = "out_id"),
             @Result(property = "cp_name", column = "cp_name"),
             @Result(property = "cl_code", column = "cl_code"),
             @Result(property = "cst_code", column = "cst_code"),
-            @Result(property = "io_date", column = "io_date"),
-            @Result(property = "io_content", column = "io_content"),
-            @Result(property = "in_supp_value", column = "in_supp_value"),
-            @Result(property = "in_total_value", column = "in_total_value"),
-            @Result(property = "in_collect_value", column = "in_collect_value"),
-            @Result(property = "in_collect_remain", column = "in_collect_remain"),
+            @Result(property = "out_date", column = "out_date"),
+            @Result(property = "out_content", column = "out_content"),
+            @Result(property = "out_supp_value", column = "out_supp_value"),
+            @Result(property = "out_total_value", column = "out_total_value"),
+            @Result(property = "out_collect_value", column = "out_collect_value"),
+            @Result(property = "out_collect_remain", column = "out_collect_remain"),
     })
-    List<IncomeOutcome> selectAll();
+    List<Outcome> selectAll();
 
-    @Select("SELECT `a`.`io_id`, `a`.`cp_name`, `a`.`io_date`, `a`.`io_content`, `a`.`out_supp_value`, `a`.`out_total_value`, \n" +
+    @Select("SELECT `a`.`out_id`, `a`.`cp_name`, `a`.`out_date`, `a`.`out_content`, `a`.`out_supp_value`, `a`.`out_total_value`, \n" +
             "`a`.`out_collect_value`, `a`.`out_collect_remain`, `b`.`cp_name` AS `cl_code`, `c`.`cst_name` AS `cst_code` \n" +
-            "FROM (SELECT `io_id`, `cp_name`, `cl_code`, `cst_code`, `io_date`, `io_content`, `out_supp_value`, `out_total_value` \n" +
-            ", `out_collect_value`, `out_collect_remain` FROM `ahaproject`.`income_outcome` WHERE `io_id` = '2') AS `a` \n" +
+            "FROM (SELECT `out_id`, `cp_name`, `cl_code`, `cst_code`, `out_date`, `out_content`, `out_supp_value`, `out_total_value` \n" +
+            ", `out_collect_value`, `out_collect_remain` FROM `ahaproject`.`outcome` WHERE `out_id` = '2') AS `a` \n" +
             "LEFT OUTER JOIN `client` AS `b` \n" +
             "ON `a`.`cl_code` = `b`.`cl_code` \n" +
             "LEFT OUTER JOIN `construction` AS `c` \n" +
             "ON `a`.`cst_code` = `c`.`cst_code`")
-    @ResultMap("ioMap")
-    IncomeOutcome selectOne(long io_id);
+    @ResultMap("outMap")
+    Outcome selectOne(long out_id);
 
-    @Insert("INSERT INTO `ahaproject`.`income_outcome` " +
-            "(`cl_code`, `cst_code`, `cp_name`, `io_date`, `io_content`, `out_supp_value`, " +
+    @Insert("INSERT INTO `ahaproject`.`outcome` " +
+            "(`cl_code`, `cst_code`, `cp_name`, `out_date`, `out_content`, `out_supp_value`, " +
             "`out_total_value`, `out_collect_value`, `out_collect_remain`) " +
-            "VALUES (#{io.cl_code}, #{io.cst_code}, #{io.cp_name}, #{io.io_date}, #{io.io_content}, " +
-            "#{io.out_supp_value}, #{io.out_total_value}, #{io.out_collect_value}, #{io.out_collect_remain})")
-    @Options(useGeneratedKeys = true, keyProperty = "io_id")
-    int insert(@Param("io") IncomeOutcome io);
+            "VALUES (#{out.cl_code}, #{out.cst_code}, #{out.cp_name}, #{out.out_date}, #{out.out_content}, " +
+            "#{out.out_supp_value}, #{out.out_total_value}, #{out.out_collect_value}, #{out.out_collect_remain})")
+    @Options(useGeneratedKeys = true, keyProperty = "out_id")
+    int insert(@Param("out") Outcome out);
 
-    @Update("UPDATE `ahaproject`.`income_outcome` AS `a` \n" +
+    @Update("UPDATE `ahaproject`.`outcome` AS `a` \n" +
             "SET `a`.`cl_code` = (SELECT `b`.`cl_code` FROM `ahaproject`.`client` AS `b` \n" +
-            "WHERE `b`.`cp_name` = #{io.cl_code}), \n" +
+            "WHERE `b`.`cp_name` = #{out.cl_code}), \n" +
             "`a`.`cst_code` =  (SELECT `c`.`cst_code` FROM `ahaproject`.`construction` AS `c` \n" +
-            "WHERE `c`.`cst_name` = #{io.cst_code}),\n" +
-            "`a`.`cp_name` = #{io.cp_name},\n" +
-            "`a`.`io_date` = #{io.io_date},\n" +
-            "`a`.`io_content` = #{io.io_content},\n" +
-            "`a`.`out_supp_value` = #{io.out_supp_value},\n" +
-            "`a`.`out_collect_value` = #{io.out_collect_value} \n" +
-            " WHERE `a`.`io_id` = #{io.io_id}\")")
-    int update(@Param("io") IncomeOutcome io);
+            "WHERE `c`.`cst_name` = #{out.cst_code}),\n" +
+            "`a`.`cp_name` = #{out.cp_name},\n" +
+            "`a`.`out_date` = #{out.out_date},\n" +
+            "`a`.`out_content` = #{out.out_content},\n" +
+            "`a`.`out_supp_value` = #{out.out_supp_value},\n" +
+            "`a`.`out_collect_value` = #{out.out_collect_value} \n" +
+            " WHERE `a`.`out_id` = #{out.out_id}\")")
+    int update(@Param("out") Outcome out);
 
-    @Delete("DELETE FROM `ahaproject`.`income_outcome` WHERE `io_id` = #{io.io_id}")
-    int delete(@Param("io") IncomeOutcome io);
+    @Delete("DELETE FROM `ahaproject`.`outcome` WHERE `out_id` = #{out.out_id}")
+    int delete(@Param("out") Outcome out);
 }

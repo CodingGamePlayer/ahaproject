@@ -1,8 +1,7 @@
 package kr.co.ahaproject.apicontroller.kjh.imp;
 
 import kr.co.ahaproject.apicontroller.kjh.OutcomeApiController;
-import kr.co.ahaproject.dto.IncomeOutcomeDTO;
-import kr.co.ahaproject.service.kjh.IncomeService;
+import kr.co.ahaproject.dto.OutcomeDTO;
 import kr.co.ahaproject.service.kjh.OutcomeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,8 @@ public class OutcomeApiControllerImp implements OutcomeApiController {
     OutcomeService outcomeService;
     @Override
     @PostMapping("/outcome")
-    public ResponseEntity<IncomeOutcomeDTO> register(@RequestBody IncomeOutcomeDTO ioDTO) {
-        int result = outcomeService.insert(ioDTO);
+    public ResponseEntity<OutcomeDTO> register(@RequestBody OutcomeDTO outDTO) {
+        int result = outcomeService.insert(outDTO);
 
         if(result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -30,8 +29,8 @@ public class OutcomeApiControllerImp implements OutcomeApiController {
 
     @Override
     @PutMapping("/outcome")
-    public ResponseEntity<IncomeOutcomeDTO> update(@RequestBody IncomeOutcomeDTO ioDTO) {
-        int result = outcomeService.update(ioDTO);
+    public ResponseEntity<OutcomeDTO> update(@RequestBody OutcomeDTO outDTO) {
+        int result = outcomeService.update(outDTO);
 
         if(result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -42,8 +41,8 @@ public class OutcomeApiControllerImp implements OutcomeApiController {
 
     @Override
     @DeleteMapping ("/outcome")
-    public ResponseEntity delete(@RequestBody IncomeOutcomeDTO ioDTO) {
-        int result = outcomeService.delete(ioDTO);
+    public ResponseEntity delete(@RequestBody OutcomeDTO outDTO) {
+        int result = outcomeService.delete(outDTO);
 
         if(result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

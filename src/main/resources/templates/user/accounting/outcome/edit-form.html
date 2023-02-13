@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label class="form-control-label">*회사명</label>
                     <select class="form-select" aria-label="Default select example"  id="cp_name">
-                        <option th:text="${ioDTO.cp_name}" selected></option>
+                        <option th:text="${outDTO.cp_name}" selected></option>
                         <th:block th:each="company : ${companyDTOs}">
                             <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
                         </th:block>
@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <label class="form-control-label">*거래처코드</label>
                     <select class="form-select" aria-label="Default select example" id="cl_code">
-                        <option th:text="${ioDTO.cl_code}" selected></option>
+                        <option th:text="${outDTO.cl_code}" selected></option>
                         <th:block th:each="client : ${clientDTOs}">
                             <option th:value="${client.cp_name}" >[[${client.cp_name}]]</option>
                         </th:block>
@@ -65,7 +65,7 @@
                 <div class="form-group">
                     <label class="form-control-label">*공사코드</label>
                     <select class="form-select" aria-label="Default select example" id="cst_code">
-                        <option th:text="${ioDTO.cst_code}" selected></option>
+                        <option th:text="${outDTO.cst_code}" selected></option>
                         <th:block th:each="const : ${constructionDTOs}">
                             <option th:value="${const.cst_name}" >[[${const.cst_name}]]</option>
                         </th:block>
@@ -76,7 +76,7 @@
                 <div class="form-group">
                     <label class="form-control-label">*매출 날짜</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' th:value="${ioDTO.io_date}"/>
+                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' th:value="${outDTO.out_date}"/>
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
@@ -86,23 +86,23 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*매출 내용</label>
-                    <input class="form-control" type="text" id="io_content" th:value="${ioDTO.io_content}">
+                    <input class="form-control" type="text" id="out_content" th:value="${outDTO.out_content}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*매출 공급가액</label>
-                    <input class="form-control" type="text" id="in_supp_value" th:value="${ioDTO.out_supp_value}">
+                    <input class="form-control" type="text" id="out_supp_value" th:value="${outDTO.out_supp_value}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*매출 지급액</label>
-                    <input class="form-control" type="text" id="in_collect_value" th:value="${ioDTO.out_collect_value}">
+                    <input class="form-control" type="text" id="out_collect_value" th:value="${outDTO.out_collect_value}">
                 </div>
             </div>
-            <input class="form-control" type="hidden" id="in_total_value" th:value="${ioDTO.out_total_value}">
-            <input class="form-control" type="hidden" id="in_collect_remain" th:value="${ioDTO.out_collect_remain}">
+            <input class="form-control" type="hidden" id="out_total_value" th:value="${outDTO.out_total_value}">
+            <input class="form-control" type="hidden" id="out_collect_remain" th:value="${outDTO.out_collect_remain}">
             <input type="button" class="btn btn-primary" id="outcomeSubmitBtn" value="수정하기"/>
             <input type="button" class="btn btn-dark mt-2" id="outcomeDeleteBtn" value="삭제하기"/>
         </div>
@@ -120,10 +120,10 @@
 
     const outcomeDeleteBtn = document.getElementById("outcomeDeleteBtn");
     outcomeDeleteBtn.addEventListener("click", () => {
-        const input_io_id = urlParams.get('io_id');
+        const input_out_id = urlParams.get('out_id');
 
         const outcome = {
-            io_id : input_io_id
+            out_id : input_out_id
         }
 
         const url = "/api/user/accounting/outcome";
@@ -147,31 +147,31 @@
     });
 
 
-    incomeSubmitBtn.addEventListener("click", () => {
-        const input_io_id = urlParams.get('io_id');
+    outcomeSubmitBtn.addEventListener("click", () => {
+        const input_out_id = urlParams.get('out_id');
         const input_cp_name = document.querySelector('#cp_name').value;
         const input_cl_code = document.querySelector('#cl_code').value;
         const input_cst_code = document.querySelector('#cst_code').value;
-        const input_io_date = document.querySelector('#datetimepicker1Input').value;
-        const input_io_content = document.querySelector('#io_content').value;
+        const input_out_date = document.querySelector('#datetimepicker1Input').value;
+        const input_out_content = document.querySelector('#out_content').value;
         const input_out_supp_value = document.querySelector('#out_supp_value').value;
         const input_out_collect_value = document.querySelector('#out_collect_value').value;
 
 
         const outcome1 = {
-            io_id : input_io_id,
+            out_id : input_out_id,
             cp_name : input_cp_name,
             cl_code : input_cl_code,
             cst_code : input_cst_code,
-            io_date : input_io_date,
-            io_content : input_io_content,
+            out_date : input_out_date,
+            out_content : input_out_content,
             out_supp_value : input_out_supp_value,
             out_collect_value : input_out_collect_value
         };
 
         if (input_cp_name == "" || input_cl_code == "" ||
-            input_cst_code == "" || input_io_date == "" ||
-            input_io_content == "" || input_out_supp_value == "" ||
+            input_cst_code == "" || input_out_date == "" ||
+            input_out_content == "" || input_out_supp_value == "" ||
             input_out_collect_value == ""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;

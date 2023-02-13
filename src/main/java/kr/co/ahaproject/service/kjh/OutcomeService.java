@@ -1,17 +1,17 @@
 package kr.co.ahaproject.service.kjh;
 
-import kr.co.ahaproject.dto.IncomeOutcomeDTO;
+import kr.co.ahaproject.dto.OutcomeDTO;
 
 import java.util.List;
 
 public interface OutcomeService {
-    List<IncomeOutcomeDTO> selectAll();
+    List<OutcomeDTO> selectAll();
 
-    IncomeOutcomeDTO selectOne(long io_id);
+    OutcomeDTO selectOne(long out_id);
 
-    int insert(IncomeOutcomeDTO ioDTO);
+    int insert(OutcomeDTO outDTO);
 
-    int update(IncomeOutcomeDTO ioDTO);
+    int update(OutcomeDTO outDTO);
 
-    int delete(IncomeOutcomeDTO ioDTO);
+    int delete(OutcomeDTO outDTO);
 }

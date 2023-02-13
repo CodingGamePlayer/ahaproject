@@ -1,11 +1,11 @@
 package kr.co.ahaproject.controller.kjh.imp;
 
 import kr.co.ahaproject.controller.kjh.OutcomeController;
-import kr.co.ahaproject.service.kjh.IncomeService;
+import kr.co.ahaproject.service.kjh.OutcomeService;
 import kr.co.ahaproject.service.kjh.OutcomeService;
 import kr.co.ahaproject.service.kjs.ClientService;
 import kr.co.ahaproject.service.kjs.CompanyService;
-import kr.co.ahaproject.service.kjs.ConstructionService;
+import kr.co.ahaproject.service.mskim.ConstructionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class OutcomeControllerImp implements OutcomeController {
     @GetMapping("/outcome")
     public String selectAll(Model model) {
 
-        model.addAttribute("ioDTOs", outcomeService.selectAll());
+        model.addAttribute("outDTOs", outcomeService.selectAll());
         return "user/accounting/outcome/list";
     }
 
@@ -47,8 +47,8 @@ public class OutcomeControllerImp implements OutcomeController {
 
     @Override
     @GetMapping("/outcome-edit")
-    public String editForm(long io_id, Model model) {
-        model.addAttribute("ioDTO", outcomeService.selectOne(io_id));
+    public String editForm(long out_id, Model model) {
+        model.addAttribute("outDTO", outcomeService.selectOne(out_id));
         model.addAttribute("companyDTOs", companyService.selectAll());
         model.addAttribute("clientDTOs", clientService.selectAll());
         model.addAttribute("constructionDTOs", constructionService.selectAll());

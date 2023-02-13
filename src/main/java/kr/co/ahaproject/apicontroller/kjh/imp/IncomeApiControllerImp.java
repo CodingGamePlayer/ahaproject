@@ -1,17 +1,13 @@
 package kr.co.ahaproject.apicontroller.kjh.imp;
 
 import kr.co.ahaproject.apicontroller.kjh.IncomeApiController;
-import kr.co.ahaproject.dto.IncomeOutcomeDTO;
+import kr.co.ahaproject.dto.IncomeDTO;
 import kr.co.ahaproject.service.kjh.IncomeService;
-import kr.co.ahaproject.service.kjh.imp.IncomeServiceImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -21,8 +17,8 @@ public class IncomeApiControllerImp implements IncomeApiController {
     IncomeService incomeService;
     @Override
     @PostMapping("/income")
-    public ResponseEntity<IncomeOutcomeDTO> register(@RequestBody IncomeOutcomeDTO ioDTO) {
-        int result = incomeService.insert(ioDTO);
+    public ResponseEntity<IncomeDTO> register(@RequestBody IncomeDTO inDTO) {
+        int result = incomeService.insert(inDTO);
 
         if(result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -33,8 +29,8 @@ public class IncomeApiControllerImp implements IncomeApiController {
 
     @Override
     @PutMapping("/income")
-    public ResponseEntity<IncomeOutcomeDTO> update(@RequestBody IncomeOutcomeDTO ioDTO) {
-        int result = incomeService.update(ioDTO);
+    public ResponseEntity<IncomeDTO> update(@RequestBody IncomeDTO inDTO) {
+        int result = incomeService.update(inDTO);
 
         if(result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -45,8 +41,8 @@ public class IncomeApiControllerImp implements IncomeApiController {
 
     @Override
     @DeleteMapping ("/income")
-    public ResponseEntity delete(@RequestBody IncomeOutcomeDTO ioDTO) {
-        int result = incomeService.delete(ioDTO);
+    public ResponseEntity delete(@RequestBody IncomeDTO inDTO) {
+        int result = incomeService.delete(inDTO);
 
         if(result == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
