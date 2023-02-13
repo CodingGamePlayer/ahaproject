@@ -2,7 +2,6 @@ package kr.co.ahaproject.controller.moo.imp;
 
 import kr.co.ahaproject.controller.moo.LaborCostController;
 import kr.co.ahaproject.dto.LaborCostDTO;
-import kr.co.ahaproject.dto.MachineDTO;
 import kr.co.ahaproject.service.moo.LaborCostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +24,11 @@ public class LaborCostControllerImp implements LaborCostController {
 
         model.addAttribute("laborCostDTOs",laborCostDTOList);
         return "/user/accounting/laborcost/list";
+    }
+
+    @Override
+    public String delete(Model model) {
+        return null;
     }
 
     @Override

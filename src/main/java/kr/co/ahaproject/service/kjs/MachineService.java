@@ -1,4 +1,4 @@
-package kr.co.ahaproject.service.moo;
+package kr.co.ahaproject.service.kjs;
 
 import kr.co.ahaproject.dto.MachineDTO;
 
