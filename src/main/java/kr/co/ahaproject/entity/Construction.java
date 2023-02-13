@@ -17,12 +17,10 @@ public class Construction {
     String cst_period;
     String cst_start;
     String cst_end;
-    Long cst_toal_pay;
-    Long cst_1st_pay;
-    String cst_collect_date;
     boolean cst_finised;
     String cst_etc1;
     String cst_etc2;
     String cst_etc3;
-    String cst_file;
+    String cst_filename;
+    String cst_uuid;
 }

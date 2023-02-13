@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.ahaproject.controller.mskim.ConstructionController;
-import kr.co.ahaproject.service.mskim.ConstructionService2;
+import kr.co.ahaproject.dto.ConstructionDTO;
+import kr.co.ahaproject.service.mskim.ConstructionService;
 
 
 @Controller
@@ -15,7 +16,7 @@ import kr.co.ahaproject.service.mskim.ConstructionService2;
 public class ConstructionControllerImpl implements ConstructionController {
 
 	@Autowired
-	private ConstructionService2 constructionService;
+	private ConstructionService constructionService;
 	
 	@Override
 	@GetMapping("/cst-list")
@@ -35,9 +36,12 @@ public class ConstructionControllerImpl implements ConstructionController {
 	}
 
 	@Override
-	public ModelAndView construction_edit(ModelAndView mav, int cst_id) {
-		// TODO Auto-generated method stub
-		return null;
+	@GetMapping("/cst-edit")
+	public ModelAndView construction_edit(ModelAndView mav, ConstructionDTO cstDTO) {
+		mav.addObject("cstDTO", constructionService.findByCst(cstDTO));
+		mav.setViewName("user/construction/construction-edit-form");
+		
+		return mav;
 	}
 
 }
