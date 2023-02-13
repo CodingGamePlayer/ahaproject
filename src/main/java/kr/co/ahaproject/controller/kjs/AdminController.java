@@ -1,11 +1,13 @@
 package kr.co.ahaproject.controller.kjs;
 
 import kr.co.ahaproject.dto.MisuDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 public interface AdminController {
 
-    String misu(Model model);
+    String misu(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model);
 
     String misuForm(Model model);
 
@@ -13,5 +15,5 @@ public interface AdminController {
 
     String blacklist();
 
-    String manage(Model model);
+    String manage(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model);
 }

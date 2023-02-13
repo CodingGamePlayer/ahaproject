@@ -1,6 +1,8 @@
 package kr.co.ahaproject.service.kjs.imp;
 
 import kr.co.ahaproject.dto.AccountDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.Account;
 import kr.co.ahaproject.mapper.kjs.AccountMapper;
 import kr.co.ahaproject.service.kjs.AccountService;
@@ -63,6 +65,26 @@ public class AccountServiceImp implements AccountService {
         return accounts.stream()
                 .map(account -> modelMapper.map(account, AccountDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public PageResponseDTO<AccountDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+        List<Account> accountList = accountMapper.selectAllForPaging(pageRequestDTO);
+
+        List<AccountDTO> accountDTOList = accountList.stream()
+                .map(account -> modelMapper.map(account, AccountDTO.class))
+                .collect(Collectors.toList());
+
+        int count = accountMapper.getCount(pageRequestDTO);
+
+        PageResponseDTO<AccountDTO> pageResponseDTO = PageResponseDTO.<AccountDTO>withAll()
+                .dtoList(accountDTOList)
+                .total(count)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+
+        return pageResponseDTO;
     }
 
     @Override
