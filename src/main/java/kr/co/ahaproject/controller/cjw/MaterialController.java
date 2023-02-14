@@ -23,6 +23,8 @@ public interface MaterialController {
     // 자재 기초정보 상세보기 이동
     String detail(MaterialDTO dto, Model model);
 
+    String image(MaterialDTO materialDTO, Model model);
+
 	
 
 	

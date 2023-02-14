@@ -66,16 +66,18 @@ public class MaterialControllerImp implements MaterialController {
 		return "/user/material/material-edit-form";
 	}
 
+	@Override
+	@GetMapping("/user/material/image")
+	public String image(MaterialDTO materialDTO, Model model) {
+
+		MaterialDTO result = materialService.findById(materialDTO);
+
+		model.addAttribute("materialDTO", result);
+
+		return "user/material/image";
+	}
 
 
-
-
-	
-
-
-
-	
-	
 	// 자재 기초정보 END ======
 
 	

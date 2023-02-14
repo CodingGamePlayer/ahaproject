@@ -66,4 +66,9 @@ public interface MaterialMapper {
 	List<Material> selectAllForPaging(PageRequestDTO pageRequestDTO);
 
 
+	@Select("SELECT * FROM material WHERE mt_id = #{material.mt_id}")
+	Material findById(@Param("material") Material material);
+
+	@Select("SELECT * FROM material WHERE mt_code = #{mt_code}")
+	Material findByCode(@Param("mt_code") String mt_code);
 }

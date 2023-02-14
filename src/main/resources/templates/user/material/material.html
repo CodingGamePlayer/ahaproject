@@ -70,7 +70,9 @@
                                 <tr>
                                     <th:block th:if="${data.mt_filename} == ''">
                                     <td class="d-flex justify-content-center">
+                                        <a href="#" th:onclick="showImage([[${data.mt_id}]])" >
                                         <img class="rounded-2" style="width: 200px; height: 100px;" src="https://via.placeholder.com/200x100">
+                                        </a>
                                     </td>
                                     </th:block>
                                     <th:block th:unless="${data.mt_filename} == ''">
@@ -118,6 +120,12 @@
                                         </a>
                                     </td>
                                     <script>
+
+                                        function showImage(id) {
+                                            let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=750, height=650, top=0,left=0";
+
+                                            window.open("/user/basicinfo/material/image?mt_id=" + id, "_blank", option);
+                                        }
 										function editMaterial(id){
 										    let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 										   // window.open("/admin/misu-edit?misu_id=" + id, "_blank", option);

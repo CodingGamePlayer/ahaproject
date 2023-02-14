@@ -85,4 +85,13 @@ public class MaterialServiceImp implements MaterialService{
 
 		return pageResponseDTO;
 	}
+
+	@Override
+	public MaterialDTO findById(MaterialDTO materialDTO) {
+
+		Material material = modelMapper.map(materialDTO, Material.class);
+
+		Material result = materialMapper.findById(material);
+		return modelMapper.map(result, MaterialDTO.class);
+	}
 }

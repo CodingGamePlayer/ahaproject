@@ -1,20 +1,27 @@
 package kr.co.ahaproject.controller.cjw.imp;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import kr.co.ahaproject.controller.cjw.UseMaterialController;
+import kr.co.ahaproject.dto.ConstructionDTO;
+import kr.co.ahaproject.dto.MaterialDTO;
+import kr.co.ahaproject.dto.UseMaterialDTO;
+import kr.co.ahaproject.service.cjw.MaterialService;
+import kr.co.ahaproject.service.cjw.UseMaterialService;
+import kr.co.ahaproject.service.mskim.ConstructionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import kr.co.ahaproject.controller.cjw.UseMaterialController;
-import kr.co.ahaproject.dto.UseMaterialDTO;
-import kr.co.ahaproject.service.cjw.UseMaterialService;
+import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class UseMaterialControllerImp implements UseMaterialController {
 
-	@Autowired
-	UseMaterialService useMaterialService;
-	
+	private final UseMaterialService useMaterialService;
+	private final ConstructionService constructionService;
+	private final MaterialService materialService;
+
 	//현장 자재 목록 - 이동하기
 	@Override
 	@GetMapping("/user/worksite/use-material/list")
@@ -27,13 +34,24 @@ public class UseMaterialControllerImp implements UseMaterialController {
 	@Override
 	@GetMapping("/user/worksite/use-material/register")
 	public String register(Model model, UseMaterialDTO useMaterialDTO) {
-		 if(useMaterialService.selectCount() > 0) {
+
+
+		List<ConstructionDTO> constructionDTOS = constructionService.selectAll();
+		List<MaterialDTO> materialDTOS = materialService.listAll();
+
+
+
+		if(useMaterialService.selectCount() > 0) {
 		        int id = useMaterialService.selectCount() + 1;
 		        String idkey = String.format("%04d",id);
 		        model.addAttribute("idkey", "MT"+idkey);
+		        model.addAttribute("constructionDTOs", constructionDTOS);
+		        model.addAttribute("materialDTOs", materialDTOS);
 		    } else {
 		        String idkey = "0001";
 		        model.addAttribute("idkey","MT"+idkey);
+		        model.addAttribute("constructionDTOs", constructionDTOS);
+		        model.addAttribute("materialDTOs", materialDTOS);
 		    }
 			
 		
