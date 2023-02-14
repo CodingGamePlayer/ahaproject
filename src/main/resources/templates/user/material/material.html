@@ -29,7 +29,22 @@
                             <p class="text-sm">자재별 현황 전체보기</p>
                         </div>
                         <div class="ms-auto d-flex">
+                            <form class="row g-3" action="/user/material/list" method="get">
 
+                                <div class="col-auto">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="category" name="type">
+                                        <option value="mt_code">자재코드 검색</option>
+                                        <option value="mt_name">자재명 검색</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="keyword" class="visually-hidden">search</label>
+                                    <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">검색</button>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
@@ -40,7 +55,6 @@
                             <thead class="bg-gray-100">
                             <tr>
                                 <th class="text-secondary text-center text-xs font-weight-semibold opacity-7">사진</th>
- 								<th class="text-secondary text-xs font-weight-semibold opacity-7">번호</th>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">자재코드</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">자재명</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">규격(제품번호)</th>
@@ -52,7 +66,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <th:block th:each="data : ${listData}">
+                            <th:block th:each="data : ${listData.dtoList}">
                                 <tr>
                                     <th:block th:if="${data.mt_filename} == ''">
                                     <td class="d-flex justify-content-center">
@@ -64,17 +78,7 @@
                                             <img class="rounded-2" style="width: 200px; height: 100px;" th:src="|/user/view/s_${data.mt_uuid}_${data.mt_filename}|">
                                         </td>
                                     </th:block>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex align-items-center">
 
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center ms-1">
-                                                <span class="text-secondary text-sm font-weight-normal"
-                                                      th:text="${data.mt_id}"/>
-                                            </div>
-                                        </div>
-                                    </td>
                                     <td>
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${data.mt_code}"/>
@@ -132,6 +136,47 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4"></div>
+
+        <div class="col-sm-4 d-flex justify-content-center">
+            <th:block
+                    th:with="start=${listData.start}, end=${listData.end}, keyword =${param.keyword}, type = ${param.type}">
+                <ul class="pagination">
+                    <li th:if="${start} == '1'" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/user/material/list(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◁</a>
+                    </li>
+                    <li th:if="${start} > '1'" class="page-item ">
+                        <a class="page-link"
+                           th:href="@{/user/material/list(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◀</a>
+
+                    </li>
+
+                    <th:block th:each="num : ${#numbers.sequence(start,end)}">
+                        <li class="page-item" th:if="${num} != ${listData.page}">
+
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/user/material/list(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                        <li class="page-item active " th:if="${num} == ${listData.page}">
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/user/material/list(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                    </th:block>
+
+                    <li th:if="${end} >= ${listData.total} / 10" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/user/material/list(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▷</a>
+                    </li>
+                    <li th:if="${end} < ${listData.total} / 10" class="page-item">
+                        <a class="page-link"
+                           th:href="@{/user/material/list(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▶</a>
+                    </li>
+                </ul>
+            </th:block>
+        </div>
+        <div class="col-md-3"></div>
+
 
     </div>
 

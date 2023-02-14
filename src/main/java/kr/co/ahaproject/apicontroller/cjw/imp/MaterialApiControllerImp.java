@@ -25,15 +25,11 @@ public class MaterialApiControllerImp implements MaterialApiController {
 	@Override
 	@PostMapping("/material")
 	public ResponseEntity register(@RequestBody MaterialDTO materialDTO) {
-		if(materialDTO == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
 
         int result = materialService.create(materialDTO);
 
-
         if(result == 0){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
         return ResponseEntity.status(HttpStatus.OK).build();
@@ -45,10 +41,9 @@ public class MaterialApiControllerImp implements MaterialApiController {
 	public ResponseEntity update(@RequestBody MaterialDTO materialDTO) {
 		
 		  int result = materialService.update(materialDTO);
-		  System.out.println(String.valueOf(result));
-	        
+
 	        if (result == 0){
-	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	        }
 
 	        return ResponseEntity.status(HttpStatus.OK).build();
@@ -64,7 +59,7 @@ public class MaterialApiControllerImp implements MaterialApiController {
 			int result = materialService.delete(mt_id);
 	        
 			if (result == 0){ 
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 			}
 
 	        return ResponseEntity.status(HttpStatus.OK).build();

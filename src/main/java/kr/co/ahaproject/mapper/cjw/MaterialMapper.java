@@ -1,20 +1,12 @@
 package kr.co.ahaproject.mapper.cjw;
 
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
-import io.swagger.v3.oas.annotations.Parameter;
 import kr.co.ahaproject.dto.MaterialDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.entity.Material;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper
 public interface MaterialMapper {
@@ -69,7 +61,9 @@ public interface MaterialMapper {
 	int delete(@Param("mt_id") int mt_id); // 글삭제
 	
 	
+	int getCount(PageRequestDTO pageRequestDTO);
 
+	List<Material> selectAllForPaging(PageRequestDTO pageRequestDTO);
 
 
 }

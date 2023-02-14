@@ -1,8 +1,10 @@
 package kr.co.ahaproject.service.cjw;
 
-import java.util.List;
-
 import kr.co.ahaproject.dto.MaterialDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
+
+import java.util.List;
 
 public interface MaterialService {
 	
@@ -24,6 +26,7 @@ public interface MaterialService {
 		// 자재 기초정보 글삭제
 		int delete(int mt_id);
 
+		PageResponseDTO<MaterialDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 
 		
 

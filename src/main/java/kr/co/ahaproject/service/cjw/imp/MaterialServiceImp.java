@@ -1,19 +1,25 @@
 package kr.co.ahaproject.service.cjw.imp;
 
-import java.util.List;
-
+import kr.co.ahaproject.dto.MaterialDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
+import kr.co.ahaproject.entity.Material;
+import kr.co.ahaproject.mapper.cjw.MaterialMapper;
+import kr.co.ahaproject.service.cjw.MaterialService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.ahaproject.dto.MaterialDTO;
-import kr.co.ahaproject.mapper.cjw.MaterialMapper;
-import kr.co.ahaproject.service.cjw.MaterialService;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MaterialServiceImp implements MaterialService{
 	
 	@Autowired
 	MaterialMapper materialMapper;
+
+	private ModelMapper modelMapper = new ModelMapper();
 	
 	// 자재 전체조회
 	@Override
@@ -36,14 +42,6 @@ public class MaterialServiceImp implements MaterialService{
 	@Override
 	public int create(MaterialDTO dto) {
 
-		if(dto.getMt_etc1() == "" || dto.getMt_etc2() == "" || dto.getMt_etc3() == "") {
-			dto.setMt_etc1("None");
-			dto.setMt_etc2("None");
-			dto.setMt_etc3("None");
-		}
-		
-		
-		
 		return materialMapper.create(dto);
 
 	}
@@ -51,12 +49,7 @@ public class MaterialServiceImp implements MaterialService{
 	// 자재 수정
 	@Override
 	public int update(MaterialDTO dto) {
-		
-		if(dto.getMt_etc1() == "" || dto.getMt_etc2() == "" || dto.getMt_etc3() == "") {
-			dto.setMt_etc1("None");
-			dto.setMt_etc2("None");
-			dto.setMt_etc3("None");
-		}
+
 		return materialMapper.update(dto);
 	}
 
@@ -69,11 +62,27 @@ public class MaterialServiceImp implements MaterialService{
 	// count
 	@Override
 	public int selectCount() {
-		// TODO Auto-generated method stub
 		return materialMapper.selectCount();
 	}
 
-	
-	
 
+	@Override
+	public PageResponseDTO<MaterialDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+		List<Material> materialList = materialMapper.selectAllForPaging(pageRequestDTO);
+
+		List<MaterialDTO> collect = materialList.stream()
+				.map(material -> modelMapper.map(material, MaterialDTO.class))
+				.collect(Collectors.toList());
+
+		int count = materialMapper.getCount(pageRequestDTO);
+
+		PageResponseDTO<MaterialDTO> pageResponseDTO = PageResponseDTO.<MaterialDTO>withAll()
+				.pageRequestDTO(pageRequestDTO)
+				.total(count)
+				.dtoList(collect)
+				.build();
+
+		return pageResponseDTO;
+	}
 }

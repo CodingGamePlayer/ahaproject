@@ -1,16 +1,16 @@
 package kr.co.ahaproject.controller.cjw.imp;
 
-import java.util.List;
-
+import kr.co.ahaproject.controller.cjw.MaterialController;
+import kr.co.ahaproject.dto.MaterialDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
+import kr.co.ahaproject.service.cjw.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import kr.co.ahaproject.controller.cjw.MaterialController;
-import kr.co.ahaproject.dto.MachineDTO;
-import kr.co.ahaproject.dto.MaterialDTO;
-import kr.co.ahaproject.service.cjw.MaterialService;
+import javax.validation.Valid;
 
 @Controller
 public class MaterialControllerImp implements MaterialController {
@@ -27,9 +27,11 @@ public class MaterialControllerImp implements MaterialController {
 	// 자재 기초정보 전체글보기
 	@Override
 	@GetMapping("/user/material/list")
-	public String list(Model model) {
-		
-		model.addAttribute("listData", materialService.listAll());
+	public String list(@Valid PageRequestDTO pageRequestDTO, Model model) {
+
+		PageResponseDTO<MaterialDTO> pageResponseDTO = materialService.selectAllForPaging(pageRequestDTO);
+
+		model.addAttribute("listData", pageResponseDTO);
 		return "/user/material/material";
 	}
 	
