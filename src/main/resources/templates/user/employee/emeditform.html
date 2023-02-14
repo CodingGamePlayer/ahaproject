@@ -208,12 +208,12 @@
           <label class="form-control-label">사용여부</label>
           <select class="form-select" aria-label="Default select example" id="emp_use">
             <th:block th:if="${eDTO.emp_use} == false">
-              <option value="false" selected>사용안함</option>
-              <option value="true">사용중</option>
+              <option value="false" selected>퇴사</option>
+              <option value="true">재직</option>
             </th:block>
             <th:block th:unless="${eDTO.emp_use} == false">
-              <option value="false" >사용안함</option>
-              <option value="true" selected>사용중</option>
+              <option value="false" >퇴사</option>
+              <option value="true" selected>재직</option>
             </th:block>
           </select>
         </div>
