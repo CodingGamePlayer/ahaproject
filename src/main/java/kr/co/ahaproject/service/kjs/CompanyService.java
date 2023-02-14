@@ -1,10 +1,10 @@
 package kr.co.ahaproject.service.kjs;
 
 import kr.co.ahaproject.dto.CompanyDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 
 import java.util.List;
-
-import groovyjarjarpicocli.CommandLine.Model;
 
 public interface CompanyService {
 
@@ -17,8 +17,8 @@ public interface CompanyService {
     int update(CompanyDTO companyDTO);
     
     int delete(CompanyDTO companyDTO);
-    
-    
+
+    PageResponseDTO<CompanyDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 //  페이징 연습 중 ..
     
     int count();
