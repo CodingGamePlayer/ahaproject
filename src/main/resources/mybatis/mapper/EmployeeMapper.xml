@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.cyr.EmployeeMapper">
+
+    <resultMap id="EmployeeMap" type="Employee">
+        <result property="emp_id" column="emp_id"/>
+        <result property="cp_name" column="cp_name"/>
+        <result property="emp_code" column="emp_code"/>
+        <result property="emp_name" column="emp_name"/>
+        <result property="emp_joining" column="emp_joining"/>
+        <result property="emp_regid" column="emp_regid"/>
+        <result property="emp_tel" column="emp_tel"/>
+        <result property="emp_email" column="emp_email"/>
+        <result property="emp_address" column="emp_address"/>
+        <result property="emp_account" column="emp_account"/>
+        <result property="emp_uuid" column="emp_uuid"/>
+        <result property="emp_filename" column="emp_filename"/>
+        <result property="emp_etc1" column="emp_etc1"/>
+        <result property="emp_etc2" column="emp_etc2"/>
+        <result property="emp_etc3" column="emp_etc3"/>
+        <result property="emp_use" column="emp_use"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="EmployeeMap">
+        SELECT * FROM employee
+        <include refid="search"/>
+        ORDER BY emp_id DESC
+        LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(emp_id)
+        FROM employee
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'cp_name'.toString()">
+                cp_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+            <if test="keyword != null and type == 'emp_name'.toString()">
+                emp_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+            <if test="keyword != null and type == 'emp_tel'.toString()">
+                emp_tel LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+            <if test="keyword != null and type == 'emp_email'.toString()">
+                emp_email LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+        </where>
+    </sql>
+
+    <sql id="switch">
+        <if test="finished != '' and finished == '재직'">
+            AND emp_use = 1
+        </if>
+
+        <if test="finished != '' and finished == '퇴사'">
+            AND emp_use = 0
+        </if>
+    </sql>
+
+</mapper>

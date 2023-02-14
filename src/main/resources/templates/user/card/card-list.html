@@ -28,8 +28,23 @@
                             <p class="text-sm">카드 정보 전체보기</p>
                         </div>
                         <div class="ms-auto d-flex">
-
-
+                            <form class="row g-3" action="/user/basicinfo/card/card-list" method="get">
+                                <div class="col-auto">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="category" name="type">
+                                        <option value="card_name">카드명 검색</option>
+                                        <option value="card_type">카드유형 검색</option>
+                                        <option value="card_company">카드사 검색</option>
+                                        <option value="card_num">카드번호 검색</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="keyword" class="visually-hidden">search</label>
+                                    <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">검색</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -52,7 +67,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <th:block th:each="cardDTO : ${cardDTOs}">
+                            <th:block th:each="cardDTO : ${cards.dtoList}">
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
@@ -127,6 +142,46 @@
             </div>
         </div>
 
+        <div class="col-md-4"></div>
+
+        <div class="col-sm-4 d-flex justify-content-center">
+            <th:block
+                    th:with="start=${cards.start}, end=${cards.end}, keyword =${param.keyword}, type = ${param.type}">
+                <ul class="pagination">
+                    <li th:if="${start} == '1'" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/user/basicinfo/card/card-list(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◁</a>
+                    </li>
+                    <li th:if="${start} > '1'" class="page-item ">
+                        <a class="page-link"
+                           th:href="@{/user/basicinfo/card/card-list(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◀</a>
+
+                    </li>
+
+                    <th:block th:each="num : ${#numbers.sequence(start,end)}">
+                        <li class="page-item" th:if="${num} != ${cards.page}">
+
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/user/basicinfo/card/card-list(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                        <li class="page-item active " th:if="${num} == ${cards.page}">
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/user/basicinfo/card/card-list(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                    </th:block>
+
+                    <li th:if="${end} >= ${cards.total} / 10" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/user/basicinfo/card/card-list(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▷</a>
+                    </li>
+                    <li th:if="${end} < ${cards.total} / 10" class="page-item">
+                        <a class="page-link"
+                           th:href="@{/user/basicinfo/card/card-list(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▶</a>
+                    </li>
+                </ul>
+            </th:block>
+        </div>
+        <div class="col-md-3"></div>
     </div>
 </div>
 </div>
