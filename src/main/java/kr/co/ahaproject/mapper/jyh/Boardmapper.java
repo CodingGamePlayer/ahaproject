@@ -17,9 +17,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import kr.co.ahaproject.dto.BoardDTO;
-import kr.co.ahaproject.dto.MaterialDTO;
-import kr.co.ahaproject.dto.ReplyDTO;
-import kr.co.ahaproject.entity.Board;
+
 
 @Mapper
 public interface Boardmapper {
@@ -36,12 +34,16 @@ public interface Boardmapper {
             @Result(property = "b_etc", column = "b_etc"),
             @Result(property = "b_filename", column = "b_filename"),
 			@Result(property = "b_uuid", column = "b_uuid")})
-	
     List<BoardDTO> listAll();
 	
 	@Select("SELECT * FROM board WHERE b_id = #{b_id}")
     @ResultMap("BoardMap")
 	BoardDTO SelectOne(int b_id); //선택조회
+	
+	
+	@Select("SELECT * FROM board WHERE ct_id = #{ct_id}")
+    @ResultMap("BoardMap")
+	BoardDTO CategoryOne(int ct_id); //카테고리 선택
     
 	
 	

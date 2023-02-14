@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.ahaproject.controller.jyh.BoardController;
 import kr.co.ahaproject.dto.BoardDTO;
+import kr.co.ahaproject.dto.CategoryDTO;
 import kr.co.ahaproject.service.jyh.BoardService;
+import kr.co.ahaproject.service.jyh.CategoryService;
 import kr.co.ahaproject.service.jyh.ReplyService;
 
 
@@ -25,21 +27,25 @@ public class BoardControllerImp implements BoardController {
 	private ReplyService replyservice;
 	
 
+	
+
+	
+
 	// 공지사항
 	@Override
 	@GetMapping("user/gboard/list")
-	public String list(Model model) {
-		
+	public String list(Model model, BoardDTO dto) {
+
 		model.addAttribute("listdata",service.listAll());
-		
+
 		return "user/board/list";
 	}
 
 	//등록페이지 이동
 	@Override
 	@GetMapping("user/board/register")
-	public String create() {
-
+	public String create(Model model, BoardDTO dto) {
+		model.addAttribute("register", service.SelectOne(dto.getCt_id()));
 		return "user/board/register";
 	}
 	
@@ -63,34 +69,6 @@ public class BoardControllerImp implements BoardController {
 		return "user/board/board-edit-form";
 	}
 	
-	//자유게시판
-
-	@Override
-	@GetMapping("/user/freeboard/list")
-	public String listAll(Model model) {
-		model.addAttribute("list",service.listAll());
-		return "user/board/freeboard/freeboardlist";
-	}
-
-	@Override
-	@GetMapping
-	public String register() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String selectone(int b_id, Model model, BoardDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String freeupdate(Model model, BoardDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
 
 

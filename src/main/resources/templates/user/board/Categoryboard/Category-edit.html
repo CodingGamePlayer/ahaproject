@@ -37,26 +37,19 @@
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">카테고리 등록</h5>
-            <div class="row">
+        <h5 class="card-title mt-3 mb-3">게시판 수정</h5>
+        <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">번호</label>
-                    <select class="form-select" aria-label="Default select example" id="ct_id" >
-                        <option th:text="1" th:value="1"></option>
-                         <option th:text="2" th:value="2"></option>
-                        <option th:text="3" th:value="3"></option>
-                    </select>
+                 <input type = "hidden" th:value="${update.ct_id}" name="ct_id" id="ct_id">
                 </div>
-                </div>
-            </div>
-              <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">카테고리</label>
-                    <input class = "form-control"  id="ct_name" >
-                </div>
-            </div>
             <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*카테고리</label>
+                    <input class = "form-control" type="text" id="ct_name" name="ct_name" th:value="${update.ct_name}"  >
+                </div>
+            </div>
+             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">사용여부</label>
                     <select class="form-select" aria-label="Default select example" id="ct_use">
@@ -65,18 +58,57 @@
                     </select>
                 </div>
             </div>
-            
-            <input  type="button" class="btn btn-primary" id="categorySubmitBtn" value="등록하기" />
           
+          
+            <input type="submit" class="btn btn-primary" value="수정하기" id="boardSubmitBtn"/>
+         
+            <input  type="submit" class="btn btn-primary" value="삭제하기" id="boardDeleteBtn"/>
         </div>
     </div>
 </div>
-<script>
-    const categorySubmitBtn = document.querySelector('#categorySubmitBtn');
 
-    categorySubmitBtn.addEventListener("click", () => {
+<script>
+
+//<!--  이미지 파일을 사용하기 위한 JS-->
+
+
+    const boardSubmitBtn = document.querySelector('#boardSubmitBtn');
+    const urlParams = new URL(location.href).searchParams;
+    const boardDeleteBtn = document.querySelector('#boardDeleteBtn');
     
-        const input_ct_id = document.querySelector('#ct_id').value;
+    boardDeleteBtn.addEventListener("click", function(){
+		  
+    	 const input_ct_id = urlParams.get('ct_id');
+		  
+		   const category2 = {
+				ct_id : input_ct_id 
+		   };
+			          
+		  const url = "/api/user/board/category";
+
+	      fetch(url, {
+	         method : "DELETE",
+	         body : JSON.stringify(category2),
+	         headers : {
+	             "Content-Type" : "application/json"
+	         }
+	      }).then(response => {
+	         if(response.ok){
+	             response.text();
+	             alert('삭제가 완료되었습니다.');
+	             opener.location.reload();
+	             window.open('','_self').close();
+	             
+	         } else {
+	             alert('삭제를 실패하였습니다.');
+	         }
+	      });
+	  });
+
+
+    boardSubmitBtn.addEventListener("click", () => {
+    	console.log("클릭");
+    	const input_ct_id = document.querySelector('#ct_id').value;
         const input_ct_name = document.querySelector('#ct_name').value;
         const input_ct_use = document.querySelector('#ct_use').value;
         
@@ -86,8 +118,10 @@
             ct_use : input_ct_use
            
         };
+        
 
-        if(input_ct_name == " "){
+        if( input_ct_id == "")
+        {
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
@@ -97,7 +131,7 @@
         const url = "/api/user/board/category";
 
         fetch(url, {
-           method : "POST",
+           method : "PUT",
            body : JSON.stringify(category1),
            headers : {
                "Content-Type" : "application/json"
@@ -105,19 +139,22 @@
         }).then(response => {
            if(response.ok){
                response.text();
-               alert('등록이 완료되었습니다.');
+               alert('수정이 완료되었습니다.');
                window.location.reload();
                opener.location.reload();
            } else {
-               alert('등록을 실패하였습니다.');
+               alert('수정을 실패하였습니다.');
            }
         });
+    });//수정 끝
+    
+    
+   
+   // 삭제 끝 ============
 
-
-    });
 </script>
-<!--  
-<script>
+
+<!-- <script>
     const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
@@ -140,8 +177,7 @@
             },
         },
     });
--->
-</script>
+</script> -->
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>

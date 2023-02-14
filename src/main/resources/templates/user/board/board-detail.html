@@ -19,51 +19,47 @@
 <body>
 <!-- Content -->
 <div layout:fragment="content">
-	<div class="card m-3">
-
-    <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">게시판 상세보기</h5>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                 <input type = "hidden" th:value="${selectdata.b_id}" name="b_id" id="b_id">
-                 <label class="form-control-label">*카테고리</label>
-                 <select class="form-select" aria-label="Default select example" id="ct_id" disabled="disabled" >
-                        <option th:text="공지사항" th:value="${selectdata.ct_id}"></option>
-                        <option th:text="자유게시판" th:value="${selectdata.ct_id}"></option>
-                        <option th:text="QnA" th:value="${selectdata.ct_id}"></option>
-                    </select>
-                </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*유저</label>
-                    <input class = "form-control" type="text" id="ac_id" name="ac_id" th:value="${selectdata.ac_id}" readonly="readonly" >
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*제목</label>
-                    <input class="form-control" type="text" id="b_title" name="b_title" th:value="${selectdata.b_title}" readonly="readonly">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*본문</label>
-                    <input class="form-control" type="text" id="b_body" name="b_body" size="10" th:value="${selectdata.b_body}" readonly="readonly">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">비고</label>
-                    <input class="form-control" type="text" id="b_etc" name="b_etc" th:value="${selectdata.b_etc}" readonly="readonly">
-                </div>
-            </div>
-          
-            </div>
-            </div>
-            
-            <hr>
-           
+			<div class="row">
+				<div class="col-sm-2"></div>
+	      		<div class="col-sm-8">
+	      			<div class="card m-2">
+						<div class="card-body">
+			        <h5 class="card-title mt-3 mb-3">게시판 상세보기</h5>
+			        <div class="row">
+			            <div class="col-sm-12">
+			                <div class="form-group">
+			                 <input type = "hidden" th:value="${selectdata.b_id}" name="b_id" id="b_id">
+			                 <label class="form-control-label">*카테고리</label>
+			                 <select class="form-select" aria-label="Default select example" id="ct_id" disabled="disabled" >
+			                        <option th:text="공지사항" th:value="${selectdata.ct_id}"></option>
+			                        <option th:text="자유게시판" th:value="${selectdata.ct_id}"></option>
+			                        <option th:text="QnA" th:value="${selectdata.ct_id}"></option>
+			                    </select>
+			                </div>
+			            <div class="col-sm-12">
+			                <div class="form-group">
+			                    <label class="form-control-label">*유저</label>
+			                    <input class = "form-control" type="text" id="ac_id" name="ac_id" th:value="${selectdata.ac_id}" readonly="readonly" >
+			                </div>
+			            </div>
+			            <div class="col-sm-12">
+			                <div class="form-group">
+			                    <label class="form-control-label">*제목</label>
+			                    <input class="form-control" type="text" id="b_title" name="b_title" th:value="${selectdata.b_title}" readonly="readonly">
+			                </div>
+			            </div>
+			            <div class="col-sm-12">
+			                <div class="form-group">
+			                    <label class="form-control-label">*본문</label>
+			                    <input class="form-control" type="text" id="b_body" name="b_body" size="10" th:value="${selectdata.b_body}" readonly="readonly">
+			                </div>
+			            </div>
+			
+			            </div>
+			            </div>
+			            
+			            <hr>
+			           
            
           
         </div>
@@ -71,26 +67,42 @@
         
         <!-- 댓글시작 -->
      <div>
-        <h5 class="card-title mt-3 mb-3">게시판 상세보기</h5>
+        <h3 class="card-title mt-5 mb-5" style="text-align: center" >댓글</h3>
     </div>
       <div class=" d-flex justify-content-end" style="padding-right: 40px">
-               <button class="btn btn-primary" th:onclick="replyboard([[${selectdata.b_id}]])">댓글작성</button>
+               <button class="btn btn-primary" th:onclick="replyboard([[${selectdata.b_id}]])" style="margin-bottom: 30px">댓글작성</button>
       </div>
       
            <div class="card-body px-0 py-0">
-                    <div class="border-bottom py-3 px-3 d-sm-flex align-items-center" style="border-bottom: 2px">
-                        <table class="table align-items-center mb-0">
-                            <thead class="bg-gray-100">
-                            <tr>
-                                <td class="text-secondary text-xs font-weight-semibold opacity-7">번호</td>
-                                <th style="padding-left: 50px" class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">게시판 번호</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">댓글 내용</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">유저</th>
-                            </tr>
-                            </thead>
-        </div>
+                    	<form>
+                        <table class="table table-borderless" >
+                            
                             <tbody>
                             <th:block th:each="data:${replydata}">
+                       			
+                            <tr>
+                                <td style="width: 250px " class="text-secondary text-xs font-weight-semibold opacity-7">번호 <span style="padding-left: 30px" class="text-secondary text-sm font-weight-normal" th:text ="${data.rp_id}"></span></td>
+								<td style="width: 250px" class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">게시판 번호 <span style="padding-left: 30px"  class="text-secondary text-sm font-weight-normal" th:text ="${data.b_id}"></span></td>
+                              	<td style="margin-right: 100px" class="text-center text-secondary text-xs font-weight-semibold opacity-7">유저 <span class="text-secondary text-sm font-weight-normal" th:text ="${data.ac_id}"></span></td>
+    							<td class="align-middle">
+                                        <a href="#" th:onclick="replyedit([[${data.rp_id}]])">
+                                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                                   <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                                 </svg>
+                                       </a>
+                                    </td>                        
+	                         </tr>
+                       		
+                       			
+                            
+                            <tr>
+                                    <td class="align-middle">
+                                      <span  class="text-secondary text-sm font-weight-normal" th:text ="${data.rp_body}"></span>
+                                                </td>
+
+                            </tr>
+                   
+
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
@@ -99,40 +111,22 @@
                                             </div>
                                             <div class="d-flex flex-column justify-content-center ms-1">
                                             </div>
-                                                <span class="text-secondary text-sm font-weight-normal"
-                                                     th:text ="${data.rp_id}"></span>
                                         </div>
                                     </td>
-                                    <td style="padding-left: 30px" >
-                                       <span class="text-secondary text-sm font-weight-normal"
-                                                 th:text ="${data.b_id}"></span>
-                                                   
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                                th:text ="${data.rp_body}"></span>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text ="${data.ac_id}"></span>
-                                    </td>
-                                    
-                                    
-                                 
-                              <td class="align-middle">
-                                        <a href="#" th:onclick="replyedit([[${data.rp_id}]])">
-                                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                                   <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-                                 </svg>
-                                       </a>
-                                    </td>
-                               
                                 </tr>
                             </th:block>
                             </tbody>
                         </table>
+                    
                         </div>
-                        </div>
-
+	    			
+	                </div>
+	      		</div>
+	      		<div class="col-sm-2"></div>
+			</div>
+      		
+      		
+	
          
       
       

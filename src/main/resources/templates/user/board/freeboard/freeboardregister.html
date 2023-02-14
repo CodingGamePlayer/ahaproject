@@ -42,20 +42,16 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*카테고리</label>
-                    <select class="form-select" aria-label="Default select example" id="ct_id">
-                     <th:block th:each="category : ${categoryDTOS}">
-                            <option th:value="${category.ct_id}">[[${category.ct_id}]]</option>
-                        </th:block>
+                    <select class="form-select" aria-label="Default select example" id="ct_id" >
+                         <option th:text="자유게시판" th:value="2">자유게시판</option>
+                        <!--  <option th:text="공지사항" th:value="1">공지사항</option>
+                        <option th:text="QnA" th:value="3">QnA</option>-->
                     </select>
                 </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*유저</label>
-                    <select class="form-select" aria-label="Default select example"  id="us_id">
-                        <th:block th:each="estimate : ${estimateDTOS}">
-                            <option th:value="${estimate.us_id}">[[${estimate.us_id}]]</option>
-                        </th:block>
-                    </select>
+                    <input class = "form-control" th:value="1" id="ac_id" readonly="readonly" placeholder="유저 아이디">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -67,7 +63,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*본문</label>
-                    <input class="form-control" type="text" id="b_body" size="10">
+                    <input class="form-control" type="text" id="b_body"  maxlength='20'>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -78,55 +74,179 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">파일</label>
-                    <input class="form-control" type="file" id="b_file">
+                     <!--            파일첨부를 위한 기능 추가 start-->
+            		<div class="col-sm-12">
+                	<div class="form-group">
+                    <label class="form-control-label">파일</label><br>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        파일등록
+                    </button>
                 </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">
+                    </div>
+                </div>
+            </div>
+
+            <!--            파일첨부를 위한 기능 추가 end-->
             </div>
             </div>
             
-            <input  type="button" class="btn btn-primary" id="boardSubmitBtn" value="등록하기" />
+            <input type="submit" class="btn btn-primary" value="등록하기" id="boardSubmitBtn"/>
           
         </div>
     </div>
 </div>
+<!-- 파일 첨부용 Modal start -->
+
+
+<div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">파일첨부</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">첨부파일을 선택하세요.</label>
+                    <input class="form-control" type="file" id="formFile" name="files">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUploadBtn">Close
+                </button>
+                <button type="button" class="btn btn-primary uploadBtn" id="uploadBtn">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 파일 첨부용 Modal end -->
+
+<!-- 파일 첨부용 JS start-->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/upload.js"></script>
+
+<!-- 파일 첨부용 JS end-->
+
 <script>
+    let input_UUID;
+    let input_Filename;
+
+    document.querySelector(".uploadBtn").addEventListener("click", function (e) {
+
+        const formObj = new FormData();
+
+        const fileInput = document.querySelector("input[name='files']")
+
+        console.log(fileInput.files)
+
+        const files = fileInput.files
+
+        for (let i = 0; i < files.length; i++) {
+            formObj.append("files", files[i]);
+        }
+
+
+        uploadToServer(formObj).then(result => {
+            console.log(result)
+            //console.log(result)
+            for (const uploadResult of result) {
+                showUploadFile(uploadResult)
+            }
+            document.getElementById('closeUploadBtn').click()
+        }).catch(e => {
+            document.getElementById('closeUploadBtn').click()
+
+        })
+
+    }, false)
+
+    const uploadResult = document.querySelector(".uploadResult")
+
+    function showUploadFile({uuid, fileName, link}) {
+        input_UUID = uuid;
+        input_Filename = fileName;
+        const str =
+            `
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12">
+                    <div class="card border shadow-x mb-4">
+                        <div class="card-header ">
+                            ${fileName}
+                            <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+                        </div>
+                        <div class="card-body">
+                             <img style="width: 300px; height: 100px;" src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- card -->`
+
+        uploadResult.innerHTML += str
+    }
+
+
+    function removeFile(uuid, fileName, obj) {
+
+        console.log(uuid)
+        console.log(fileName)
+
+        console.log(obj)
+
+        const targetDiv = obj.closest(".card")
+
+        removeFileToServer(uuid, fileName).then(data => {
+            targetDiv.remove()
+        })
+    }
+    
+
     const boardSubmitBtn = document.querySelector('#boardSubmitBtn');
 
     boardSubmitBtn.addEventListener("click", () => {
-        const input_b_id = document.querySelector('#b_id').value;
+    	console.log("클릭");
         const input_ct_id = document.querySelector('#ct_id').value;
-        const input_us_id = document.querySelector('#us_id').value;
+        const input_ac_id = document.querySelector('#ac_id').value;
         const input_b_title = document.querySelector('#b_title').value;
         const input_b_body = document.querySelector('#b_body').value;
         const input_b_etc = document.querySelector('#b_etc').value;
-        const input_b_file = document.querySelector('#b_file').value;
+
+
+        
+        
         
         const board1 = {
-            b_id : input_b_id,
             ct_id : input_ct_id,
-            us_id : input_us_id,
+            ac_id : input_ac_id,
             b_title : input_b_title,
            	b_body : input_b_body,
             b_etc : input_b_etc,
-            b_file : input_b_file,
+            b_filename : input_Filename,
+            b_uuid : input_UUID
+    
            
         };
 
-        if(input_b_id == "" || input_ct_id == "" ||
-            input_us_id == "" || input_b_title == "" ||
-            input_b_body == "" || input_b_etc =="" ||
-            input_b_file == ""){
+        if( input_ct_id == "" ||input_ac_id == "" ||
+        	input_b_title == "" ||input_b_body == "")
+        {
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
 
         console.log(board1);
 
-        const url = "/api/user/board";
+        const url = "/api/user/board/freeboard";
 
         fetch(url, {
            method : "POST",
-           body : JSON.stringify(board),
+           body : JSON.stringify(board1),
            headers : {
                "Content-Type" : "application/json"
            }
@@ -135,6 +255,7 @@
                response.text();
                alert('등록이 완료되었습니다.');
                window.location.reload();
+               opener.location.reload();
            } else {
                alert('등록을 실패하였습니다.');
            }
@@ -144,7 +265,7 @@
     });
 </script>
 
-<script>
+<!-- <script>
     const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
@@ -167,7 +288,7 @@
             },
         },
     });
-</script>
+</script> -->
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
