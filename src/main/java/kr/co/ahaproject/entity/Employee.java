@@ -27,6 +27,6 @@ public class Employee {
     String emp_etc1;
     String emp_etc2;
     String emp_etc3;
-    Boolean emp_use;
+    Boolean emp_use;    // 퇴사여부
 
 }

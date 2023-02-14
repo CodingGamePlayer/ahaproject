@@ -1,5 +1,7 @@
 package kr.co.ahaproject.mapper.cyr;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.entity.Client;
 import kr.co.ahaproject.entity.Company;
 import kr.co.ahaproject.entity.Employee;
 import kr.co.ahaproject.entity.Misu;
@@ -11,7 +13,7 @@ import java.util.List;
 public interface EmployeeMapper {
 
     @Select("select * from employee order by emp_code desc")
-    @Results(id = "EmployeeMap", value = {
+    @Results(id = "employeeMap", value = {
             @Result(property = "emp_id", column = "emp_id"),
             @Result(property = "cp_name", column = "cp_name"),
             @Result(property = "emp_code", column = "emp_code"),
@@ -41,7 +43,7 @@ public interface EmployeeMapper {
     int count();
 
     @Insert("insert into employee (cp_name,emp_code,emp_name,emp_joining,emp_regid,emp_tel,emp_email,emp_address,emp_account,emp_uuid,emp_filename,emp_etc1,emp_etc2,emp_etc3, emp_use)" +
-            " values (#{cp_name},#{emp_code},#{emp_name},#{emp_joining},#{emp_regid},#{emp_tel},#{emp_email},#{emp_address},#{emp_account},#{emp_uuid},#{emp_filename},#{emp_etc1},#{emp_etc2},#{emp_etc3},'true')")
+            " values (#{cp_name},#{emp_code},#{emp_name},#{emp_joining},#{emp_regid},#{emp_tel},#{emp_email},#{emp_address},#{emp_account},#{emp_uuid},#{emp_filename},#{emp_etc1},#{emp_etc2},#{emp_etc3},${emp_use})")
     int insert(Employee employee);
 
     @Update("update employee set cp_name=#{cp_name},emp_code=#{emp_code},emp_name=#{emp_name},emp_regid=#{emp_regid},emp_joining=#{emp_joining},emp_tel=#{emp_tel},emp_email=#{emp_email}," +
@@ -50,5 +52,9 @@ public interface EmployeeMapper {
 
     @Delete("delete from employee where emp_id=#{emp_id}")
     int delete(int emp_id);
+
+    List<Employee> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+    int getCount(PageRequestDTO pageRequestDTO);
 
 }

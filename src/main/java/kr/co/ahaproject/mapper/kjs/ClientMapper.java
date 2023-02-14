@@ -2,6 +2,8 @@ package kr.co.ahaproject.mapper.kjs;
 
 import java.util.List;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.entity.Misu;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -79,4 +81,8 @@ public interface ClientMapper {
 // 거래처 코드
   @Select ("select ifnull(max(cl_id)+1, 1) from ahaproject.client")
   int maxNum();
+
+	List<Client> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+	int getCount(PageRequestDTO pageRequestDTO);
 }

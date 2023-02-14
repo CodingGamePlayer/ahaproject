@@ -24,16 +24,34 @@
                             <div>
                                 <h6 class="font-weight-semibold text-lg mb-0">인사 현황</h6>
                                 <p class="text-sm">인사 현황 전체보기</p>
-                                <button class="btn btn-primary" th:onclick="regitEmployee()">인사 신규 등록하기</button>
-                                <script>
-                                    function regitEmployee(){
-                                        let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
-                                        window.open("/user/employee/emform", "_blank", option);
-                                    }
-                                </script>
                             </div>
                             <div class="ms-auto d-flex">
+                                <form class="row g-3" action="/user/employee/list" method="get">
+                                    <div class="col-auto">
+                                        <select class="form-select pe-5" aria-label="Default select example" id="finished" name="finished">
+                                            <option value="" selected>재직여부</option>
+                                            <option value="재직">재직</option>
+                                            <option value="퇴사">퇴사</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <select class="form-select pe-5" aria-label="Default select example" id="category" name="type">
+                                            <option value="cp_name">회사 검색</option>
+                                            <option value="emp_name">사원명 검색</option>
+                                            <option value="emp_tel">전화번호 검색</option>
+                                            <option value="emp_email">이메일 검색</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <label for="keyword" class="visually-hidden">search</label>
+                                        <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search">
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary mb-3">검색</button>
+                                    </div>
+                                </form>
+
 
                             </div>
                         </div>
@@ -51,7 +69,7 @@
                                     <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">주소</th>
                                     <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">계좌정보</th>
                                     <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고</th>
-                                    <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">사용여부</th>
+                                    <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">재직여부</th>
 
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
@@ -67,10 +85,10 @@
 <!--                                    <td class="text-center text-secondary text-xs font-weight-semibold opacity-7" th:text="${list.emp_account}">계좌정보</td>-->
 <!--                                    <td class="text-center text-secondary text-xs font-weight-semibold opacity-7" th:text="${list.emp_etc1}">비고</td>-->
 <!--                                </tr>-->
-                                <th:block th:each="list:${list}">
+                                <th:block th:each="list:${employees.dtoList}">
                                     <tr>
                                         <td>
-                                        <div class="d-flex flex-column justify-content-center ms-1">
+                                        <div class="d-flex flex-column justify-content-center ms-1 ps-3">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${list.emp_code}"/>
                                         </div>
@@ -113,9 +131,9 @@
                                         <th:block th:switch="${list.emp_use}">
                                             <td class="align-middle text-center">
                                             <span class="badge badge-sm border border-danger text-danger bg-danger"
-                                                  th:case="false">사용안함</span>
+                                                  th:case="false">퇴사</span>
                                                 <span class="badge badge-sm border border-success text-success bg-success"
-                                                      th:case="true">사용중</span>
+                                                      th:case="true">재직</span>
                                             </td>
                                         </th:block>
 
@@ -146,7 +164,48 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4"></div>
 
+            <div class="col-sm-4 d-flex justify-content-center">
+                <th:block
+                        th:with="start=${employees.start}, end=${employees.end}, keyword =${param.keyword}, type = ${param.type}">
+                    <ul class="pagination">
+                        <li th:if="${start} == '1'" class="page-item disabled">
+                            <a class="page-link"
+                               th:href="@{/user/employee/list(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◁</a>
+                        </li>
+                        <li th:if="${start} > '1'" class="page-item ">
+                            <a class="page-link"
+                               th:href="@{/user/employee/list(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◀</a>
+
+                        </li>
+
+                        <th:block th:each="num : ${#numbers.sequence(start,end)}">
+                            <li class="page-item" th:if="${num} != ${employees.page}">
+
+                                <a class="page-link text-info" th:text="${num}"
+                                   th:href="@{/user/employee/list(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                            </li>
+                            <li class="page-item active " th:if="${num} == ${employees.page}">
+                                <a class="page-link text-info" th:text="${num}"
+                                   th:href="@{/user/employee/list(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                            </li>
+                        </th:block>
+
+                        <li th:if="${end} >= ${employees.total} / 10" class="page-item disabled">
+                            <a class="page-link"
+                               th:href="@{/user/employee/list(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▷</a>
+                        </li>
+                        <li th:if="${end} < ${employees.total} / 10" class="page-item">
+                            <a class="page-link"
+                               th:href="@{/user/employee/list(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▶</a>
+                        </li>
+                    </ul>
+                </th:block>
+            </div>
+            <div class="col-md-3"></div>
+
+        </div>
         </div>
     </div>
 

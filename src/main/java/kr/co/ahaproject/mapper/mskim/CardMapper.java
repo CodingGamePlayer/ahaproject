@@ -2,6 +2,8 @@ package kr.co.ahaproject.mapper.mskim;
 
 import java.util.List;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.entity.Client;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -60,5 +62,8 @@ public interface CardMapper {
 	// 카드 정보 삭제
 	@Delete("delete from card where card_id = #{card.card_id}")
 	int delete(@Param("card") Card card);
-	
+
+	List<Card> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+	int getCount(PageRequestDTO pageRequestDTO);
 }

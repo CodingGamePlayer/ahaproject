@@ -3,6 +3,9 @@ package kr.co.ahaproject.service.mskim;
 import java.util.List;
 
 import kr.co.ahaproject.dto.CardDTO;
+import kr.co.ahaproject.dto.ClientDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 
 public interface CardService {
 	
@@ -23,5 +26,7 @@ public interface CardService {
 	
 	// 카드 정보 삭제
 	int delete(CardDTO cardDTO);
+
+	PageResponseDTO<CardDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 
 }
