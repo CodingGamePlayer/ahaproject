@@ -2,6 +2,7 @@ package kr.co.ahaproject.controller.kjs.imp;
 
 import kr.co.ahaproject.controller.kjs.AdminController;
 import kr.co.ahaproject.dto.*;
+import kr.co.ahaproject.entity.Misu;
 import kr.co.ahaproject.service.kjs.AccountService;
 import kr.co.ahaproject.service.kjs.CompanyService;
 import kr.co.ahaproject.service.mskim.ConstructionService;
@@ -34,9 +35,9 @@ public class AdminControllerImp implements AdminController {
     @GetMapping("/misu")
     public String misu(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult,Model model) {
 
-        List<MisuDTO> misuDTOList = misuService.selectAll();
+        PageResponseDTO<Misu> pageResponseDTO = misuService.selectAllForPaging(pageRequestDTO);
 
-        model.addAttribute("misuDTOs", misuDTOList);
+        model.addAttribute("misuDTOs", pageResponseDTO);
 
         return "admin/misu";
     }
@@ -84,5 +85,7 @@ public class AdminControllerImp implements AdminController {
 
         return "admin/manage-account";
     }
+
+
 }
 

@@ -1,6 +1,7 @@
-package kr.co.ahaproject.mapper.kjs;
+package kr.co.ahaproject.mapper.moo;
 
 import kr.co.ahaproject.dto.MachRentListDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.MachRent;
 import org.apache.ibatis.annotations.*;
 
@@ -74,5 +75,9 @@ public interface MachrentMapper {
             "ON A.cst_code = C.cst_code " +
             "ORDER BY A.rent_id DESC ")
     List<MachRentListDTO> selectAllWithoutKind();
+
+    List<MachRentListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+    int getCount (PageRequestDTO pageRequestDTO);
 
 }

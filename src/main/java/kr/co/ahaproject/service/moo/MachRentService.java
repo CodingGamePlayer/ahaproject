@@ -1,7 +1,9 @@
-package kr.co.ahaproject.service.kjs;
+package kr.co.ahaproject.service.moo;
 
 import kr.co.ahaproject.dto.MachRentDTO;
 import kr.co.ahaproject.dto.MachRentListDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 
 import java.util.List;
 
@@ -20,4 +22,6 @@ public interface MachRentService {
 
     List<MachRentListDTO> selectAllFindByKind(String kind);
     List<MachRentListDTO> selectAllWithoutKind();
+
+    PageResponseDTO<MachRentListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 }

@@ -25,7 +25,7 @@
     <select id="selectAllForPaging" resultMap="MisuMap">
         SELECT * FROM misu
         <include refid="search"/>
-        ORDER BY ac_id DESC
+        ORDER BY misu_id DESC
         LIMIT #{skip}, #{size}
     </select>
 
@@ -36,14 +36,42 @@
     </select>
 
     <sql id="search">
+
         <where>
-            <if test="keyword != null and type == 'username'.toString()">
-                ac_username LIKE CONCAT('%', #{keyword}, '%')
+
+            <if test="keyword != null and type == 'misu_div'.toString()">
+                misu_div LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
             </if>
+            <if test="keyword != null and type == 'cst_code'.toString()">
+                cst_code LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+
             <if test="keyword != null and type == 'cp_name'.toString()">
                 cp_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
             </if>
+
+            <if test="keyword != null and type == 'misu_name'.toString()">
+                misu_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+
         </where>
+
+    </sql>
+
+    <sql id="switch">
+
+        <if test="finished != '' and finished == '완료'">
+            AND misu_finished = 1
+        </if>
+
+        <if test="finished != '' and finished == '미완'">
+            AND misu_finished = 0
+        </if>
+
     </sql>
 
 </mapper>
