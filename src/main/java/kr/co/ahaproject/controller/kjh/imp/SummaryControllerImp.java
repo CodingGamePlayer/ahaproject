@@ -16,7 +16,7 @@ public class SummaryControllerImp implements SummaryController {
     @Override
     @GetMapping("/summary")
     public String summaryList(Model model) {
-        model.addAttribute("ioDTOs", summaryService.selectAll());
+        model.addAttribute("summaryDTOs", summaryService.selectAll());
         return "user/accounting/summary/list";
     }
 }
