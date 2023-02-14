@@ -1,18 +1,18 @@
 package kr.co.ahaproject.controller.kjs.imp;
 
-import java.util.List;
-
+import kr.co.ahaproject.controller.kjs.CompanyController;
+import kr.co.ahaproject.dto.CompanyDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
+import kr.co.ahaproject.service.kjs.imp.CompanyServiceImp;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.co.ahaproject.controller.kjs.CompanyController;
-import kr.co.ahaproject.dto.CompanyDTO;
-import kr.co.ahaproject.service.kjs.imp.CompanyServiceImp;
-import lombok.extern.slf4j.Slf4j;
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -25,9 +25,11 @@ public class CompanyControllerImp implements CompanyController {
 //	리스트페이지이동
 	@Override
 	@GetMapping("/list")
-	public String company(Model model) {
-		// TODO Auto-generated method stub
-		model.addAttribute("companys",  companyService.selectAll());
+	public String company(@Valid PageRequestDTO pageRequestDTO, Model model) {
+
+		PageResponseDTO<CompanyDTO> pageResponseDTO = companyService.selectAllForPaging(pageRequestDTO);
+
+		model.addAttribute("companys",  pageResponseDTO);
 		return "user/company/company-list";
 	}
 

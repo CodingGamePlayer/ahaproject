@@ -33,6 +33,24 @@
                         <p class="text-sm">공사별 현황 전체보기</p>
                     </div>
                     <div class="ms-auto d-flex">
+                        <form class="row g-3" action="/user/accounting/summary" method="get">
+                            <div class="col-auto">
+                                <select class="form-select pe-5" aria-label="Default select example" id="category"
+                                        name="type">
+                                    <option value="cp_name">회사명 검색</option>
+                                    <option value="cl_code">거래처명 검색</option>
+                                    <option value="cst_code">공사명 검색</option>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <label for="keyword" class="visually-hidden">search</label>
+                                <input type="text" class="form-control" name="keyword" id="keyword"
+                                       placeholder="Search">
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3">검색</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

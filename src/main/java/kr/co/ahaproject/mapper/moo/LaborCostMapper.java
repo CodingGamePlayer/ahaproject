@@ -1,8 +1,8 @@
 package kr.co.ahaproject.mapper.moo;
 
 import kr.co.ahaproject.dto.LaborCostListDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.LaborCost;
-import kr.co.ahaproject.entity.MachRent;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -44,4 +44,8 @@ public interface LaborCostMapper {
             "JOIN construction C ON A.cst_code = C.cst_code " +
             "JOIN client D on A.cl_code = D.cl_code ORDER BY A.lc_id DESC")
     List<LaborCostListDTO> selectAllName();
+
+    List<LaborCostListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+    int getCount(PageRequestDTO pageRequestDTO);
 }

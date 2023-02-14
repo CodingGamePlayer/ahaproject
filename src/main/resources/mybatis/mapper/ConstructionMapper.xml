@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.mskim.ConstructionMapper">
+
+    <resultMap id="ConstructionMap" type="Construction">
+        <result property="cst_id" column="cst_id"/>
+        <result property="cst_code" column="cst_code"/>
+        <result property="cst_name" column="cst_name"/>
+        <result property="cst_period" column="cst_period"/>
+        <result property="cst_start" column="cst_start"/>
+        <result property="cst_end" column="cst_end"/>
+        <result property="cst_finised" column="cst_finised"/>
+        <result property="cst_etc1" column="cst_etc1"/>
+        <result property="cst_etc2" column="cst_etc2"/>
+        <result property="cst_etc3" column="cst_etc3"/>
+        <result property="cst_filename" column="cst_filename"/>
+        <result property="cst_uuid" column="cst_uuid"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="ConstructionMap">
+        SELECT * FROM construction
+        <include refid="search"/>
+        ORDER BY cst_id DESC
+        LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(cst_id)
+        FROM construction
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'cst_code'.toString()">
+                cst_code LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+
+            </if>
+            <if test="keyword != null and type == 'cst_name'.toString()">
+                cst_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+
+            </if>
+
+        </where>
+    </sql>
+
+    <sql id="switch">
+        <if test="finished != '' and finished == '완료'">
+            AND cst_finised = 1
+        </if>
+
+        <if test="finished != '' and finished == '미완료'">
+            AND cst_finised = 0
+        </if>
+    </sql>
+
+</mapper>

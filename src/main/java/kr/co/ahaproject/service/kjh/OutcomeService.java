@@ -1,6 +1,8 @@
 package kr.co.ahaproject.service.kjh;
 
 import kr.co.ahaproject.dto.OutcomeDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 
 import java.util.List;
 
@@ -14,4 +16,6 @@ public interface OutcomeService {
     int update(OutcomeDTO outDTO);
 
     int delete(OutcomeDTO outDTO);
+
+    PageResponseDTO<OutcomeDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 }

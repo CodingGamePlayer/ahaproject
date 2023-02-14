@@ -49,7 +49,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <th:block th:each="inDTO : ${inDTOs}">
+                            <th:block th:each="inDTO : ${inDTOs.dtoList}">
                                 <tr>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal" th:text="${inDTO.cp_name}"/>
@@ -116,6 +116,46 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4"></div>
+
+        <div class="col-sm-4 d-flex justify-content-center">
+            <th:block
+                    th:with="start=${inDTOs.start}, end=${inDTOs.end}, keyword =${param.keyword}, type = ${param.type}">
+                <ul class="pagination">
+                    <li th:if="${start} == '1'" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/user/accounting/income(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◁</a>
+                    </li>
+                    <li th:if="${start} > '1'" class="page-item ">
+                        <a class="page-link"
+                           th:href="@{/user/accounting/income(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◀</a>
+
+                    </li>
+
+                    <th:block th:each="num : ${#numbers.sequence(start,end)}">
+                        <li class="page-item" th:if="${num} != ${inDTOs.page}">
+
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/user/accounting/income(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                        <li class="page-item active " th:if="${num} == ${inDTOs.page}">
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/user/accounting/income(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                    </th:block>
+
+                    <li th:if="${end} >= ${inDTOs.total} / 10" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/user/accounting/income(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▷</a>
+                    </li>
+                    <li th:if="${end} < ${inDTOs.total} / 10" class="page-item">
+                        <a class="page-link"
+                           th:href="@{/user/accounting/income(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▶</a>
+                    </li>
+                </ul>
+            </th:block>
+        </div>
+        <div class="col-md-3"></div>
     </div>
 </div>
 </div>

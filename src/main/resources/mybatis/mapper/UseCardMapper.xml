@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.mskim.UseCardMapper">
+
+    <resultMap id="UseCardJoinMap" type="UseCardJoinDTO">
+        <result property="uc_id" column="uc_id"/>
+        <result property="card_id" column="card_id"/>
+        <result property="card_name" column="card_name"/>
+        <result property="card_class" column="card_class"/>
+        <result property="card_type" column="card_type"/>
+        <result property="card_endnum" column="card_endnum"/>
+        <result property="uc_money" column="uc_money"/>
+        <result property="uc_where" column="uc_where"/>
+        <result property="uc_date" column="uc_date"/>
+        <result property="uc_etc" column="uc_etc"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="UseCardJoinMap">
+        SELECT use_card.*, card.card_name, card.card_class, card.card_type, card.card_endnum
+        FROM use_card
+        LEFT JOIN card ON use_card.card_id = card.card_id
+        <include refid="search"/>
+        ORDER BY uc_id DESC
+        LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT use_card.*, card.card_name, card.card_class, card.card_type, card.card_endnum
+        FROM use_card
+        LEFT JOIN card ON use_card.card_id = card.card_id
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'card_name'.toString()">
+                card_name LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and type == 'card_type'.toString()">
+                card_type LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and type == 'card_num'.toString()">
+                card_num LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and type == 'card_company'.toString()">
+                card_company LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+    </sql>
+
+</mapper>

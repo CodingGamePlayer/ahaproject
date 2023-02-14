@@ -1,5 +1,6 @@
 package kr.co.ahaproject.mapper.kjh;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.Income;
 import org.apache.ibatis.annotations.*;
 
@@ -72,4 +73,8 @@ public interface IncomeMapper {
 
     @Delete("DELETE FROM `ahaproject`.`income` WHERE `in_id` = #{in.in_id}")
     int delete(@Param("in") Income in);
+
+    List<Income> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+    int getCount(PageRequestDTO pageRequestDTO);
 }

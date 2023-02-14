@@ -1,5 +1,6 @@
 package kr.co.ahaproject.mapper.kjh;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.Outcome;
 import org.apache.ibatis.annotations.*;
 
@@ -68,4 +69,8 @@ public interface OutcomeMapper {
 
     @Delete("DELETE FROM `ahaproject`.`outcome` WHERE `out_id` = #{out.out_id}")
     int delete(@Param("out") Outcome out);
+
+    List<Outcome> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+    int getCount(PageRequestDTO pageRequestDTO);
 }

@@ -1,9 +1,11 @@
 package kr.co.ahaproject.service.mskim;
 
-import java.util.List;
-
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.dto.UseCardDTO;
 import kr.co.ahaproject.dto.UseCardJoinDTO;
+
+import java.util.List;
 
 public interface UseCardService {
 	
@@ -19,4 +21,5 @@ public interface UseCardService {
     
     UseCardJoinDTO getFindUcId(int uc_id);
 
+    PageResponseDTO<UseCardJoinDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 }
