@@ -41,23 +41,22 @@ public class UseMaterialApiControllerImp implements UseMaterialApiController{
 	@PutMapping("/useMaterial")
 	public ResponseEntity update(@RequestBody UseMaterialDTO useMaterialDTO) {
 		int result = useMaterialService.update(useMaterialDTO);
-		  System.out.println(String.valueOf(result));
-	        
-	        if (result == 0){
-	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-	        }
 
-	        return ResponseEntity.status(HttpStatus.OK).build();
+		if (result == 0){
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 	@Override
 	@DeleteMapping("/useMaterial")
 	public ResponseEntity delete(@RequestBody UseMaterialDTO useMaterialDTO) {
-		Long um_id = useMaterialDTO.getUm_id();
-		int result = useMaterialService.delete(um_id);
+
+		int result = useMaterialService.delete(useMaterialDTO);
         
 		if (result == 0){ 
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 
         return ResponseEntity.status(HttpStatus.OK).build();

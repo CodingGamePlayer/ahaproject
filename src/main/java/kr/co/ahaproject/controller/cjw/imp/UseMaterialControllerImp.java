@@ -1,9 +1,7 @@
 package kr.co.ahaproject.controller.cjw.imp;
 
 import kr.co.ahaproject.controller.cjw.UseMaterialController;
-import kr.co.ahaproject.dto.ConstructionDTO;
-import kr.co.ahaproject.dto.MaterialDTO;
-import kr.co.ahaproject.dto.UseMaterialDTO;
+import kr.co.ahaproject.dto.*;
 import kr.co.ahaproject.service.cjw.MaterialService;
 import kr.co.ahaproject.service.cjw.UseMaterialService;
 import kr.co.ahaproject.service.mskim.ConstructionService;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -25,8 +24,11 @@ public class UseMaterialControllerImp implements UseMaterialController {
 	//현장 자재 목록 - 이동하기
 	@Override
 	@GetMapping("/user/worksite/use-material/list")
-	public String list(Model model) {
-		model.addAttribute("listData", useMaterialService.listAll());
+	public String list(@Valid PageRequestDTO pageRequestDTO, Model model) {
+
+		PageResponseDTO<UseMaterialDTO> pageResponseDTO = useMaterialService.selectAllForPaging(pageRequestDTO);
+
+		model.addAttribute("listData", pageResponseDTO);
 		return "/user/use-material/use-material";
 	}
 
