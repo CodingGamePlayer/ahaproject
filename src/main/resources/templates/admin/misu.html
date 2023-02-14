@@ -31,14 +31,16 @@
                         <div class="ms-auto d-flex">
                             <form class="row g-3" action="/admin/misu" method="get">
                                 <div class="col-auto">
-                                    <select class="form-select pe-5" aria-label="Default select example" id="finished" name="finished">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="finished"
+                                            name="finished">
                                         <option value="" selected>수금여부</option>
                                         <option value="완료">수금완료</option>
                                         <option value="미완">수금미완</option>
                                     </select>
                                 </div>
                                 <div class="col-auto">
-                                    <select class="form-select pe-5" aria-label="Default select example" id="category" name="type">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="category"
+                                            name="type">
                                         <option value="misu_div">구분 검색</option>
                                         <option value="cst_code">공사코드 검색</option>
                                         <option value="cp_name">회사 검색</option>
@@ -47,7 +49,8 @@
                                 </div>
                                 <div class="col-auto">
                                     <label for="keyword" class="visually-hidden">search</label>
-                                    <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search">
+                                    <input type="text" class="form-control" name="keyword" id="keyword"
+                                           placeholder="Search">
                                 </div>
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-primary mb-3">검색</button>
@@ -84,13 +87,17 @@
                             <th:block th:each="misuDTO : ${misuDTOs.dtoList}">
                                 <tr>
                                     <th:block th:if="${misuDTO.misu_filename} == ''">
-                                    <td class="d-flex justify-content-center">
-                                        <img class="rounded-2" style="width: 200px; height: 100px;" src="https://via.placeholder.com/200x100">
-                                    </td>
+                                        <td class="d-flex justify-content-center">
+                                            <img class="rounded-2" style="width: 200px; height: 100px;"
+                                                 src="https://via.placeholder.com/200x100">
+                                        </td>
                                     </th:block>
                                     <th:block th:unless="${misuDTO.misu_filename} == ''">
                                         <td class="d-flex justify-content-center">
-                                            <img class="rounded-2" style="width: 200px; height: 100px;" th:src="|/user/view/s_${misuDTO.misu_uuid}_${misuDTO.misu_filename}|">
+                                            <a href="#" th:onclick="showImage([[${misuDTO.misu_id}]])">
+                                                <img class="rounded-2" style="width: 200px; height: 100px;"
+                                                     th:src="|/user/view/s_${misuDTO.misu_uuid}_${misuDTO.misu_filename}|">
+                                            </a>
                                         </td>
                                     </th:block>
                                     <td>
@@ -161,6 +168,11 @@
                                     </td>
                                     <script>
 
+                                        function showImage(id) {
+                                            let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=750, height=650, top=0,left=0";
+
+                                            window.open("/admin/misu/image?misu_id=" + id, "_blank", option);
+                                        }
 
                                         function editMisu(id) {
                                             let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
