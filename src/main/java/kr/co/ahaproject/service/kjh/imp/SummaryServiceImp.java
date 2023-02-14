@@ -1,5 +1,7 @@
 package kr.co.ahaproject.service.kjh.imp;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.dto.SummaryDTO;
 import kr.co.ahaproject.entity.Summary;
 import kr.co.ahaproject.mapper.kjh.SummaryMapper;
@@ -25,5 +27,23 @@ public class SummaryServiceImp implements SummaryService {
                 .collect(Collectors.toList());
         list.forEach(SummayDTO -> SummayDTO.toString());
         return list;
+    }
+
+    @Override
+    public PageResponseDTO<SummaryDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+        List<Summary> summaries = summaryMapper.selectAllForPaging(pageRequestDTO);
+
+        List<SummaryDTO> dtoList = summaries.stream()
+                .map(summary -> modelMapper.map(summary, SummaryDTO.class))
+                .collect(Collectors.toList());
+
+        PageResponseDTO<SummaryDTO> pageResponseDTO = PageResponseDTO.<SummaryDTO>withAll()
+                .dtoList(dtoList)
+                .pageRequestDTO(pageRequestDTO)
+                .total(0)
+                .build();
+
+        return pageResponseDTO;
     }
 }

@@ -1,6 +1,8 @@
 package kr.co.ahaproject.service.kjh.imp;
 
 import kr.co.ahaproject.dto.OutcomeDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.Outcome;
 import kr.co.ahaproject.mapper.kjh.OutcomeMapper;
 import kr.co.ahaproject.service.AhaCommonMethod;
@@ -80,5 +82,25 @@ public class OutcomeServiceImp implements OutcomeService {
             return 0;
         }
         return 1;
+    }
+
+    @Override
+    public PageResponseDTO<OutcomeDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+        List<Outcome> outcomes = outcomeMapper.selectAllForPaging(pageRequestDTO);
+
+        List<OutcomeDTO> dtoList = outcomes.stream()
+                .map(outcome -> modelMapper.map(outcome, OutcomeDTO.class))
+                .collect(Collectors.toList());
+
+        int total = outcomeMapper.getCount(pageRequestDTO);
+
+        PageResponseDTO<OutcomeDTO> pageResponseDTO = PageResponseDTO.<OutcomeDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .total(total)
+                .dtoList(dtoList)
+                .build();
+
+        return pageResponseDTO;
     }
 }

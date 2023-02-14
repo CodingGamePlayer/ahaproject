@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.kjh.OutcomeMapper">
+
+    <resultMap id="OutcomeMap" type="Outcome">
+        <result property="out_id" column="out_id"/>
+        <result property="cl_code" column="cl_code"/>
+        <result property="cst_code" column="cst_code"/>
+        <result property="cp_name" column="cp_name"/>
+        <result property="out_date" column="out_date"/>
+        <result property="out_content" column="out_content"/>
+        <result property="out_supp_value" column="out_supp_value"/>
+        <result property="out_total_value" column="out_total_value"/>
+        <result property="out_collect_value" column="out_collect_value"/>
+        <result property="out_collect_remain" column="out_collect_remain"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="OutcomeMap">
+        SELECT `a`.`out_id`, `a`.`cp_name`, `a`.`out_date`, `a`.`out_content`, `a`.`out_supp_value`, `a`.`out_total_value`,
+        `a`.`out_collect_value`, `a`.`out_collect_remain`, `b`.`cp_name` AS `cl_code`, `c`.`cst_name` AS `cst_code`
+        FROM (SELECT `out_id`, `cp_name`, `cl_code`, `cst_code`, `out_date`, `out_content`, `out_supp_value`,
+            sum(`out_supp_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`) AS `out_total_value`
+            , `out_collect_value`,
+            sum(`out_supp_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`)
+            - sum(`out_collect_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`) AS `out_collect_remain`
+            FROM `ahaproject`.`outcome` ORDER BY `cp_name`, `cl_code`, `cst_code`) AS `a`
+        LEFT OUTER JOIN `client` AS `b`
+        ON `a`.`cl_code` = `b`.`cl_code`
+        LEFT OUTER JOIN `construction` AS `c`
+        ON `a`.`cst_code` = `c`.`cst_code`
+        <include refid="search"/>
+        ORDER BY out_id DESC
+        LIMIT #{skip}, #{size}
+
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(out_id)
+        FROM outcome
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'cp_name'.toString()">
+                cp_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+
+            </if>
+            <if test="keyword != null and type == 'cl_code'.toString()">
+                b.cp_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+
+            </if>
+            <if test="keyword != null and type == 'cst_code'.toString()">
+                c.cst_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+
+            </if>
+
+        </where>
+    </sql>
+
+    <sql id="switch">
+        <if test="finished != '' and finished == '완료'">
+            AND cst_finised = 1
+        </if>
+
+        <if test="finished != '' and finished == '미완'">
+            AND cst_finised = 0
+        </if>
+    </sql>
+
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.moo.LaborCostMapper">
+
+    <resultMap id="LaborCostMap" type="LaborCostListDTO">
+        <result property="lc_id" column="lc_id"/>
+        <result property="emp_name" column="emp_name"/>
+        <result property="cst_name" column="cst_name"/>
+        <result property="cp_name" column="cp_name"/>
+        <result property="lc_value" column="lc_value"/>
+        <result property="lc_date" column="lc_date"/>
+        <result property="lc_regit" column="lc_regit"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="LaborCostMap">
+        SELECT A.lc_id, B.emp_name, C.cst_name, D.cp_name, A.lc_value, A.lc_date, A.lc_regit
+        FROM labor_cost A
+        JOIN employee B ON A.emp_code = B.emp_code
+        JOIN construction C ON A.cst_code = C.cst_code
+        JOIN client D on A.cl_code = D.cl_code
+        <include refid="search"/>
+        ORDER BY lc_id DESC
+        LIMIT #{skip}, #{size}
+
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(A.lc_id)
+        FROM labor_cost A
+        JOIN employee B ON A.emp_code = B.emp_code
+        JOIN construction C ON A.cst_code = C.cst_code
+        JOIN client D on A.cl_code = D.cl_code
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'emp_name'.toString()">
+                B.emp_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+
+            </if>
+            <if test="keyword != null and type == 'cst_name'.toString()">
+                C.cst_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+
+            </if>
+            <if test="keyword != null and type == 'cp_name'.toString()">
+                D.cp_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+
+            </if>
+
+        </where>
+    </sql>
+
+    <sql id="switch">
+        <if test="finished != '' and finished == '완료'">
+            AND lc_regit = 1
+        </if>
+
+        <if test="finished != '' and finished == '미완'">
+            AND lc_regit = 0
+        </if>
+    </sql>
+
+</mapper>

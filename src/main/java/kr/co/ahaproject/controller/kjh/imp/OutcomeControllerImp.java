@@ -1,7 +1,9 @@
 package kr.co.ahaproject.controller.kjh.imp;
 
 import kr.co.ahaproject.controller.kjh.OutcomeController;
-import kr.co.ahaproject.service.kjh.OutcomeService;
+import kr.co.ahaproject.dto.OutcomeDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.service.kjh.OutcomeService;
 import kr.co.ahaproject.service.kjs.ClientService;
 import kr.co.ahaproject.service.kjs.CompanyService;
@@ -29,9 +31,11 @@ public class OutcomeControllerImp implements OutcomeController {
 
     @Override
     @GetMapping("/outcome")
-    public String selectAll(Model model) {
+    public String selectAll(PageRequestDTO pageRequestDTO, Model model) {
 
-        model.addAttribute("outDTOs", outcomeService.selectAll());
+        PageResponseDTO<OutcomeDTO> pageResponseDTO = outcomeService.selectAllForPaging(pageRequestDTO);
+
+        model.addAttribute("outDTOs", pageResponseDTO);
         return "user/accounting/outcome/list";
     }
 

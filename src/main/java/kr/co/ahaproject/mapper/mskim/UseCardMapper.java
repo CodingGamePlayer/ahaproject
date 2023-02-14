@@ -1,19 +1,11 @@
 package kr.co.ahaproject.mapper.mskim;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.dto.UseCardJoinDTO;
 import kr.co.ahaproject.entity.UseCard;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper
 public interface UseCardMapper {
@@ -62,8 +54,9 @@ public interface UseCardMapper {
 	//카드 사용내역 삭제
 	@Delete("delete from use_card where uc_id = #{uc.uc_id}")
 	int delete(@Param("uc") UseCard uc);
-	
-	
-	
 
+
+    List<UseCardJoinDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+	int getCount(PageRequestDTO pageRequestDTO);
 }
