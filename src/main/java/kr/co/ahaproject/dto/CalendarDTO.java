@@ -14,7 +14,7 @@ public class CalendarDTO {
     String title;
     String start;
     String end;
-    String url ="http://localhost:9000/user/worksite/rental" ;
+    String url ;
     final String textColor = "black";
     final boolean allDay = true;
 
@@ -27,6 +27,7 @@ public class CalendarDTO {
         calendarDTO.setTitle(machRentListDTO.getCst_name() + "-" + machRentListDTO.getM_name() + "(" + machRentListDTO.getM_kind() + ")");
         calendarDTO.setStart(machRentListDTO.getRent_start());
         calendarDTO.setEnd(machRentListDTO.getRent_end());
+        calendarDTO.setUrl("http://localhost:9000/user/worksite/rental?type=id&id=" + machRentListDTO.getRent_id());
 
         return calendarDTO;
     }
