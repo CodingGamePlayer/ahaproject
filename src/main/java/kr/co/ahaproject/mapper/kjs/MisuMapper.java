@@ -1,5 +1,6 @@
 package kr.co.ahaproject.mapper.kjs;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.Misu;
 import org.apache.ibatis.annotations.*;
 
@@ -47,4 +48,9 @@ public interface MisuMapper {
 
     @Delete("DELETE FROM misu WHERE misu_id = #{misu.misu_id}")
     int delete(@Param("misu") Misu misu);
+
+    List<Misu> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+    int getCount(PageRequestDTO pageRequestDTO);
+
 }

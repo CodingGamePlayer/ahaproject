@@ -1,19 +1,17 @@
-package kr.co.ahaproject.controller.kjs.imp;
+package kr.co.ahaproject.controller.moo.imp;
 
-import kr.co.ahaproject.controller.kjs.MachRentController;
-import kr.co.ahaproject.dto.ConstructionDTO;
-import kr.co.ahaproject.dto.MachRentDTO;
-import kr.co.ahaproject.dto.MachRentListDTO;
-import kr.co.ahaproject.dto.MachineDTO;
+import kr.co.ahaproject.controller.moo.MachRentController;
+import kr.co.ahaproject.dto.*;
+import kr.co.ahaproject.service.moo.MachRentService;
+import kr.co.ahaproject.service.moo.MachineService;
 import kr.co.ahaproject.service.mskim.ConstructionService;
-import kr.co.ahaproject.service.kjs.MachRentService;
-import kr.co.ahaproject.service.kjs.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -32,10 +30,11 @@ public class MachRentControllerImp implements MachRentController {
     // 장비임대 보기
     @Override
     @GetMapping("/rental")
-    public String list(Model model) {
-        List<MachRentListDTO> machRentListDTOS = machRentService.selectAllForList();
+    public String list(@Valid PageRequestDTO pageRequestDTO, Model model) {
 
-        model.addAttribute("machRentDTOs",machRentListDTOS);
+        PageResponseDTO<MachRentListDTO> pageResponseDTO = machRentService.selectAllForPaging(pageRequestDTO);
+
+        model.addAttribute("machRentDTOs", pageResponseDTO);
         return "user/worksite/rental/list";
     }
     

@@ -1,5 +1,6 @@
-package kr.co.ahaproject.mapper.kjs;
+package kr.co.ahaproject.mapper.moo;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.Machine;
 import org.apache.ibatis.annotations.*;
 
@@ -52,4 +53,8 @@ public interface MachineMapper {
 
     @Delete("DELETE FROM machine WHERE m_id = #{machine.m_id}")
     int delete(@Param("machine")Machine machine);
+
+    List<Machine> selectAllForPaging(PageRequestDTO pageRequestDTO);
+    int getCount(PageRequestDTO pageRequestDTO);
+
 }

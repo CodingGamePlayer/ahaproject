@@ -36,6 +36,9 @@
             <if test="keyword != null and type == 'cp_name'.toString()">
                 cp_name LIKE CONCAT('%', #{keyword}, '%')
             </if>
+            <if test="keyword != null and type == 'cp_person_name'.toString()">
+                cp_person_name LIKE CONCAT('%', #{keyword}, '%')
+            </if>
         </where>
     </sql>
 
