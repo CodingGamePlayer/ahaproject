@@ -52,6 +52,9 @@
                 B.m_name LIKE CONCAT('%', #{keyword}, '%')
                 <include refid="case1"/>
             </if>
+            <if test="type == 'id'.toString()">
+                A.rent_id = #{id}
+            </if>
         </where>
     </sql>
 

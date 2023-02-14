@@ -44,13 +44,36 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*공사코드</label>
-                    <input class="input-group-sm form-control" type="text" id="cst_code" name="cst_code">
+                    <select class="form-select" aria-label="Default select example" id="cst_code" name="cst_code">
+                        <th:block th:each="const : ${constructionDTOs}">
+                            <option >[[${const.cst_code}]]</option>
+                        </th:block>
+                    </select>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                      <label class="form-control-label">*자재코드</label>
-                    <input class="form-control" type="text" id="mt_code" name="mt_code" th:value="${idkey}" disabled="disabled">
+                    <label class="form-control-label">*자재코드</label>
+                    <select class="form-select" aria-label="Default select example" id="mt_code" name="mt_code">
+                        <th:block th:each="mate : ${materialDTOs}">
+                            <th:block th:if="${mate.mt_remain} > 0">
+                            <option th:value="${mate.mt_code}">
+                                <span>[[${mate.mt_name}]]</span>
+                                <span> : </span>
+                                <span>[[${mate.mt_code}]]</span>
+                                <span> (남은재고 : [[${mate.mt_remain}]])</span>
+                            </option>
+                            </th:block>
+                            <th:block th:unless="${mate.mt_remain} > 0">
+                                <option th:value="${mate.mt_code}" disabled>
+                                    <span>[[${mate.mt_name}]]</span>
+                                    <span> : </span>
+                                    <span>[[${mate.mt_code}]]</span>
+                                    <span> (남은재고 : [[${mate.mt_remain}]])</span>
+                                </option>
+                            </th:block>
+                        </th:block>
+                    </select>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -65,17 +88,8 @@
                     <input class="form-control" type="text" id="um_where" name="um_where">
                 </div>
             </div>
-          
-           <div class="col-sm-12">
-	        <div class="form-group">
-	          <label class="form-control-label">등록여부</label>
-	          <select class="form-select" aria-label="Default select example" id="um_regit" name="um_regit">
-	              <option value="true">사용</option>
-	              <option value="false">미사용</option>
-	          </select>
-	        </div>
-	      </div>
-       		
+
+
             <input type="submit" class="btn btn-primary" value="등록하기" id="useMaterialSubmitBtn" />
         </div>
     </div>
@@ -84,6 +98,8 @@
 
 
 <script>
+
+
   const useMaterialSubmitBtn = document.querySelector('#useMaterialSubmitBtn');
 
   useMaterialSubmitBtn.addEventListener("click", () => {
@@ -91,23 +107,22 @@
         const input_mt_code = document.querySelector('#mt_code').value;
         const input_um_where = document.querySelector('#um_where').value;
         const input_um_amount = document.querySelector('#um_amount').value;
-        const input_um_regit = document.querySelector('#um_regit').value; 
 
         if(input_cst_code == "" || input_mt_code == "" ||
            input_um_amount == "") {
             alert('*이 있는 칸은 채워주시기 바랍니다.');
             return;
         }
-        
-        
+
+
         const material1 = {
         		cst_code : input_cst_code,
         		mt_code : input_mt_code,
         		um_where : input_um_where,
         		um_amount : input_um_amount,
-        		um_regit : input_um_regit
+
         };
-        
+
 
         console.log(material1);
 
@@ -124,6 +139,7 @@
                response.text();
                alert('등록이 완료되었습니다.');
                window.location.reload();
+               opener.location.reload();
            } else {
                alert('등록을 실패하였습니다.');
            }
@@ -157,7 +173,7 @@
             },
         },
     }); */
-    
+
 </script>
 
 

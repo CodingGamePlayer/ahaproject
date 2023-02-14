@@ -1,5 +1,6 @@
 package kr.co.ahaproject.controller.cjw;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
 import org.springframework.ui.Model;
 
 import kr.co.ahaproject.dto.MaterialDTO;
@@ -13,7 +14,7 @@ public interface MaterialController {
     // 자재 기초정보 START ======
     
     // 자재 기초정보 전체목록 이동
-    String list(Model model);
+    String list(PageRequestDTO pageRequestDTO, Model model);
    
     // 자재 기초정보 글생성 이동
 //    String register(Model model);
@@ -21,6 +22,8 @@ public interface MaterialController {
     String register(Model model, MaterialDTO dto);
     // 자재 기초정보 상세보기 이동
     String detail(MaterialDTO dto, Model model);
+
+    String image(MaterialDTO materialDTO, Model model);
 
 	
 
