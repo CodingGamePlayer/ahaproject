@@ -1,10 +1,12 @@
-package kr.co.ahaproject.service.kjs.imp;
+package kr.co.ahaproject.service.moo.imp;
 
 import kr.co.ahaproject.dto.MachineDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.Machine;
-import kr.co.ahaproject.mapper.kjs.MachineMapper;
+import kr.co.ahaproject.mapper.moo.MachineMapper;
 import kr.co.ahaproject.service.AhaCommonMethod;
-import kr.co.ahaproject.service.kjs.MachineService;
+import kr.co.ahaproject.service.moo.MachineService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,4 +85,23 @@ public class MachineServiceImp implements MachineService {
         return result;
     }
 
+    @Override
+    public PageResponseDTO<MachineDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+        List<Machine> machineList = machineMapper.selectAllForPaging(pageRequestDTO);
+
+        List<MachineDTO> collect = machineList.stream()
+                .map(machine -> modelMapper.map(machine, MachineDTO.class))
+                .collect(Collectors.toList());
+
+        int count = machineMapper.getCount(pageRequestDTO);
+
+        PageResponseDTO<MachineDTO> pageResponseDTO = PageResponseDTO.<MachineDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .total(count)
+                .dtoList(collect)
+                .build();
+
+        return pageResponseDTO;
+    }
 }

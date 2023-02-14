@@ -1,6 +1,8 @@
-package kr.co.ahaproject.service.kjs;
+package kr.co.ahaproject.service.moo;
 
 import kr.co.ahaproject.dto.MachineDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 
 import java.util.List;
 
@@ -17,5 +19,8 @@ public interface MachineService {
     Integer getm_code();
 
     int delete(MachineDTO machineDTO);
+
+    PageResponseDTO<MachineDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
 
 }

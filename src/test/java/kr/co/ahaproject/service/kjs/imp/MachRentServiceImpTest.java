@@ -2,15 +2,13 @@ package kr.co.ahaproject.service.kjs.imp;
 
 import kr.co.ahaproject.dto.MachRentDTO;
 import kr.co.ahaproject.dto.MachRentListDTO;
-import kr.co.ahaproject.service.kjs.MachRentService;
+import kr.co.ahaproject.service.moo.MachRentService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Slf4j

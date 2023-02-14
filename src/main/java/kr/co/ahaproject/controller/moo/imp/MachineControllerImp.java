@@ -1,14 +1,18 @@
-package kr.co.ahaproject.controller.kjs.imp;
+package kr.co.ahaproject.controller.moo.imp;
 
-import kr.co.ahaproject.controller.kjs.MachineController;
+import kr.co.ahaproject.controller.moo.MachineController;
 import kr.co.ahaproject.dto.MachineDTO;
-import kr.co.ahaproject.service.kjs.MachineService;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
+import kr.co.ahaproject.service.moo.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -20,10 +24,13 @@ public class MachineControllerImp implements MachineController {
     // 장비정보 보기
     @Override
     @GetMapping("/machine")
-    public String list(Model model) {
-        List<MachineDTO> machineDTOList = machineService.selectAll();
+    public String list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
 
-        model.addAttribute("machineDTOs",machineDTOList);
+
+        PageResponseDTO<MachineDTO> pageResponseDTO = machineService.selectAllForPaging(pageRequestDTO);
+
+        model.addAttribute("machineDTOs",pageResponseDTO);
+
         return "user/basicinfo/machine/list";
     }
 
@@ -64,4 +71,7 @@ public class MachineControllerImp implements MachineController {
         model.addAttribute("machineDTO", result);
         return "user/basicinfo/machine/image";
     }
+
+
+
 }

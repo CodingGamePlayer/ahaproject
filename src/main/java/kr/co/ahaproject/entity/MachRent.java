@@ -24,4 +24,5 @@ public class MachRent {
     Long rent_misu;
     Boolean rent_finished;
     String rent_etc;
+    String rent_type;
 }

@@ -1,11 +1,13 @@
-package kr.co.ahaproject.service.kjs.imp;
+package kr.co.ahaproject.service.moo.imp;
 
 import kr.co.ahaproject.dto.MachRentDTO;
 import kr.co.ahaproject.dto.MachRentListDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.MachRent;
-import kr.co.ahaproject.mapper.kjs.MachrentMapper;
+import kr.co.ahaproject.mapper.moo.MachrentMapper;
 import kr.co.ahaproject.service.AhaCommonMethod;
-import kr.co.ahaproject.service.kjs.MachRentService;
+import kr.co.ahaproject.service.moo.MachRentService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,5 +122,21 @@ public class MachRentServiceImp implements MachRentService {
         List<MachRentListDTO> machRentListDTOS = machrentMapper.selectAllWithoutKind();
 
         return machRentListDTOS;
+    }
+
+    @Override
+    public PageResponseDTO<MachRentListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+        List<MachRentListDTO> machRentList = machrentMapper.selectAllForPaging(pageRequestDTO);
+
+        int count = machrentMapper.getCount(pageRequestDTO);
+
+        PageResponseDTO<MachRentListDTO> pageResponseDTO = PageResponseDTO.<MachRentListDTO>withAll()
+                .dtoList(machRentList)
+                .total(count)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+
+        return pageResponseDTO;
     }
 }

@@ -30,9 +30,18 @@ public class ConstructionControllerImpl implements ConstructionController {
 
 	@Override
 	@GetMapping("/cst-form")
-	public String construction_form() {
+	public ModelAndView construction_form(ModelAndView mav) {
+		int count = constructionService.codeCount();
 		
-		return "user/construction/construction-form";
+		if(count >0) {
+			String code = String.format("%04d",count+1);
+			mav.addObject("ConstructionCode", "CS"+code);
+		} else {
+			mav.addObject("ConstructionCode", "CS0001");
+		}
+		
+		mav.setViewName("user/construction/construction-form");
+		return mav;
 	}
 
 	@Override

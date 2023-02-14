@@ -15,4 +15,7 @@ public interface ConstructionService {
     int update(ConstructionDTO cstDTO);
     
     int delete(ConstructionDTO cstDTO);
+    
+    int codeCount();
+
 }

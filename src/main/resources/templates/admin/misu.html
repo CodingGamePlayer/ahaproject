@@ -29,6 +29,30 @@
                             <p class="text-sm">미수별 현황 전체보기</p>
                         </div>
                         <div class="ms-auto d-flex">
+                            <form class="row g-3" action="/admin/misu" method="get">
+                                <div class="col-auto">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="finished" name="finished">
+                                        <option value="" selected>수금여부</option>
+                                        <option value="완료">수금완료</option>
+                                        <option value="미완">수금미완</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="category" name="type">
+                                        <option value="misu_div">구분 검색</option>
+                                        <option value="cst_code">공사코드 검색</option>
+                                        <option value="cp_name">회사 검색</option>
+                                        <option value="misu_name">거래처명 검색</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="keyword" class="visually-hidden">search</label>
+                                    <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">검색</button>
+                                </div>
+                            </form>
 
 
                         </div>
@@ -57,7 +81,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <th:block th:each="misuDTO : ${misuDTOs}">
+                            <th:block th:each="misuDTO : ${misuDTOs.dtoList}">
                                 <tr>
                                     <th:block th:if="${misuDTO.misu_filename} == ''">
                                     <td class="d-flex justify-content-center">
@@ -76,7 +100,7 @@
                                             </div>
                                             <div class="d-flex flex-column justify-content-center ms-1">
                                                 <span class="text-secondary text-sm font-weight-normal"
-                                                      th:text="${misuDTO.misu_name}"/>
+                                                      th:text="${misuDTO.misu_div}"/>
                                             </div>
                                         </div>
                                     </td>
@@ -118,7 +142,6 @@
                                                   th:case="false">수금미완</span>
                                             <span class="badge badge-sm border border-success text-success bg-success"
                                                   th:case="true">수금완료</span>
-
                                         </td>
                                     </th:block>
 
@@ -137,6 +160,8 @@
                                         </a>
                                     </td>
                                     <script>
+
+
                                         function editMisu(id) {
                                             let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
@@ -152,7 +177,46 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4"></div>
 
+        <div class="col-sm-4 d-flex justify-content-center">
+            <th:block
+                    th:with="start=${misuDTOs.start}, end=${misuDTOs.end}, keyword =${param.keyword}, type = ${param.type}">
+                <ul class="pagination">
+                    <li th:if="${start} == '1'" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/admin/misu(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◁</a>
+                    </li>
+                    <li th:if="${start} > '1'" class="page-item ">
+                        <a class="page-link"
+                           th:href="@{/admin/misu(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◀</a>
+
+                    </li>
+
+                    <th:block th:each="num : ${#numbers.sequence(start,end)}">
+                        <li class="page-item" th:if="${num} != ${misuDTOs.page}">
+
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/admin/misu(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                        <li class="page-item active " th:if="${num} == ${misuDTOs.page}">
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/admin/misu(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                    </th:block>
+
+                    <li th:if="${end} >= ${misuDTOs.total} / 10" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/admin/misu(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▷</a>
+                    </li>
+                    <li th:if="${end} < ${misuDTOs.total} / 10" class="page-item">
+                        <a class="page-link"
+                           th:href="@{/admin/misu(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▶</a>
+                    </li>
+                </ul>
+            </th:block>
+        </div>
+        <div class="col-md-3"></div>
     </div>
 
 </div>

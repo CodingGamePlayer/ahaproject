@@ -30,7 +30,7 @@
                                         <th:block th:if="${param.year} == null">
                                             <option th:value="${jangBi.year}">[[${jangBi.year}]]</option>
                                         </th:block>
-                                        <th:block th:unless="${param.year} == ''">
+                                        <th:block th:if="${param.year} != null">
                                             <option th:value="${param.year}">[[${param.year}]]</option>
                                         </th:block>
                                         <th:block th:each="num : ${#numbers.sequence(2000, 2100)}">

@@ -30,7 +30,12 @@ public class PageRequestDTO {
 
     private String keyword;
 
-    private boolean finished;
+    private String finished;
+
+    // 장비 현황 페이지용
+    private String jangbiType;
+
+    private String kind;
 
     public int getSkip(){
         return (page -1) * 10;
