@@ -30,7 +30,7 @@ public class ConstructionControllerImpl implements ConstructionController {
 
 		mav.addObject("constructionDTOs", pageResponseDTO);
 		mav.setViewName("user/construction/construction-list");
-		
+
 		return mav;
 	}
 
