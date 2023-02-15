@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.kjh.SummaryMapper">
+
+    <resultMap id="SummaryMap" type="Summary">
+        <result property="cp_name" column="cp_name"/>
+        <result property="cl_code" column="cl_code"/>
+        <result property="cst_code" column="cst_code"/>
+        <result property="out_supp_value" column="out_supp_value"/>
+        <result property="out_collect_value" column="out_collect_value"/>
+        <result property="out_collect_remain" column="out_collect_remain"/>
+        <result property="in_supp_value" column="in_supp_value"/>
+        <result property="in_collect_value" column="in_collect_value"/>
+        <result property="in_collect_remain" column="in_collect_remain"/>
+
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="SummaryMap">
+
+        SELECT
+        `a`.`cp_name`,
+        `b`.`cp_name` AS `cl_code`,
+        `c`.`cst_name` AS `cst_code`,
+        `a`.`out_supp_value`,
+        `a`.`out_collect_value`,
+        `a`.`out_collect_remain`,
+        `a`.`in_supp_value`,
+        `a`.`in_collect_value`,
+        `a`.`in_collect_remain`
+        FROM
+            (SELECT
+                `cp_name`,
+                `cl_code`,
+                `cst_code`,
+                SUM(`out_supp_value`) AS `out_supp_value`,
+                SUM(`out_collect_value`) AS `out_collect_value`,
+                SUM(`out_supp_value`) - SUM(`out_collect_value`) AS `out_collect_remain`,
+                SUM(`in_supp_value`) AS `in_supp_value`,
+                SUM(`in_collect_value`) AS `in_collect_value`,
+                SUM(`in_supp_value`) - SUM(`in_collect_value`) AS `in_collect_remain`
+            FROM
+            (((SELECT
+            `a`.`cp_name`,
+            `a`.`cl_code`,
+            `a`.`cst_code`,
+            `b`.`out_supp_value`,
+            `b`.`out_collect_value`,
+            `b`.`out_collect_remain`,
+            `a`.`in_supp_value`,
+            `a`.`in_collect_value`,
+            `a`.`in_collect_remain`
+                FROM
+                `ahaproject`.`income` AS `a`
+                LEFT JOIN `ahaproject`.`outcome` AS `b` ON (`a`.`cp_name` = `b`.`cp_name`
+                AND `a`.`cl_code` = `b`.`cl_code`
+                AND `a`.`cst_code` = `b`.`cst_code`)
+                WHERE
+                `b`.`cp_name` IS NULL) UNION (SELECT
+                `b`.`cp_name`,
+                `b`.`cl_code`,
+                `b`.`cst_code`,
+                `b`.`out_supp_value`,
+                `b`.`out_collect_value`,
+                `b`.`out_collect_remain`,
+                `a`.`in_supp_value`,
+                `a`.`in_collect_value`,
+                `a`.`in_collect_remain`
+                FROM
+                `ahaproject`.`income` AS `a`
+                RIGHT JOIN `ahaproject`.`outcome` AS `b` ON (`a`.`cp_name` = `b`.`cp_name`
+                AND `a`.`cl_code` = `b`.`cl_code`
+                AND `a`.`cst_code` = `b`.`cst_code`)
+                WHERE
+                `a`.`cp_name` IS NULL)) UNION (SELECT
+                `a`.`cp_name`,
+                `a`.`cl_code`,
+                `a`.`cst_code`,
+                `b`.`out_supp_value`,
+                `b`.`out_collect_value`,
+                `b`.`out_collect_remain`,
+                `a`.`in_supp_value`,
+                `a`.`in_collect_value`,
+                `a`.`in_collect_remain`
+                FROM
+                    (SELECT
+                    `cp_name`,
+                    `cl_code`,
+                    `cst_code`,
+                    SUM(`in_supp_value`) AS `in_supp_value`,
+                    SUM(`in_collect_value`) AS `in_collect_value`,
+                    SUM(`in_supp_value`) - SUM(`in_collect_value`) AS `in_collect_remain`
+                    FROM
+                    `ahaproject`.`income`
+                    GROUP BY `cp_name` , `cl_code` , `cst_code` WITH ROLLUP) AS `a`
+                    JOIN (SELECT
+                    `cp_name`,
+                    `cl_code`,
+                    `cst_code`,
+                    SUM(`out_supp_value`) AS `out_supp_value`,
+                    SUM(`out_collect_value`) AS `out_collect_value`,
+                    SUM(`out_supp_value`) - SUM(`out_collect_value`) AS `out_collect_remain`
+                    FROM
+                    `ahaproject`.`outcome`
+                        GROUP BY `cp_name` , `cl_code` , `cst_code` WITH ROLLUP) AS `b` ON (`a`.`cp_name` = `b`.`cp_name`
+                            AND `a`.`cl_code` = `b`.`cl_code`
+                            AND `a`.`cst_code` = `b`.`cst_code`))) AS `d`
+                        GROUP BY `cp_name` , `cl_code` , `cst_code` WITH ROLLUP) AS `a`
+                            LEFT OUTER JOIN
+                        `ahaproject`.`client` AS `b` ON `a`.`cl_code` = `b`.`cl_code`
+                            LEFT OUTER JOIN
+                        `ahaproject`.`construction` AS `c` ON `a`.`cst_code` = `c`.`cst_code`
+
+        <include refid="search"/>
+        LIMIT #{skip}, #{size}
+    </select>
+
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'cp_name'.toString()">
+                cp_name LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and type == 'cl_code'.toString()">
+                cl_code LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and type == 'cst_code'.toString()">
+                cst_code LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+
+        </where>
+    </sql>
+
+
+</mapper>
