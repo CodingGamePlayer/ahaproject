@@ -37,83 +37,68 @@
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">카드 사용 내용 등록</h5>
-        <div class="row">
+        <h5 class="card-title mt-3 mb-3">카테고리 등록</h5>
+            <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*카드명</label>
-                    <select class="form-select" aria-label="Default select example" id="card_id">
-                        <th:block th:each="card : ${cardDTOs}">
-                            <option th:value="${card.card_id}">[[${card.card_name}]]</option>
-                        </th:block>
+                    <label class="form-control-label">번호</label>
+                    <select class="form-select" aria-label="Default select example" id="ct_id" >
+                        <option th:text="1" th:value="1"></option>
+                         <option th:text="2" th:value="2"></option>
+                        <option th:text="3" th:value="3"></option>
+                    </select>
+                </div>
+                </div>
+            </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">카테고리</label>
+                    <input class = "form-control"  id="ct_name" >
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">사용여부</label>
+                    <select class="form-select" aria-label="Default select example" id="ct_use">
+                        <option value="false" selected>미사용</option>
+                        <option value="true">사용</option>
                     </select>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*사용금액</label>
-                    <input class="form-control" type="number" id="uc_money">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*사용처</label>
-                    <input class="form-control" type="text" id="uc_where">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*사용일</label>
-                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
-                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
-                        <span class='fa-solid fa-calendar'></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">비고</label>
-                    <input class="form-control" type="text" id="uc_etc">
-                </div>
-            </div>
-            <input type="button" class="btn btn-primary" id="useSubmitBtn" value="등록하기" />
+            
+            <input  type="button" class="btn btn-primary" id="categorySubmitBtn" value="등록하기" />
+          
         </div>
     </div>
 </div>
 <script>
-    const useSubmitBtn = document.querySelector('#useSubmitBtn');
+    const categorySubmitBtn = document.querySelector('#categorySubmitBtn');
 
-    useSubmitBtn.addEventListener("click", () => {
-        const input_card_id = document.querySelector('#card_id').value;
-        const input_uc_money = document.querySelector('#uc_money').value;
-        const input_uc_where = document.querySelector('#uc_where').value;
-        const input_uc_date = document.querySelector('#datetimepicker1Input').value;
-        const input_uc_etc = document.querySelector('#uc_etc').value;
-
-        const ucif = {
-        	card_id : input_card_id,
-        	uc_money : input_uc_money,
-        	uc_where : input_uc_where,
-        	uc_date : input_uc_date,
-        	uc_etc : input_uc_etc
-            
+    categorySubmitBtn.addEventListener("click", () => {
+    
+        const input_ct_id = document.querySelector('#ct_id').value;
+        const input_ct_name = document.querySelector('#ct_name').value;
+        const input_ct_use = document.querySelector('#ct_use').value;
+        
+        const category1 = {
+            ct_id : input_ct_id,
+            ct_name : input_ct_name,
+            ct_use : input_ct_use
+           
         };
 
-        if(input_card_id == "" || input_uc_money == "" ||
-        	input_uc_where == "" || input_uc_date == "" ){
+        if(input_ct_name == " "){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
 
-        console.log(ucif);
+        console.log(category1);
 
-        const url = "/api/user/worksite/use-card/ucinfo";
+        const url = "/api/user/board/category";
 
         fetch(url, {
            method : "POST",
-           body : JSON.stringify(ucif),
+           body : JSON.stringify(category1),
            headers : {
                "Content-Type" : "application/json"
            }
@@ -122,7 +107,7 @@
                response.text();
                alert('등록이 완료되었습니다.');
                window.location.reload();
-               opener.location.href="uc-list";
+               opener.location.reload();
            } else {
                alert('등록을 실패하였습니다.');
            }
@@ -131,14 +116,15 @@
 
     });
 </script>
-
+<!--  
 <script>
     const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
-    	display: {
+        display: {
             components: {
-                clock: false
+                seconds: false,
+                useTwentyfourHour: false,
             },
             icons: {
                 type: 'icons',
@@ -153,9 +139,8 @@
                 close: 'fas fa-solid fa-xmark'
             },
         },
-    	 
-        
     });
+-->
 </script>
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>

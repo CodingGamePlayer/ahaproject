@@ -37,108 +37,131 @@
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">카드 사용 내용 등록</h5>
+        <h5 class="card-title mt-3 mb-3">게시판 수정</h5>
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*카드명</label>
-                    <select class="form-select" aria-label="Default select example" id="card_id">
-                        <th:block th:each="card : ${cardDTOs}">
-                            <option th:value="${card.card_id}">[[${card.card_name}]]</option>
-                        </th:block>
+                 <input type = "hidden" th:value="${update.ct_id}" name="ct_id" id="ct_id">
+                </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*카테고리</label>
+                    <input class = "form-control" type="text" id="ct_name" name="ct_name" th:value="${update.ct_name}"  >
+                </div>
+            </div>
+             <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">사용여부</label>
+                    <select class="form-select" aria-label="Default select example" id="ct_use">
+                        <option value="false" selected>미사용</option>
+                        <option value="true">사용</option>
                     </select>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*사용금액</label>
-                    <input class="form-control" type="number" id="uc_money">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*사용처</label>
-                    <input class="form-control" type="text" id="uc_where">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*사용일</label>
-                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
-                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
-                        <span class='fa-solid fa-calendar'></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">비고</label>
-                    <input class="form-control" type="text" id="uc_etc">
-                </div>
-            </div>
-            <input type="button" class="btn btn-primary" id="useSubmitBtn" value="등록하기" />
+          
+          
+            <input type="submit" class="btn btn-primary" value="수정하기" id="boardSubmitBtn"/>
+         
+            <input  type="submit" class="btn btn-primary" value="삭제하기" id="boardDeleteBtn"/>
         </div>
     </div>
 </div>
+
 <script>
-    const useSubmitBtn = document.querySelector('#useSubmitBtn');
 
-    useSubmitBtn.addEventListener("click", () => {
-        const input_card_id = document.querySelector('#card_id').value;
-        const input_uc_money = document.querySelector('#uc_money').value;
-        const input_uc_where = document.querySelector('#uc_where').value;
-        const input_uc_date = document.querySelector('#datetimepicker1Input').value;
-        const input_uc_etc = document.querySelector('#uc_etc').value;
+//<!--  이미지 파일을 사용하기 위한 JS-->
 
-        const ucif = {
-        	card_id : input_card_id,
-        	uc_money : input_uc_money,
-        	uc_where : input_uc_where,
-        	uc_date : input_uc_date,
-        	uc_etc : input_uc_etc
-            
+
+    const boardSubmitBtn = document.querySelector('#boardSubmitBtn');
+    const urlParams = new URL(location.href).searchParams;
+    const boardDeleteBtn = document.querySelector('#boardDeleteBtn');
+    
+    boardDeleteBtn.addEventListener("click", function(){
+		  
+    	 const input_ct_id = urlParams.get('ct_id');
+		  
+		   const category2 = {
+				ct_id : input_ct_id 
+		   };
+			          
+		  const url = "/api/user/board/category";
+
+	      fetch(url, {
+	         method : "DELETE",
+	         body : JSON.stringify(category2),
+	         headers : {
+	             "Content-Type" : "application/json"
+	         }
+	      }).then(response => {
+	         if(response.ok){
+	             response.text();
+	             alert('삭제가 완료되었습니다.');
+	             opener.location.reload();
+	             window.open('','_self').close();
+	             
+	         } else {
+	             alert('삭제를 실패하였습니다.');
+	         }
+	      });
+	  });
+
+
+    boardSubmitBtn.addEventListener("click", () => {
+    	console.log("클릭");
+    	const input_ct_id = document.querySelector('#ct_id').value;
+        const input_ct_name = document.querySelector('#ct_name').value;
+        const input_ct_use = document.querySelector('#ct_use').value;
+        
+        const category1 = {
+            ct_id : input_ct_id,
+            ct_name : input_ct_name,
+            ct_use : input_ct_use
+           
         };
+        
 
-        if(input_card_id == "" || input_uc_money == "" ||
-        	input_uc_where == "" || input_uc_date == "" ){
+        if( input_ct_id == "")
+        {
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
 
-        console.log(ucif);
+        console.log(category1);
 
-        const url = "/api/user/worksite/use-card/ucinfo";
+        const url = "/api/user/board/category";
 
         fetch(url, {
-           method : "POST",
-           body : JSON.stringify(ucif),
+           method : "PUT",
+           body : JSON.stringify(category1),
            headers : {
                "Content-Type" : "application/json"
            }
         }).then(response => {
            if(response.ok){
                response.text();
-               alert('등록이 완료되었습니다.');
+               alert('수정이 완료되었습니다.');
                window.location.reload();
-               opener.location.href="uc-list";
+               opener.location.reload();
            } else {
-               alert('등록을 실패하였습니다.');
+               alert('수정을 실패하였습니다.');
            }
         });
+    });//수정 끝
+    
+    
+   
+   // 삭제 끝 ============
 
-
-    });
 </script>
 
-<script>
+<!-- <script>
     const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
-    	display: {
+        display: {
             components: {
-                clock: false
+                seconds: false,
+                useTwentyfourHour: false,
             },
             icons: {
                 type: 'icons',
@@ -153,10 +176,8 @@
                 close: 'fas fa-solid fa-xmark'
             },
         },
-    	 
-        
     });
-</script>
+</script> -->
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>

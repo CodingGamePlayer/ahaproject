@@ -37,83 +37,96 @@
 <div class="card m-3">
 
     <div class="card-body">
-        <h5 class="card-title mt-3 mb-3">카드 사용 내용 등록</h5>
+        <h5 class="card-title mt-3 mb-3">게시판 등록</h5>
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*카드명</label>
-                    <select class="form-select" aria-label="Default select example" id="card_id">
-                        <th:block th:each="card : ${cardDTOs}">
-                            <option th:value="${card.card_id}">[[${card.card_name}]]</option>
+                    <label class="form-control-label">*카테고리</label>
+                    <select class="form-select" aria-label="Default select example" id="ct_id">
+                        <option value="noticeboard" selected>공지사항</option>
+                        <option value="freeboard" >자유게시판</option>
+                        <option value="qnaboard" >QnA</option>
+                    </select>
+                </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*유저</label>
+                    <select class="form-select" aria-label="Default select example"  id="us_id">
+                        <th:block th:each="estimate : ${estimateDTOS}">
+                            <option th:value="${estimate.us_id}">[[${estimate.us_id}]]</option>
                         </th:block>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*사용금액</label>
-                    <input class="form-control" type="number" id="uc_money">
+                    <label class="form-control-label">*제목</label>
+                    <input class="form-control" type="text" id="b_title">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*사용처</label>
-                    <input class="form-control" type="text" id="uc_where">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="form-control-label">*사용일</label>
-                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
-                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
-                        <span class='fa-solid fa-calendar'></span>
-                        </span>
-                    </div>
+                    <label class="form-control-label">*본문</label>
+                    <input class="form-control" type="text" id="b_body" size="10">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고</label>
-                    <input class="form-control" type="text" id="uc_etc">
+                    <input class="form-control" type="text" id="b_etc">
                 </div>
             </div>
-            <input type="button" class="btn btn-primary" id="useSubmitBtn" value="등록하기" />
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">파일</label>
+                    <input class="form-control" type="file" id="b_file">
+                </div>
+            </div>
+            </div>
+            
+            <input  type="button" class="btn btn-primary" id="boardSubmitBtn" value="등록하기" />
+          
         </div>
     </div>
 </div>
 <script>
-    const useSubmitBtn = document.querySelector('#useSubmitBtn');
+    const boardSubmitBtn = document.querySelector('#boardSubmitBtn');
 
-    useSubmitBtn.addEventListener("click", () => {
-        const input_card_id = document.querySelector('#card_id').value;
-        const input_uc_money = document.querySelector('#uc_money').value;
-        const input_uc_where = document.querySelector('#uc_where').value;
-        const input_uc_date = document.querySelector('#datetimepicker1Input').value;
-        const input_uc_etc = document.querySelector('#uc_etc').value;
-
-        const ucif = {
-        	card_id : input_card_id,
-        	uc_money : input_uc_money,
-        	uc_where : input_uc_where,
-        	uc_date : input_uc_date,
-        	uc_etc : input_uc_etc
-            
+    boardSubmitBtn.addEventListener("click", () => {
+        const input_b_id = document.querySelector('#b_id').value;
+        const input_ct_id = document.querySelector('#ct_id').value;
+        const input_us_id = document.querySelector('#us_id').value;
+        const input_b_title = document.querySelector('#b_title').value;
+        const input_b_body = document.querySelector('#b_body').value;
+        const input_b_etc = document.querySelector('#b_etc').value;
+        const input_b_file = document.querySelector('#b_file').value;
+        
+        const board1 = {
+            b_id : input_b_id,
+            ct_id : input_ct_id,
+            us_id : input_us_id,
+            b_title : input_b_title,
+           	b_body : input_b_body,
+            b_etc : input_b_etc,
+            b_file : input_b_file,
+           
         };
 
-        if(input_card_id == "" || input_uc_money == "" ||
-        	input_uc_where == "" || input_uc_date == "" ){
+        if(input_b_id == "" || input_ct_id == "" ||
+            input_us_id == "" || input_b_title == "" ||
+            input_b_body == "" || input_b_etc =="" ||
+            input_b_file == ""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         }
 
-        console.log(ucif);
+        console.log(board1);
 
-        const url = "/api/user/worksite/use-card/ucinfo";
+        const url = "/api/user/board";
 
         fetch(url, {
            method : "POST",
-           body : JSON.stringify(ucif),
+           body : JSON.stringify(board),
            headers : {
                "Content-Type" : "application/json"
            }
@@ -122,7 +135,6 @@
                response.text();
                alert('등록이 완료되었습니다.');
                window.location.reload();
-               opener.location.href="uc-list";
            } else {
                alert('등록을 실패하였습니다.');
            }
@@ -136,9 +148,10 @@
     const datevalue = document.querySelector('#datetimepicker1Input').value;
     console.log(datevalue);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
-    	display: {
+        display: {
             components: {
-                clock: false
+                seconds: false,
+                useTwentyfourHour: false,
             },
             icons: {
                 type: 'icons',
@@ -153,8 +166,6 @@
                 close: 'fas fa-solid fa-xmark'
             },
         },
-    	 
-        
     });
 </script>
 <script src="/assets/js/core/popper.min.js"></script>
