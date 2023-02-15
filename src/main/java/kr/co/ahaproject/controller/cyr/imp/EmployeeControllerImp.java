@@ -1,6 +1,9 @@
 package kr.co.ahaproject.controller.cyr.imp;
 
 import kr.co.ahaproject.controller.cyr.EmployeeController;
+import kr.co.ahaproject.dto.EmployeeDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.Employee;
 import kr.co.ahaproject.service.kjs.CompanyService;
 import kr.co.ahaproject.service.cyr.EmployeeService;
@@ -9,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,10 +25,14 @@ public class EmployeeControllerImp implements EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("user/employee/emmain")
-    public String listAll(Model model) {
-        model.addAttribute("list", employeeService.listAll());
-        return "user/employee/emmain";
+    @Override
+    @GetMapping("user/employee/list")
+    public String employee(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
+        PageResponseDTO<EmployeeDTO> pageResponseDTO = employeeService.selectAllForPaging(pageRequestDTO);
+
+
+        model.addAttribute("employees", pageResponseDTO);
+        return "/user/employee/employee";
     }
 
     @Override
@@ -71,13 +79,14 @@ public class EmployeeControllerImp implements EmployeeController {
 
     @Override
     @PostMapping("user/employee/emform")
-    public ResponseEntity<Employee> register(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> register(@RequestBody EmployeeDTO employeeDTO) {
 
-        if(employee == null){
+        if(employeeDTO == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-        int result = employeeService.insert(employee);
+
+        int result = employeeService.insert(employeeDTO);
 
 
         if(result == 0){

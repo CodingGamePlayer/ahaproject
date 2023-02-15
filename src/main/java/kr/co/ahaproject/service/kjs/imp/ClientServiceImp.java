@@ -3,6 +3,9 @@ package kr.co.ahaproject.service.kjs.imp;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
+import kr.co.ahaproject.entity.Misu;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,8 +90,22 @@ public class ClientServiceImp implements ClientService {
 		// TODO Auto-generated method stub
 		return cm.maxNum();
 	}
-	
-	
 
+	@Override
+	public PageResponseDTO<ClientDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+		List<ClientDTO> clientList = cm.selectAllForPaging(pageRequestDTO)
+				.stream()
+				.map(client -> modelMapper.map(client, ClientDTO.class))
+				.collect(Collectors.toList());
 
+		int count = cm.getCount(pageRequestDTO);
+
+		PageResponseDTO<ClientDTO> pageResponseDTO = PageResponseDTO.<ClientDTO>withAll()
+				.total(count)
+				.dtoList(clientList)
+				.pageRequestDTO(pageRequestDTO)
+				.build();
+
+		return pageResponseDTO;
+	}
 }

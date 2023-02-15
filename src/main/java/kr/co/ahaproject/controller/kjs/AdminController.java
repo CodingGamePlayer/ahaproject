@@ -13,6 +13,8 @@ public interface AdminController {
 
     String misuEditForm(MisuDTO misuDTO, Model model);
 
+    String misuImage(MisuDTO misuDTO, Model model);
+
     String blacklist();
 
     String manage(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model);

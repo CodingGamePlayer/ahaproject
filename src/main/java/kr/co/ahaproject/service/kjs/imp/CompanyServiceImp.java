@@ -1,6 +1,8 @@
 package kr.co.ahaproject.service.kjs.imp;
 
 import kr.co.ahaproject.dto.CompanyDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.Company;
 import kr.co.ahaproject.mapper.kjs.CompanyMapper;
 import kr.co.ahaproject.service.kjs.CompanyService;
@@ -85,6 +87,26 @@ public class CompanyServiceImp implements CompanyService {
 		return companyList.stream()
 				.map(company -> modelMapper.map(company, CompanyDTO.class))
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public PageResponseDTO<CompanyDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+		List<Company> companies = companyMapper.selectAllForPaging(pageRequestDTO);
+
+		List<CompanyDTO> dtoList = companies.stream()
+				.map(company -> modelMapper.map(company, CompanyDTO.class))
+				.collect(Collectors.toList());
+
+		int total = companyMapper.getCount(pageRequestDTO);
+
+		PageResponseDTO<CompanyDTO> pageResponseDTO = PageResponseDTO.<CompanyDTO>withAll()
+				.pageRequestDTO(pageRequestDTO)
+				.total(total)
+				.dtoList(dtoList)
+				.build();
+
+		return pageResponseDTO;
 	}
 }
 

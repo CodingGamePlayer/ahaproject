@@ -1,17 +1,18 @@
 package kr.co.ahaproject.service.mskim.imp;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import kr.co.ahaproject.dto.ConstructionDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.Construction;
 import kr.co.ahaproject.mapper.mskim.ConstructionMapper;
 import kr.co.ahaproject.service.mskim.ConstructionService;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -84,4 +85,23 @@ public class ConstructionServiceImp implements ConstructionService {
 		return constructionMapper.codeCount();
 	}
 
+	@Override
+	public PageResponseDTO<ConstructionDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+		List<Construction> constructions = constructionMapper.selectAllForPaging(pageRequestDTO);
+
+		List<ConstructionDTO> dtoList = constructions.stream()
+				.map(construction -> modelMapper.map(construction, ConstructionDTO.class))
+				.collect(Collectors.toList());
+
+		int total = constructionMapper.getCount(pageRequestDTO);
+
+		PageResponseDTO<ConstructionDTO> pageResponseDTO = PageResponseDTO.<ConstructionDTO>withAll()
+				.pageRequestDTO(pageRequestDTO)
+				.total(total)
+				.dtoList(dtoList)
+				.build();
+
+		return pageResponseDTO;
+	}
 }

@@ -76,6 +76,18 @@ public class AdminControllerImp implements AdminController {
     }
 
     @Override
+    @GetMapping("/misu/image")
+    public String misuImage(MisuDTO misuDTO, Model model) {
+
+        MisuDTO result = misuService.findById(misuDTO);
+
+        model.addAttribute("misuDTO", result);
+
+
+        return "admin/image";
+    }
+
+    @Override
     @GetMapping("/manage-account")
     public String manage(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
 

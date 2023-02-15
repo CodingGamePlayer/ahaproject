@@ -1,6 +1,9 @@
 package kr.co.ahaproject.controller.kjh.imp;
 
 import kr.co.ahaproject.controller.kjh.IncomeController;
+import kr.co.ahaproject.dto.IncomeDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.service.kjh.IncomeService;
 import kr.co.ahaproject.service.kjs.ClientService;
 import kr.co.ahaproject.service.kjs.CompanyService;
@@ -27,9 +30,11 @@ public class IncomeControllerImp implements IncomeController {
 
     @Override
     @GetMapping("/income")
-    public String selectAll(Model model) {
+    public String selectAll(PageRequestDTO pageRequestDTO, Model model) {
 
-        model.addAttribute("inDTOs", incomeService.selectAll());
+        PageResponseDTO<IncomeDTO> pageResponseDTO = incomeService.selectAllForPaging(pageRequestDTO);
+
+        model.addAttribute("inDTOs", pageResponseDTO);
         return "user/accounting/income/list";
     }
 

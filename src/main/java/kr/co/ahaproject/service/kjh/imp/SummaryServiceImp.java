@@ -1,7 +1,9 @@
 package kr.co.ahaproject.service.kjh.imp;
 
-import kr.co.ahaproject.dto.OutcomeDTO;
-import kr.co.ahaproject.entity.Outcome;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
+import kr.co.ahaproject.dto.SummaryDTO;
+import kr.co.ahaproject.entity.Summary;
 import kr.co.ahaproject.mapper.kjh.SummaryMapper;
 import kr.co.ahaproject.service.kjh.SummaryService;
 import org.modelmapper.ModelMapper;
@@ -17,13 +19,31 @@ public class SummaryServiceImp implements SummaryService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public List<OutcomeDTO> selectAll() {
-        List<Outcome> ios = summaryMapper.selectAll();
-        ios.forEach(io -> io.toString());
-        List<OutcomeDTO> list = ios.stream()
-                .map(io -> modelMapper.map(io, OutcomeDTO.class))
+    public List<SummaryDTO> selectAll() {
+        List<Summary> summaries = summaryMapper.selectAll();
+        summaries.forEach(io -> io.toString());
+        List<SummaryDTO> list = summaries.stream()
+                .map(io -> modelMapper.map(io, SummaryDTO.class))
                 .collect(Collectors.toList());
-        list.forEach(ioDTO -> ioDTO.toString());
+        list.forEach(SummayDTO -> SummayDTO.toString());
         return list;
+    }
+
+    @Override
+    public PageResponseDTO<SummaryDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+        List<Summary> summaries = summaryMapper.selectAllForPaging(pageRequestDTO);
+
+        List<SummaryDTO> dtoList = summaries.stream()
+                .map(summary -> modelMapper.map(summary, SummaryDTO.class))
+                .collect(Collectors.toList());
+
+        PageResponseDTO<SummaryDTO> pageResponseDTO = PageResponseDTO.<SummaryDTO>withAll()
+                .dtoList(dtoList)
+                .pageRequestDTO(pageRequestDTO)
+                .total(0)
+                .build();
+
+        return pageResponseDTO;
     }
 }

@@ -36,6 +36,8 @@ public class PageRequestDTO {
     private String jangbiType;
 
     private String kind;
+    // 아이디 넘버
+    private String id;
 
     public int getSkip(){
         return (page -1) * 10;

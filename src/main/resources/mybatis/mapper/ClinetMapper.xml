@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.kjs.ClientMapper">
+
+    <resultMap id="ClientMap" type="Client">
+        <result property="cl_id" column="cl_id"/>
+        <result property="cp_name" column="cp_name"/>
+        <result property="cp_num" column="cp_num"/>
+        <result property="cp_address" column="cp_address"/>
+        <result property="cp_tel" column="cp_tel"/>
+        <result property="cl_code" column="cl_code"/>
+        <result property="cl_email" column="cl_email"/>
+        <result property="cl_account" column="cl_account"/>
+        <result property="cl_file" column="cl_file"/>
+        <result property="cl_etc1" column="cl_etc1"/>
+        <result property="cl_etc2" column="cl_etc2"/>
+        <result property="cl_etc3" column="cl_etc3"/>
+        <result property="cl_uuid" column="cl_uuid"/>
+        <result property="cl_filename" column="cl_filename"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="ClientMap">
+        SELECT * FROM client
+        <include refid="search"/>
+        ORDER BY cl_id DESC
+        LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(cl_id)
+        FROM client
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'cp_name'.toString()">
+                cp_name LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and type == 'cl_email'.toString()">
+                cl_email LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and type == 'cl_account'.toString()">
+                cl_account LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+    </sql>
+
+</mapper>

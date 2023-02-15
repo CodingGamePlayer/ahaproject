@@ -28,7 +28,31 @@
                             <p class="text-sm">공사 현황 전체보기</p>
                         </div>
                         <div class="ms-auto d-flex">
-
+                            <form class="row g-3" action="/user/worksite/construction/cst-list" method="get">
+                                <div class="col-auto">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="finished"
+                                            name="finished">
+                                        <option value="" selected>공사종료여부</option>
+                                        <option value="완료">완료</option>
+                                        <option value="미완료">미완료</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="category"
+                                            name="type">
+                                        <option value="cst_code">공사코드 검색</option>
+                                        <option value="cst_name">공사명 검색</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="keyword" class="visually-hidden">search</label>
+                                    <input type="text" class="form-control" name="keyword" id="keyword"
+                                           placeholder="Search">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">검색</button>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
@@ -51,7 +75,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <th:block th:each="constructionDTO : ${constructionDTOs}">
+                            <th:block th:each="constructionDTO : ${constructionDTOs.dtoList}">
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
@@ -128,7 +152,46 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4"></div>
 
+        <div class="col-sm-4 d-flex justify-content-center">
+            <th:block
+                    th:with="start=${constructionDTOs.start}, end=${constructionDTOs.end}, keyword =${param.keyword}, type = ${param.type}">
+                <ul class="pagination">
+                    <li th:if="${start} == '1'" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/user/worksite/construction/cst-list(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◁</a>
+                    </li>
+                    <li th:if="${start} > '1'" class="page-item ">
+                        <a class="page-link"
+                           th:href="@{/user/worksite/construction/cst-list(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◀</a>
+
+                    </li>
+
+                    <th:block th:each="num : ${#numbers.sequence(start,end)}">
+                        <li class="page-item" th:if="${num} != ${constructionDTOs.page}">
+
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/user/worksite/construction/cst-list(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                        <li class="page-item active " th:if="${num} == ${constructionDTOs.page}">
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/user/worksite/construction/cst-list(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                    </th:block>
+
+                    <li th:if="${end} >= ${constructionDTOs.total} / 10" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/user/worksite/construction/cst-list(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▷</a>
+                    </li>
+                    <li th:if="${end} < ${constructionDTOs.total} / 10" class="page-item">
+                        <a class="page-link"
+                           th:href="@{/user/worksite/construction/cst-list(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▶</a>
+                    </li>
+                </ul>
+            </th:block>
+        </div>
+        <div class="col-md-3"></div>
     </div>
 </div>
 </div>

@@ -1,5 +1,6 @@
 package kr.co.ahaproject.mapper.kjh;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.Outcome;
 import org.apache.ibatis.annotations.*;
 
@@ -37,7 +38,7 @@ public interface OutcomeMapper {
     @Select("SELECT `a`.`out_id`, `a`.`cp_name`, `a`.`out_date`, `a`.`out_content`, `a`.`out_supp_value`, `a`.`out_total_value`, \n" +
             "`a`.`out_collect_value`, `a`.`out_collect_remain`, `b`.`cp_name` AS `cl_code`, `c`.`cst_name` AS `cst_code` \n" +
             "FROM (SELECT `out_id`, `cp_name`, `cl_code`, `cst_code`, `out_date`, `out_content`, `out_supp_value`, `out_total_value` \n" +
-            ", `out_collect_value`, `out_collect_remain` FROM `ahaproject`.`outcome` WHERE `out_id` = '2') AS `a` \n" +
+            ", `out_collect_value`, `out_collect_remain` FROM `ahaproject`.`outcome` WHERE `out_id` = #{out_id}) AS `a` \n" +
             "LEFT OUTER JOIN `client` AS `b` \n" +
             "ON `a`.`cl_code` = `b`.`cl_code` \n" +
             "LEFT OUTER JOIN `construction` AS `c` \n" +
@@ -63,9 +64,13 @@ public interface OutcomeMapper {
             "`a`.`out_content` = #{out.out_content},\n" +
             "`a`.`out_supp_value` = #{out.out_supp_value},\n" +
             "`a`.`out_collect_value` = #{out.out_collect_value} \n" +
-            " WHERE `a`.`out_id` = #{out.out_id}\")")
+            " WHERE `a`.`out_id` = #{out.out_id}")
     int update(@Param("out") Outcome out);
 
     @Delete("DELETE FROM `ahaproject`.`outcome` WHERE `out_id` = #{out.out_id}")
     int delete(@Param("out") Outcome out);
+
+    List<Outcome> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+    int getCount(PageRequestDTO pageRequestDTO);
 }

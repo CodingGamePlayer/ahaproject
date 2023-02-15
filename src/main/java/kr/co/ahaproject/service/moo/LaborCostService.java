@@ -2,7 +2,8 @@ package kr.co.ahaproject.service.moo;
 
 import kr.co.ahaproject.dto.LaborCostDTO;
 import kr.co.ahaproject.dto.LaborCostListDTO;
-import kr.co.ahaproject.entity.LaborCost;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface LaborCostService {
 
     // 인건비 상세보기
     LaborCostDTO findById(LaborCostDTO laborCostDTO);
+
+    PageResponseDTO<LaborCostListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 }

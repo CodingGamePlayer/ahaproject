@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.cjw.UseMaterialMapper">
+
+    <resultMap id="UseMaterialMap" type="UseMaterial">
+        <result property="um_id" column="um_id"/>
+        <result property="mt_code" column="mt_code"/>
+        <result property="cst_code" column="cst_code"/>
+        <result property="um_where" column="um_where"/>
+        <result property="um_amount" column="um_amount"/>
+        <result property="um_regit" column="um_regit"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="UseMaterialMap">
+        SELECT * FROM use_material
+        <include refid="search"/>
+        ORDER BY um_id DESC
+        LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(um_id)
+        FROM use_material
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+
+        <where>
+
+            <if test="keyword != null and type == 'mt_code'.toString()">
+                mt_code LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+            <if test="keyword != null and type == 'cst_code'.toString()">
+                cst_code LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+
+            <if test="keyword != null and type == 'um_where'.toString()">
+                um_where LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+
+
+        </where>
+
+    </sql>
+
+    <sql id="switch">
+
+        <if test="finished != '' and finished == '사용'">
+            AND um_regit = 1
+        </if>
+
+        <if test="finished != '' and finished == '미사용'">
+            AND um_regit = 0
+        </if>
+
+    </sql>
+
+</mapper>

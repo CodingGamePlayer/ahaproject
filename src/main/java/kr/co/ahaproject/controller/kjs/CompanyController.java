@@ -1,15 +1,14 @@
 package kr.co.ahaproject.controller.kjs;
 
 
-import org.springframework.ui.Model;
-
-import kr.co.ahaproject.dto.ClientDTO;
 import kr.co.ahaproject.dto.CompanyDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import org.springframework.ui.Model;
 
 public interface CompanyController {
 	
 	
-	String company(Model model);
+	String company(PageRequestDTO pageRequestDTO, Model model);
 
     String companyForm(Model model, CompanyDTO companyDTO);
 

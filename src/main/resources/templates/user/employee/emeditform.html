@@ -208,12 +208,12 @@
           <label class="form-control-label">사용여부</label>
           <select class="form-select" aria-label="Default select example" id="emp_use">
             <th:block th:if="${eDTO.emp_use} == false">
-              <option value="false" selected>사용안함</option>
-              <option value="true">사용중</option>
+              <option value="false" selected>퇴사</option>
+              <option value="true">재직</option>
             </th:block>
             <th:block th:unless="${eDTO.emp_use} == false">
-              <option value="false" >사용안함</option>
-              <option value="true" selected>사용중</option>
+              <option value="false" >퇴사</option>
+              <option value="true" selected>재직</option>
             </th:block>
           </select>
         </div>
@@ -262,15 +262,21 @@
     input_UUID = uuid;
     input_Filename = fileName;
     const str =
-            `<div class="card col-10 ">
-            <div class="card-header ">
-                ${fileName}
-                <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+            `
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12">
+                    <div class="card border shadow-x mb-4">
+                        <div class="card-header d-flex justify-content-between">
+                            ${fileName}
+                            <button class="btn btn-sm btn-primary"  onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+                        </div>
+                        <div class="card-body">
+                             <img style="width: 300px; height: 100px;" src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                 <img src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
-            </div>
-        </div><!-- card -->`
+            `
 
     uploadResult.innerHTML += str
   }

@@ -3,6 +3,9 @@ package kr.co.ahaproject.service.mskim.imp;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import kr.co.ahaproject.dto.ClientDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.service.mskim.CardService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,4 +88,21 @@ public class CardServiceImpl implements CardService {
 		return 1;
 	}
 
+	@Override
+	public PageResponseDTO<CardDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+		List<CardDTO> cardDTOList = cardMapper.selectAllForPaging(pageRequestDTO)
+				.stream()
+				.map(card -> modelMapper.map(card, CardDTO.class))
+				.collect(Collectors.toList());
+
+		int count = cardMapper.getCount(pageRequestDTO);
+
+		PageResponseDTO<CardDTO> pageResponseDTO = PageResponseDTO.<CardDTO>withAll()
+				.total(count)
+				.dtoList(cardDTOList)
+				.pageRequestDTO(pageRequestDTO)
+				.build();
+
+		return pageResponseDTO;
+	}
 }

@@ -1,7 +1,13 @@
 package kr.co.ahaproject.controller.mskim.imp;
 
+import kr.co.ahaproject.dto.CardDTO;
+import kr.co.ahaproject.dto.ClientDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.ahaproject.controller.mskim.CardController;
 import kr.co.ahaproject.service.mskim.CardService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user/basicinfo/card")
@@ -19,12 +27,11 @@ public class CardControllerImpl implements CardController {
 
 	@Override
 	@GetMapping("/card-list")
-	public ModelAndView card(ModelAndView mav) {
-		
-		mav.addObject("cardDTOs", cardService.selectAll());
-		mav.setViewName("user/card/card-list");
-		
-		return mav;
+	public String card(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
+		PageResponseDTO<CardDTO> pageResponseDTO = cardService.selectAllForPaging(pageRequestDTO);
+
+		model.addAttribute("cards", pageResponseDTO);
+		return "user/card/card-list";
 	}
 
 	@Override

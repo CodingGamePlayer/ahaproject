@@ -16,7 +16,7 @@ public class EmployeeDTO {
     String emp_code;
     String emp_name;
     String emp_joining;
-    String emp_regid;
+    String emp_regid;   // 주민등록번호
     String emp_tel;
     String emp_email;
     String emp_address;
