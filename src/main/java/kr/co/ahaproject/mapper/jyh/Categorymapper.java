@@ -28,25 +28,23 @@ public interface Categorymapper {
             @Result(property = "ct_name", column = "ct_name"),
             @Result(property = "ct_use", column = "ct_use")})
 	List<CategoryDTO> listAll();
-            @Select("SELECT * FROM category WHERE ct_id = #{category.ct_id}")
-            @ResultMap("CategoryMap")
-            Category findById(@Param("category") Category category);
-	
+           
 	//카테고리 선택조회
-	@Select("select * from category where ct_id = #{category.ct_id}")
+    @Select("SELECT * FROM category WHERE ct_id = #{ct_id}")
+    @ResultMap("CategoryMap")
 	CategoryDTO SelectOne(int ct_id);
 	
 	
 	//카테고리 추가
-	@Insert("inset into category (ct_id,ct_name,ct_use) values(#{category.ct_id},#{category.ct_name},#{category.ct_use}")
+	@Insert("insert into category (ct_name,ct_use) values(#{ct_name},#{ct_use})")
 	int Catecreate(CategoryDTO dto);
 	
 	//수정
 	@Update("update category set ct_name =#{category.ct_name}, ct_use = #{category.ct_use} where ct_id = #{category.ct_id}")
-	int Cateupdate(CategoryDTO dto);
+	int Cateupdate(@Param("category") CategoryDTO dto);
 	
 	//삭제
-	@Delete("delete from category where ct_id =#{category.ct_id}")
+	@Delete("delete from category where ct_id =#{ct_id}")
 	int Catedelete(int ct_id);
 	
 	

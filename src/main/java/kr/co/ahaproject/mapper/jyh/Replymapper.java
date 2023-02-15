@@ -30,33 +30,27 @@ public interface Replymapper {
             @Result(property = "rp_id", column = "rp_id"),
             @Result(property = "b_id", column = "b_id"),
             @Result(property = "rp_body", column = "rp_body"),
-            @Result(property = "us_id", column = "us_id")})
-	List<ReplyDTO> getdetail(int b_id);
-	
-            @Select("SELECT * FROM reply WHERE rp_id = #{reply.rp_id}")
-            @ResultMap("ReplyMap")
-            Reply findById(@Param("reply") Reply reply);
-	
+            @Result(property = "ac_id", column = "ac_id")})
+		List<ReplyDTO> getdetail(int b_id);
+	@Select("SELECT * FROM reply WHERE rp_id = #{rp_id}")
+    @ResultMap("ReplyMap")
+	ReplyDTO replySelectOne(int rp_id); //댓글 선택조회
 	
 	
-	//댓글 선택조회
-	@Select("select* from reply where rp_id = #{reply.rp_id}")
-	ReplyDTO replySelectOne(int rp_id);
 	
 	//댓글 작성
-	@Insert("insert into reply(rp_body, us_id) values(#{reply.rp_body}, #{reply.us_id}")
+	@Insert("insert into reply (b_id,rp_body, ac_id) values (#{b_id},#{rp_body}, #{ac_id})")
 	int replycreate(ReplyDTO dto);
 	
 	
 	
 	//댓글 수정
-
-	@Update("update `ahaproject`.`reply` set rp_body=#{reply.rp_body}, us_id=#{reply.us_id} where rp_id = #{reply.rp_id} and b_id = #{reply.b_id}")
-	int replyupdate(ReplyDTO dto); 
+	@Update("update `ahaproject`.`reply` set rp_body=#{reply.rp_body}, ac_id=#{reply.ac_id} where rp_id = #{reply.rp_id} and b_id = #{reply.b_id}")
+	int replyupdate(@Param("reply") ReplyDTO reply); 
 	
 	
 	
 	//댓글 삭제
-	@Delete("delete from reply where rp_id=#{reply.rp_id}")
-	int replydelete(int rp_id);
+	@Delete("delete from reply where rp_id=#{rp_id}")
+	int replydelete(@Param("rp_id") int rp_id);
 }

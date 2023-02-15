@@ -26,13 +26,13 @@ public interface BoardService {
 			
 		
 		
-		//글 수정
-		public int update(BoardDTO dto); 
+	//글 수정
+	public int update(BoardDTO dto); 
 			
 		
 		
-		//글 삭제
-		public int delete(int b_id);
+	//글 삭제
+	public int delete(int b_id);
 			
 		
 		
