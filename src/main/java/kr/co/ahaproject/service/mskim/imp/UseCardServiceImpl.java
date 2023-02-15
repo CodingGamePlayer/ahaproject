@@ -85,8 +85,6 @@ public class UseCardServiceImpl implements UseCardService {
 
 		List<UseCardJoinDTO> useCardJoinDTOS = ucm.selectAllForPaging(pageRequestDTO);
 
-		useCardJoinDTOS.forEach(useCardJoinDTO -> System.out.println(useCardJoinDTO));
-
 		int total = ucm.getCount(pageRequestDTO);
 
 		PageResponseDTO<UseCardJoinDTO> pageResponseDTO = PageResponseDTO.<UseCardJoinDTO>withAll()
