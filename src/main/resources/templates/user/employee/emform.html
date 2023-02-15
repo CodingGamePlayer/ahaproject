@@ -49,9 +49,9 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">*회사명</label>
-          <select class="form-select" aria-label="Default select example"  id="cp_name">
+          <select class="form-select" aria-label="Default select example"  id="cp_id">
             <th:block th:each="company : ${companyDTOs}">
-              <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
+              <option th:value="${company.cp_id}">[[${company.cp_name}]]</option>
             </th:block>
           </select>
         </div>
@@ -288,7 +288,7 @@
 
     empSubmitBtn.addEventListener("click", () => {
     // const input_emp_id = document.querySelector('#emp_id').value;
-    const input_cp_name = document.querySelector('#cp_name').value;
+    const input_cp_id = document.querySelector('#cp_id').value;
     const input_emp_code = document.querySelector('#emp_code').value;
     const input_emp_name = document.querySelector('#emp_name').value;
     const input_emp_joining = document.querySelector('#emp_joining').value;
@@ -304,7 +304,7 @@
 
     const emp1 = {
       // emp_id: input_emp_id,
-      cp_name : input_cp_name,
+      cp_id : input_cp_id,
       emp_name : input_emp_name,
       emp_code : input_emp_code,
       emp_tel : input_emp_tel,
@@ -320,7 +320,7 @@
       emp_etc3 : input_emp_etc3
     };
 
-    if(input_cp_name == "" ||
+    if(input_cp_id == "" ||
             input_emp_name == "" || input_emp_joining == "" ||
             input_emp_regid == ""){
       alert('*이 있는 칸은 채워주시기 바랍니다.')

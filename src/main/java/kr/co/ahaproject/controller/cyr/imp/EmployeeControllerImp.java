@@ -44,6 +44,7 @@ public class EmployeeControllerImp implements EmployeeController {
     @GetMapping("user/employee/emform")
     public String goInsert(Model model) {
         model.addAttribute("companyDTOs", companyService.selectAll());
+
         int count = employeeService.count();
         if(count>0){
         int id = employeeService.selectid() +1;

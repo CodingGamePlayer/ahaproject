@@ -1,4 +1,4 @@
-package kr.co.ahaproject.entity;
+package kr.co.ahaproject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,14 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account {
+public class AccountListDTO {
 
     int ac_id;
-    int cp_id;
+    String cp_name;
     String username;
     String ac_password;
     String ac_person_name;
     String ac_role;
     String ac_regdate;
-
 }

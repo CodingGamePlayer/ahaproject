@@ -91,7 +91,7 @@ public class AdminControllerImp implements AdminController {
     @GetMapping("/manage-account")
     public String manage(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
 
-        PageResponseDTO<AccountDTO> pageResponseDTO = accountService.selectAllForPaging(pageRequestDTO);
+        PageResponseDTO<AccountListDTO> pageResponseDTO = accountService.selectAllForPaging(pageRequestDTO);
 
         model.addAttribute("accountDTOs", pageResponseDTO);
 
