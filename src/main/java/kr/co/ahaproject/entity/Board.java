@@ -17,5 +17,6 @@ public class Board {
     String b_title;
     String b_body;
     String b_etc;
-    String b_file;
+    String b_filename;
+    String b_uuid;
 }
