@@ -1,6 +1,7 @@
 package kr.co.ahaproject.service.kjs.imp;
 
 import kr.co.ahaproject.dto.AccountDTO;
+import kr.co.ahaproject.dto.AccountListDTO;
 import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.Account;
@@ -27,7 +28,7 @@ class AccountServiceImpTest {
     void register() {
 
         AccountDTO accountDTO = AccountDTO.builder()
-                .cp_name("김회사")
+                .cp_id(1)
                 .ac_password("123")
                 .username("otw1917")
                 .ac_person_name("김길동")
@@ -91,9 +92,9 @@ class AccountServiceImpTest {
 //        List<Account> accounts = accountMapper.selectAllForPaging(pageRequestDTO);
 //
 //        accounts.forEach(account -> log.info(String.valueOf(account)));
-        PageResponseDTO<AccountDTO> pageResponseDTO = accountService.selectAllForPaging(pageRequestDTO);
+        PageResponseDTO<AccountListDTO> pageResponseDTO = accountService.selectAllForPaging(pageRequestDTO);
 
-        List<AccountDTO> dtoList = pageResponseDTO.getDtoList();
+        List<AccountListDTO> dtoList = pageResponseDTO.getDtoList();
 
         dtoList.forEach(accountDTO -> log.info(String.valueOf(accountDTO)));
     }
