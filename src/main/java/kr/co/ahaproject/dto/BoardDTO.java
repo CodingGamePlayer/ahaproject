@@ -13,10 +13,9 @@ public class BoardDTO {
 
     int b_id;
     int ct_id;
-    int ac_id;
+    int us_id;
     String b_title;
     String b_body;
     String b_etc;
-    String b_filename;
-    String b_uuid;
+    String b_file;
 }
