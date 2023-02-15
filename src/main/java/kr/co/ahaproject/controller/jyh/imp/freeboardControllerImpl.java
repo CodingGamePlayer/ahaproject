@@ -1,5 +1,7 @@
 package kr.co.ahaproject.controller.jyh.imp;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,8 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import kr.co.ahaproject.controller.jyh.freeboardController;
 import kr.co.ahaproject.dto.BoardDTO;
 import kr.co.ahaproject.service.jyh.freeboardService;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequiredArgsConstructor
+@Slf4j
+@RequestMapping("/user/gboard/free-board")
 public class freeboardControllerImpl implements freeboardController {
 
 	@Autowired 
@@ -17,18 +23,12 @@ public class freeboardControllerImpl implements freeboardController {
 	
 
 	@Override
-	@GetMapping("/user/freeboard/freeboardlist")
+	@GetMapping("/list")
 	public String listAll(Model model) {
 		model.addAttribute("item", Freeboardservice.list());
 		return "user/board/freeboard/freeboardlist";
 	}
 
-	@Override
-	@GetMapping("/user/board/freeboard/freeregister")
-	public String create() {
-		// TODO Auto-generated method stub
-		return "user/board/freeboard/freeboardregister";
-	}
 
 	@Override
 	public String detail(int b_id, Model model) {
@@ -42,4 +42,9 @@ public class freeboardControllerImpl implements freeboardController {
 		return null;
 	}
 
+	@Override
+	@GetMapping("/register-form")
+	public String createForm() {
+		return "user/board/freeboard/register";
+	}
 }

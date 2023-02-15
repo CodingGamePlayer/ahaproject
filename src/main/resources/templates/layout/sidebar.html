@@ -9,7 +9,7 @@
                 <span class="font-weight-bold text-lg">Aha Company</span>
             </a>
         </div>
-        <div class="collapse navbar-collapse px-4  w-auto " id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse px-4  w-auto mb-6" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <button class="btn btn-sm  mt-3 text-start mb-2 btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#basicInfo" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-fill me-1" viewBox="0 0 16 16">
@@ -92,7 +92,7 @@
                 <div class="collapse ms-3 mb-3" id="gboard" >
                     <div><a href="/user/category/list" class="text-white text-sm">- 전체보기</a></div>
                     <div><a href="/user/gboard/list" class="text-white text-sm">- 공지사항</a></div>
-                    <div><a href="/user/freeboard/freeboardlist" class="text-white text-sm">- 자유게시판</a></div>
+                    <div><a th:href="@{/user/gboard/free-board/list}" class="text-white text-sm">- 자유게시판</a></div>
                     <div><a href="/user/qnaboard/list" class="text-white text-sm">- QnA</a></div>
 
                 </div>
