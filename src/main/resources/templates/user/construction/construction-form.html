@@ -53,12 +53,6 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*공사기간</label>
-                    <input class="input-group-sm form-control " type="text" id="cst_period">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
                     <label class="form-control-label">*공사착수일</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
                         <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
@@ -77,6 +71,12 @@
                         <span class='fa-solid fa-calendar'></span>
                         </span>
                     </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">공사기간</label>
+                    <input class="input-group-sm form-control " type="text" id="cst_period">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -161,6 +161,25 @@
 
 <!-- 파일 첨부용 JS end-->
 <script>
+
+document.getElementById('datetimepicker2Input').onchange = function(){
+
+var sdd = document.getElementById("datetimepicker1Input").value;
+    var edd = document.getElementById("datetimepicker2Input").value;
+    var ar1 = sdd.split('.');
+    var ar1 = sdd.split(' ');
+    var ar2 = edd.split('.');
+    var ar2 = edd.split(' ');
+    var da1 = new Date(ar1[0], ar1[1], ar1[2]);
+    var da2 = new Date(ar2[0], ar2[1], ar2[2]);
+    var dif = da2 - da1;
+    var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+ if(sdd && edd){
+
+document.getElementById('cst_period').value = parseInt(dif/cDay);
+ }
+}
+
 let input_UUID;
 let input_Filename;
 
@@ -256,8 +275,7 @@ function removeFile(uuid, fileName, obj) {
         };
 
         if(input_cst_code == "" || input_cst_name == "" ||
-        		input_cst_period == "" || input_cst_start == "" ||
-        		input_cst_end == "" || input_cst_finised == "" ){
+        		 input_cst_start == "" || ninput_cst_end == "" || input_cst_finised == "" ){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         };
