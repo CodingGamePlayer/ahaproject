@@ -1,5 +1,7 @@
 package kr.co.ahaproject.controller.mskim.imp;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,21 +12,25 @@ import kr.co.ahaproject.controller.mskim.ConstructionController;
 import kr.co.ahaproject.dto.ConstructionDTO;
 import kr.co.ahaproject.service.mskim.ConstructionService;
 
+import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/user/worksite/construction")
 public class ConstructionControllerImpl implements ConstructionController {
-
+//1
 	@Autowired
 	private ConstructionService constructionService;
 	
 	@Override
 	@GetMapping("/cst-list")
-	public ModelAndView construction(ModelAndView mav) {
-		
-		mav.addObject("constructionDTOs", constructionService.selectAll());
+	public ModelAndView construction(@Valid PageRequestDTO pageRequestDTO, ModelAndView mav) {
+
+		PageResponseDTO<ConstructionDTO> pageResponseDTO = constructionService.selectAllForPaging(pageRequestDTO);
+
+		mav.addObject("constructionDTOs", pageResponseDTO);
 		mav.setViewName("user/construction/construction-list");
-		
+
 		return mav;
 	}
 

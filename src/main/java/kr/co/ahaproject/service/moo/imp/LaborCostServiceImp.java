@@ -3,9 +3,9 @@ package kr.co.ahaproject.service.moo.imp;
 import groovy.util.logging.Slf4j;
 import kr.co.ahaproject.dto.LaborCostDTO;
 import kr.co.ahaproject.dto.LaborCostListDTO;
-import kr.co.ahaproject.dto.MachineDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.LaborCost;
-import kr.co.ahaproject.entity.Machine;
 import kr.co.ahaproject.mapper.moo.LaborCostMapper;
 import kr.co.ahaproject.service.AhaCommonMethod;
 import kr.co.ahaproject.service.moo.LaborCostService;
@@ -91,6 +91,22 @@ public class LaborCostServiceImp implements LaborCostService {
     public LaborCostDTO findById(LaborCostDTO laborCostDTO) {
         LaborCost laborCost = laborCostMapper.findById(modelMapper.map(laborCostDTO, LaborCost.class));
         return modelMapper.map(laborCost, LaborCostDTO.class);
+    }
+
+    @Override
+    public PageResponseDTO<LaborCostListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+        List<LaborCostListDTO> laborCosts = laborCostMapper.selectAllForPaging(pageRequestDTO);
+
+        int total = laborCostMapper.getCount(pageRequestDTO);
+
+        PageResponseDTO<LaborCostListDTO> pageResponseDTO = PageResponseDTO.<LaborCostListDTO>withAll()
+                .dtoList(laborCosts)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+
+        return pageResponseDTO;
     }
 }
 

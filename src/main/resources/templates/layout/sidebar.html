@@ -1,6 +1,6 @@
 <html lagn="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<!--headerFragment 선언-->
+<!--headerFragment 선언1-->
 <div th:fragment="SidebarFragment">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start " id="sidenav-main">
         <div class="sidenav-header">
@@ -53,9 +53,9 @@
                     <div><a href="/user/worksite/use-material/list" class="text-white text-sm">- 자재사용내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitUseMaterial()">- 자재사용내역 입력</a></div>
                     <div><hr></div>
-                    <div><a th:href="@{/user/estimate/esmain}" class="text-white text-sm">- 견적서정보 보기</a></div>
-                    <div><a href="#" class="text-white text-sm" th:onclick="regitEstimate()">- 견적서정보 입력</a></div>
-                    <div><hr></div>
+<!--                    <div><a th:href="@{/user/estimate/esmain}" class="text-white text-sm">- 견적서정보 보기</a></div>-->
+<!--                    <div><a href="#" class="text-white text-sm" th:onclick="regitEstimate()">- 견적서정보 입력</a></div>-->
+<!--                    <div><hr></div>-->
                     <div><a th:href="@{/user/worksite/rental}" class="text-white text-sm">- 장비대여내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMachineRent()">- 장비대여내역 입력</a></div>
                 </div>

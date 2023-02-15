@@ -1,5 +1,6 @@
 package kr.co.ahaproject.mapper.mskim;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.Construction;
 
 import org.apache.ibatis.annotations.Delete;
@@ -57,4 +58,7 @@ public interface ConstructionMapper {
     @Select("select count(*) from construction")
     int codeCount();
 
+    List<Construction> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+    int getCount(PageRequestDTO pageRequestDTO);
 }

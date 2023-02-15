@@ -1,5 +1,6 @@
 package kr.co.ahaproject.mapper.kjh;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.Summary;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -116,4 +117,7 @@ public interface SummaryMapper {
             @Result(property = "in_collect_remain", column = "in_collect_remain"),
     })
     List<Summary> selectAll();
+
+    List<Summary> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
 }

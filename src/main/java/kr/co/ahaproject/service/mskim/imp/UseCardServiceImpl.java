@@ -1,17 +1,18 @@
 package kr.co.ahaproject.service.mskim.imp;
 
-import java.util.List;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.dto.UseCardDTO;
 import kr.co.ahaproject.dto.UseCardJoinDTO;
 import kr.co.ahaproject.entity.UseCard;
 import kr.co.ahaproject.mapper.mskim.UseCardMapper;
 import kr.co.ahaproject.service.mskim.UseCardService;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -79,4 +80,19 @@ public class UseCardServiceImpl implements UseCardService {
 		return ucm.getFindUcId(uc_id);
 	}
 
+	@Override
+	public PageResponseDTO<UseCardJoinDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+		List<UseCardJoinDTO> useCardJoinDTOS = ucm.selectAllForPaging(pageRequestDTO);
+
+		int total = ucm.getCount(pageRequestDTO);
+
+		PageResponseDTO<UseCardJoinDTO> pageResponseDTO = PageResponseDTO.<UseCardJoinDTO>withAll()
+				.pageRequestDTO(pageRequestDTO)
+				.total(total)
+				.dtoList(useCardJoinDTOS)
+				.build();
+
+		return pageResponseDTO;
+	}
 }

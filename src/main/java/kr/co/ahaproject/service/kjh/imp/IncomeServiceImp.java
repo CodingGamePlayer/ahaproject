@@ -1,6 +1,8 @@
 package kr.co.ahaproject.service.kjh.imp;
 
 import kr.co.ahaproject.dto.IncomeDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.entity.Income;
 import kr.co.ahaproject.mapper.kjh.IncomeMapper;
 import kr.co.ahaproject.service.AhaCommonMethod;
@@ -80,5 +82,25 @@ public class IncomeServiceImp implements IncomeService {
             return 0;
         }
         return 1;
+    }
+
+    @Override
+    public PageResponseDTO<IncomeDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+        List<Income> incomes = incomeMapper.selectAllForPaging(pageRequestDTO);
+
+        List<IncomeDTO> dtoList = incomes.stream()
+                .map(income -> modelMapper.map(income, IncomeDTO.class))
+                .collect(Collectors.toList());
+
+        int total = incomeMapper.getCount(pageRequestDTO);
+
+        PageResponseDTO<IncomeDTO> pageResponseDTO = PageResponseDTO.<IncomeDTO>withAll()
+                .dtoList(dtoList)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+
+        return pageResponseDTO;
     }
 }

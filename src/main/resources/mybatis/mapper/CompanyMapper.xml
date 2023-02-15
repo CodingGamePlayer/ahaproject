@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.kjs.CompanyMapper">
+
+    <resultMap id="CompanyMap" type="Company">
+        <result property="cp_id" column="cp_id"/>
+        <result property="cp_name" column="cp_name"/>
+        <result property="cp_num" column="cp_num"/>
+        <result property="cp_address" column="cp_address"/>
+        <result property="cp_tel" column="cp_tel"/>
+        <result property="cp_type" column="cp_type"/>
+        <result property="cp_head_name" column="cp_head_name"/>
+        <result property="cp_head_id" column="cp_head_id"/>
+        <result property="cp_sector" column="cp_sector"/>
+        <result property="cp_establish" column="cp_establish"/>
+        <result property="cp_open" column="cp_open"/>
+        <result property="cp_eng_name" column="cp_eng_name"/>
+        <result property="cp_eng_address" column="cp_eng_address"/>
+        <result property="cp_eng_head_name" column="cp_eng_head_name"/>
+        <result property="cp_domain" column="cp_domain"/>
+        <result property="cp_filename" column="cp_filename"/>
+        <result property="cp_uuid" column="cp_uuid"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="CompanyMap">
+        SELECT * FROM company
+        <include refid="search"/>
+        ORDER BY cp_id DESC
+        LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(cp_id)
+        FROM company
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'cp_name'.toString()">
+                cp_name LIKE CONCAT('%', #{keyword}, '%')
+
+            </if>
+            <if test="keyword != null and type == 'cp_num'.toString()">
+                cp_num LIKE CONCAT('%', #{keyword}, '%')
+
+            </if>
+            <if test="keyword != null and type == 'cp_head_name'.toString()">
+                cp_head_name LIKE CONCAT('%', #{keyword}, '%')
+
+            </if>
+
+        </where>
+    </sql>
+
+</mapper>
