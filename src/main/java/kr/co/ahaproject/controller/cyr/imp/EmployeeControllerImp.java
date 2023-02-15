@@ -71,9 +71,11 @@ public class EmployeeControllerImp implements EmployeeController {
 
     @Override
     @GetMapping("user/employee/emeditform")
-    public void emEditForm(Employee employee, Model model) {
+    public String emEditForm(Employee employee, Model model) {
         model.addAttribute("companyDTOs", companyService.selectAll());
         model.addAttribute("eDTO",employeeService.selectOne(employee.getEmp_id().intValue()));
+
+        return "user/employee/emeditform";
     }
 
 
