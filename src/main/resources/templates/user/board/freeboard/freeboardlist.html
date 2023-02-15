@@ -49,14 +49,14 @@
                             <tbody>
                             <th:block th:each="listdata:${item}">
                              <tr>
-                                    <th:block th:if="${listdata.b_filename} == ''">
+                                    <th:block th:if="${listdata.b_filename} == '' or ${listdata.b_filename} == null">
                                     <td class="d-flex justify-content-center">
-                                        <img class="rounded-2" style="width: 200px; height: 100px;" src="https://via.placeholder.com/200x100">
+                                        <img class="rounded-2" style="width: 200px; height: 100px;" src="https://via.placeholder.com/200x100" onerror="this.onerror=null; this.src='https://via.placeholder.com/200x100';">
                                     </td>
                                     </th:block>
-                                    <th:block th:unless="${listdata.b_filename} == ''">
+                                    <th:block th:unless="${listdata.b_filename} == ''or ${listdata.b_filename} == null">
                                         <td class="d-flex justify-content-center">
-                                            <img class="rounded-2" style="width: 200px; height: 100px;" th:src="|/user/view/s_${listdata.b_uuid}_${listdata.b_filename}|">
+                                            <img class="rounded-2" style="width: 200px; height: 100px;" th:src="|/user/view/s_${listdata.b_uuid}_${listdata.b_filename}|" onerror="this.onerror=null; this.src='https://via.placeholder.com/200x100';">
                                         </td>
                                     </th:block>
                                     <td>

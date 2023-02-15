@@ -92,13 +92,13 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*매출 공급가액</label>
-                    <input class="form-control" type="text" id="out_supp_value" th:value="${outDTO.out_supp_value}">
+                    <input class="form-control" type="number" id="out_supp_value" th:value="${outDTO.out_supp_value}">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*매출 지급액</label>
-                    <input class="form-control" type="text" id="out_collect_value" th:value="${outDTO.out_collect_value}">
+                    <input class="form-control" type="number" id="out_collect_value" th:value="${outDTO.out_collect_value}">
                 </div>
             </div>
             <input class="form-control" type="hidden" id="out_total_value" th:value="${outDTO.out_total_value}">
@@ -194,6 +194,7 @@
                 alert('수정이 완료되었습니다.');
                 window.close();
                 opener.location.reload();
+                window.close();
             } else {
                 alert('수정을 실패하였습니다.');
             }

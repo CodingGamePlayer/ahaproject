@@ -67,7 +67,7 @@ public class MaterialControllerImp implements MaterialController {
 	}
 
 	@Override
-	@GetMapping("/user/material/image")
+	@GetMapping("/user/basicinfo/material/image")
 	public String image(MaterialDTO materialDTO, Model model) {
 
 		MaterialDTO result = materialService.findById(materialDTO);
