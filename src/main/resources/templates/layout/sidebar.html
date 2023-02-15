@@ -22,7 +22,7 @@
                     <div><a href="/user/client/list" class="text-white text-sm">- 고객정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitClient()">- 고객정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="/user/employee/emmain" class="text-white text-sm">- 직원정보 보기</a></div>
+                    <div><a href="/user/employee/list" class="text-white text-sm">- 직원정보 보기</a></div>
 <!--                    20230207 15:44 수정-->
                     <div><a href="#" class="text-white text-sm" th:onclick="regitEmployee()">- 직원정보 입력</a></div>
                     <div><hr></div>
@@ -56,12 +56,10 @@
                     <div><a th:href="@{/user/estimate/esmain}" class="text-white text-sm">- 견적서정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitEstimate()">- 견적서정보 입력</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 카드사용내역 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 카드사용내역 입력</a></div>
-                    <div><hr></div>
                     <div><a th:href="@{/user/worksite/rental}" class="text-white text-sm">- 장비대여내역 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMachineRent()">- 장비대여내역 입력</a></div>
                 </div>
+
                 <button class="btn btn-sm  btn-primary mt-3 text-start mb-2 " type="button" data-bs-toggle="collapse" data-bs-target="#gboard" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text me-1" viewBox="0 0 16 16">
                         <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
@@ -75,7 +73,7 @@
                     <div><a href="/user/freeboard/freeboardlist" class="text-white text-sm">- 자유게시판</a></div>
                     <div><a href="/user/qnaboard/list" class="text-white text-sm">- QnA</a></div>
 
-                </div>
+
                 <button class="btn btn-sm mt-3 text-start mb-2 btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#accounting" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-accounting me-1" viewBox="0 0 16 16">
                         <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
@@ -93,8 +91,13 @@
                     <div><a href="#" class="text-white text-sm" th:onclick="regitIncome()">- 매입내역 입력</a></div>
                     <div><hr></div>
                     <div><a th:href="@{/user/accounting/laborcost}" class="text-white text-sm">- 인건비내역 보기</a></div>
-                    <div><a href="#" class="text-white text-sm">- 인건비내역 입력</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitLaborCost()">- 인건비내역 입력</a></div>
+                    <div><hr></div>
+                    <div><a th:href="@{/user/worksite/use-card/uc-list}" class="text-white text-sm">- 카드사용내역 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitUseCard()">- 카드사용내역 입력</a></div>
                 </div>
+               	</div>
+               
                 <button sec:authorize="hasAuthority('ROLE_ADMIN')" class="btn btn-sm btn-warning mt-3 text-start mb-2 " type="button" data-bs-toggle="collapse" data-bs-target="#adminPage" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-briefcase-fill me-1" viewBox="0 0 16 16">
                         <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/>
@@ -176,6 +179,12 @@
 
                 window.open("/user/worksite/rental/register", "_blank", option);
             }
+            // 인건비 입력
+            function regitLaborCost(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/accounting/laborcost/register", "_blank", option);
+            }
             function regitCompany(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
@@ -222,6 +231,13 @@
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                 window.open("/user/worksite/construction/cst-form", "_blank", option);
+            }
+            
+          //카드사용 내역 입력
+            function regitUseCard(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/worksite/use-card/uc-form", "_blank", option);
             }
 
             // 견적서 등록

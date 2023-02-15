@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/accounting")
 
 public class LaborCostApiControllerImp implements LaborCostApiController {
 
@@ -24,7 +24,7 @@ public class LaborCostApiControllerImp implements LaborCostApiController {
     @Override
     @ApiOperation(value = "인건비 POST", notes = "POST 방식으로 인건비 등록")
     @PostMapping("/laborcost")
-    public ResponseEntity register(LaborCostDTO laborCostDTO) {
+    public ResponseEntity register(@RequestBody LaborCostDTO laborCostDTO) {
         if (laborCostService == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -35,11 +35,11 @@ public class LaborCostApiControllerImp implements LaborCostApiController {
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-// 주석
+
     @Override
     @ApiOperation(value = "인건비 PUT", notes = "PUT 방식으로 인건비 수정")
-    @PutMapping("/laborcost")
-    public ResponseEntity update(LaborCostDTO laborCostDTO) {
+    @PutMapping(value ="/laborcost", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity update(@RequestBody LaborCostDTO laborCostDTO) {
         int result = laborCostService.update(laborCostDTO);
         log.info(String.valueOf(result));
         if (result == 0) {
@@ -51,7 +51,17 @@ public class LaborCostApiControllerImp implements LaborCostApiController {
     @Override
     @ApiOperation(value = "인건비 DELETE", notes = "DELETE 방식으로 인건비 삭제")
     @DeleteMapping(value = "/laborcost", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity delete(LaborCostDTO laborCostDTO) {
-        return null;
+    public ResponseEntity delete(@RequestBody LaborCostDTO laborCostDTO) {
+        int result = laborCostService.delete(laborCostDTO);
+
+        if (laborCostDTO.getLc_id() == 0){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        if (result==0){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

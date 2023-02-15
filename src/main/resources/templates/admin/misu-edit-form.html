@@ -82,13 +82,13 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*미수금</label>
-                    <input class="form-control" type="text" id="misu_value" th:value="${misuDTO.misu_value}">
+                    <input class="form-control" type="text" id="misu_value" th:value="${misuDTO.misu_value}" onkeyup="calculateRemain()">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">수금액</label>
-                    <input class="form-control" type="text" id="misu_collect_value" th:value="${misuDTO.misu_collect_value}">
+                    <input class="form-control" type="text" id="misu_collect_value" th:value="${misuDTO.misu_collect_value}" onkeyup="calculateRemain()">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -187,13 +187,23 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/upload.js"></script>
-
 <script>
 
+    function calculateRemain() {
+        let supp_value = document.querySelector("#misu_value").value;
+        let collect_value = document.querySelector("#misu_collect_value").value;
+        let target = document.querySelector("#misu_total_value")
 
+        console.log(supp_value);
+        console.log(collect_value);
+
+        target.value = Math.floor(supp_value - collect_value);
+    }
+</script>
+
+<script>
 //<!--    이미지 파일을 사용하기 위한 JS-->
 
-// <!--    이미지 파일을 사용하기 위한 JS-->
 
     /*<![CDATA[*/
     let input_UUID = "[[${misuDTO.misu_uuid}]]";

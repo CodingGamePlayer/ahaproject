@@ -1,20 +1,20 @@
 package kr.co.ahaproject.controller.kjs.imp;
 
 import kr.co.ahaproject.controller.kjs.AdminController;
-import kr.co.ahaproject.dto.AccountDTO;
-import kr.co.ahaproject.dto.CompanyDTO;
-import kr.co.ahaproject.dto.ConstructionDTO;
-import kr.co.ahaproject.dto.MisuDTO;
+import kr.co.ahaproject.dto.*;
+import kr.co.ahaproject.entity.Misu;
 import kr.co.ahaproject.service.kjs.AccountService;
 import kr.co.ahaproject.service.kjs.CompanyService;
-import kr.co.ahaproject.service.kjs.ConstructionService;
+import kr.co.ahaproject.service.mskim.ConstructionService;
 import kr.co.ahaproject.service.kjs.MisuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -33,11 +33,11 @@ public class AdminControllerImp implements AdminController {
 
     @Override
     @GetMapping("/misu")
-    public String misu(Model model) {
+    public String misu(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult,Model model) {
 
-        List<MisuDTO> misuDTOList = misuService.selectAll();
+        PageResponseDTO<Misu> pageResponseDTO = misuService.selectAllForPaging(pageRequestDTO);
 
-        model.addAttribute("misuDTOs", misuDTOList);
+        model.addAttribute("misuDTOs", pageResponseDTO);
 
         return "admin/misu";
     }
@@ -76,14 +76,28 @@ public class AdminControllerImp implements AdminController {
     }
 
     @Override
+    @GetMapping("/misu/image")
+    public String misuImage(MisuDTO misuDTO, Model model) {
+
+        MisuDTO result = misuService.findById(misuDTO);
+
+        model.addAttribute("misuDTO", result);
+
+
+        return "admin/image";
+    }
+
+    @Override
     @GetMapping("/manage-account")
-    public String manage(Model model) {
+    public String manage(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
 
-        List<AccountDTO> accountDTOS = accountService.selectAll();
+        PageResponseDTO<AccountDTO> pageResponseDTO = accountService.selectAllForPaging(pageRequestDTO);
 
-        model.addAttribute("accountDTOs", accountDTOS);
+        model.addAttribute("accountDTOs", pageResponseDTO);
 
         return "admin/manage-account";
     }
+
+
 }
 

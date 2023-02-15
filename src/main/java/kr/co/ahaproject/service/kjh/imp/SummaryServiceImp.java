@@ -1,8 +1,7 @@
 package kr.co.ahaproject.service.kjh.imp;
 
-import kr.co.ahaproject.dto.IncomeOutcomeDTO;
-import kr.co.ahaproject.entity.IncomeOutcome;
-import kr.co.ahaproject.mapper.kjh.IncomeMapper;
+import kr.co.ahaproject.dto.SummaryDTO;
+import kr.co.ahaproject.entity.Summary;
 import kr.co.ahaproject.mapper.kjh.SummaryMapper;
 import kr.co.ahaproject.service.kjh.SummaryService;
 import org.modelmapper.ModelMapper;
@@ -18,13 +17,13 @@ public class SummaryServiceImp implements SummaryService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public List<IncomeOutcomeDTO> selectAll() {
-        List<IncomeOutcome> ios = summaryMapper.selectAll();
-        ios.forEach(io -> io.toString());
-        List<IncomeOutcomeDTO> list = ios.stream()
-                .map(io -> modelMapper.map(io, IncomeOutcomeDTO.class))
+    public List<SummaryDTO> selectAll() {
+        List<Summary> summaries = summaryMapper.selectAll();
+        summaries.forEach(io -> io.toString());
+        List<SummaryDTO> list = summaries.stream()
+                .map(io -> modelMapper.map(io, SummaryDTO.class))
                 .collect(Collectors.toList());
-        list.forEach(ioDTO -> ioDTO.toString());
+        list.forEach(SummayDTO -> SummayDTO.toString());
         return list;
     }
 }

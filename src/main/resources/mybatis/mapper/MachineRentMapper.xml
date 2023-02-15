@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.moo.MachrentMapper">
+
+    <resultMap id="MachRentListDTOMap" type="MachRentListDTO">
+        <result property="rent_id" column="rent_id"/>
+        <result property="cst_name" column="cst_name"/>
+        <result property="rent_start" column="rent_start"/>
+        <result property="rent_end" column="rent_end"/>
+        <result property="rent_bill_date" column="rent_bill_date"/>
+        <result property="m_name" column="m_name"/>
+        <result property="m_kind" column="m_kind"/>
+        <result property="rent_supp_value" column="rent_supp_value"/>
+        <result property="rent_tax" column="rent_tax"/>
+        <result property="rent_collect_date" column="rent_collect_date"/>
+        <result property="rent_collect_value" column="rent_collect_value"/>
+        <result property="rent_misu" column="rent_misu"/>
+        <result property="rent_finished" column="rent_finished"/>
+        <result property="rent_etc" column="rent_etc"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="MachRentListDTOMap">
+        SELECT
+        A.rent_id, C.cst_name, A.rent_start, A.rent_end, A.rent_bill_date, B.m_name, A.rent_supp_value,
+        A.rent_tax, A.rent_collect_date, A.rent_collect_value, A.rent_misu, A.rent_finished, A.rent_etc, B.m_kind
+        FROM mach_rent A JOIN machine B
+        ON A.m_code = B.m_code JOIN construction C
+        ON A.cst_code = C.cst_code
+        <include refid="search"/>
+        ORDER BY rent_id DESC
+        LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(rent_id)
+        FROM mach_rent A JOIN machine B
+        ON A.m_code = B.m_code JOIN construction C
+        ON A.cst_code = C.cst_code
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'cst_name'.toString()">
+                C.cst_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="case1"/>
+            </if>
+            <if test="keyword != null and type == 'm_name'.toString()">
+                B.m_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="case1"/>
+            </if>
+            <if test="type == 'id'.toString()">
+                A.rent_id = #{id}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="case1">
+        <if test="finished != '' and finished == '임대중'">
+            AND A.rent_finished = 0
+        </if>
+
+        <if test="finished != '' and finished == '임대종료'">
+            AND A.rent_finished = 1
+        </if>
+    </sql>
+
+
+</mapper>

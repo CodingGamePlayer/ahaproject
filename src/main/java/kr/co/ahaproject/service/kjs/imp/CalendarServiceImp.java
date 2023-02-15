@@ -4,7 +4,7 @@ import kr.co.ahaproject.dto.CalendarDTO;
 import kr.co.ahaproject.dto.CountMachRentDTO;
 import kr.co.ahaproject.dto.MachRentListDTO;
 import kr.co.ahaproject.service.kjs.CalendarService;
-import kr.co.ahaproject.service.kjs.MachRentService;
+import kr.co.ahaproject.service.moo.MachRentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

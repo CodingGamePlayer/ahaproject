@@ -5,8 +5,8 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{layout/default-template.html}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
 </head>
 <body>
 <!-- default_layout.html 고유 CSS 추가 -->
@@ -29,6 +29,32 @@
                             <p class="text-sm">자재 사용 내역보기</p>
                         </div>
                         <div class="ms-auto d-flex">
+                            <form class="row g-3" action="/user/worksite/use-material/list" method="get">
+                                <div class="col-auto">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="finished"
+                                            name="finished">
+                                        <option value="" selected>사용여부</option>
+                                        <option value="사용">사용</option>
+                                        <option value="미사용">미사용</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="category"
+                                            name="type">
+                                        <option value="mt_code">자재코드 검색</option>
+                                        <option value="cst_code">공사코드 검색</option>
+                                        <option value="um_where">사용처 검색</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="keyword" class="visually-hidden">search</label>
+                                    <input type="text" class="form-control" name="keyword" id="keyword"
+                                           placeholder="Search">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">검색</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -37,26 +63,27 @@
                         <table class="table align-items-center mb-0">
                             <thead class="bg-gray-100">
                             <tr>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7">번호</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7"
+                                    style="width: 50px;">번호
+                                </th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사코드</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">자재코드</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">사용처</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">사용량</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">등록여부</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <th:block th:each="data : ${listData}">
+                            <th:block th:each="data : ${listData.dtoList}">
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex align-items-center">
 
                                             </div>
-                                            <div class="d-flex flex-column justify-content-center ms-1">
-                                                <span class="text-secondary text-sm font-weight-normal"
-                                                      th:text="${data.um_id}"></span>
+                                            <div class="d-flex flex-column justify-content-center text-center ms-1">
+                                                <span class="text-center text-secondary text-sm font-weight-normal ps-2"
+                                                      th:text="${data.um_id}"/>
                                             </div>
                                         </div>
                                     </td>
@@ -76,35 +103,60 @@
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${data.um_amount}"></span>
                                     </td>
-                                    
-                                    <th:block th:switch="${data.um_regit}">
-                                        <td class="align-middle text-center">
-                                            <span class="badge badge-sm border border-danger text-danger bg-danger"
-                                                  th:case="false">미사용</span>
-                                            <span class="badge badge-sm border border-success text-success bg-success"
-                                                  th:case="true">사용</span>
-                                        </td>
-                                    </th:block>
-                                    
+
                                     <!-- <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${data.um_regit}"></span>
                                     </td> -->
 
                                     <td class="align-middle">
-                                        <a href="#" th:onclick="useEditMaterial([[${data.um_id}]])">
-                                            <svg width="14" height="14" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M11.2201 2.02495C10.8292 1.63482 10.196 1.63545 9.80585 2.02636C9.41572 2.41727 9.41635 3.05044 9.80726 3.44057L11.2201 2.02495ZM12.5572 6.18502C12.9481 6.57516 13.5813 6.57453 13.9714 6.18362C14.3615 5.79271 14.3609 5.15954 13.97 4.7694L12.5572 6.18502ZM11.6803 1.56839L12.3867 2.2762L12.3867 2.27619L11.6803 1.56839ZM14.4302 4.31284L15.1367 5.02065L15.1367 5.02064L14.4302 4.31284ZM3.72198 15V16C3.98686 16 4.24091 15.8949 4.42839 15.7078L3.72198 15ZM0.999756 15H-0.000244141C-0.000244141 15.5523 0.447471 16 0.999756 16L0.999756 15ZM0.999756 12.2279L0.293346 11.5201C0.105383 11.7077 -0.000244141 11.9624 -0.000244141 12.2279H0.999756ZM9.80726 3.44057L12.5572 6.18502L13.97 4.7694L11.2201 2.02495L9.80726 3.44057ZM12.3867 2.27619C12.7557 1.90794 13.3549 1.90794 13.7238 2.27619L15.1367 0.860593C13.9869 -0.286864 12.1236 -0.286864 10.9739 0.860593L12.3867 2.27619ZM13.7238 2.27619C14.0917 2.64337 14.0917 3.23787 13.7238 3.60504L15.1367 5.02064C16.2875 3.8721 16.2875 2.00913 15.1367 0.860593L13.7238 2.27619ZM13.7238 3.60504L3.01557 14.2922L4.42839 15.7078L15.1367 5.02065L13.7238 3.60504ZM3.72198 14H0.999756V16H3.72198V14ZM1.99976 15V12.2279H-0.000244141V15H1.99976ZM1.70617 12.9357L12.3867 2.2762L10.9739 0.86059L0.293346 11.5201L1.70617 12.9357Z" fill="#64748B" />
+                                        <a href="#" th:onclick="deleteData([[${data.um_id}]], [[${data.mt_code}]])">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                             </svg>
                                         </a>
                                     </td>
                                     <script>
-										function useEditMaterial(id){
-										    let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
-										   // window.open("/admin/misu-edit?misu_id=" + id, "_blank", option);
-										    window.open("/user/worksite/use-material/detail?um_id=" + id, "_blank", option);
-										}
-									</script>
+                                        
+
+
+                                        function deleteData(id, code) {
+                                            console.log(id)
+                                            console.log(code)
+
+                                            if(window.confirm('삭제 하시겠습니까?')){
+
+                                                let input_um_id = id;
+                                                let input_mt_code = code;
+
+                                                const material2 = {
+                                                    um_id : input_um_id,
+                                                    mt_code : input_mt_code
+                                                };
+
+                                                const url = "/api/user/worksite/useMaterial";
+
+                                                fetch(url, {
+                                                    method : "DELETE",
+                                                    body : JSON.stringify(material2),
+                                                    headers : {
+                                                        "Content-Type" : "application/json"
+                                                    }
+                                                }).then(response => {
+                                                    if(response.ok){
+                                                        response.text();
+                                                        alert('삭제가 완료되었습니다.');
+                                                        window.location.reload();
+
+                                                    } else {
+                                                        alert('삭제를 실패하였습니다.');
+                                                    }
+                                                });
+                                            }
+
+                                        }
+
+                                    </script>
                                 </tr>
                             </th:block>
                             </tbody>
@@ -117,10 +169,48 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4"></div>
 
+        <div class="col-sm-4 d-flex justify-content-center">
+            <th:block
+                    th:with="start=${listData.start}, end=${listData.end}, keyword =${param.keyword}, type = ${param.type}">
+                <ul class="pagination">
+                    <li th:if="${start} == '1'" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/user/worksite/use-material/list(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◁</a>
+                    </li>
+                    <li th:if="${start} > '1'" class="page-item ">
+                        <a class="page-link"
+                           th:href="@{/user/worksite/use-material/list(page = ${start} -10, keyword = ${keyword}, type = ${type})}">◀</a>
+
+                    </li>
+
+                    <th:block th:each="num : ${#numbers.sequence(start,end)}">
+                        <li class="page-item" th:if="${num} != ${listData.page}">
+
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/user/worksite/use-material/list(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                        <li class="page-item active " th:if="${num} == ${listData.page}">
+                            <a class="page-link text-info" th:text="${num}"
+                               th:href="@{/user/worksite/use-material/list(page = ${num}, keyword = ${keyword}, type = ${type})}"></a>
+                        </li>
+                    </th:block>
+
+                    <li th:if="${end} >= ${listData.total} / 10" class="page-item disabled">
+                        <a class="page-link"
+                           th:href="@{/user/worksite/use-material/list(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▷</a>
+                    </li>
+                    <li th:if="${end} < ${listData.total} / 10" class="page-item">
+                        <a class="page-link"
+                           th:href="@{/user/worksite/use-material/list(page = ${end} +1, keyword = ${keyword}, type = ${type})}">▶</a>
+                    </li>
+                </ul>
+            </th:block>
+        </div>
+        <div class="col-md-3"></div>
     </div>
 </div>
-
 
 
 </body>

@@ -2,7 +2,7 @@ package kr.co.ahaproject.apicontroller.kjs.imp;
 import io.swagger.annotations.ApiOperation;
 import kr.co.ahaproject.apicontroller.kjs.MachineApiController;
 import kr.co.ahaproject.dto.MachineDTO;
-import kr.co.ahaproject.service.kjs.MachineService;
+import kr.co.ahaproject.service.moo.MachineService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

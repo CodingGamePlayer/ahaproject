@@ -83,7 +83,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*매입 내용</label>
-                    <input class="form-control" type="text" id="io_content">
+                    <input class="form-control" type="text" id="in_content">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -109,8 +109,8 @@
         const input_cp_name = document.querySelector('#cp_name').value;
         const input_cl_code = document.querySelector('#cl_code').value;
         const input_cst_code = document.querySelector('#cst_code').value;
-        const input_io_date = document.querySelector('#datetimepicker1Input').value;
-        const input_io_content = document.querySelector('#io_content').value;
+        const input_in_date = document.querySelector('#datetimepicker1Input').value;
+        const input_in_content = document.querySelector('#in_content').value;
         const input_in_supp_value = document.querySelector('#in_supp_value').value;
         const input_in_collect_value = document.querySelector('#in_collect_value').value;
 
@@ -118,15 +118,15 @@
             cp_name : input_cp_name,
             cl_code : input_cl_code,
             cst_code : input_cst_code,
-            io_date : input_io_date,
-            io_content : input_io_content,
+            in_date : input_in_date,
+            in_content : input_in_content,
             in_supp_value : input_in_supp_value,
             in_collect_value : input_in_collect_value
         };
 
         if(input_cl_code == "" || input_cst_code == "" ||
-            input_cp_name == "" || input_io_date == "" ||
-            input_io_content == "" || input_in_supp_value == "" ||
+            input_cp_name == "" || input_in_date == "" ||
+            input_in_content == "" || input_in_supp_value == "" ||
             input_in_collect_value == ""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
@@ -147,6 +147,7 @@
                 response.text();
                 alert('등록이 완료되었습니다.');
                 window.location.reload();
+                opener.location.reload();
             } else {
                 alert('등록을 실패하였습니다.');
             }

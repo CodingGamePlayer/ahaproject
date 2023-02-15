@@ -3,7 +3,7 @@ package kr.co.ahaproject.apicontroller.kjs.imp;
 import io.swagger.annotations.ApiOperation;
 import kr.co.ahaproject.apicontroller.kjs.MachRentApiController;
 import kr.co.ahaproject.dto.MachRentDTO;
-import kr.co.ahaproject.service.kjs.MachRentService;
+import kr.co.ahaproject.service.moo.MachRentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

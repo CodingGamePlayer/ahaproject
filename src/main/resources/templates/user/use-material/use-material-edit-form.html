@@ -163,7 +163,7 @@
 	         if(response.ok){
 	             response.text();
 	             alert('삭제가 완료되었습니다.');
-	             window.open('','_self').close();
+	             window.location.reload();
 	             
 	         } else {
 	             alert('삭제를 실패하였습니다.');

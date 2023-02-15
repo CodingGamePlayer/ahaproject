@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.moo.MachineMapper">
+
+    <resultMap id="MachineMap" type="Machine">
+        <result property="m_id" column="m_id"/>
+        <result property="m_code" column="m_code"/>
+        <result property="m_name" column="m_name"/>
+        <result property="m_equip_num" column="m_equip_num"/>
+        <result property="m_type" column="m_type"/>
+        <result property="m_kind" column="m_kind"/>
+        <result property="m_price" column="m_price"/>
+        <result property="m_tax" column="m_tax"/>
+        <result property="m_date" column="m_date"/>
+        <result property="m_use" column="m_use"/>
+        <result property="m_uuid" column="m_uuid"/>
+        <result property="m_filename" column="m_filename"/>
+        <result property="m_etc1" column="m_etc1"/>
+        <result property="m_etc2" column="m_etc2"/>
+        <result property="m_etc3" column="m_etc3"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="MachineMap">
+        SELECT * FROM machine
+        <include refid="search"/>
+        ORDER BY m_id DESC
+        LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(m_id)
+        FROM machine
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'm_code'.toString()">
+                m_code LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="case1"/>
+                <include refid="case2"/>
+                <include refid="case3"/>
+            </if>
+            <if test="keyword != null and type == 'm_name'.toString()">
+                m_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="case1"/>
+                <include refid="case2"/>
+                <include refid="case3"/>
+            </if>
+            <if test="keyword != null and type == 'm_equip_num'.toString()">
+                m_equip_num LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="case1"/>
+                <include refid="case2"/>
+                <include refid="case3"/>
+            </if>
+        </where>
+    </sql>
+
+    <sql id="case1">
+        <if test="finished != '' and finished == '사용중'">
+            AND m_use = 1
+        </if>
+
+        <if test="finished != '' and finished == '미사용중'">
+            AND m_use = 0
+        </if>
+    </sql>
+
+    <sql id="case2">
+        <if test="jangbiType != '' and jangbiType == '타사'">
+            AND m_type = "타사"
+        </if>
+        <if test="jangbiType != '' and jangbiType == '자사'">
+            AND m_type = "자사"
+        </if>
+    </sql>
+
+    <sql id="case3">
+        <if test="kind != '' and kind == '포장'">
+            AND m_kind = '포장'
+        </if>
+        <if test="kind != '' and kind == '장비'">
+            AND m_kind = '장비'
+        </if>
+    </sql>
+
+
+
+</mapper>
