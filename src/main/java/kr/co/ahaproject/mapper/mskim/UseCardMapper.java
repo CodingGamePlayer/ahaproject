@@ -57,19 +57,7 @@ public interface UseCardMapper {
 	//카드 사용내역 삭제
 	@Delete("delete from use_card where uc_id = #{uc.uc_id}")
 	int delete(@Param("uc") UseCard uc);
-
-	@Results(id="UseCardJoinMap", value = {
-			@Result(property = "uc_id", column = "uc_id"),
-			@Result(property = "uc_money", column = "uc_money"),
-			@Result(property = "uc_where", column = "uc_where"),
-			@Result(property = "uc_date", column = "uc_date"),
-			@Result(property = "uc_etc", column = "uc_etc"),
-			@Result(property = "card_id", column = "card_id"),
-			@Result(property = "card_name", column = "card_name"),
-			@Result(property = "card_class", column = "card_class"),
-			@Result(property = "card_type", column = "card_type"),
-			@Result(property = "card_endnum", column = "card_endnum")
-	})
+  
     List<UseCardJoinDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 
 	int getCount(PageRequestDTO pageRequestDTO);

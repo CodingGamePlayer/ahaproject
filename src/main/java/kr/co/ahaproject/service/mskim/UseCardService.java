@@ -22,6 +22,4 @@ public interface UseCardService {
     UseCardJoinDTO getFindUcId(int uc_id);
 
     PageResponseDTO<UseCardJoinDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
-
-
 }
