@@ -19,44 +19,98 @@
     </resultMap>
 
     <select id="selectAllForPaging" resultMap="OutcomeMap">
-        SELECT `a`.`out_id`, `a`.`cp_name`, `a`.`out_date`, `a`.`out_content`, `a`.`out_supp_value`, `a`.`out_total_value`,
-        `a`.`out_collect_value`, `a`.`out_collect_remain`, `b`.`cp_name` AS `cl_code`, `c`.`cst_name` AS `cst_code`
-        FROM (SELECT `out_id`, `cp_name`, `cl_code`, `cst_code`, `out_date`, `out_content`, `out_supp_value`,
-            sum(`out_supp_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`) AS `out_total_value`
-            , `out_collect_value`,
-            sum(`out_supp_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`)
-            - sum(`out_collect_value`) OVER(PARTITION BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`) AS `out_collect_remain`
-            FROM `ahaproject`.`outcome` ORDER BY `cp_name`, `cl_code`, `cst_code`) AS `a`
+        SELECT  `a`.`out_id`,
+                `a`.`cp_name`,
+                `a`.`out_date`,
+                `a`.`out_content`,
+                `a`.`out_supp_value`,
+                `a`.`out_total_value`,
+                `a`.`out_collect_value`,
+                `a`.`out_collect_remain`,
+                `b`.`cp_name`  AS `cl_code`,
+                `c`.`cst_name` AS `cst_code`
+        FROM (
+        SELECT  `out_id`,
+                `cp_name`,
+                `cl_code`,
+                `cst_code`,
+                `out_date`,
+                `out_content`,
+                `out_supp_value`,
+        Sum(`out_supp_value`) over(partition BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`)
+            AS `out_total_value`,
+        `out_collect_value`,
+        sum(`out_supp_value`) over(partition BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`)
+        - sum(`out_collect_value`) over(partition BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`)
+            AS `out_collect_remain`
+        FROM     `ahaproject`.`outcome`
+        ORDER BY `cp_name`, `cl_code`, `cst_code`) AS `a`
         LEFT OUTER JOIN `client` AS `b`
-        ON `a`.`cl_code` = `b`.`cl_code`
+        ON              `a`.`cl_code` = `b`.`cl_code`
         LEFT OUTER JOIN `construction` AS `c`
-        ON `a`.`cst_code` = `c`.`cst_code`
+        ON              `a`.`cst_code` = `c`.`cst_code`
         <include refid="search"/>
-        ORDER BY out_id DESC
         LIMIT #{skip}, #{size}
 
     </select>
 
     <select id="getCount" resultType="int">
-        SELECT COUNT(out_id)
-        FROM outcome
-        <include refid="search"/>
+        SELECT Count(`d`.`out_id`)
+        FROM   (
+        SELECT          `a`.`out_id`,
+        `a`.`cp_name`,
+        `a`.`out_date`,
+        `a`.`out_content`,
+        `a`.`out_supp_value`,
+        `a`.`out_total_value`,
+        `a`.`out_collect_value`,
+        `a`.`out_collect_remain`,
+        `b`.`cp_name`  AS `cl_code`,
+        `c`.`cst_name` AS `cst_code`
+        FROM            (
+        SELECT   `out_id`,
+        `cp_name`,
+        `cl_code`,
+        `cst_code`,
+        `out_date`,
+        `out_content`,
+        `out_supp_value`,
+        Sum(`out_supp_value`) over(partition BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`)
+            AS `out_total_value` ,
+        `out_collect_value`,
+        sum(`out_supp_value`) over(partition BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`)
+        - sum(`out_collect_value`) over(partition BY `cst_code`, `cl_code`, `cp_name` ORDER BY `out_id`)
+            AS `out_collect_remain`
+        FROM     `ahaproject`.`outcome`
+        ORDER BY `cp_name`,
+        `cl_code`,
+        `cst_code`) AS `a`
+        LEFT OUTER JOIN `client`                      AS `b`
+        ON              `a`.`cl_code` = `b`.`cl_code`
+        LEFT OUTER JOIN `construction` AS `c`
+        ON              `a`.`cst_code` = `c`.`cst_code`
+        <include refid="search"/> ) AS `d`
     </select>
 
     <sql id="search">
         <where>
             <if test="keyword != null and type == 'cp_name'.toString()">
-                cp_name LIKE CONCAT('%', #{keyword}, '%')
+                `a`.`cp_name` LIKE CONCAT('%', #{keyword}, '%')
                 <include refid="switch"/>
 
             </if>
             <if test="keyword != null and type == 'cl_code'.toString()">
-                b.cp_name LIKE CONCAT('%', #{keyword}, '%')
+                `b`.`cp_name` LIKE CONCAT('%', #{keyword}, '%')
                 <include refid="switch"/>
 
             </if>
             <if test="keyword != null and type == 'cst_code'.toString()">
-                c.cst_name LIKE CONCAT('%', #{keyword}, '%')
+                `c`.`cst_name` LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+
+            </if>
+            <if test="keyword != null and type == 'out_content'.toString()">
+                `a`.`out_content` LIKE CONCAT('%', #{keyword}, '%')
                 <include refid="switch"/>
 
             </if>
@@ -66,11 +120,11 @@
 
     <sql id="switch">
         <if test="finished != '' and finished == '완료'">
-            AND cst_finised = 1
+            AND `a`.`out_collect_remain` = 0
         </if>
 
-        <if test="finished != '' and finished == '미완'">
-            AND cst_finised = 0
+        <if test="finished != '' and finished == '미완료'">
+            AND `a`.`out_collect_remain` != 0
         </if>
     </sql>
 
