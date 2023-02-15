@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/user/worksite/construction")
 public class ConstructionControllerImpl implements ConstructionController {
-
+//1
 	@Autowired
 	private ConstructionService constructionService;
 	

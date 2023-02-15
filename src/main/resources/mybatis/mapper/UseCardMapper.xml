@@ -28,6 +28,7 @@
     </select>
 
     <select id="getCount" resultType="int">
+
         SELECT count(card.card_id)
         FROM use_card
         LEFT JOIN card ON use_card.card_id = card.card_id
