@@ -28,7 +28,8 @@
     </select>
 
     <select id="getCount" resultType="int">
-        SELECT use_card.*, card.card_name, card.card_class, card.card_type, card.card_endnum
+
+        SELECT count(card.card_id)
         FROM use_card
         LEFT JOIN card ON use_card.card_id = card.card_id
         <include refid="search"/>
@@ -38,17 +39,31 @@
         <where>
             <if test="keyword != null and type == 'card_name'.toString()">
                 card_name LIKE CONCAT('%', #{keyword}, '%')
+
             </if>
-            <if test="keyword != null and type == 'card_type'.toString()">
-                card_type LIKE CONCAT('%', #{keyword}, '%')
+            <if test="keyword != null and type == 'card_class'.toString()">
+                card_class LIKE CONCAT('%', #{keyword}, '%')
+
             </if>
-            <if test="keyword != null and type == 'card_num'.toString()">
-                card_num LIKE CONCAT('%', #{keyword}, '%')
-            </if>
-            <if test="keyword != null and type == 'card_company'.toString()">
-                card_company LIKE CONCAT('%', #{keyword}, '%')
+            <if test="keyword != null and type == 'uc_where'.toString()">
+                uc_where LIKE CONCAT('%', #{keyword}, '%')
+
             </if>
         </where>
     </sql>
+
+    <!-- 회계 처리여부를 위해 만들어둔 옵션 / 현재 날짜 기준 검색 옵션
+    <sql id="switch">
+
+        <if test="finished != '' and finished == '이전'">
+            AND current_date() > uc_date
+        </if>
+
+        <if test="finished != '' and finished == '이후'">
+            AND uc_date >= current_date()
+        </if>
+
+    </sql>
+    -->
 
 </mapper>

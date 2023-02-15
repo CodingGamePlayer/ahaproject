@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/user/worksite/construction")
 public class ConstructionControllerImpl implements ConstructionController {
-
+//1
 	@Autowired
 	private ConstructionService constructionService;
 	
@@ -30,7 +30,7 @@ public class ConstructionControllerImpl implements ConstructionController {
 
 		mav.addObject("constructionDTOs", pageResponseDTO);
 		mav.setViewName("user/construction/construction-list");
-		
+
 		return mav;
 	}
 

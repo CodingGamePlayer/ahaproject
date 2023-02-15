@@ -26,7 +26,10 @@ public interface UseCardMapper {
 			@Result(property = "card_endnum", column = "card_endnum")
 	})
 	List<UseCardJoinDTO> selectAll();
-	
+
+
+
+
 	//카드별 사용 내역 조회
 	@Select("select use_card.*, card.card_name, card.card_class, card.card_type, card.card_endnum "+
 			"from use_card left join card on use_card.card_id = card.card_id "+
@@ -54,8 +57,7 @@ public interface UseCardMapper {
 	//카드 사용내역 삭제
 	@Delete("delete from use_card where uc_id = #{uc.uc_id}")
 	int delete(@Param("uc") UseCard uc);
-
-
+  
     List<UseCardJoinDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 
 	int getCount(PageRequestDTO pageRequestDTO);

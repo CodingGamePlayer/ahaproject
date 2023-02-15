@@ -1,12 +1,15 @@
 package kr.co.ahaproject.controller.mskim;
 
+import kr.co.ahaproject.dto.PageRequestDTO;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.ahaproject.dto.UseCardDTO;
 
 public interface UseCardController {
 	
-	ModelAndView selectAll(ModelAndView mav);
+	String selectAll(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model);
 	
 	ModelAndView selectOne(ModelAndView mav, int card_id);
 	
