@@ -13,5 +13,5 @@ public class ReplyDTO {
     int rp_id;
     int b_id;
     String rp_body;
-    int us_id;
+    int ac_id;
 }
