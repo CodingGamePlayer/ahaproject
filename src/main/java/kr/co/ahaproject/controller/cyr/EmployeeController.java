@@ -18,7 +18,7 @@ public interface EmployeeController {
 
     ResponseEntity delete(Employee employee);
 
-    void emEditForm(Employee employee, Model model);
+    String emEditForm(Employee employee, Model model);
 
     ResponseEntity register(EmployeeDTO employeeDTO);
 

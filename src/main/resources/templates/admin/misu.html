@@ -18,97 +18,6 @@
 </style>
 <!-- Content -->
 <div layout:fragment="content">
-    <div class="row">
-        <div class="col-sm-12 pe-3">
-            <div class="card border shadow-xs mb-4">
-                <div class="card-header border-bottom pb-0">
-                    <div class="d-sm-flex align-items-center">
-                        <div>
-                            <h6 class="font-weight-semibold text-lg mb-0">미수금 현황</h6>
-                            <p class="text-sm">미수별 현황 전체보기</p>
-                        </div>
-                        <div class="ms-auto d-flex">
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body px-0 py-0">
-                    <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
-                        <table class="table align-items-center mb-0">
-                            <thead class="bg-gray-100">
-                            <tr>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7">구분</th>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">회사명</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공사코드
-                                </th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">거래처명</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">담당자</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">미수금</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">미수금잔액</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금액</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금일</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금완료여부
-                                </th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">비고</th>
-                                <th class="text-secondary opacity-7"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <th:block th:each="misuDTO : ${misuDTOs}">
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex align-items-center">
-
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center ms-1">
-                                                <span class="text-secondary text-sm font-weight-normal"
-                                                      th:text="${misuDTO.misu_name}"/>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.cp_name}"/>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.cst_code}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_name}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_manager}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_value}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_total_value}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_collect_value}"/>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_collect_value}"/>
-                                    </td>
-                                    <th:block th:switch="${misuDTO.misu_finished}">
-                                        <td class="align-middle text-center">
-                                            <span class="badge badge-sm border border-danger text-danger bg-danger"
-                                                  th:case="false">수금미완</span>
-                                            <span class="badge badge-sm border border-success text-success bg-success"
-                                                  th:case="true">수금완료</span>
-
-                                        </td>
-                                    </th:block>
 
     <div class="row">
         <div class="col-sm-12 pe-3">
@@ -187,7 +96,7 @@
                                         <td class="d-flex justify-content-center">
                                             <a href="#" th:onclick="showImage([[${misuDTO.misu_id}]])">
                                                 <img class="rounded-2" style="width: 200px; height: 100px;"
-                                                     th:src="|/user/view/s_${misuDTO.misu_uuid}_${misuDTO.misu_filename}|">
+                                                     th:src="|/user/view/s_${misuDTO.misu_uuid}_${misuDTO.misu_filename}|"  onerror="this.onerror=null; this.src='https://via.placeholder.com/200x100';">
                                             </a>
                                         </td>
                                     </th:block>
@@ -280,6 +189,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-4"></div>
 
         <div class="col-sm-4 d-flex justify-content-center">
@@ -320,7 +230,7 @@
             </th:block>
         </div>
         <div class="col-md-3"></div>
-    </div>
+
 
 </div>
 </div>

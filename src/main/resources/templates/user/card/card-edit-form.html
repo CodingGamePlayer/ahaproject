@@ -79,7 +79,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*카드 끝번호(4자리)</label>
-                    <input class="form-control" type="t`ext" id="card_endnum" th:value="${cardDTO.card_endnum}">
+                    <input class="form-control" type="number" id="card_endnum" th:value="${cardDTO.card_endnum}">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -190,6 +190,7 @@
                alert('수정이 완료되었습니다.');
                window.location.reload();
                opener.location.reload();
+               window.close();
            } else {
                alert('수정을 실패하였습니다.');
            }
