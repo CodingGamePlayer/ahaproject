@@ -27,10 +27,12 @@ public class MisuServiceImp implements MisuService {
     @Override
     public int register(MisuDTO misuDTO) {
 
-        String after = new AhaCommonMethod().changeDate(misuDTO.getMisu_collect_date());
-
-        misuDTO.setMisu_collect_date(after);
-
+        if(misuDTO.getMisu_collect_date() == null || misuDTO.getMisu_collect_date().isEmpty()) {
+            misuDTO.setMisu_collect_date("");
+        }else{
+            String after = new AhaCommonMethod().changeDate(misuDTO.getMisu_collect_date());
+            misuDTO.setMisu_collect_date(after);
+        }
         int result = misuMapper.register(modelMapper.map(misuDTO, Misu.class));
 
         if (!(result > 0)) {
