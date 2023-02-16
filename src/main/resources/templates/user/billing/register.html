@@ -62,14 +62,14 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*작업일</label>
-                    <input class="form-control" type="text" id="bl_work_date" required>
+                    <input class="form-control" type="text" id="bl_work_date" placeholder="작업일을 입력하세요" required>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*발행일</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='bl_pub_date' type='text' class='form-control' data-td-target='#datetimepicker1' required />
+                        <input id='bl_pub_date' type='text' class='form-control' data-td-target='#datetimepicker1' placeholder="발행일을 입력하세요" required />
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
@@ -80,7 +80,7 @@
                 <div class="form-group">
                     <label class="form-control-label">*수금일</label>
                     <div class='input-group' id='datetimepicker2' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='bl_collect_date' type='text' class='form-control' data-td-target='#datetimepicker1' required />
+                        <input id='bl_collect_date' type='text' class='form-control' data-td-target='#datetimepicker1' placeholder="수금일을 입력하세요" required />
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
@@ -90,25 +90,25 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*공급가액</label>
-                    <input class="form-control" type="number" id="bl_supp_value" required>
+                    <input class="form-control" type="number" id="bl_supp_value" placeholder="공급가액을 입력하세요" required>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*세액</label>
-                    <input class="form-control" type="number" id="bl_tax" required>
+                    <input class="form-control" type="number" id="bl_tax" placeholder="세액을 입력하세요" required>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*합계 금액</label>
-                    <input class="form-control" type="number" id="bl_total_value" required>
+                    <input class="form-control" type="number" id="bl_total_value" placeholder="합계 금액을 입력하세요" required>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*차액</label>
-                    <input class="form-control" type="number" id="bl_difference" required>
+                    <input class="form-control" type="number" id="bl_difference" placeholder="차액을 입력하세요" required>
                 </div>
             </div>
             <input type="button" class="btn btn-primary" id="billingSubmitBtn" value="등록하기" />

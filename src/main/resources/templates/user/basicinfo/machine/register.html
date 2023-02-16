@@ -48,13 +48,13 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*장비명</label>
-                    <input class="form-control" type="text" id="m_name">
+                    <input class="form-control" type="text" id="m_name" placeholder="장비명을 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*규격(제품번호)</label>
-                    <input class="form-control" type="text" id="m_equip_num">
+                    <input class="form-control" type="text" id="m_equip_num" placeholder="규격(제품번호)를 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -78,20 +78,20 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*매입액</label>
-                    <input class="form-control" type="text" id="m_price" onkeyup="calculateTax()">
+                    <input class="form-control" type="text" id="m_price" onkeyup="calculateTax()" placeholder="매입액을 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*세액</label>
-                    <input class="form-control" type="text" id="m_tax"/>
+                    <input class="form-control" type="text" id="m_tax" placeholder="세액을 입력하세요"/>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*매입일자</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
+                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' placeholder="매입일자를 입력하세요"/>
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
@@ -110,19 +110,19 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고1</label>
-                    <input class="form-control" type="text" id="m_etc1">
+                    <input class="form-control" type="text" id="m_etc1" placeholder="비고사항을 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고2</label>
-                    <input class="form-control" type="text" id="m_etc2">
+                    <input class="form-control" type="text" id="m_etc2" placeholder="비고사항을 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고3</label>
-                    <input class="form-control" type="text" id="m_etc3">
+                    <input class="form-control" type="text" id="m_etc3" placeholder="비고사항을 입력하세요">
                 </div>
             </div>
             <!--            파일첨부를 위한 기능 추가 start-->
@@ -161,7 +161,7 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label for="formFile" class="form-label">첨부파일을 선택하세요.</label>
+                    <label for="formFile" class="form-label">첨부파일을 선택하세요</label>
                     <input class="form-control" type="file" id="formFile" name="files">
                 </div>
             </div>
