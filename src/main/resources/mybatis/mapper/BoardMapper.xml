@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.jyh.Boardmapper">
+
+    <resultMap id="BoardListMap" type="BoardListDTO">
+        <result property="b_id" column="b_id"/>
+        <result property="c_id" column="c_id"/>
+        <result property="ct_name" column="ct_name"/>
+        <result property="b_title" column="b_title"/>
+        <result property="b_body" column="b_body"/>
+        <result property="ac_id" column="ac_id"/>
+        <result property="ac_username" column="ac_username"/>
+        <result property="ac_person_name" column="ac_person_name"/>
+        <result property="b_regit_date" column="b_regit_date"/>
+        <result property="b_modi_date" column="b_modi_date"/>
+        <result property="b_uuid" column="b_uuid"/>
+        <result property="b_filename" column="b_filename"/>
+    </resultMap>
+
+    <select id="selectAllForPaging" resultMap="BoardListMap">
+        SELECT
+            B.b_id,
+            C.ct_id,
+            C.ct_name,
+            B.b_title,
+            B.b_body,
+            A.ac_id,
+            A.ac_username,
+            A.ac_person_name,
+            B.b_regit_date,
+            B.b_modi_date,
+            B.b_uuid,
+            B.b_filename
+        FROM board B
+            Join account A ON B.ac_id = A.ac_id
+            JOIN category C ON B.ct_id = C.ct_id
+        <include refid="search"/>
+        ORDER BY b_id DESC
+        LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT
+            COUNT(b_id)
+        FROM board B
+            Join account A ON B.ac_id = A.ac_id
+            JOIN category C ON B.ct_id = C.ct_id
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null and type == 'b_title'.toString()">
+                b_title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and type == 'b_body'.toString()">
+                b_body LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+    </sql>
+
+</mapper>
