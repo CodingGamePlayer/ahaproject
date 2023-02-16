@@ -22,7 +22,7 @@ public class BillingApiControllerImpl implements BillingApiController {
     private BillingService billingService;
 
     @Override
-    @ApiOperation(value="견적서 POST", notes="fetch를 이용하여 POST방식으로 견적서 정보 등록" )
+    @ApiOperation(value="계산서 POST", notes="fetch를 이용하여 POST방식으로 계산서 정보 등록" )
     @PostMapping(value="/billingInfo", consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BillingDTO> register(@RequestBody BillingDTO billingDTO) {
 
@@ -30,7 +30,7 @@ public class BillingApiControllerImpl implements BillingApiController {
     }
 
     @Override
-    @ApiOperation(value="견적서 PUT", notes="fetch를 이용하여 PUT방식으로 견적서 정보 수정")
+    @ApiOperation(value="계산서 PUT", notes="fetch를 이용하여 PUT방식으로 계산서 정보 수정")
     @PutMapping(value="/billingInfo", consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BillingDTO> update(@RequestBody BillingDTO billingDTO) {
 
@@ -38,7 +38,7 @@ public class BillingApiControllerImpl implements BillingApiController {
     }
 
     @Override
-    @ApiOperation(value="견적서 DELETE", notes="fetch를 이용하여 DELETE 방식으로 견적서 정보 삭제")
+    @ApiOperation(value="계산서 DELETE", notes="fetch를 이용하여 DELETE 방식으로 계산서 정보 삭제")
     @DeleteMapping(value="/billingInfo", consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BillingDTO> delete(@RequestBody BillingDTO billingDTO) {
 
