@@ -32,17 +32,17 @@ public class CardApiControllerImpl implements CardApiController {
 		
 		String after = new AhaCommonMethod().changeDate(cardDTO.getCard_exp_date());
 		cardDTO.setCard_exp_date(after);
-		
+
 		if(cardDTO==null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
-		
+
 		int result = cardService.register(cardDTO);
-		
+
 		if(result == 0) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
-		
+
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 

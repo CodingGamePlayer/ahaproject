@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BillingDTO {
+public class BillingResponseDTO {
 
     Long bl_id;
     String bl_work_date;
@@ -21,4 +21,7 @@ public class BillingDTO {
     Long bl_total_value;
     String bl_collect_date;
     Long bl_difference;
+    String cp_name;
+    String cl_code;
+    String cst_name;
 }
