@@ -37,7 +37,9 @@
                     <div><hr></div>
                     <div><a th:href="@{/user/basicinfo/card/card-list}" class="text-white text-sm">- 카드정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitCard()">- 카드정보 입력</a></div>
-
+                    <div><hr></div>
+                    <div><a th:href="@{/user/basicinfo/billing/list}" class="text-white text-sm">- 계산서 정보 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitBilling()">- 계산서 정보 입력</a></div>
                 </div>
                 <button class="btn btn-sm mt-3 text-start mb-2 btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#worksite" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace me-1" viewBox="0 0 16 16">
@@ -209,6 +211,13 @@
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                 window.open("/user/basicinfo/card/card-form", "_blank", option);
+            }
+
+            // 견적서 정보 입력
+            function regitBilling(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/basicinfo/billing/register", "_blank", option);
             }
 
             //매입,매출 등록

@@ -10,7 +10,7 @@
         <result property="cp_name" column="cp_name"/>
         <result property="cp_num" column="cp_num"/>
         <result property="cp_address" column="cp_address"/>
-        <result property="cp_tel" column="cp_tel"/>
+        <result property="cl_tel" column="cl_tel"/>
         <result property="cl_code" column="cl_code"/>
         <result property="cl_email" column="cl_email"/>
         <result property="cl_account" column="cl_account"/>
