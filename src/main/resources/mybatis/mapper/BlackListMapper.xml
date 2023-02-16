@@ -5,20 +5,38 @@
 
 <mapper namespace="kr.co.ahaproject.mapper.kjs.BlackListMapper">
 
-    <resultMap id="BlackListMap" type="BlackListDTO">
-        <result property="" column=""/>
-        <result property="" column=""/>
-        <result property="" column=""/>
-        <result property="" column=""/>
-        <result property="" column=""/>
-        <result property="" column=""/>
-        <result property="" column=""/>
-        <result property="" column=""/>
-        <result property="" column=""/>
-        <result property="" column=""/>
+    <resultMap id="BlackListDTOMap" type="BlackListDTO">
+        <result property="cp_name" column="cp_name"/>
+        <result property="cp_num" column="cp_num"/>
+        <result property="cl_tel" column="cl_tel"/>
+        <result property="cl_email" column="cl_email"/>
+        <result property="black_total_misu" column="black_total_misu"/>
+        <result property="black_etc" column="black_etc"/>
     </resultMap>
 
-    <select id="selectAllForPaging" resultMap="MisuMap">
+    <insert id="insert">
+        INSERT INTO blacklist(cp_name, cp_num, cl_code, black_total_misu, black_etc)
+        VALUES (#{cp_name},#{cp_num},#{cl_code},#{black_total_misu},#{black_etc})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM blacklist
+        WHERE black_id = #{black_id}
+    </delete>
+
+    <update id="update">
+        UPDATE blacklist
+        SET
+            cp_name = #{cp_name},
+            cp_num = #{cp_num},
+            cl_code = #{cl_code},
+            black_total_misu = #{black_total_misu},
+            black_etc = #{black_etc}
+        WHERE
+            black_id = #{black_id}
+    </update>
+
+    <select id="selectAllForPaging" resultMap="BlackListDTOMap">
         SELECT * FROM misu
         <include refid="search"/>
         ORDER BY misu_id DESC
