@@ -9,15 +9,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardDTO {
+public class ReplyListDTO {
 
+    int rp_id;
     int b_id;
-    int ct_id;
     int ac_id;
-    String b_title;
-    String b_body;
-    String b_filename;
-    String b_uuid;
-    String b_regit_date;
-    String b_modi_date;
+    String rp_body;
+    String ac_username;
+    String ac_person_name;
 }

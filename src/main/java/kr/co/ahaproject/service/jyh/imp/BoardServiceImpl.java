@@ -9,6 +9,7 @@ import kr.co.ahaproject.service.jyh.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,7 +28,10 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int create(BoardDTO dto) {
-		// TODO Auto-generated method stub
+		String now = String.valueOf(LocalDate.now());
+
+		dto.setB_regit_date(now);
+
 		return mapper.create(dto);
 	}
 
@@ -39,7 +43,10 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int update(BoardDTO dto) {
-		// TODO Auto-generated method stub
+		String now = String.valueOf(LocalDate.now());
+
+		dto.setB_modi_date(now);
+
 		return mapper.update(dto);
 	}
 

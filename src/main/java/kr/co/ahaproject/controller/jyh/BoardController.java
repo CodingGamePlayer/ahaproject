@@ -3,6 +3,7 @@ package kr.co.ahaproject.controller.jyh;
 
 import kr.co.ahaproject.dto.BoardDTO;
 import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.entity.Account;
 import org.springframework.ui.Model;
 
 public interface BoardController {
@@ -19,12 +20,11 @@ public interface BoardController {
 	
 	//작성
 	String create(Model model,BoardDTO dto);
-	
-	//상세조회
-	String detail(int b_id, Model model);
-	
+
 	//수정
-	String update(int id, Model model);
+	String detail(int id, Model model, Account account);
+
+
 		
 	
 	

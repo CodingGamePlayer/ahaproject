@@ -26,26 +26,16 @@
                 <div class="card-header border-bottom pb-0">
                     <div class="d-sm-flex align-items-center">
                         <div>
-                            <h6 class="font-weight-semibold text-lg mb-0">미수금 현황</h6>
-                            <p class="text-sm">미수별 현황 전체보기</p>
+                            <h6 class="font-weight-semibold text-lg mb-0">자유게시판</h6>
+                            <p class="text-sm">전체글보기</p>
                         </div>
                         <div class="ms-auto d-flex">
-                            <form class="row g-3" action="/admin/misu" method="get">
-                                <div class="col-auto">
-                                    <select class="form-select pe-5" aria-label="Default select example" id="finished"
-                                            name="finished">
-                                        <option value="" selected>수금여부</option>
-                                        <option value="완료">수금완료</option>
-                                        <option value="미완">수금미완</option>
-                                    </select>
-                                </div>
+                            <form class="row g-3" action="/user/board/list" method="get">
                                 <div class="col-auto">
                                     <select class="form-select pe-5" aria-label="Default select example" id="category"
                                             name="type">
-                                        <option value="misu_div">구분 검색</option>
-                                        <option value="cst_code">공사코드 검색</option>
-                                        <option value="cp_name">회사 검색</option>
-                                        <option value="misu_name">거래처명 검색</option>
+                                        <option value="b_title">제목 검색</option>
+                                        <option value="b_body">본문 검색</option>
                                     </select>
                                 </div>
                                 <div class="col-auto">
@@ -59,6 +49,7 @@
                             </form>
 
 
+
                         </div>
                     </div>
                 </div>
@@ -67,12 +58,12 @@
                         <table class="table align-items-center mb-0">
                             <thead class="bg-gray-100">
                             <tr>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">사진</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">카테고리</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">아이디</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">이름
                                 </th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">제목</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">본문</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">등록일</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수정일</th>
 
@@ -81,20 +72,6 @@
                             <tbody>
                             <th:block th:each="board : ${boards.dtoList}">
                                 <tr>
-                                    <th:block th:if="${board.b_filename} == '' or ${board.b_filename} == null">
-                                        <td class="d-flex justify-content-center">
-                                            <img class="rounded-2" style="width: 200px; height: 100px;"
-                                                 src="https://via.placeholder.com/200x100">
-                                        </td>
-                                    </th:block>
-                                    <th:block th:unless="${board.b_filename} == '' or ${board.b_filename} == null">
-                                    <td class="d-flex justify-content-center">
-                                            <a href="#" th:onclick="showImage([[${board.B_id}]])">
-                                                <img class="rounded-2" style="width: 200px; height: 100px;"
-                                                     th:src="|/user/view/s_${board.b_uuid}_${board.b_filename}|"  onerror="this.onerror=null; this.src='https://via.placeholder.com/200x100';">
-                                            </a>
-                                        </td>
-                                    </th:block>
 
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-center text-sm font-weight-normal"
@@ -114,6 +91,12 @@
                                               th:text="${board.b_title}" style=" display:inline-block; width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"/>
                                         </a>
                                     </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <a th:href="@{/user/board/detail/{id}(id=${board.b_id})}">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${board.b_body}" style=" display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"/>
+                                        </a>
+                                    </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${board.b_regit_date}"/>
@@ -129,12 +112,14 @@
                         </table>
 
                     </div>
+
                 </div>
             </div>
         </div>
-        <div class="col-sm-1"></div>
 
-        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+        </div>
 
         <div class="col-sm-4 d-flex justify-content-center">
             <th:block
@@ -173,7 +158,11 @@
                 </ul>
             </th:block>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-2 "></div>
+        <div class="col-md-2 ">
+            <a class="btn btn-primary " href="http://localhost:9000/user/board/register-form">글쓰기</a>
+
+        </div>
 
 
     </div>

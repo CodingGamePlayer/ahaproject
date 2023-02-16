@@ -1,13 +1,13 @@
 package kr.co.ahaproject.service.jyh.imp;
 
-import java.util.List;
-
+import kr.co.ahaproject.dto.ReplyDTO;
+import kr.co.ahaproject.dto.ReplyListDTO;
+import kr.co.ahaproject.mapper.jyh.Replymapper;
+import kr.co.ahaproject.service.jyh.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.ahaproject.dto.ReplyDTO;
-import kr.co.ahaproject.mapper.jyh.Replymapper;
-import kr.co.ahaproject.service.jyh.ReplyService;
+import java.util.List;
 
 @Service
 public class ReplyServiceImpl implements ReplyService {
@@ -44,7 +44,11 @@ public class ReplyServiceImpl implements ReplyService {
 		// TODO Auto-generated method stub
 		return mapper.replydelete(rp_id);
 	}
-	
-	
 
+	@Override
+	public List<ReplyListDTO> findByBoardId(int id) {
+
+
+		return mapper.findByBoardId(id);
+	}
 }

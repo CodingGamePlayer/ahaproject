@@ -71,7 +71,7 @@
                                 if (response.ok){
                                     alert("등록이 완료되었습니다.")
 
-                                    window.location.href =""
+                                    window.location.href ="http://localhost:9000/user/board/list"
                                 } else {
                                     alert("등록을 실패하였습니다.")
 
@@ -139,6 +139,20 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-9"></div>
+            <div class="col-sm-2 mt-2">
+                <button class="btn btn-primary btn-sm ms-auto " href="#" th:onclick="backToList()">전체글보기</button>
+            </div>
+
+            <script>
+                function backToList() {
+                    if (window.confirm('전체보기 페이지로 넘어 가시겠습니까?')){
+
+                        window.location.href = "http://localhost:9000/user/board/list";
+                    }
+
+                }
+            </script>
 
         </div>
 

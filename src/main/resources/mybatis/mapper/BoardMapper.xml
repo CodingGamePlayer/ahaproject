@@ -53,14 +53,11 @@
 
     <sql id="search">
         <where>
-            <if test="keyword != null and type == 'username'.toString()">
-                ac_username LIKE CONCAT('%', #{keyword}, '%')
+            <if test="keyword != null and type == 'b_title'.toString()">
+                b_title LIKE CONCAT('%', #{keyword}, '%')
             </if>
-            <if test="keyword != null and type == 'cp_name'.toString()">
-                cp_name LIKE CONCAT('%', #{keyword}, '%')
-            </if>
-            <if test="keyword != null and type == 'ac_person_name'.toString()">
-                ac_person_name LIKE CONCAT('%', #{keyword}, '%')
+            <if test="keyword != null and type == 'b_body'.toString()">
+                b_body LIKE CONCAT('%', #{keyword}, '%')
             </if>
         </where>
     </sql>
