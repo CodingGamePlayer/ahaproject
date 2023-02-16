@@ -15,7 +15,9 @@ public interface AdminController {
 
     String misuImage(MisuDTO misuDTO, Model model);
 
-    String blacklist();
+    String blacklist(PageRequestDTO pageRequestDTO, Model model);
 
     String manage(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model);
+
+
 }

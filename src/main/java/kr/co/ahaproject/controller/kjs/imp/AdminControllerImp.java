@@ -4,10 +4,11 @@ import kr.co.ahaproject.controller.kjs.AdminController;
 import kr.co.ahaproject.dto.*;
 import kr.co.ahaproject.entity.Misu;
 import kr.co.ahaproject.service.kjs.AccountService;
+import kr.co.ahaproject.service.kjs.BlackService;
 import kr.co.ahaproject.service.kjs.CompanyService;
-import kr.co.ahaproject.service.mskim.ConstructionService;
 import kr.co.ahaproject.service.kjs.MisuService;
-import org.springframework.beans.factory.annotation.Autowired;
+import kr.co.ahaproject.service.mskim.ConstructionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,18 +19,21 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminControllerImp implements AdminController {
 
-    @Autowired
-    private CompanyService companyService;
-    @Autowired
-    private ConstructionService constructionService;
-    @Autowired
-    private MisuService misuService;
 
-    @Autowired
-    private AccountService accountService;
+    private final CompanyService companyService;
+
+    private final ConstructionService constructionService;
+
+    private final MisuService misuService;
+
+    private final AccountService accountService;
+
+    private final BlackService blackService;
+
 
     @Override
     @GetMapping("/misu")
@@ -43,8 +47,14 @@ public class AdminControllerImp implements AdminController {
     }
 
     @Override
-    public String blacklist() {
-        return null;
+    @GetMapping("/manage-black")
+    public String blacklist(PageRequestDTO pageRequestDTO, Model model) {
+
+        PageResponseDTO<BlackListDTO> pageResponseDTO = blackService.selectAllForPaging(pageRequestDTO);
+
+        model.addAttribute("blacklist", pageResponseDTO);
+
+        return "admin/manage-black";
     }
 
     @Override
@@ -97,6 +107,8 @@ public class AdminControllerImp implements AdminController {
 
         return "admin/manage-account";
     }
+
+
 
 
 }

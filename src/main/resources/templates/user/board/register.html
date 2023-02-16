@@ -31,7 +31,6 @@
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-end">
                             <p class="mb-0">글쓰기</p>
-                            <button class="btn btn-primary btn-sm ms-auto" href="#" th:onclick="abc()">등록하기</button>
                         </div>
                     </div>
 
@@ -139,8 +138,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9"></div>
-            <div class="col-sm-2 mt-2">
+            <div class="col-sm-8"></div>
+            <div class="col-sm-2 mt-2 ms-3">
+                <button class="btn btn-primary btn-sm ms-auto" href="#" th:onclick="abc()">등록하기</button>
+
                 <button class="btn btn-primary btn-sm ms-auto " href="#" th:onclick="backToList()">전체글보기</button>
             </div>
 
