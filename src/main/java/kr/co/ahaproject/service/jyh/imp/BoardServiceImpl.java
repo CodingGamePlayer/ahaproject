@@ -1,13 +1,15 @@
 package kr.co.ahaproject.service.jyh.imp;
 
-import java.util.List;
-
+import kr.co.ahaproject.dto.BoardDTO;
+import kr.co.ahaproject.dto.BoardListDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
+import kr.co.ahaproject.mapper.jyh.Boardmapper;
 import kr.co.ahaproject.service.jyh.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.ahaproject.dto.BoardDTO;
-import kr.co.ahaproject.mapper.jyh.Boardmapper;
+import java.util.List;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -46,7 +48,20 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return mapper.delete(b_id);
 	}
-	
-	
 
+	@Override
+	public PageResponseDTO<BoardListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO) {
+
+		List<BoardListDTO> boardListDTOS = mapper.selectAllForPaging(pageRequestDTO);
+
+		int total = mapper.getCount(pageRequestDTO);
+
+		PageResponseDTO<BoardListDTO> pageResponseDTO = PageResponseDTO.<BoardListDTO>withAll()
+				.pageRequestDTO(pageRequestDTO)
+				.total(total)
+				.dtoList(boardListDTOS)
+				.build();
+
+		return pageResponseDTO;
+	}
 }

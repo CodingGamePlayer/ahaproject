@@ -1,8 +1,7 @@
 package kr.co.ahaproject.apicontroller.jyh;
 
-import org.springframework.http.ResponseEntity;
-
 import kr.co.ahaproject.dto.BoardDTO;
+import org.springframework.http.ResponseEntity;
 
 
 

@@ -90,10 +90,9 @@
                     Communication
                 </button>
                 <div class="collapse ms-3 mb-3" id="gboard" >
-                    <div><a href="/user/category/list" class="text-white text-sm">- 전체보기</a></div>
-                    <div><a href="/user/gboard/list" class="text-white text-sm">- 공지사항</a></div>
-                    <div><a th:href="@{/user/gboard/free-board/list}" class="text-white text-sm">- 자유게시판</a></div>
-                    <div><a href="/user/qnaboard/list" class="text-white text-sm">- QnA</a></div>
+                    <div><a th:href="@{/user/board/register-form}" class="text-white text-sm">- 글쓰기</a></div>
+                    <div><a th:href="@{/user/board/list}" class="text-white text-sm">- 전체 글보기</a></div>
+                    <div><a href="/user/board/list" class="text-white text-sm">- QnA</a></div>
 
                 </div>
                 <button sec:authorize="hasAuthority('ROLE_ADMIN')" class="btn btn-sm btn-warning mt-3 text-start mb-2 " type="button" data-bs-toggle="collapse" data-bs-target="#adminPage" aria-expanded="false" aria-controls="collapseExample1">

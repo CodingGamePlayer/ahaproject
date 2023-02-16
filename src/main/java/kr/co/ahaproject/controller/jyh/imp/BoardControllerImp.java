@@ -1,51 +1,47 @@
 package kr.co.ahaproject.controller.jyh.imp;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import kr.co.ahaproject.controller.jyh.BoardController;
+import kr.co.ahaproject.dto.*;
+import kr.co.ahaproject.service.jyh.BoardService;
+import kr.co.ahaproject.service.jyh.CategoryService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.co.ahaproject.controller.jyh.BoardController;
-import kr.co.ahaproject.dto.BoardDTO;
-import kr.co.ahaproject.dto.CategoryDTO;
-import kr.co.ahaproject.service.jyh.BoardService;
-import kr.co.ahaproject.service.jyh.CategoryService;
-import kr.co.ahaproject.service.jyh.ReplyService;
-
+import java.util.List;
 
 
 @Controller
+@RequiredArgsConstructor
+@Slf4j
 public class BoardControllerImp implements BoardController {
-	
-	
-	@Autowired
-	private BoardService service;
-	
-	@Autowired
-	private ReplyService replyservice;
-	
 
-	
+	private final CategoryService categoryService;
+	private final BoardService boardService;
 
-	
 
 	// 공지사항
 	@Override
-	@GetMapping("user/gboard/list")
-	public String list(Model model, BoardDTO dto) {
+	@GetMapping("/user/board/list")
+	public String list(PageRequestDTO pageRequestDTO, Model model) {
 
-		model.addAttribute("listdata",service.listAll());
+		PageResponseDTO<BoardListDTO> pageResponseDTO = boardService.selectAllForPaging(pageRequestDTO);
+
+		model.addAttribute("boards", pageResponseDTO);
 
 		return "user/board/list";
 	}
 
 	//등록페이지 이동
 	@Override
-	@GetMapping("user/board/register")
+	@GetMapping("/user/board/register-form")
 	public String create(Model model, BoardDTO dto) {
-		model.addAttribute("register", service.SelectOne(dto.getCt_id()));
+		List<CategoryDTO> categoryDTOS = categoryService.listAll();
+
+		model.addAttribute("categories", categoryDTOS);
 		return "user/board/register";
 	}
 	
@@ -54,19 +50,23 @@ public class BoardControllerImp implements BoardController {
 	@Override
 	@GetMapping("/user/board/SelectOne/{b_id}")
 	public String detail(@PathVariable("b_id") int b_id, Model model) {
-		
-		model.addAttribute("selectdata", service.SelectOne(b_id));
-		model.addAttribute("replydata",replyservice.getdetail(b_id));
+
 		return "user/board/board-detail";
 	}
 
 	//게시판 업데이트 페이지로 이동
 	@Override
-	@GetMapping("/user/board/detail")
-	public String update(Model model, BoardDTO dto) {
-		
-		model.addAttribute("update", service.SelectOne(dto.getB_id()));
-		return "user/board/board-edit-form";
+	@GetMapping("/user/board/detail/{id}")
+	public String update(@PathVariable int id, Model model) {
+
+		BoardDTO boardDTO = boardService.SelectOne(id);
+		List<CategoryDTO> categoryDTOS = categoryService.listAll();
+
+
+		model.addAttribute("board", boardDTO);
+		model.addAttribute("categories", categoryDTOS);
+
+		return "user/board/detail";
 	}
 	
 	

@@ -1,12 +1,11 @@
 package kr.co.ahaproject.service.jyh;
 
-import java.util.List;
-
-
 import kr.co.ahaproject.dto.BoardDTO;
+import kr.co.ahaproject.dto.BoardListDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import kr.co.ahaproject.dto.PageResponseDTO;
 
-
-
+import java.util.List;
 
 
 public interface BoardService {
@@ -33,13 +32,7 @@ public interface BoardService {
 		
 	//글 삭제
 	public int delete(int b_id);
-			
-		
-		
-		
-	
-	
-	
-	
 
+
+	PageResponseDTO<BoardListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 }
