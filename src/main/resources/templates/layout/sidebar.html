@@ -108,7 +108,7 @@
                     <div><a href="/admin/misu" class="text-white text-sm">- 미수금현황 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMisu()">- 미수금 등록</a></div>
                     <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 블랙리스트 등록</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitBlack()">- 블랙리스트 등록</a></div>
                     <div><a href="#" class="text-white text-sm">- 블랙리스트 보기</a></div>
                     <div><hr></div>
                     <div><a href="/admin/manage-account" class="text-white text-sm">- 사용자권한 변경</a></div>
@@ -140,6 +140,12 @@
             </ul>
         </div>
         <script>
+            function regitBlack(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/admin/black-form", "_blank", option);
+            }
+
             function regitMisu(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
