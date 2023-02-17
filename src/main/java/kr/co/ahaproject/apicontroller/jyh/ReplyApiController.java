@@ -1,13 +1,11 @@
 package kr.co.ahaproject.apicontroller.jyh;
 
-import org.springframework.http.ResponseEntity;
 import kr.co.ahaproject.dto.ReplyDTO;
+import org.springframework.http.ResponseEntity;
 
 public interface ReplyApiController {
-	ResponseEntity create(ReplyDTO dto);
 
-	 ResponseEntity update(ReplyDTO dto);
-	
-	 ResponseEntity delete(ReplyDTO dto);
+    public ResponseEntity insert(ReplyDTO replyDTO);
 
+    public ResponseEntity delete(ReplyDTO replyDTO);
 }

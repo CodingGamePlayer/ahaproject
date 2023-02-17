@@ -13,7 +13,7 @@ public class BillingDTO {
 
     Long bl_id;
     String bl_work_date;
-    String cp_name;
+    int cl_id;
     String cst_code;
     String bl_pub_date;
     Long bl_supp_value;

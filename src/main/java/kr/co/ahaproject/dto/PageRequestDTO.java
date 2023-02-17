@@ -43,6 +43,8 @@ public class PageRequestDTO {
     // 아이디 넘버
     private String id;
 
+    private boolean blacklist;
+
     public int getSkip(){
         return (page -1) * 10;
     }

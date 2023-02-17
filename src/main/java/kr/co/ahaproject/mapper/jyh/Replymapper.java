@@ -1,22 +1,10 @@
 package kr.co.ahaproject.mapper.jyh;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
-import kr.co.ahaproject.dto.BoardDTO;
 import kr.co.ahaproject.dto.ReplyDTO;
-import kr.co.ahaproject.entity.Board;
-import kr.co.ahaproject.entity.Misu;
-import kr.co.ahaproject.entity.Reply;
+import kr.co.ahaproject.dto.ReplyListDTO;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper
 public interface Replymapper {
@@ -53,4 +41,17 @@ public interface Replymapper {
 	//댓글 삭제
 	@Delete("delete from reply where rp_id=#{rp_id}")
 	int replydelete(@Param("rp_id") int rp_id);
+
+	@Select("SELECT R.rp_id, R.b_id, R.rp_body, A.ac_id, A.ac_username, A.ac_person_name " +
+			"FROM reply R JOIN account A ON R.ac_id = A.ac_id " +
+			"WHERE R.b_id = #{id}")
+	@Results(id = "ReplyListDTO", value = {
+			@Result(property = "rp_id", column = "rp_id"),
+			@Result(property = "b_id", column = "b_id"),
+			@Result(property = "ac_id", column = "ac_id"),
+			@Result(property = "rp_body", column = "rp_body"),
+			@Result(property = "ac_username", column = "ac_username"),
+			@Result(property = "ac_person_name", column = "ac_person_name")
+	})
+	List<ReplyListDTO> findByBoardId(int id);
 }

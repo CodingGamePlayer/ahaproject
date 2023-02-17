@@ -58,6 +58,11 @@
                 <include refid="switch"/>
             </if>
 
+            <if test="blacklist">
+                misu_black = 1
+                <include refid="switch"/>
+            </if>
+
         </where>
 
     </sql>

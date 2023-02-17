@@ -16,7 +16,8 @@ public class BoardDTO {
     int ac_id;
     String b_title;
     String b_body;
-    String b_etc;
     String b_filename;
     String b_uuid;
+    String b_regit_date;
+    String b_modi_date;
 }

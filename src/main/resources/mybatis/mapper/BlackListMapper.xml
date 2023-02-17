@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ahaproject.mapper.kjs.BlackListMapper">
+
+    <resultMap id="BlackListDTOMap" type="BlackListDTO">
+        <result property="cp_name" column="cp_name"/>
+        <result property="cp_num" column="cp_num"/>
+        <result property="cl_tel" column="cl_tel"/>
+        <result property="cl_email" column="cl_email"/>
+        <result property="black_total_misu" column="black_total_misu"/>
+        <result property="black_etc" column="black_etc"/>
+    </resultMap>
+
+    <insert id="insert">
+        INSERT INTO blacklist(cp_name, cp_num, cl_code, black_total_misu, black_etc)
+        VALUES (#{cp_name},#{cp_num},#{cl_code},#{black_total_misu},#{black_etc})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM blacklist
+        WHERE black_id = #{black_id}
+    </delete>
+
+    <update id="update">
+        UPDATE blacklist
+        SET
+            cp_name = #{cp_name},
+            cp_num = #{cp_num},
+            cl_code = #{cl_code},
+            black_total_misu = #{black_total_misu},
+            black_etc = #{black_etc}
+        WHERE
+            black_id = #{black_id}
+    </update>
+
+    <select id="selectAllForPaging" resultMap="BlackListDTOMap">
+        SELECT * FROM misu
+        <include refid="search"/>
+        ORDER BY misu_id DESC
+        LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(misu_id)
+        FROM misu
+        <include refid="search"/>
+    </select>
+
+    <sql id="search">
+
+        <where>
+
+            <if test="keyword != null and type == 'misu_div'.toString()">
+                misu_div LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+            <if test="keyword != null and type == 'cst_code'.toString()">
+                cst_code LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+
+            <if test="keyword != null and type == 'cp_name'.toString()">
+                cp_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+
+            <if test="keyword != null and type == 'misu_name'.toString()">
+                misu_name LIKE CONCAT('%', #{keyword}, '%')
+                <include refid="switch"/>
+            </if>
+
+        </where>
+
+    </sql>
+
+    <sql id="switch">
+
+        <if test="finished != '' and finished == '완료'">
+            AND misu_finished = 1
+        </if>
+
+        <if test="finished != '' and finished == '미완'">
+            AND misu_finished = 0
+        </if>
+
+    </sql>
+
+</mapper>

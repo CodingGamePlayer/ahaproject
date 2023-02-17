@@ -123,9 +123,9 @@
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${list.emp_account}"/>
                                         </td>
-                                        <td th:text="${list.emp_etc1}" class="align-middle text-center">
+                                        <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${list.emp_etc1}"/>
+                                              th:text="${list.emp_etc1}"  style=" display:inline-block; width:50px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"/>
                                         </td>
 
                                         <th:block th:switch="${list.emp_use}">

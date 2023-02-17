@@ -9,7 +9,7 @@
                 <span class="font-weight-bold text-lg">Aha Company</span>
             </a>
         </div>
-        <div class="collapse navbar-collapse px-4  w-auto " id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse px-4  w-auto mb-6" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <button class="btn btn-sm  mt-3 text-start mb-2 btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#basicInfo" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-fill me-1" viewBox="0 0 16 16">
@@ -37,7 +37,9 @@
                     <div><hr></div>
                     <div><a th:href="@{/user/basicinfo/card/card-list}" class="text-white text-sm">- 카드정보 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitCard()">- 카드정보 입력</a></div>
-
+                    <div><hr></div>
+                    <div><a th:href="@{/user/basicinfo/billing/list}" class="text-white text-sm">- 계산서 정보 보기</a></div>
+                    <div><a href="#" class="text-white text-sm" th:onclick="regitBilling()">- 계산서 정보 입력</a></div>
                 </div>
                 <button class="btn btn-sm mt-3 text-start mb-2 btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#worksite" aria-expanded="false" aria-controls="collapseExample1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace me-1" viewBox="0 0 16 16">
@@ -90,10 +92,8 @@
                     Communication
                 </button>
                 <div class="collapse ms-3 mb-3" id="gboard" >
-                    <div><a href="/user/category/list" class="text-white text-sm">- 전체보기</a></div>
-                    <div><a href="/user/gboard/list" class="text-white text-sm">- 공지사항</a></div>
-                    <div><a href="/user/freeboard/freeboardlist" class="text-white text-sm">- 자유게시판</a></div>
-                    <div><a href="/user/qnaboard/list" class="text-white text-sm">- QnA</a></div>
+                    <div><a th:href="@{/user/board/list}" class="text-white text-sm">- 전체 글보기</a></div>
+                    <div><a th:href="@{/user/board/list-qna}" class="text-white text-sm">- QnA</a></div>
 
                 </div>
                 <button sec:authorize="hasAuthority('ROLE_ADMIN')" class="btn btn-sm btn-warning mt-3 text-start mb-2 " type="button" data-bs-toggle="collapse" data-bs-target="#adminPage" aria-expanded="false" aria-controls="collapseExample1">
@@ -106,9 +106,6 @@
                 <div class="collapse ms-3 mb-3" id="adminPage" >
                     <div><a href="/admin/misu" class="text-white text-sm">- 미수금현황 보기</a></div>
                     <div><a href="#" class="text-white text-sm" th:onclick="regitMisu()">- 미수금 등록</a></div>
-                    <div><hr></div>
-                    <div><a href="#" class="text-white text-sm">- 블랙리스트 등록</a></div>
-                    <div><a href="#" class="text-white text-sm">- 블랙리스트 보기</a></div>
                     <div><hr></div>
                     <div><a href="/admin/manage-account" class="text-white text-sm">- 사용자권한 변경</a></div>
                 </div>
@@ -139,6 +136,12 @@
             </ul>
         </div>
         <script>
+            function regitBlack(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/admin/black-form", "_blank", option);
+            }
+
             function regitMisu(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
@@ -212,6 +215,13 @@
                 window.open("/user/basicinfo/card/card-form", "_blank", option);
             }
 
+            // 견적서 정보 입력
+            function regitBilling(){
+                let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
+
+                window.open("/user/basicinfo/billing/register", "_blank", option);
+            }
+
             //매입,매출 등록
             function regitIncome(){
                 let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
@@ -254,7 +264,7 @@
                     <div class="docs-info">
                         <h6 class="font-weight-bold up mb-2">Need help?</h6>
                         <p class="text-sm font-weight-normal">고객센터 바로가기</p>
-                        <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/corporate-ui-dashboard" target="_blank" class="font-weight-bold text-sm mb-0 icon-move-right mt-auto w-100 mb-0">
+                        <a th:href="@{/user/board/list-qna}" class="font-weight-bold text-sm mb-0 icon-move-right mt-auto w-100 mb-0">
                             QnA 문의하러 가기
                             <i class="fas fa-arrow-right-long text-sm ms-1" aria-hidden="true"></i>
                         </a>

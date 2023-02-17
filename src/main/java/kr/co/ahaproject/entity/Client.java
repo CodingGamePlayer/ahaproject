@@ -15,7 +15,7 @@ public class Client {
     String cp_name;
     String cp_num;
     String cp_address;
-    String cp_tel;
+    String cl_tel;
     String cl_code;
     String cl_email;
     String cl_account;

@@ -16,6 +16,8 @@ public interface AdminApiController {
 
     ResponseEntity deleteAccount(AccountDTO accountDTO);
 
+    ResponseEntity regitBlack(MisuDTO misuDTO);
+
 
 
 

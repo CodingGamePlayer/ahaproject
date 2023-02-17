@@ -15,6 +15,8 @@ public class BlackListDTO {
     String cp_name;
     String cp_num;
     String cl_code;
+    String cl_tel;
+    String cl_email;
     Long black_total_misu;
     String black_etc;
 }

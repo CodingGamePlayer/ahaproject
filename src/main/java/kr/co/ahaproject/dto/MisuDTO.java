@@ -25,4 +25,6 @@ public class MisuDTO {
     String misu_uuid;
     String misu_filename;
     String misu_etc;
+
+    boolean misu_black;
 }

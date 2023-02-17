@@ -53,4 +53,6 @@ public interface MisuMapper {
 
     int getCount(PageRequestDTO pageRequestDTO);
 
+    @Update("UPDATE misu SET misu_black = 1 - #{misu.misu_black} WHERE misu_id = #{misu.misu_id}")
+    int regitBlack(@Param("misu") Misu misu);
 }
