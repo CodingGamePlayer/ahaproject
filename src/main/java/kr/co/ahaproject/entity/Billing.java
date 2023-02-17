@@ -21,5 +21,9 @@ public class Billing {
     Long bl_total_value;
     String bl_collect_date;
     Long bl_difference;
+    String bl_uuid1;
+    String bl_filename1;
+    String bl_uuid2;
+    String bl_filename2;
 
 }

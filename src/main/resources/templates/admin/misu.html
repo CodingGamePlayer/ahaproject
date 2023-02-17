@@ -99,7 +99,7 @@
                                     <th:block th:unless="${misuDTO.misu_filename} == ''">
                                         <td class="d-flex justify-content-center">
                                             <a href="#" th:onclick="showImage([[${misuDTO.misu_id}]])">
-                                                <img class="rounded-2" style="width: 200px; height: 100px;"
+                                                <img class="rounded-2 " style="width: 200px; height: 100px;"
                                                      th:src="|/user/view/s_${misuDTO.misu_uuid}_${misuDTO.misu_filename}|"  onerror="this.onerror=null; this.src='https://via.placeholder.com/200x100';">
                                             </a>
                                         </td>

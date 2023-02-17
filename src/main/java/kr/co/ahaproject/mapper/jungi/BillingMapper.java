@@ -3,8 +3,6 @@ package kr.co.ahaproject.mapper.jungi;
 import kr.co.ahaproject.dto.BillingResponseDTO;
 import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.entity.Billing;
-import kr.co.ahaproject.entity.Estimate;
-import kr.co.ahaproject.entity.Misu;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -24,6 +22,10 @@ public interface BillingMapper {
             @Result(property = "bl_total_value", column = "bl_total_value"),
             @Result(property = "bl_collect_date", column = "bl_collect_date"),
             @Result(property = "bl_difference", column = "bl_difference"),
+            @Result(property = "bl_uuid1", column = "bl_uuid1"),
+            @Result(property = "bl_filename1", column = "bl_filename1"),
+            @Result(property = "bl_uuid2", column = "bl_uuid2"),
+            @Result(property = "bl_filename2", column = "bl_filename2")
     })
     List<Billing> selectAll();
 
@@ -44,7 +46,11 @@ public interface BillingMapper {
             @Result(property = "bl_difference", column = "bl_difference"),
             @Result(property = "cp_name", column = "cp_name"),
             @Result(property = "cl_code", column = "cl_code"),
-            @Result(property = "cst_name", column = "cst_name")
+            @Result(property = "cst_name", column = "cst_name"),
+            @Result(property = "bl_uuid1", column = "bl_uuid1"),
+            @Result(property = "bl_filename1", column = "bl_filename1"),
+            @Result(property = "bl_uuid2", column = "bl_uuid2"),
+            @Result(property = "bl_filename2", column = "bl_filename2")
     })
     BillingResponseDTO findById(@Param("billing") Billing billing);
 
@@ -58,7 +64,11 @@ public interface BillingMapper {
             "`bl_tax`, " +
             "`bl_total_value`, " +
             "`bl_collect_date`, " +
-            "`bl_difference`) " +
+            "`bl_difference`, " +
+            "bl_uuid1," +
+            "bl_filename1, " +
+            "bl_uuid2, " +
+            "bl_filename2) " +
             "VALUES " +
             "(#{billing.bl_id}, " +
             "#{billing.bl_work_date}, " +
@@ -69,7 +79,11 @@ public interface BillingMapper {
             "#{billing.bl_tax}, " +
             "#{billing.bl_total_value}, " +
             "#{billing.bl_collect_date}, " +
-            "#{billing.bl_difference})")
+            "#{billing.bl_difference}, " +
+            "#{billing.bl_uuid1}, " +
+            "#{billing.bl_filename1}, " +
+            "#{billing.bl_uuid2}, " +
+            "#{billing.bl_filename2})")
     int register(@Param("billing") Billing billing);
 
     @Update("UPDATE billing " +
@@ -84,6 +98,10 @@ public interface BillingMapper {
             "`bl_total_value` = #{billing.bl_total_value}, " +
             "`bl_collect_date` = #{billing.bl_collect_date}, " +
             "`bl_difference` = #{billing.bl_difference} " +
+            "bl_uuid1 = #{billing.bl_uuid1}, " +
+            "bl_filename1 = #{billing.bl_filename1}, " +
+            "bl_uuid2 = #{billing.bl_uuid2}, " +
+            "bl_filename2 = #{billing.bl_filename2} " +
             "WHERE (`bl_id` = #{billing.bl_id})")
     int update(@Param("billing") Billing billing);
 

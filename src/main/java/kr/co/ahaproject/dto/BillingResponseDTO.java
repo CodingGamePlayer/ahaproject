@@ -24,4 +24,8 @@ public class BillingResponseDTO {
     String cp_name;
     String cl_code;
     String cst_name;
+    String bl_uuid1;
+    String bl_filename1;
+    String bl_uuid2;
+    String bl_filename2;
 }

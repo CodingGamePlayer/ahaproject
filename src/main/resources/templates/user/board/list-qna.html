@@ -59,12 +59,12 @@
                             <tr>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">카테고리</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">아이디</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">이름
-                                </th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">이름</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">제목</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">본문</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">등록일</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수정일</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">답변여부</th>
 
                             </tr>
                             </thead>
@@ -150,7 +150,14 @@
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${board.b_modi_date}"/>
                                         </td>
-
+                                        <th:block th:switch="${board.b_finished}">
+                                            <td class="align-middle text-center">
+                                            <span class="badge badge-sm border border-danger text-danger bg-danger"
+                                                  th:case="false">답변미완</span>
+                                            <span class="badge badge-sm border border-success text-success bg-success"
+                                                  th:case="true">답변완료</span>
+                                            </td>
+                                        </th:block>
                                     </tr>
                                 </th:block>
                             </th:block>
