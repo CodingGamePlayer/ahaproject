@@ -31,14 +31,15 @@ public class ConstructionApiControllerImpl implements ConstructionApiController{
 	@PostMapping(value="/cstinfo", consumes= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ConstructionDTO> register(@RequestBody ConstructionDTO cstDTO) {
 		
+		if(cstDTO == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+		
 		String after = new AhaCommonMethod().changeDate(cstDTO.getCst_start());
 		cstDTO.setCst_start(after);
 		after = new AhaCommonMethod().changeDate(cstDTO.getCst_end());
 		cstDTO.setCst_end(after);
 		
-		if(cstDTO == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
 		
 		int result = cstService.regist(cstDTO);
 		

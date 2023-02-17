@@ -28,9 +28,14 @@ public class PageResponseDTO<E> {
     public PageResponseDTO(PageRequestDTO pageRequestDTO, List<E> dtoList, int total){
         this.page = pageRequestDTO.getPage();
         this.size = pageRequestDTO.getSize();
-
+        
+        
+        
         this.total = total;
         this.dtoList = dtoList;
+        if(total==0) {
+        	total =1;
+        }
 
         this.end = (int) (Math.ceil(this.page / 10.0)) * 10;
         this.start = end - 9;

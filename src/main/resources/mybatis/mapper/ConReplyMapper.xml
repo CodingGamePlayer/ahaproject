@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="kr.co.ahaproject.mapper.mskim.ConReplyMapper">
+
+	<resultMap id="ConReplyMap" type="ConReplyDTO">
+		<result property="rp_id" column="rp_id"/>
+		<result property="cst_id" column="cst_id"/>
+		<result property="cst_name" column="cst_name"/>
+		<result property="rp_title" column="rp_title"/>
+		<result property="rp_body" column="rp_body"/>
+		<result property="rp_reg_date" column="rp_reg_date"/>
+		<result property="rp_mod_date" column="rp_mod_date"/>
+		<result property="rp_finished" column="rp_finished"/>
+	</resultMap>
+	
+	<select id="selectAllForPaging" resultMap="ConReplyMap">
+		SELECT con_reply.*, construction.cst_name
+		FROM con_reply
+		LEFT JOIN construction ON con_reply.cst_id = construction.cst_id
+		<include refid="search"/>
+		ORDER BY rp_id DESC
+		LIMIT #{skip}, #{size}
+	</select>
+	
+	<select id="getCount" resultType="int">
+		SELECT count(con_reply.rp_id)
+		FROM con_reply
+		LEFT JOIN construction ON con_reply.cst_id = construction.cst_id
+		<include refid="search"/>
+	</select>
+	
+	<sql id="search">
+		<where>
+			<if test="cst_id !=0">
+				con_reply.cst_id = #{cst_id}
+			</if>
+			<if test="keyword != null and type == 'rp_title'.toString()">
+				rp_title LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="keyword != null and type == 'rp_body'.toString()">
+				rp_body LIKE CONCAT('%',#{keyword},'%')
+			</if>
+		</where>
+	</sql>
+
+</mapper>

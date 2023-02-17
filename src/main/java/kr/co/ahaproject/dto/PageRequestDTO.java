@@ -31,6 +31,10 @@ public class PageRequestDTO {
     private String keyword;
 
     private String finished;
+    
+    private int card_id;
+    
+    private int cst_id;
 
     // 장비 현황 페이지용
     private String jangbiType;

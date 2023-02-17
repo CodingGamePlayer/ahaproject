@@ -13,6 +13,7 @@ public class ConReplyDTO {
 
     Long rp_id;
     Long cst_id;
+    String cst_name;
     String rp_title;
     String rp_body;
     String rp_reg_date;
