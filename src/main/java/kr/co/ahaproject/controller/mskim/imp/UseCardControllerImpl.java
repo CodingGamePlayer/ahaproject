@@ -40,7 +40,8 @@ public class UseCardControllerImpl implements UseCardController {
 
 	@Override
 	@GetMapping("/c-list")
-	public ModelAndView selectOne(ModelAndView mav, @RequestParam("card_id") int card_id) {
+	public ModelAndView selectOne(PageRequestDTO pageRequestDTO, ModelAndView mav, @RequestParam("card_id") int card_id) {
+		
 		
 		mav.addObject("ucjs", ucs.selectOne(card_id));
 		mav.setViewName("user/use-card/use-card-list");

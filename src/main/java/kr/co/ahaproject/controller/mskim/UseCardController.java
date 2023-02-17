@@ -11,7 +11,7 @@ public interface UseCardController {
 	
 	String selectAll(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model);
 	
-	ModelAndView selectOne(ModelAndView mav, int card_id);
+	ModelAndView selectOne(PageRequestDTO pageRequestDTO, ModelAndView mav, int card_id);
 	
 	ModelAndView use_card_form(ModelAndView mav);
 	

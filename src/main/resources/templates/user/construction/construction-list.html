@@ -89,8 +89,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${constructionDTO.cst_name}"/>
+                                        <a class="text-primary text-sm font-weight-normal"
+                                        	 href="#" th:onclick="conReplyForm([[${constructionDTO.cst_id}]])"
+                                              th:text="${constructionDTO.cst_name}"></a>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-sm font-weight-normal"
@@ -138,6 +139,10 @@
                                             let option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=1000, top=0,left=0";
 
                                             window.open("/user/worksite/construction/cst-edit?cst_id=" + id, "_blank", option);
+                                        }
+                                        function conReplyForm(id){
+
+                                            window.location.href="/user/worksite/con-reply/con-reply-list?cst_id="+id;
                                         }
                                     </script>
                                 </tr>
@@ -193,6 +198,5 @@
         </div>
         <div class="col-md-3"></div>
     </div>
-</div>
 </div>
 </html>

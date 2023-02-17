@@ -122,8 +122,8 @@
                     </div>
                 </div>
             </div>
-
             <!--            파일첨부를 위한 기능 추가 end-->
+            
             <input type="button" class="btn btn-primary" id="cstSubmitBtn" value="등록하기" />
         </div>
     </div>
@@ -275,7 +275,7 @@ function removeFile(uuid, fileName, obj) {
         };
 
         if(input_cst_code == "" || input_cst_name == "" ||
-        		 input_cst_start == "" || ninput_cst_end == "" || input_cst_finised == "" ){
+        		 input_cst_start == "" || input_cst_end == "" || input_cst_finised == "" ){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
         };
@@ -348,9 +348,7 @@ function removeFile(uuid, fileName, obj) {
                 clear: 'fa fa-solid fa-trash',
                 close: 'fas fa-solid fa-xmark'
             },
-        },
-    	 
-        
+        },    	    
     });
     
 </script>

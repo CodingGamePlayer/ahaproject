@@ -49,6 +49,10 @@
                 uc_where LIKE CONCAT('%', #{keyword}, '%')
 
             </if>
+            <if test="card_id != 0">
+            	use_card.card_id = #{card_id}
+            
+            </if>
         </where>
     </sql>
 
