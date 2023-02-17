@@ -125,7 +125,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_name}"/>
+                                              th:text="${misuDTO.misu_name}" style=" display:inline-block; width:80px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
@@ -145,7 +145,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_collect_value}"/>
+                                              th:text="${misuDTO.misu_collect_date}"/>
                                     </td>
                                     <th:block th:switch="${misuDTO.misu_finished}">
                                         <td class="align-middle text-center">
