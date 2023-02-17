@@ -55,8 +55,13 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*작업일</label>
-                    <input class="form-control" type="text" id="bl_work_date" th:value="${billingResponseDTO.bl_work_date}" required>
+                    <label class="form-control-label">*발행일</label>
+                    <div class='input-group' id='datetimepicker3' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                        <input id='bl_work_date' type='text' class='form-control' data-td-target='#datetimepicker1' th:value="${billingResponseDTO.bl_work_date}"  required />
+                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
+                        <span class='fa-solid fa-calendar'></span>
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -241,6 +246,25 @@
     const datevalue2 = document.querySelector('#bl_collect_date').value;
     console.log(datevalue2);
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker2'), {
+        display: {
+            components: {
+                clock: false
+            },
+            icons: {
+                type: 'icons',
+                time: 'fa fa-solid fa-clock',
+                date: 'fa fa-solid fa-calendar',
+                up: 'fa fa-solid fa-arrow-up',
+                down: 'fa fa-solid fa-arrow-down',
+                previous: 'fa fa-solid fa-chevron-left',
+                next: 'fa fa-solid fa-chevron-right',
+                today: 'fa fa-solid fa-calendar-check',
+                clear: 'fa fa-solid fa-trash',
+                close: 'fas fa-solid fa-xmark'
+            },
+        },
+    });
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker3'), {
         display: {
             components: {
                 clock: false

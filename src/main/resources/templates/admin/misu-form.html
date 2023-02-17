@@ -328,10 +328,9 @@
             }
         }).then(response => {
             if (response.ok) {
-                response.text();
                 alert('등록이 완료되었습니다.');
+                opener.location.reload();
                 window.location.reload();
-                opener.window.reload();
             } else {
                 alert('등록을 실패하였습니다.');
             }
