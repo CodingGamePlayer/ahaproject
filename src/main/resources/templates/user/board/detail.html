@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <input type="hidden" th:value="${board.b_id}" id="b_id">
+                                    <input type="hidden" th:value="${board.b_id}">
                                     <label for="b_title" class="form-control-label">제목</label>
                                     <input class="form-control" id="b_title" type="text" placeholder=""
                                            th:value="${board.b_title}" disabled="disabled">
@@ -52,7 +52,7 @@
                                     <select class="form-select" aria-label="Default select example" id="ct_id"
                                             disabled="disabled">
                                         <th:block th:each="category : ${categories}">
-                                            <option th:if="${category.ct_use} == true" th:value="${category.ct_id}">
+                                            <option th:if="${category.ct_id} == ${board.ct_id}" th:value="${category.ct_id}">
                                                 [[${category.ct_name}]]
                                             </option>
                                         </th:block>

@@ -96,4 +96,16 @@ public class MisuServiceImp implements MisuService {
 
         return pageResponseDTO;
     }
+
+    @Override
+    public int regitBlack(MisuDTO misuDTO) {
+
+        int result = misuMapper.regitBlack(modelMapper.map(misuDTO, Misu.class));
+
+        if (!(result > 0)){
+            return 0;
+        }
+
+        return result;
+    }
 }
