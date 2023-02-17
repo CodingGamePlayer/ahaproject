@@ -25,14 +25,9 @@ public class BillingServiceImpl implements BillingService {
     @Override
     public int register(BillingDTO billingDTO) {
 
-        String bl_collect_date = new AhaCommonMethod().changeDate(billingDTO.getBl_collect_date());
-        String bl_work_date = new AhaCommonMethod().changeDate(billingDTO.getBl_work_date());
-        String bl_pub_date = new AhaCommonMethod().changeDate(billingDTO.getBl_pub_date());
-        billingDTO.setBl_collect_date(bl_collect_date);
-        billingDTO.setBl_work_date(bl_work_date);
-        billingDTO.setBl_pub_date(bl_pub_date);
+        BillingDTO dto = setDateTime(billingDTO);
 
-        return billingMapper.register(modelMapper.map(billingDTO, Billing.class));
+        return billingMapper.register(modelMapper.map(dto, Billing.class));
     }
 
     @Override
@@ -43,15 +38,9 @@ public class BillingServiceImpl implements BillingService {
     @Override
     public int update(BillingDTO billingDTO) {
 
-        String bl_collect_date = new AhaCommonMethod().changeDate(billingDTO.getBl_collect_date());
-        String bl_work_date = new AhaCommonMethod().changeDate(billingDTO.getBl_work_date());
-        String bl_pub_date = new AhaCommonMethod().changeDate(billingDTO.getBl_pub_date());
-        billingDTO.setBl_collect_date(bl_collect_date);
-        billingDTO.setBl_work_date(bl_work_date);
-        billingDTO.setBl_pub_date(bl_pub_date);
+        BillingDTO dto = setDateTime(billingDTO);
 
-
-        return billingMapper.update(modelMapper.map(billingDTO, Billing.class));
+        return billingMapper.update(modelMapper.map(dto, Billing.class));
     }
 
     @Override
@@ -77,5 +66,20 @@ public class BillingServiceImpl implements BillingService {
     @Autowired
     public BillingServiceImpl(BillingMapper billingMapper) {
         this.billingMapper = billingMapper;
+    }
+
+
+    public BillingDTO setDateTime(BillingDTO billingDTO){
+
+        String bl_collect_date = new AhaCommonMethod().changeDate(billingDTO.getBl_collect_date());
+        String bl_work_start_date = new AhaCommonMethod().changeDate(billingDTO.getBl_work_start_date());
+        String bl_work_end_date = new AhaCommonMethod().changeDate(billingDTO.getBl_work_end_date());
+        String bl_pub_date = new AhaCommonMethod().changeDate(billingDTO.getBl_pub_date());
+        billingDTO.setBl_collect_date(bl_collect_date);
+        billingDTO.setBl_work_start_date(bl_work_start_date);
+        billingDTO.setBl_work_end_date(bl_work_end_date);
+        billingDTO.setBl_pub_date(bl_pub_date);
+
+        return billingDTO;
     }
 }

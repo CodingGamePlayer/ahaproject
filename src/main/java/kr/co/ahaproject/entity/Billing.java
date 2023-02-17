@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 public class Billing {
 
     Long bl_id;
-    String bl_work_date;
+    String bl_work_start_date;
+    String bl_work_end_date;
     int cl_id;
     String cst_code;
     String bl_pub_date;
@@ -25,5 +26,6 @@ public class Billing {
     String bl_filename1;
     String bl_uuid2;
     String bl_filename2;
+    String bl_etc;
 
 }

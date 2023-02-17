@@ -25,8 +25,8 @@
                 <div class="card-header border-bottom pb-0">
                     <div class="d-sm-flex align-items-center">
                         <div>
-                            <h6 class="font-weight-semibold text-lg mb-0">계산서</h6>
-                            <p class="text-sm">계산서 전체보기</p>
+                            <h6 class="font-weight-semibold text-lg mb-0">계산서-견적서</h6>
+                            <p class="text-sm">계산서-견적서 전체보기</p>
                         </div>
                         <div class="ms-auto d-flex">
                             <form class="row g-3" action="/user/basicinfo/billing/list" method="get">
@@ -66,9 +66,9 @@
                             <tr>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7">고객 정보</th>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">공사 정보</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">작업일</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">작업 시작일</th>
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">작업 종료일</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">발행일</th>
-                                <!--                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금일</th>-->
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">공급가액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">세액</th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">합계 금액</th>
@@ -100,11 +100,15 @@
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${billing.bl_work_date}"/>
+                                              th:text="${billing.bl_work_start_date}"/>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-secondary text-sm font-weight-normal"
+                                              th:text="${billing.bl_work_end_date}"/>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
                                               th:text="${billing.bl_pub_date}"/>
                                     </td>
+
                                     </td>
                                     <!--                                    <td class="align-middle text-center">-->
                                     <!--                                        <span class="text-secondary text-sm font-weight-normal"-->
@@ -128,26 +132,26 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="비고"/>
+                                              th:text="${billing.bl_etc}" style=" display:inline-block; width:80px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"/>
                                     </td>
 
                                     <td class="align-middle text-center">
                                         <a th:href="|/user/download/${billing.bl_uuid1}_${billing.bl_filename1}|">
-                                        <span th:if="${billing.bl_uuid1} != null"
+                                        <span th:if="${billing.bl_uuid1} != null and ${billing.bl_uuid1} != ''"
                                               class="text-primary text-sm font-weight-normal"
                                               th:text="다운로드"/>
                                         </a>
-                                        <span th:if="${billing.bl_uuid1} == null"
+                                        <span th:if="${billing.bl_uuid1} == null or ${billing.bl_uuid1} == ''"
                                               class="text-secondary text-sm font-weight-normal"
                                               text=""/>
                                     </td>
 
                                     <td class="align-middle text-center">
                                         <a th:href="|/user/download/${billing.bl_uuid2}_${billing.bl_filename2}|">
-                                        <span th:if="${billing.bl_uuid2} != null" class="text-primary text-sm font-weight-normal"
+                                        <span th:if="${billing.bl_uuid2} != null and ${billing.bl_uuid2} !=''" class="text-primary text-sm font-weight-normal"
                                               th:text="다운로드"/>
                                         </a>
-                                            <span th:if="${billing.bl_uuid2} == null" class="text-secondary text-sm font-weight-normal"
+                                            <span th:if="${billing.bl_uuid2} == null or ${billing.bl_uuid2}" class="text-secondary text-sm font-weight-normal"
                                                   text=""/>
                                     </td>
                                     <td class="align-middle">
