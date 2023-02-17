@@ -40,6 +40,17 @@ public class BoardControllerImp implements BoardController {
 		return "user/board/list";
 	}
 
+	@Override
+	@GetMapping("/user/board/list-qna")
+	public String listQnA(PageRequestDTO pageRequestDTO, Model model) {
+
+		PageResponseDTO<BoardListDTO> pageResponseDTO = boardService.selectAllForPaging(pageRequestDTO);
+
+		model.addAttribute("boards", pageResponseDTO);
+
+		return "user/board/list-qna";
+	}
+
 	//등록페이지 이동
 	@Override
 	@GetMapping("/user/board/register-form")
@@ -48,6 +59,15 @@ public class BoardControllerImp implements BoardController {
 
 		model.addAttribute("categories", categoryDTOS);
 		return "user/board/register";
+	}
+
+	@Override
+	@GetMapping("/user/board/register-qna-form")
+	public String createQnA(Model model, BoardDTO dto) {
+		List<CategoryDTO> categoryDTOS = categoryService.listAll();
+
+		model.addAttribute("categories", categoryDTOS);
+		return "user/board/register-qna";
 	}
 
 	//게시판 업데이트 페이지로 이동
@@ -68,4 +88,20 @@ public class BoardControllerImp implements BoardController {
 		return "user/board/detail";
 	}
 
+	@Override
+	@GetMapping("/user/board/detail-qna/{id}")
+	public String detailQnA(@PathVariable int id, Model model, @AuthenticationPrincipal Account account) {
+
+
+		BoardDTO boardDTO = boardService.SelectOne(id);
+		List<CategoryDTO> categoryDTOS = categoryService.listAll();
+		List<ReplyListDTO> replyDTOS = replyService.findByBoardId(id);
+
+		model.addAttribute("replies", replyDTOS);
+		model.addAttribute("account", account);
+		model.addAttribute("board", boardDTO);
+		model.addAttribute("categories", categoryDTOS);
+
+		return "user/board/detail-qna";
+	}
 }

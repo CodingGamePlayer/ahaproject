@@ -92,9 +92,8 @@
                     Communication
                 </button>
                 <div class="collapse ms-3 mb-3" id="gboard" >
-                    <div><a th:href="@{/user/board/register-form}" class="text-white text-sm">- 글쓰기</a></div>
                     <div><a th:href="@{/user/board/list}" class="text-white text-sm">- 전체 글보기</a></div>
-                    <div><a href="/user/board/list" class="text-white text-sm">- QnA</a></div>
+                    <div><a th:href="@{/user/board/list-qna}" class="text-white text-sm">- QnA</a></div>
 
                 </div>
                 <button sec:authorize="hasAuthority('ROLE_ADMIN')" class="btn btn-sm btn-warning mt-3 text-start mb-2 " type="button" data-bs-toggle="collapse" data-bs-target="#adminPage" aria-expanded="false" aria-controls="collapseExample1">
@@ -265,7 +264,7 @@
                     <div class="docs-info">
                         <h6 class="font-weight-bold up mb-2">Need help?</h6>
                         <p class="text-sm font-weight-normal">고객센터 바로가기</p>
-                        <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/corporate-ui-dashboard" target="_blank" class="font-weight-bold text-sm mb-0 icon-move-right mt-auto w-100 mb-0">
+                        <a th:href="@{/user/board/list-qna}" class="font-weight-bold text-sm mb-0 icon-move-right mt-auto w-100 mb-0">
                             QnA 문의하러 가기
                             <i class="fas fa-arrow-right-long text-sm ms-1" aria-hidden="true"></i>
                         </a>

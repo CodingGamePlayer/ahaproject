@@ -17,12 +17,15 @@ public interface BoardController {
 	
 	//전체조회
 	String list(PageRequestDTO pageRequestDTO, Model model);
-	
+	String listQnA(PageRequestDTO pageRequestDTO, Model model);
+
 	//작성
 	String create(Model model,BoardDTO dto);
+	String createQnA(Model model,BoardDTO dto);
 
 	//수정
 	String detail(int id, Model model, Account account);
+	String detailQnA(int id, Model model, Account account);
 
 
 		
