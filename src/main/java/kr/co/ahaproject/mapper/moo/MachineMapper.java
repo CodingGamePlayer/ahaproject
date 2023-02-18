@@ -39,11 +39,15 @@ public interface MachineMapper {
     @ResultMap("machineMap")
     Machine findById(@Param("machine") Machine machine);
 
+    @Select("SELECT * FROM machine WHERE m_code = #{m_code}")
+    @ResultMap("machineMap")
+    Machine findByCode(@Param("m_code") String m_code);
+
     @Update("UPDATE `ahaproject`.`machine` SET " +
             "`m_name` = #{machine.m_name}, `m_equip_num` = #{machine.m_equip_num}, `m_type` = #{machine.m_type}, " +
             "`m_price` = #{machine.m_price}, `m_tax` = #{machine.m_tax}, `m_date` = #{machine.m_date}, " +
             "`m_filename` = #{machine.m_filename}, `m_etc1` = #{machine.m_etc1}, `m_etc2` = #{machine.m_etc2}, " +
-            "`m_etc3` = #{machine.m_etc3}, m_uuid = #{machine.m_uuid}, m_kind = #{machine.m_kind} " +
+            "`m_etc3` = #{machine.m_etc3}, m_uuid = #{machine.m_uuid}, m_kind = #{machine.m_kind}, m_use = #{machine.m_use} " +
             "WHERE `m_id` = #{machine.m_id}")
     int update(@Param("machine") Machine machine);
 

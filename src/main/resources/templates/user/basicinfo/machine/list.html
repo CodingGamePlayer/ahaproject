@@ -150,9 +150,9 @@
                                     <th:block th:switch="${machineDTO.m_use}">
                                         <td class="align-middle text-center">
                                             <span class="badge badge-sm border border-danger text-danger bg-danger"
-                                                  th:case="0">미사용중</span>
+                                                  th:case="false">미사용중</span>
                                             <span class="badge badge-sm border border-success text-success bg-success"
-                                                  th:case="1">사용중</span>
+                                                  th:case="true">사용중</span>
 
                                         </td>
                                     </th:block>

@@ -189,9 +189,13 @@
 
         if(window.confirm("삭제하시겠습니까?")){
             const input_rent_id = urlParams.get('rent_id');
+            const input_rent_finished = document.querySelector("#rent_finished").value;
+            const input_m_code = document.querySelector('#m_code').value;
 
             const machRent = {
-                rent_id : input_rent_id
+                rent_id : input_rent_id,
+                m_code: input_m_code,
+                rent_finished : input_rent_finished
             }
 
             const url = "/api/worksite/rental"
