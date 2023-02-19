@@ -11,12 +11,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -58,7 +62,7 @@ public class UpDownControllerImp implements UpDownController {
 
                         image = true;
 
-                        File thumbFile = new File(uploadPath, "s_" + uuid + "_" + originalName);
+                        File thumbFile = new File(uploadPath, uuid + "_" + originalName);
 
                         Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 700, 600);
                     }
@@ -126,5 +130,40 @@ public class UpDownControllerImp implements UpDownController {
         resultMap.put("result", removed);
 
         return resultMap;
+    }
+
+    @Override
+    @ApiOperation(value = "download 파일", notes = "GET 방식으로 파일 다운")
+    @GetMapping(value = "/user/download/{fileName}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity downloadFile(@PathVariable String fileName, @RequestHeader("User-Agent") String agent) {
+        HttpHeaders headers = new HttpHeaders();
+
+        try {
+            String originalFileName = URLDecoder.decode(fileName, "UTF-8");
+
+            Resource file = new FileSystemResource(uploadPath + File.separator + originalFileName);
+
+            if(!file.exists())
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+            String onlyFileName = originalFileName.substring(originalFileName.lastIndexOf("_") + 1);
+
+            if(agent.contains("Trident"))
+                onlyFileName = URLEncoder.encode(onlyFileName, "UTF-8").replaceAll("\\+", " ");
+
+            else if (agent.contains("Edge"))
+                onlyFileName = URLEncoder.encode(onlyFileName, "UTF-8");
+
+            else
+                onlyFileName = new String(onlyFileName.getBytes("UTF-8"), "ISO-8859-1");
+
+            headers.add("Content-Disposition", "attachment; filename=" + onlyFileName);
+
+            return ResponseEntity.status(HttpStatus.OK).headers(headers).body(file);
+
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

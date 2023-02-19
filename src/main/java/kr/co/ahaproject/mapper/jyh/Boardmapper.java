@@ -43,7 +43,9 @@ public interface Boardmapper {
 	//글 작성 
 	@Insert("insert into board(ct_id,ac_id,b_title,b_body,b_regit_date,b_filename,b_uuid) values(#{ct_id},#{ac_id},#{b_title},#{b_body},#{b_regit_date},#{b_filename},#{b_uuid})")
       int create(BoardDTO dto);
-	
+
+	@Update("UPDATE board SET b_finished = #{board.b_finished} WHERE b_id = #{board.b_id}")
+	int updateFinish(@Param("board") BoardDTO board);
 	//글 수정
 	 @Update("UPDATE `ahaproject`.`board` SET " +
 	            "`ct_id` = #{board.ct_id}, " +
@@ -51,7 +53,7 @@ public interface Boardmapper {
 			 	"`b_body` = #{board.b_body}, " +
 			 	"b_modi_date = #{board.b_modi_date} " +
 	            "WHERE (`b_id` = #{board.b_id})")
-	    int update(@Param("board") BoardDTO board); 
+	int update(@Param("board") BoardDTO board);
 	
 	
 	//글 삭제 
@@ -61,4 +63,6 @@ public interface Boardmapper {
 	List<BoardListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 
 	int getCount(PageRequestDTO pageRequestDTO);
+
+
 }

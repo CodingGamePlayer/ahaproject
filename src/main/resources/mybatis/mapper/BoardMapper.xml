@@ -18,6 +18,7 @@
         <result property="b_modi_date" column="b_modi_date"/>
         <result property="b_uuid" column="b_uuid"/>
         <result property="b_filename" column="b_filename"/>
+        <result property="b_finished" column="b_finished"/>
     </resultMap>
 
     <select id="selectAllForPaging" resultMap="BoardListMap">
@@ -33,7 +34,8 @@
             B.b_regit_date,
             B.b_modi_date,
             B.b_uuid,
-            B.b_filename
+            B.b_filename,
+            B.b_finished
         FROM board B
             Join account A ON B.ac_id = A.ac_id
             JOIN category C ON B.ct_id = C.ct_id

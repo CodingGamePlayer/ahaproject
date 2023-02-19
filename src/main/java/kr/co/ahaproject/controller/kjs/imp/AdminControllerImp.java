@@ -3,10 +3,7 @@ package kr.co.ahaproject.controller.kjs.imp;
 import kr.co.ahaproject.controller.kjs.AdminController;
 import kr.co.ahaproject.dto.*;
 import kr.co.ahaproject.entity.Misu;
-import kr.co.ahaproject.service.kjs.AccountService;
-import kr.co.ahaproject.service.kjs.BlackService;
-import kr.co.ahaproject.service.kjs.CompanyService;
-import kr.co.ahaproject.service.kjs.MisuService;
+import kr.co.ahaproject.service.kjs.*;
 import kr.co.ahaproject.service.mskim.ConstructionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -34,6 +31,8 @@ public class AdminControllerImp implements AdminController {
 
     private final BlackService blackService;
 
+    private final ClientService clientService;
+
 
     @Override
     @GetMapping("/misu")
@@ -55,6 +54,19 @@ public class AdminControllerImp implements AdminController {
         model.addAttribute("blacklist", pageResponseDTO);
 
         return "admin/manage-black";
+    }
+
+    @Override
+    @GetMapping("/black-form")
+    public String blackForm(Model model) {
+
+        List<CompanyDTO> companyDTOS = companyService.selectAll();
+        List<ClientDTO> clientDTOS = clientService.selectAll();
+
+        model.addAttribute("companies", companyDTOS);
+        model.addAttribute("clients", clientDTOS);
+
+        return "admin/black-form";
     }
 
     @Override

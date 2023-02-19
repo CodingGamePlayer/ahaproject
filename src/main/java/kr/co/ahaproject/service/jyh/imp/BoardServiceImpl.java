@@ -6,6 +6,7 @@ import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.dto.PageResponseDTO;
 import kr.co.ahaproject.mapper.jyh.Boardmapper;
 import kr.co.ahaproject.service.jyh.BoardService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	Boardmapper mapper;
-	
+
+	private ModelMapper modelMapper = new ModelMapper();
 
 	@Override
 	public List<BoardDTO> listAll() {
@@ -39,6 +41,11 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDTO SelectOne(int b_id) {
 		// TODO Auto-generated method stub
 		return mapper.SelectOne(b_id);
+	}
+
+	@Override
+	public int updateFinish(BoardDTO boardDTO) {
+		return mapper.updateFinish(modelMapper.map(boardDTO, BoardDTO.class));
 	}
 
 	@Override

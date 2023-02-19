@@ -61,6 +61,14 @@ public class MisuServiceImp implements MisuService {
 
     @Override
     public int update(MisuDTO misuDTO) {
+
+        if(misuDTO.getMisu_collect_date() == null || misuDTO.getMisu_collect_date().isEmpty()) {
+            misuDTO.setMisu_collect_date("");
+        }else{
+            String after = new AhaCommonMethod().changeDate(misuDTO.getMisu_collect_date());
+            misuDTO.setMisu_collect_date(after);
+        }
+
         Misu misu = modelMapper.map(misuDTO, Misu.class);
         int update = misuMapper.update(misu);
 
@@ -97,5 +105,17 @@ public class MisuServiceImp implements MisuService {
                 .build();
 
         return pageResponseDTO;
+    }
+
+    @Override
+    public int regitBlack(MisuDTO misuDTO) {
+
+        int result = misuMapper.regitBlack(modelMapper.map(misuDTO, Misu.class));
+
+        if (!(result > 0)){
+            return 0;
+        }
+
+        return result;
     }
 }

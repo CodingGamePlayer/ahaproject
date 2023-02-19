@@ -17,6 +17,8 @@ public interface AdminController {
 
     String blacklist(PageRequestDTO pageRequestDTO, Model model);
 
+    String blackForm(Model model);
+
     String manage(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model);
 
 

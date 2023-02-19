@@ -2,8 +2,6 @@ package kr.co.ahaproject.controller.jungi.impl;
 
 import kr.co.ahaproject.controller.jungi.BillingController;
 import kr.co.ahaproject.dto.*;
-import kr.co.ahaproject.entity.Billing;
-import kr.co.ahaproject.entity.Misu;
 import kr.co.ahaproject.service.jungi.BillingService;
 import kr.co.ahaproject.service.kjs.ClientService;
 import kr.co.ahaproject.service.mskim.ConstructionService;
@@ -57,8 +55,10 @@ public class BillingControllerImpl implements BillingController {
     @GetMapping("/edit")
     public String billingEditForm(Model model, BillingDTO billingDTO) {
 
-        BillingResponseDTO billingResponseDTO =  billingService.findById(billingDTO);
-        model.addAttribute("billingResponseDTO", billingResponseDTO);
+        model.addAttribute("clientDTOs", clientService.selectAll());
+        model.addAttribute("constructionDTOs", constructionService.selectAll());
+        model.addAttribute("billingResponseDTO", billingService.findById(billingDTO));
+
 
         return "user/billing/edit";
     }
