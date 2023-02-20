@@ -164,14 +164,16 @@
 
 document.getElementById('datetimepicker2Input').onchange = function(){
 
-var sdd = document.getElementById("datetimepicker1Input").value;
+	var sdd = document.getElementById("datetimepicker1Input").value;
     var edd = document.getElementById("datetimepicker2Input").value;
+    console.log(sdd+": sdd");
+    console.log(edd+": edd");
     var ar1 = sdd.split('.');
-    var ar1 = sdd.split(' ');
+    //var ar1 = sdd.split(' ');
     var ar2 = edd.split('.');
-    var ar2 = edd.split(' ');
-    var da1 = new Date(ar1[0], ar1[1], ar1[2]);
-    var da2 = new Date(ar2[0], ar2[1], ar2[2]);
+    //var ar2 = edd.split(' ');
+    var da1 = new Date(ar1[0]+"-"+ar1[1]+"-"+ ar1[2]);
+    var da2 = new Date(ar2[0]+"-"+ar2[1]+"-"+ ar2[2]);
     var dif = da2 - da1;
     var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
  if(sdd && edd){
