@@ -5,18 +5,12 @@
 
 package kr.co.ahaproject.mapper.jyh;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import kr.co.ahaproject.dto.BoardDTO;
+import kr.co.ahaproject.dto.BoardListDTO;
+import kr.co.ahaproject.dto.PageRequestDTO;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 
 @Mapper
@@ -31,7 +25,6 @@ public interface Boardmapper {
             @Result(property = "ac_id", column = "ac_id"),
             @Result(property = "b_title", column = "b_title"),
             @Result(property = "b_body", column = "b_body"),
-            @Result(property = "b_etc", column = "b_etc"),
             @Result(property = "b_filename", column = "b_filename"),
 			@Result(property = "b_uuid", column = "b_uuid")})
     List<BoardDTO> listAll();
@@ -44,22 +37,32 @@ public interface Boardmapper {
 	@Select("SELECT * FROM board WHERE ct_id = #{ct_id}")
     @ResultMap("BoardMap")
 	BoardDTO CategoryOne(int ct_id); //카테고리 선택
-    
-	
-	
+
+
+
 	//글 작성 
-	@Insert("insert into board(ct_id,ac_id,b_title,b_body,b_etc,b_filename,b_uuid) values(#{ct_id},#{ac_id},#{b_title},#{b_body},#{b_etc},#{b_filename},#{b_uuid})")
+	@Insert("insert into board(ct_id,ac_id,b_title,b_body,b_regit_date,b_filename,b_uuid) values(#{ct_id},#{ac_id},#{b_title},#{b_body},#{b_regit_date},#{b_filename},#{b_uuid})")
       int create(BoardDTO dto);
-	
+
+	@Update("UPDATE board SET b_finished = #{board.b_finished} WHERE b_id = #{board.b_id}")
+	int updateFinish(@Param("board") BoardDTO board);
 	//글 수정
 	 @Update("UPDATE `ahaproject`.`board` SET " +
-	            "`ct_id` = #{board.ct_id}, `ac_id` = #{board.ac_id}, " +
-	            "`b_title` = #{board.b_title}, `b_body` = #{board.b_body}, `b_etc` = #{board.b_etc}, " +
-	            "`b_filename` = #{board.b_filename}, `b_uuid`= #{board.b_uuid} WHERE (`b_id` = #{board.b_id})")
-	    int update(@Param("board") BoardDTO board); 
+	            "`ct_id` = #{board.ct_id}, " +
+	            "`b_title` = #{board.b_title}, " +
+			 	"`b_body` = #{board.b_body}, " +
+			 	"b_modi_date = #{board.b_modi_date} " +
+	            "WHERE (`b_id` = #{board.b_id})")
+	int update(@Param("board") BoardDTO board);
 	
 	
 	//글 삭제 
 	@Delete("delete from `ahaproject`.`board` where b_id = #{b_id}")
 	int delete(@Param("b_id") int b_id);
+
+	List<BoardListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
+
+	int getCount(PageRequestDTO pageRequestDTO);
+
+
 }

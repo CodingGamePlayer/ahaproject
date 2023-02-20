@@ -49,9 +49,9 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">*회사명</label>
-          <select class="form-select" aria-label="Default select example"  id="cp_name">
+          <select class="form-select" aria-label="Default select example"  id="cp_id">
             <th:block th:each="company : ${companyDTOs}">
-              <option th:value="${company.cp_name}">[[${company.cp_name}]]</option>
+              <option th:value="${company.cp_id}">[[${company.cp_name}]]</option>
             </th:block>
           </select>
         </div>
@@ -67,14 +67,14 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">*사원명</label>
-          <input class="form-control" type="text" id="emp_name">
+          <input class="form-control" type="text" id="emp_name" placeholder="사원명을 입력하세요">
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">*입사일자</label>
-          <input class="datepicker form-control" id='emp_joining'>
+          <input class="datepicker form-control" id='emp_joining' placeholder="입사일을 입력하세요">
           <script>
 
             $.datepicker.setDefaults({
@@ -120,7 +120,7 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">주소</label>
-          <input class="form-control" type="text" id="emp_address" >
+          <input class="form-control" type="text" id="emp_address" placeholder="주소를 입력하세요">
         </div>
       </div>
 
@@ -132,21 +132,21 @@
       </div>
 
       <!--            파일첨부를 위한 기능 추가 start-->
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label class="form-control-label">파일</label><br>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            파일등록
-          </button>
-        </div>
-      </div>
+<!--      <div class="col-sm-12">-->
+<!--        <div class="form-group">-->
+<!--          <label class="form-control-label">파일</label><br>-->
+<!--          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--            파일등록-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="row mt-3">
-        <div class="col d-flex justify-content-center">
-          <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">
-          </div>
-        </div>
-      </div>
+<!--      <div class="row mt-3">-->
+<!--        <div class="col d-flex justify-content-center">-->
+<!--          <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
       <!--            파일첨부를 위한 기능 추가 end-->
 
       <!-- 파일 첨부용 Modal start -->
@@ -187,21 +187,21 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">비고</label>
-          <input class="form-control" type="text" id="emp_etc1">
+          <input class="form-control" type="text" id="emp_etc1" placeholder="비고사항을 입력하세요">
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">비고2</label>
-          <input class="form-control" type="text" id="emp_etc2">
+          <input class="form-control" type="text" id="emp_etc2" placeholder="비고사항을 입력하세요">
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
           <label class="form-control-label">비고3</label>
-          <textarea class="form-control" type="text" id="emp_etc3"></textarea>
+          <textarea class="form-control" type="text" id="emp_etc3" placeholder="비고사항을 입력하세요"></textarea>
         </div>
       </div>
 
@@ -288,7 +288,7 @@
 
     empSubmitBtn.addEventListener("click", () => {
     // const input_emp_id = document.querySelector('#emp_id').value;
-    const input_cp_name = document.querySelector('#cp_name').value;
+    const input_cp_id = document.querySelector('#cp_id').value;
     const input_emp_code = document.querySelector('#emp_code').value;
     const input_emp_name = document.querySelector('#emp_name').value;
     const input_emp_joining = document.querySelector('#emp_joining').value;
@@ -304,7 +304,7 @@
 
     const emp1 = {
       // emp_id: input_emp_id,
-      cp_name : input_cp_name,
+      cp_id : input_cp_id,
       emp_name : input_emp_name,
       emp_code : input_emp_code,
       emp_tel : input_emp_tel,
@@ -320,7 +320,7 @@
       emp_etc3 : input_emp_etc3
     };
 
-    if(input_cp_name == "" ||
+    if(input_cp_id == "" ||
             input_emp_name == "" || input_emp_joining == "" ||
             input_emp_regid == ""){
       alert('*이 있는 칸은 채워주시기 바랍니다.')
@@ -342,7 +342,7 @@
         response.text();
         alert('등록이 완료되었습니다.');
         window.location.reload();
-        opener.location.reload();
+        opener.location.href="list";
       } else {
         alert('등록을 실패하였습니다.');
       }

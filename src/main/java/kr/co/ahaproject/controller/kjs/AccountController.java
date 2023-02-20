@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface AccountController {
 
-    String registerForm();
+    String registerForm(Model model);
     String loginForm();
     String logout(HttpServletRequest request, HttpServletResponse response);
 

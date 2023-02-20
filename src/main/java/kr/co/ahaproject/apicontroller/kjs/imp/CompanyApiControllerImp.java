@@ -40,17 +40,17 @@ public class CompanyApiControllerImp implements CompanyApiController{
 		
 		String after1 = new AhaCommonMethod().changeDate(companyDTO.getCp_open());
 		companyDTO.setCp_establish(after1);
-		
+
 		if(companyDTO == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
-		
+
 		int result = companyService.register(companyDTO);
-		
+
 		if(result == 0) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
-		
+
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 

@@ -102,4 +102,17 @@ public class AdminApiControllerImp implements AdminApiController {
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @Override
+    @ApiOperation(value = "블랙리스트상태 변경", notes = "PUT 방식으로 블랙리스트 상태 변경")
+    @PutMapping("/black")
+    public ResponseEntity regitBlack(@RequestBody MisuDTO misuDTO) {
+
+        int result = misuService.regitBlack(misuDTO);
+
+        if (result == 0 ){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

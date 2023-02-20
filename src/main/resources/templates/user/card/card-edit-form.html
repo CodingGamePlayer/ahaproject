@@ -79,7 +79,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*카드 끝번호(4자리)</label>
-                    <input class="form-control" type="t`ext" id="card_endnum" th:value="${cardDTO.card_endnum}">
+                    <input class="form-control" type="number" id="card_endnum" th:value="${cardDTO.card_endnum}">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -96,7 +96,12 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*거래처 코드</label>
-                    <input class="form-control" th:value="${cardDTO.cl_code}" type="text" id="cl_code">
+                    <select class="form-select" aria-label="Default select example" id="cl_code" placeholder="거래처 코드를 입력하세요">
+                        <th:block th:each="client : ${clients}">
+                            <option th:if="${cardDTO.cl_code} == ${client.cl_code}" th:value="${client.cl_code}" th:text="${client.cp_name} + '( ' + ${client.cl_code} + ' )'" selected></option>
+                            <option th:value="${client.cl_code}" th:text="${client.cp_name} + '( ' + ${client.cl_code} + ' )'"></option>
+                        </th:block>
+                    </select>
                 </div>
             </div>
             <input type="button" class="btn btn-primary" id="cardSubmitBtn" value="수정하기" />
@@ -190,6 +195,7 @@
                alert('수정이 완료되었습니다.');
                window.location.reload();
                opener.location.reload();
+               window.close();
            } else {
                alert('수정을 실패하였습니다.');
            }

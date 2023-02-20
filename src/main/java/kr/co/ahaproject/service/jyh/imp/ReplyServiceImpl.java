@@ -1,50 +1,64 @@
 package kr.co.ahaproject.service.jyh.imp;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import kr.co.ahaproject.dto.BoardDTO;
+import kr.co.ahaproject.dto.ReplyDTO;
+import kr.co.ahaproject.dto.ReplyListDTO;
+import kr.co.ahaproject.mapper.jyh.Replymapper;
+import kr.co.ahaproject.service.jyh.BoardService;
+import kr.co.ahaproject.service.jyh.ReplyService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import kr.co.ahaproject.dto.ReplyDTO;
-import kr.co.ahaproject.mapper.jyh.Replymapper;
-import kr.co.ahaproject.service.jyh.ReplyService;
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ReplyServiceImpl implements ReplyService {
-	
-	@Autowired
-	Replymapper mapper;
+
+	private final Replymapper replymapper;
+
+	private final BoardService boardService;
 
 	@Override
 	public List<ReplyDTO> getdetail(int b_id) {
 		// TODO Auto-generated method stub
-		return mapper.getdetail(b_id);
+		return replymapper.getdetail(b_id);
 	}
 
 	@Override
 	public int create(ReplyDTO dto) {
-		// TODO Auto-generated method stub
-		return mapper.replycreate(dto);
+
+		BoardDTO boardDTO = boardService.SelectOne(dto.getB_id());
+		boardDTO.setB_finished(true);
+		boardService.updateFinish(boardDTO);
+
+		return replymapper.replycreate(dto);
 	}
 
 	@Override
 	public ReplyDTO SelectOne(int rp_id) {
 		// TODO Auto-generated method stub
-		return mapper.replySelectOne(rp_id);
+		return replymapper.replySelectOne(rp_id);
 	}
+
+
 
 	@Override
 	public int update(ReplyDTO dto) {
 		// TODO Auto-generated method stub
-		return mapper.replyupdate(dto);
+		return replymapper.replyupdate(dto);
 	}
 
 	@Override
 	public int delete(int rp_id) {
 		// TODO Auto-generated method stub
-		return mapper.replydelete(rp_id);
+		return replymapper.replydelete(rp_id);
 	}
-	
-	
 
+	@Override
+	public List<ReplyListDTO> findByBoardId(int id) {
+
+
+		return replymapper.findByBoardId(id);
+	}
 }

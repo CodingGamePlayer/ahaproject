@@ -5,7 +5,7 @@
 
 <mapper namespace="kr.co.ahaproject.mapper.kjs.AccountMapper">
 
-    <resultMap id="AccountMap" type="Account">
+    <resultMap id="AccountListMap" type="AccountListDTO">
         <result property="ac_id" column="ac_id"/>
         <result property="cp_name" column="cp_name"/>
         <result property="username" column="ac_username"/>
@@ -15,8 +15,10 @@
         <result property="ac_regdate" column="ac_regdate"/>
     </resultMap>
 
-    <select id="selectAllForPaging" resultMap="AccountMap">
-        SELECT * FROM account
+    <select id="selectAllForPaging" resultMap="AccountListMap">
+        SELECT ac_id, cp_name, ac_username, ac_password, ac_person_name, ac_role, ac_regdate
+        FROM account A
+        JOIN company B ON A.cp_id = B.cp_id
         <include refid="search"/>
         ORDER BY ac_id DESC
         LIMIT #{skip}, #{size}
@@ -24,7 +26,8 @@
     
     <select id="getCount" resultType="int">
         SELECT COUNT(ac_id)
-        FROM account
+        FROM account A
+        JOIN company B ON A.cp_id = B.cp_id
         <include refid="search"/>
     </select>
 
@@ -36,8 +39,8 @@
             <if test="keyword != null and type == 'cp_name'.toString()">
                 cp_name LIKE CONCAT('%', #{keyword}, '%')
             </if>
-            <if test="keyword != null and type == 'cp_person_name'.toString()">
-                cp_person_name LIKE CONCAT('%', #{keyword}, '%')
+            <if test="keyword != null and type == 'ac_person_name'.toString()">
+                ac_person_name LIKE CONCAT('%', #{keyword}, '%')
             </if>
         </where>
     </sql>

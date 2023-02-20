@@ -42,7 +42,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*카드명</label>
-                    <input class="input-group-sm form-control " type="text" id="card_name">
+                    <input class="input-group-sm form-control " type="text" id="card_name" placeholder="카드명을 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
@@ -67,26 +67,26 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*카드회사</label>
-                    <input class="form-control" type="text" id="card_company">
+                    <input class="form-control" type="text" id="card_company" placeholder="카드회사를 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*카드번호</label>
-                    <input class="form-control" type="text" id="card_num">
+                    <input class="form-control" type="text" id="card_num" placeholder="카드번호를 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*카드 끝번호(4자리)</label>
-                    <input class="form-control" type="text" id="card_endnum">
+                    <input class="form-control" type="number" id="card_endnum" placeholder="카드 끝번호(4자리)를 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*카드 만료일</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
+                        <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' placeholder="카드 만료일을 입력하세요"/>
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
                         <span class='fa-solid fa-calendar'></span>
                         </span>
@@ -96,7 +96,11 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*거래처 코드</label>
-                    <input class="form-control" type="text" id="cl_code">
+                    <select class="form-select" aria-label="Default select example" id="cl_code" placeholder="거래처 코드를 입력하세요">
+                        <th:block th:each="client : ${clients}">
+                            <option th:value="${client.cl_code}" th:text="${client.cp_name} + '( ' + ${client.cl_code} + ' )'"></option>
+                        </th:block>
+                    </select>
                 </div>
             </div>
             <input type="button" class="btn btn-primary" id="cardSubmitBtn" value="등록하기" />

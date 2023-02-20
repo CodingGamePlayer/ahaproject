@@ -54,37 +54,37 @@
             <div class="col-sm-12">
                 <div class="form-group">
                       <label class="form-control-label">*자재명</label>
-                    <input class="form-control" type="text" id="mt_name" name="mt_name">
+                    <input class="form-control" type="text" id="mt_name" name="mt_name" placeholder="자재명을 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                      <label class="form-control-label">*규격(제품번호)</label>
-                    <input class="form-control" type="text" id="mt_standard" name="mt_standard">
+                    <input class="form-control" type="text" id="mt_standard" name="mt_standard" placeholder="규격(제품번호)를 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*재고</label>
-                    <input class="form-control" type="text" id="mt_remain" name="mt_remain">
+                    <input class="form-control" type="text" id="mt_remain" name="mt_remain" placeholder="재고를 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고1</label>
-                    <input class="form-control" type="text" id="mt_etc1" name="mt_etc1">
+                    <input class="form-control" type="text" id="mt_etc1" name="mt_etc1" placeholder="비고를 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고2</label>
-                    <input class="form-control" type="text" id="mt_etc2" name="mt_etc2">
+                    <input class="form-control" type="text" id="mt_etc2" name="mt_etc2" placeholder="비고를 입력하세요">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">비고3</label>
-                    <input class="form-control" type="text" id="mt_etc3" name="mt_etc3">
+                    <input class="form-control" type="text" id="mt_etc3" name="mt_etc3" placeholder="비고를 입력하세요">
                 </div>
             </div>
             
@@ -268,7 +268,7 @@
                  response.text();
                  alert('등록이 완료되었습니다.');
                  window.location.reload();
-                 opener.location.reload();
+                 opener.location.href="list";
              } else {
                  alert('등록을 실패하였습니다.');
              }

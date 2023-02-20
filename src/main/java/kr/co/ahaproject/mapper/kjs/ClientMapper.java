@@ -1,32 +1,18 @@
 package kr.co.ahaproject.mapper.kjs;
 
-import java.util.List;
-
 import kr.co.ahaproject.dto.PageRequestDTO;
-import kr.co.ahaproject.entity.Misu;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
-import com.mysql.cj.x.protobuf.MysqlxCrud.Column;
-
-import kr.co.ahaproject.dto.ClientDTO;
 import kr.co.ahaproject.entity.Client;
-import kr.co.ahaproject.entity.Company;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 
 @Mapper
 public interface ClientMapper {
 	
 //	고객 등록
-    @Insert("INSERT INTO ahaproject.client (cp_num, cp_name, cp_address, cp_tel, cl_code, cl_email, cl_account, cl_filename, cl_uuid, cl_etc1, cl_etc2, cl_etc3) "
-    		+ " VALUES (#{client.cp_num},#{client.cp_name},#{client.cp_address},#{client.cp_tel},#{client.cl_code},#{client.cl_email},#{client.cl_account},#{client.cl_filename},#{client.cl_uuid},#{client.cl_etc1},#{client.cl_etc2},#{client.cl_etc3})")
+    @Insert("INSERT INTO ahaproject.client (cp_num, cp_name, cp_address, cl_tel, cl_code, cl_email, cl_account, cl_filename, cl_uuid, cl_etc1, cl_etc2, cl_etc3) "
+    		+ " VALUES (#{client.cp_num},#{client.cp_name},#{client.cp_address},#{client.cl_tel},#{client.cl_code},#{client.cl_email},#{client.cl_account},#{client.cl_filename},#{client.cl_uuid},#{client.cl_etc1},#{client.cl_etc2},#{client.cl_etc3})")
     int register(@Param("client") Client client);
 
 
@@ -38,7 +24,7 @@ public interface ClientMapper {
             @Result(property = "cp_name", column = "cp_name"),
             @Result(property = "cp_num", column = "cp_num"),
             @Result(property = "cp_address", column = "cp_address"),
-            @Result(property = "cp_tel", column = "cp_tel"),
+            @Result(property = "cl_tel", column = "cl_tel"),
             @Result(property = "cl_code", column = "cl_code"),
             @Result(property = "cl_email", column = "cl_email"),
             @Result(property = "cl_account", column = "cl_account"),
@@ -60,7 +46,7 @@ public interface ClientMapper {
     		+ "cp_name = #{client.cp_name},"
     		+ "cp_num = #{client.cp_num},"
     		+ "cp_address = #{client.cp_address},"
-    		+ "cp_tel = #{client.cp_tel},"
+    		+ "cl_tel = #{client.cl_tel},"
     		+ "cl_code = #{client.cl_code},"
     		+ "cl_email = #{client.cl_email},"
     		+ "cl_account = #{client.cl_account},"

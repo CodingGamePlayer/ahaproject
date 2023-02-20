@@ -96,13 +96,13 @@
                             <tbody>
                             <th:block th:each="machineDTO : ${machineDTOs.dtoList}">
                                 <tr>
-                                    <th:block th:if="${machineDTO.m_filename} == ''">
+                                    <th:block th:if="${machineDTO.m_filename} == null or ${machineDTO.m_filename} == ''">
                                         <td class="d-flex justify-content-center">
-                                            <img class="rounded-2" style="width: 200px; height: 100px;" src="https://via.placeholder.com/200x100">
+                                            <img class="rounded-2" style="width: 200px; height: 100px;" src="https://via.placeholder.com/200x100" th:onerror="https://via.placeholder.com/200x100">
                                         </td>
                                     </th:block>
-                                    <th:block th:unless="${machineDTO.m_filename} == ''">
-                                        <td class="d-flex justify-content-center ">
+                                    <th:block th:if="${machineDTO.m_filename} != null and ${machineDTO.m_filename} != ''" >
+                                        <td class="d-flex justify-content-center " >
                                             <a href="#" th:onclick="showImage([[${machineDTO.m_id}]])" >
                                             <img class="rounded-2 a" style="width: 200px; height: 100px;" th:src="|/user/view/s_${machineDTO.m_uuid}_${machineDTO.m_filename}|">
                                             </a>
@@ -150,23 +150,23 @@
                                     <th:block th:switch="${machineDTO.m_use}">
                                         <td class="align-middle text-center">
                                             <span class="badge badge-sm border border-danger text-danger bg-danger"
-                                                  th:case="0">미사용중</span>
+                                                  th:case="false">미사용중</span>
                                             <span class="badge badge-sm border border-success text-success bg-success"
-                                                  th:case="1">사용중</span>
+                                                  th:case="true">사용중</span>
 
                                         </td>
                                     </th:block>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${machineDTO.m_etc1}"/>
+                                              th:text="${machineDTO.m_etc1}" style=" display:inline-block; width:50px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${machineDTO.m_etc2}"/>
+                                              th:text="${machineDTO.m_etc2}" style=" display:inline-block; width:50px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${machineDTO.m_etc3}"/>
+                                              th:text="${machineDTO.m_etc3}" style=" display:inline-block; width:50px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"/>
                                     </td>
 
                                     <td class="align-middle">

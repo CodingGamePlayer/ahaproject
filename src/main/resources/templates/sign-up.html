@@ -13,13 +13,15 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdcLalf%2FbtrZSSOq559%2F8KOO6SGlIIsRbRMJtkykXK%2Fimg.png">
+    <link rel="icon" type="image/png" href="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdcLalf%2FbtrZSSOq559%2F8KOO6SGlIIsRbRMJtkykXK%2Fimg.png">
     <title>
         회원가입
     </title>
@@ -149,9 +151,11 @@
                                     </div>
                                     <label>company</label>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="Enter your company "
-                                               aria-label="company" aria-describedby="email-addon" name="cp_name"
-                                               id="sign-up-cp-name">
+                                        <select class="form-select" aria-label="Default select example" id="sign-up-cp-id">
+                                            <th:block th:each="company : ${companyDTOs}">
+                                                <option th:value="${company.cp_id}">[[${company.cp_name}]]</option>
+                                            </th:block>
+                                        </select>
                                     </div>
                                     <label>name</label>
                                     <div class="mb-3">
@@ -176,10 +180,10 @@
 
                                         const inputUsername = document.querySelector('#sign-up-username').value;
                                         const inputPassword = document.querySelector('#sign-up-password').value;
-                                        const inputCpName = document.querySelector('#sign-up-cp-name').value;
+                                        const inputCpId = document.querySelector('#sign-up-cp-id').value;
                                         const inputPersonName = document.querySelector('#sign-up-password').value;
 
-                                        if (inputUsername === "" || inputPassword === "" || inputCpName === "" || inputPersonName ==="") {
+                                        if (inputUsername === "" || inputPassword === "" || inputCpId === "" || inputPersonName ==="") {
                                             alert("모든 칸을 채워주시기 바랍니다.");
                                             return;
 
@@ -188,7 +192,7 @@
                                         const user = {
                                             username : inputUsername,
                                             ac_password : inputPassword,
-                                            cp_name : inputCpName,
+                                            cp_id : inputCpId,
                                             ac_person_name: inputPersonName
                                         }
 

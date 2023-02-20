@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Account {
 
     int ac_id;
-    String cp_name;
+    int cp_id;
     String username;
     String ac_password;
     String ac_person_name;

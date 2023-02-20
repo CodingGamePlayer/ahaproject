@@ -12,9 +12,8 @@ import lombok.NoArgsConstructor;
 public class Employee {
 
     Long emp_id;
-    String cp_name;
+    String cp_id;
     String emp_code;
-
     String emp_name;
     String emp_joining;
     String emp_regid;

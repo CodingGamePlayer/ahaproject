@@ -1,6 +1,7 @@
 package kr.co.ahaproject.service.kjs;
 
 import kr.co.ahaproject.dto.AccountDTO;
+import kr.co.ahaproject.dto.AccountListDTO;
 import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.dto.PageResponseDTO;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,5 @@ public interface AccountService {
 
     int delete(AccountDTO accountDTO);
 
-    PageResponseDTO<AccountDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<AccountListDTO> selectAllForPaging(PageRequestDTO pageRequestDTO);
 }

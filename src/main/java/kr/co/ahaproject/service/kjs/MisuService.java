@@ -21,4 +21,5 @@ public interface MisuService {
 
     PageResponseDTO<Misu> selectAllForPaging(PageRequestDTO pageRequestDTO);
 
+    int regitBlack(MisuDTO misuDTO);
 }

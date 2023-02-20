@@ -114,7 +114,7 @@
                     <input class="form-control" type="text" id="m_etc3" th:value="${machine.m_etc3}">
                 </div>
             </div>
-
+            <input type="hidden" th:value="${machine.m_use}" id="m_use">
             <!--            파일등록을 위한 코드 start-->
             <div class="col-sm-12">
                 <div class="form-group">
@@ -324,6 +324,7 @@
         const input_m_etc1 = document.querySelector('#m_etc1').value;
         const input_m_etc2 = document.querySelector('#m_etc2').value;
         const input_m_etc3 = document.querySelector('#m_etc3').value;
+        const input_m_use = document.querySelector('#m_use').value;
 
         const machine1 = {
             m_id: input_m_id,
@@ -336,6 +337,7 @@
             m_tax: input_m_tax,
             m_date: input_m_date,
             m_filename: input_Filename,
+            m_use : input_m_use,
             m_etc1: input_m_etc1,
             m_etc2: input_m_etc2,
             m_etc3: input_m_etc3,

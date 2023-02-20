@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layout/default-template.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>아하포장건설</title>
+
+
+</head>
+<body>
+<!-- default_layout.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+    <!--    <link rel="stylesheet" th:href="@{/css/page/home.css}" >-->
+</th:block>
+<!-- default_layout.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <!--    <script th:src="@{/js/page/home.js}"></script>-->
+</th:block>
+
+<!--content start-->
+<div layout:fragment="content">
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-md-8">
+                <div class="card border shadow-xs">
+                    <div class="card-header pb-0">
+                        <div class="d-flex align-items-end">
+                            <p class="mb-0">글쓰기</p>
+                        </div>
+                    </div>
+
+                    <script>
+
+                        const selector = document.querySelector("#registration");
+
+                        function abc() {
+                            const input_ct_id = document.querySelector("#ct_id").value;
+                            const input_b_title = document.querySelector("#b_title").value;
+                            const input_b_body = document.querySelector("#b_body").value;
+
+                            if(input_b_title == ''){
+                                alert('제목을 채워주시기 바랍니다.')
+                            }
+
+                            if(input_b_body == ''){
+                                alert('본문을 채워주시기 바랍니다.')
+                            }
+
+
+                            const board ={
+                                ct_id : input_ct_id,
+                                b_title : input_b_title,
+                                b_body : input_b_body,
+                            }
+
+                            const url = "/api/user/board";
+
+                            fetch(url, {
+                                method : "POST",
+                                body : JSON.stringify(board),
+                                headers : {
+                                    "Content-Type" : "application/json"
+                                }
+                            }).then(response => {
+                                if (response.ok){
+                                    alert("등록이 완료되었습니다.")
+
+                                    window.location.href ="http://localhost:9000/user/board/list-qna"
+                                } else {
+                                    alert("등록을 실패하였습니다.")
+
+                                }
+                            })
+
+                        }
+
+                    </script>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label for="b_title" class="form-control-label">제목</label>
+                                    <input class="form-control" id="b_title" type="text" placeholder="제목을 입력하세요">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="b_title" class="form-control-label">카테고리</label>
+                                    <select class="form-select" aria-label="Default select example" id="ct_id">
+                                        <th:block th:each="category : ${categories}">
+                                            <option th:if="${category.ct_use} == true" th:value="${category.ct_id}">[[${category.ct_name}]]</option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr class="horizontal dark">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="b_body" class="form-control-label">본문</label>
+                                    <textarea class="form-control" type="text" id="b_body" rows="30"
+                                              style="resize: none;"> </textarea>
+                                </div>
+                            </div>
+
+                        </div>
+<!--                        <hr class="horizontal dark">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <div class="form-group">-->
+<!--                                    <div class="col-sm-12">-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label class="form-control-label">파일</label><br>-->
+<!--                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"-->
+<!--                                                    data-bs-target="#exampleModal">-->
+<!--                                                파일등록-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="row mt-3">-->
+<!--                                        <div class="col d-flex justify-content-center">-->
+<!--                                            <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8"></div>
+            <div class="col-sm-2 mt-2 ms-3">
+                <button class="btn btn-primary btn-sm ms-auto" href="#" th:onclick="abc()">등록하기</button>
+
+                <button class="btn btn-primary btn-sm ms-auto " href="#" th:onclick="backToList()">전체글보기</button>
+            </div>
+
+            <script>
+                function backToList() {
+                    if (window.confirm('전체보기 페이지로 넘어 가시겠습니까?')){
+
+                        window.location.href = "http://localhost:9000/user/board/list-qna";
+                    }
+
+                }
+            </script>
+
+        </div>
+
+    </div>
+
+
+    <div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">파일첨부</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">첨부파일을 선택하세요.</label>
+                        <input class="form-control" type="file" id="formFile" name="files">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUploadBtn">Close
+                    </button>
+                    <button type="button" class="btn btn-primary uploadBtn" id="uploadBtn">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+
+</html>

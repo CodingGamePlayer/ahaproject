@@ -16,4 +16,6 @@ public interface UpDownController {
     ResponseEntity<Resource> viewFileGET(@PathVariable String fileName);
 
     Map<String, Boolean> removeFile(String fileName);
+
+    ResponseEntity downloadFile(String fileName, String agent);
 }
