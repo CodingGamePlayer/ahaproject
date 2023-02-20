@@ -21,8 +21,8 @@ public interface BoardService {
 		
 	//해당 글 선택조회
 	public BoardDTO SelectOne(int b_id);
-			
-			
+
+	public int updateFinish(BoardDTO boardDTO);
 		
 		
 	//글 수정

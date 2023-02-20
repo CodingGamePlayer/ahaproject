@@ -157,8 +157,6 @@
     </div>
 </div>
 <!-- 파일 첨부용 Modal start -->
-
-
 <div class="modal fade uploadModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -328,8 +326,8 @@
             }
         }).then(response => {
             if (response.ok) {
-                response.text();
                 alert('등록이 완료되었습니다.');
+                opener.location.href="misu";
                 window.location.reload();
             } else {
                 alert('등록을 실패하였습니다.');

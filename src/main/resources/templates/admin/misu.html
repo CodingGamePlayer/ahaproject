@@ -99,7 +99,7 @@
                                     <th:block th:unless="${misuDTO.misu_filename} == ''">
                                         <td class="d-flex justify-content-center">
                                             <a href="#" th:onclick="showImage([[${misuDTO.misu_id}]])">
-                                                <img class="rounded-2" style="width: 200px; height: 100px;"
+                                                <img class="rounded-2 " style="width: 200px; height: 100px;"
                                                      th:src="|/user/view/s_${misuDTO.misu_uuid}_${misuDTO.misu_filename}|"  onerror="this.onerror=null; this.src='https://via.placeholder.com/200x100';">
                                             </a>
                                         </td>
@@ -125,7 +125,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_name}"/>
+                                              th:text="${misuDTO.misu_name}" style=" display:inline-block; width:80px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"/>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
@@ -145,7 +145,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-sm font-weight-normal"
-                                              th:text="${misuDTO.misu_collect_value}"/>
+                                              th:text="${misuDTO.misu_collect_date}"/>
                                     </td>
                                     <th:block th:switch="${misuDTO.misu_finished}">
                                         <td class="align-middle text-center">

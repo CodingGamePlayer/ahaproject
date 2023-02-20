@@ -96,7 +96,11 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*거래처 코드</label>
-                    <input class="form-control" type="text" id="cl_code" placeholder="거래처 코드를 입력하세요">
+                    <select class="form-select" aria-label="Default select example" id="cl_code" placeholder="거래처 코드를 입력하세요">
+                        <th:block th:each="client : ${clients}">
+                            <option th:value="${client.cl_code}" th:text="${client.cp_name} + '( ' + ${client.cl_code} + ' )'"></option>
+                        </th:block>
+                    </select>
                 </div>
             </div>
             <input type="button" class="btn btn-primary" id="cardSubmitBtn" value="등록하기" />

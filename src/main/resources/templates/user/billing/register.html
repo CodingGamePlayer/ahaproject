@@ -44,7 +44,8 @@
                     <label class="form-control-label">*고객정보</label>
                     <select class="form-select" aria-label="Default select example" id="cl_id" required>
                         <th:block th:each="client : ${clientDTOs}">
-                            <option th:value="${client.cl_id}" th:text="|${client.cp_name} ( ${client.cl_code} )|"></option>
+                            <option th:value="${client.cl_id}"
+                                    th:text="|${client.cp_name} ( ${client.cl_code} )|"></option>
                         </th:block>
                     </select>
                 </div>
@@ -54,23 +55,49 @@
                     <label class="form-control-label">*공사정보</label>
                     <select class="form-select" aria-label="Default select example" id="cst_code" required>
                         <th:block th:each="construction : ${constructionDTOs}">
-                            <option th:value="${construction.cst_code}" th:text="|${construction.cst_name} ( ${construction.cst_code} )|"></option>
+                            <option th:value="${construction.cst_code}"
+                                    th:text="|${construction.cst_name} ( ${construction.cst_code} )|"></option>
                         </th:block>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*작업일</label>
-                    <input class="form-control" type="text" id="bl_work_date" placeholder="작업일을 입력하세요" required>
+                    <label class="form-control-label">*작업 시작일</label>
+                    <div class='input-group' id='datetimepicker3' data-td-target-input='nearest'
+                         data-td-target-toggle='nearest'>
+                        <input id='bl_work_start_date' type='text' class='form-control' data-td-target='#datetimepicker3'
+                               placeholder="작업 시작일을 입력하세요" required/>
+                        <span class='input-group-text' data-td-target='#datetimepicker1'
+                              data-td-toggle='datetimepicker'>
+                        <span class='fa-solid fa-calendar'></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">*작업 종료일</label>
+                    <div class='input-group' id='datetimepicker4' data-td-target-input='nearest'
+                         data-td-target-toggle='nearest'>
+                        <input id='bl_work_end_date' type='text' class='form-control' data-td-target='#datetimepicker4'
+                               placeholder="작업 종료일을 입력하세요" required/>
+                        <span class='input-group-text' data-td-target='#datetimepicker1'
+                              data-td-toggle='datetimepicker'>
+                        <span class='fa-solid fa-calendar'></span>
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*발행일</label>
-                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='bl_pub_date' type='text' class='form-control' data-td-target='#datetimepicker1' placeholder="발행일을 입력하세요" required />
-                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
+                    <div class='input-group' id='datetimepicker1' data-td-target-input='nearest'
+                         data-td-target-toggle='nearest'>
+                        <input id='bl_pub_date' type='text' class='form-control' data-td-target='#datetimepicker1'
+                               placeholder="발행일을 입력하세요" required/>
+                        <span class='input-group-text' data-td-target='#datetimepicker1'
+                              data-td-toggle='datetimepicker'>
                         <span class='fa-solid fa-calendar'></span>
                         </span>
                     </div>
@@ -79,9 +106,12 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*수금일</label>
-                    <div class='input-group' id='datetimepicker2' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                        <input id='bl_collect_date' type='text' class='form-control' data-td-target='#datetimepicker1' placeholder="수금일을 입력하세요" required />
-                        <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
+                    <div class='input-group' id='datetimepicker2' data-td-target-input='nearest'
+                         data-td-target-toggle='nearest'>
+                        <input id='bl_collect_date' type='text' class='form-control' data-td-target='#datetimepicker1'
+                               placeholder="수금일을 입력하세요" required/>
+                        <span class='input-group-text' data-td-target='#datetimepicker1'
+                              data-td-toggle='datetimepicker'>
                         <span class='fa-solid fa-calendar'></span>
                         </span>
                     </div>
@@ -111,21 +141,241 @@
                     <input class="form-control" type="number" id="bl_difference" placeholder="차액을 입력하세요" required>
                 </div>
             </div>
-            <input type="button" class="btn btn-primary" id="billingSubmitBtn" value="등록하기" />
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">비고</label>
+                    <input class="form-control" type="text" id="bl_etc" placeholder="비고을 입력하세요">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group d-inline-block me-3">
+                    <label class="form-control-label">견적서</label><br>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal1">
+                        파일등록
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row mt-3">
+                    <div class="col d-flex justify-content-center">
+                        <div class="container-fluid d-flex uploadResult1" style="flex-wrap: wrap;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group d-inline-block">
+                    <label class="form-control-label">거래명세서</label><br>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal2">
+                        파일등록
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row mt-3">
+                    <div class="col d-flex justify-content-center">
+                        <div class="container-fluid d-flex uploadResult2" style="flex-wrap: wrap;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <input type="button" class="btn btn-primary" id="billingSubmitBtn" value="등록하기"/>
         </div>
     </div>
 </div>
+<!-- 파일 첨부용1 Modal start -->
+<div class="modal fade uploadModal" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">파일첨부</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="formFile1" class="form-label">첨부파일을 선택하세요.</label>
+                    <input class="form-control" type="file" id="formFile1" name="files1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUploadBtn1">Close
+                </button>
+                <button type="button" class="btn btn-primary uploadBtn1" id="uploadBtn1">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 파일 첨부용1 Modal end -->
+<!-- 파일 첨부용2 Modal start -->
+<div class="modal fade uploadModal" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">파일첨부</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="formFile2" class="form-label">첨부파일을 선택하세요.</label>
+                    <input class="form-control" type="file" id="formFile2" name="files2">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUploadBtn2">Close
+                </button>
+                <button type="button" class="btn btn-primary uploadBtn2" id="uploadBtn2">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 파일 첨부용2 Modal end -->
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/upload.js"></script>
 <script>
+
+    let input_UUID1;
+    let input_Filename1;
+
+
+    document.querySelector(".uploadBtn1").addEventListener("click", function (e) {
+
+        const formObj = new FormData();
+
+        const fileInput = document.querySelector("input[name='files1']")
+
+        console.log(fileInput.files)
+
+        const files = fileInput.files
+
+        for (let i = 0; i < files.length; i++) {
+            formObj.append("files", files[i]);
+        }
+
+
+        uploadToServer(formObj).then(result => {
+            console.log(result)
+            //console.log(result)
+            for (const uploadResult of result) {
+                showUploadFile1(uploadResult)
+            }
+            document.getElementById('closeUploadBtn1').click()
+        }).catch(e => {
+            document.getElementById('closeUploadBtn1').click()
+
+        })
+
+    }, false)
+
+    const uploadResult1 = document.querySelector(".uploadResult1")
+
+    function showUploadFile1({uuid, fileName, link}) {
+        input_UUID1 = uuid;
+        input_Filename1 = fileName;
+        const str =
+            `
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12">
+                    <div class="card border shadow-x mb-4">
+                        <div class="card-header d-flex justify-content-between">
+                            ${fileName}
+                            <button class="btn btn-sm btn-primary ms-2"  onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+        uploadResult1.innerHTML += str
+    }
+
+
+    function removeFile(uuid, fileName, obj) {
+
+        console.log(uuid)
+        console.log(fileName)
+
+        console.log(obj)
+
+        const targetDiv = obj.closest(".card")
+
+        removeFileToServer(uuid, fileName).then(data => {
+            targetDiv.remove()
+        })
+    }
+
+
+    let input_UUID2;
+    let input_Filename2;
+    document.querySelector("#uploadBtn2").addEventListener("click", function (e) {
+
+        console.log(123)
+        const formObj = new FormData();
+
+        const fileInput = document.querySelector("input[name='files2']")
+
+        console.log(fileInput.files)
+
+        const files = fileInput.files
+
+        for (let i = 0; i < files.length; i++) {
+            formObj.append("files", files[i]);
+        }
+
+
+        uploadToServer(formObj).then(result => {
+            console.log(result)
+            //console.log(result)
+            for (const uploadResult of result) {
+                showUploadFile2(uploadResult)
+            }
+            document.getElementById('closeUploadBtn2').click()
+        }).catch(e => {
+            document.getElementById('closeUploadBtn2').click()
+
+        })
+
+    }, false)
+
+
+    const uploadResult2 = document.querySelector(".uploadResult2")
+
+    function showUploadFile2({uuid, fileName, link}) {
+        input_UUID2 = uuid;
+        input_Filename2 = fileName;
+        const str =
+            `
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12">
+                    <div class="card border shadow-x mb-4">
+                        <div class="card-header d-flex justify-content-between">
+                            ${fileName}
+                            <button class="btn btn-sm btn-primary ms-2"  onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+        uploadResult2.innerHTML += str
+    }
+
 
     let suppValue = document.getElementById('bl_supp_value');
     let tax = document.getElementById('bl_tax');
     let totalValue = document.getElementById('bl_total_value');
 
     suppValue.addEventListener('keyup', function () {
-       tax.value = Math.floor(suppValue.value / 10) ;
-       totalValue.value = Number(suppValue.value) + Number(tax.value);
+        tax.value = Math.floor(suppValue.value / 10);
+        totalValue.value = Number(suppValue.value) + Number(tax.value);
     });
-
 
 
     const billingSubmitBtn = document.querySelector('#billingSubmitBtn');
@@ -133,37 +383,43 @@
     billingSubmitBtn.addEventListener("click", () => {
         const input_cl_id = document.querySelector('#cl_id').value;
         const input_cst_code = document.querySelector('#cst_code').value;
-        const input_work_date = document.querySelector('#bl_work_date').value;
+        const input_work_start_date = document.querySelector('#bl_work_start_date').value;
+        const input_work_end_date = document.querySelector('#bl_work_end_date').value;
         const input_pub_date = document.querySelector('#bl_pub_date').value;
         const input_collect_date = document.querySelector('#bl_collect_date').value;
         const input_supp_value = document.querySelector('#bl_supp_value').value;
         const input_tax = document.querySelector('#bl_tax').value;
         const input_total_value = document.querySelector('#bl_total_value').value;
         const input_difference = document.querySelector('#bl_difference').value;
+        const input_etc = document.querySelector('#bl_etc').value;
 
         function calculateRemain(input_supp_value) {
-
 
 
         }
 
         const billingInfo = {
-            cl_id : input_cl_id,
-            cst_code : input_cst_code,
-            bl_work_date : input_work_date,
-            bl_pub_date : input_pub_date,
-            bl_collect_date : input_collect_date,
-            bl_supp_value : input_supp_value,
-            bl_tax : input_tax,
-            bl_total_value : input_total_value,
-            bl_difference : input_difference,
-
+            cl_id: input_cl_id,
+            cst_code: input_cst_code,
+            bl_work_start_date: input_work_start_date,
+            bl_work_end_date: input_work_end_date,
+            bl_pub_date: input_pub_date,
+            bl_collect_date: input_collect_date,
+            bl_supp_value: input_supp_value,
+            bl_tax: input_tax,
+            bl_total_value: input_total_value,
+            bl_difference: input_difference,
+            bl_uuid1 : input_UUID1,
+            bl_filename1 : input_Filename1,
+            bl_uuid2 : input_UUID2,
+            bl_filename2 :input_Filename2,
+            bl_etc : input_etc
 
         };
 
-        if(input_cl_id == "" || input_cst_code == "" ||
-            input_work_date == "" || input_pub_date == "" ||
-            input_collect_date == "" || input_supp_value =="" ||
+        if (input_cl_id == "" || input_cst_code == "" || input_work_end_date == "" ||
+            input_work_start_date == "" || input_pub_date == "" ||
+            input_collect_date == "" || input_supp_value == "" ||
             input_tax == "" || input_total_value == "" || input_difference == "") {
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
@@ -174,17 +430,17 @@
         const url = "/api/user/basicinfo/billing/billingInfo";
 
         fetch(url, {
-            method : "POST",
-            body : JSON.stringify(billingInfo),
-            headers : {
-                "Content-Type" : "application/json"
+            method: "POST",
+            body: JSON.stringify(billingInfo),
+            headers: {
+                "Content-Type": "application/json"
             }
         }).then(response => {
-            if(response.ok){
+            if (response.ok) {
                 response.text();
                 alert('등록이 완료되었습니다.');
                 window.location.reload();
-                opener.location.href="list";
+                opener.location.href = "list";
             } else {
                 alert('등록을 실패하였습니다.');
             }
@@ -195,8 +451,7 @@
 </script>
 
 <script>
-    const datevalue = document.querySelector('#bl_pub_date').value;
-    console.log(datevalue);
+
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
         display: {
             components: {
@@ -217,9 +472,46 @@
         },
     });
 
-    const datevalue2 = document.querySelector('#bl_collect_date').value;
-    console.log(datevalue2);
+
     new tempusDominus.TempusDominus(document.getElementById('datetimepicker2'), {
+        display: {
+            components: {
+                clock: false
+            },
+            icons: {
+                type: 'icons',
+                time: 'fa fa-solid fa-clock',
+                date: 'fa fa-solid fa-calendar',
+                up: 'fa fa-solid fa-arrow-up',
+                down: 'fa fa-solid fa-arrow-down',
+                previous: 'fa fa-solid fa-chevron-left',
+                next: 'fa fa-solid fa-chevron-right',
+                today: 'fa fa-solid fa-calendar-check',
+                clear: 'fa fa-solid fa-trash',
+                close: 'fas fa-solid fa-xmark'
+            },
+        },
+    });
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker3'), {
+        display: {
+            components: {
+                clock: false
+            },
+            icons: {
+                type: 'icons',
+                time: 'fa fa-solid fa-clock',
+                date: 'fa fa-solid fa-calendar',
+                up: 'fa fa-solid fa-arrow-up',
+                down: 'fa fa-solid fa-arrow-down',
+                previous: 'fa fa-solid fa-chevron-left',
+                next: 'fa fa-solid fa-chevron-right',
+                today: 'fa fa-solid fa-calendar-check',
+                clear: 'fa fa-solid fa-trash',
+                close: 'fas fa-solid fa-xmark'
+            },
+        },
+    });
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker4'), {
         display: {
             components: {
                 clock: false

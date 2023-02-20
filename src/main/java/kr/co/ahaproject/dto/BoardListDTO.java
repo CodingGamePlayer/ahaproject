@@ -23,5 +23,6 @@ public class BoardListDTO {
     String b_modi_date;
     String b_uuid;
     String b_filename;
+    boolean b_finished;
 
 }

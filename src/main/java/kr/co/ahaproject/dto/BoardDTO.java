@@ -20,4 +20,5 @@ public class BoardDTO {
     String b_uuid;
     String b_regit_date;
     String b_modi_date;
+    boolean b_finished;
 }
