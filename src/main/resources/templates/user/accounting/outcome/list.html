@@ -25,7 +25,32 @@
                             <h6 class="font-weight-semibold text-lg mb-0">매출 현황</h6>
                             <p class="text-sm">매출 현황 전체보기</p>
                         </div>
-                        <div class="ms-auto ">
+                        <div class="ms-auto d-flex">
+                            <form class="row g-3" action="/user/accounting/outcome" method="get">
+
+                                <div class="col-auto">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="finished" name="finished">
+                                        <option value="" selected>완료현황</option>
+                                        <option value="완료">완료</option>
+                                        <option value="미완료">미완료</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <select class="form-select pe-5" aria-label="Default select example" id="category" name="type">
+                                        <option value="cp_name">회사명 검색</option>
+                                        <option value="cl_code">거래처명 검색</option>
+                                        <option value="cst_code">공사명 검색</option>
+                                        <option value="out_content">매출 내용 검색</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="keyword" class="visually-hidden">search</label>
+                                    <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">검색</button>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
@@ -44,10 +69,10 @@
                                 </th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매출 합계금액
                                 </th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매출 지급액
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매출 수금액
                                 </th>
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">매출 잔액</th>
-                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">지급완료여부
+                                <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">수금완료여부
                                 </th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
