@@ -1,9 +1,11 @@
 package kr.co.ahaproject.controller.mskim.imp;
 
+import kr.co.ahaproject.controller.mskim.CardController;
 import kr.co.ahaproject.dto.CardDTO;
-import kr.co.ahaproject.dto.ClientDTO;
 import kr.co.ahaproject.dto.PageRequestDTO;
 import kr.co.ahaproject.dto.PageResponseDTO;
+import kr.co.ahaproject.service.kjs.ClientService;
+import kr.co.ahaproject.service.mskim.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,17 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.ahaproject.controller.mskim.CardController;
-import kr.co.ahaproject.service.mskim.CardService;
-
-import javax.validation.Valid;
-
 @Controller
 @RequestMapping("/user/basicinfo/card")
 public class CardControllerImpl implements CardController {
 	
 	@Autowired
 	private CardService cardService;
+
+	@Autowired
+	private ClientService clientService;
 
 	@Override
 	@GetMapping("/card-list")
@@ -45,7 +45,10 @@ public class CardControllerImpl implements CardController {
 
 	@Override
 	@GetMapping("/card-form")
-	public String card_form() {
+	public String card_form(Model model) {
+
+		model.addAttribute("clients", clientService.selectAll());
+
 		return "user/card/card-form";
 	}
 
@@ -53,6 +56,7 @@ public class CardControllerImpl implements CardController {
 	@GetMapping("/card-edit")
 	public ModelAndView card_edit(ModelAndView mav, @RequestParam("card_id") int card_id) {
 		mav.addObject("cardDTO", cardService.findByCard(card_id));
+		mav.addObject("clients", clientService.selectAll());
 		mav.setViewName("user/card/card-edit-form");
 		return mav;
 	}

@@ -14,7 +14,7 @@ public interface CardController {
 	ModelAndView cardClient(ModelAndView mav, String cl_code);
 	
 	// 카드 정보 등록 폼 이동
-	String card_form();
+	String card_form(Model model);
 	
 	// 카드 정보 수정 폼
 	ModelAndView card_edit(ModelAndView mav, int card_id);

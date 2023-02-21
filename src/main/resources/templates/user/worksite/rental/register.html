@@ -44,7 +44,7 @@
                     <label class="form-control-label">*공사코드</label>
                     <select class="form-select" aria-label="Default select example" id="cst_code">
                         <th:block th:each="const : ${constructionDTOs}">
-                            <option th:value="${const.cst_code}">[[${const.cst_code}]]</option>
+                            <option th:value="${const.cst_code}" th:text="${const.cst_name} + ' ( ' + ${const.cst_code} + ' ) '" />
                         </th:block>
                     </select>
                 </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">*렌트 종료일</label>
+                    <label class="form-control-label">*렌트 종료일(까지)</label>
                     <div class='input-group' id='datetimepicker3' data-td-target-input='nearest'
                          data-td-target-toggle='nearest'>
                         <input id='datetimepicker3Input' type='text' class='form-control'
@@ -252,7 +252,7 @@
                     response.text();
                     alert('등록이 완료되었습니다.');
                     window.location.reload();
-                    opener.location.reload();
+                    opener.location.href="http://localhost:9000/user/worksite/rental";
                 } else {
                     alert('등록을 실패하였습니다.');
                 }

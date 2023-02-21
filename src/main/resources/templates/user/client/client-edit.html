@@ -72,7 +72,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">*회사 전화번호</label>
-                    <select class="form-select" aria-label="Default select example" id="cp_tel">
+                    <select class="form-select" aria-label="Default select example" id="cl_tel">
                         <th:block th:each="company : ${companys}">
                         <option th:value="${company.cp_tel}" >[[${company.cp_tel}]]</option>
                         </th:block>
@@ -131,7 +131,7 @@
         const input_cp_num = document.querySelector('#cp_num').value;
         const input_cp_name = document.querySelector('#cp_name').value;
         const input_cp_address = document.querySelector('#cp_address').value;
-        const input_cp_tel = document.querySelector('#cp_tel').value;
+        const input_cl_tel = document.querySelector('#cl_tel').value;
         const input_cl_code = document.querySelector('#cl_code').value;
         const input_cl_email = document.querySelector('#cl_email').value;
         const input_cl_account = document.querySelector('#cl_account').value;
@@ -144,7 +144,7 @@
             cp_num : input_cp_num,
             cp_name : input_cp_name,
             cp_address : input_cp_address,
-            cp_tel : input_cp_tel,
+            cl_tel : input_cl_tel,
             cl_code : input_cl_code,
             cl_email : input_cl_email,
             cl_account : input_cl_account,
@@ -154,7 +154,7 @@
         };
 
         if(input_cp_num == "" ||input_cp_name == "" || 
-        input_cp_address == "" || input_cp_tel == "" ||
+        input_cp_address == "" || input_cl_tel == "" ||
         input_cl_code == "" || input_cl_email =="" || input_cl_account == ""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
