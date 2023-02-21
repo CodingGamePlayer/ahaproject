@@ -90,17 +90,17 @@
                             <tbody>
                             <th:block th:each="misuDTO : ${misuDTOs.dtoList}">
                                 <tr>
-                                    <th:block th:if="${misuDTO.misu_filename} == ''">
+                                    <th:block th:if="${misuDTO.misu_filename} == '' or ${misuDTO.misu_filename} == null">
                                         <td class="d-flex justify-content-center">
                                             <img class="rounded-2" style="width: 200px; height: 100px;"
                                                  src="https://via.placeholder.com/200x100">
                                         </td>
                                     </th:block>
-                                    <th:block th:unless="${misuDTO.misu_filename} == ''">
+                                    <th:block th:if="${misuDTO.misu_filename} != '' and ${misuDTO.misu_filename} != null">
                                         <td class="d-flex justify-content-center">
                                             <a href="#" th:onclick="showImage([[${misuDTO.misu_id}]])">
                                                 <img class="rounded-2 " style="width: 200px; height: 100px;"
-                                                     th:src="|/user/view/s_${misuDTO.misu_uuid}_${misuDTO.misu_filename}|"  onerror="this.onerror=null; this.src='https://via.placeholder.com/200x100';">
+                                                     th:src="|/user/view/${misuDTO.misu_uuid}_${misuDTO.misu_filename}|" th:onerror="https://via.placeholder.com/200x100">
                                             </a>
                                         </td>
                                     </th:block>

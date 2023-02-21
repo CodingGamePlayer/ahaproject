@@ -77,9 +77,9 @@ public class UpDownControllerImp implements UpDownController {
                 );
 
             }); //end each
-
             return list;
         } // end if
+
         return null;
     }
 
@@ -119,7 +119,7 @@ public class UpDownControllerImp implements UpDownController {
             removed = resource.getFile().delete();
 
             if(contentType.startsWith("image")){
-                File thumbnailFile = new File (uploadPath + File.separator + "s_" + fileName);
+                File thumbnailFile = new File (uploadPath + File.separator + fileName);
 
                 thumbnailFile.delete();
             }
