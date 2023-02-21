@@ -73,10 +73,10 @@
                                         <img class="rounded-2" style="width: 200px; height: 100px;" src="https://via.placeholder.com/200x100">
                                     </td>
                                     </th:block>
-                                    <th:block th:unless="${data.mt_filename} == '' or ${data.mt_filename} == null">
+                                    <th:block th:if="${data.mt_filename} != '' and ${data.mt_filename} != null">
                                         <td class="d-flex justify-content-center">
                                             <a href="#" th:onclick="showImage([[${data.mt_id}]])" >
-                                            <img class="rounded-2" style="width: 200px; height: 100px;" th:src="|/user/view/s_${data.mt_uuid}_${data.mt_filename}|" onerror="this.onerror=null; this.src='https://via.placeholder.com/200x100';">
+                                            <img class="rounded-2" style="width: 200px; height: 100px;" th:src="|/user/view/${data.mt_uuid}_${data.mt_filename}|" th:onerror="https://via.placeholder.com/200x100">
                                             </a>
                                         </td>
                                     </th:block>

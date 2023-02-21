@@ -179,7 +179,7 @@
 
     const uploadResult = document.querySelector(".uploadResult")
 
-    function showUploadFile({uuid, fileName, link}) {
+    function showUploadFile({uuid, fileName}) {
         input_UUID = uuid;
         input_Filename = fileName;
         const str =
@@ -192,7 +192,7 @@
                             <button class="btn btn-sm btn-primary"  onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
                         </div>
                         <div class="card-body">
-                             <img style="width: 300px; height: 100px;" src="/user/view/${link}" data-src="${uuid + "_" + fileName}" >
+                             <img style="width: 300px; height: 100px;" src="/user/view/${uuid + "_" + fileName}" data-src="${uuid + "_" + fileName}" >
                         </div>
                     </div>
                 </div>

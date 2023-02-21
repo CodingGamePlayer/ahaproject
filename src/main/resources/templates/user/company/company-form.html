@@ -64,7 +64,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                   <label for="form-control-label">법인,개인</label>
+                   <label for="cp_type">법인,개인</label>
 					 <select class="form-select" aria-label="Default select example"  id="cp_type">
 					    <option value="법인">법인</option>
 					    <option value="개인">개인</option>
@@ -91,7 +91,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">설립연월일</label>
+                    <label class="form-control-label">*설립연월일</label>
                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
                         <input id='cp_establish' type='text' class='form-control' data-td-target='#datetimepicker1' placeholder="설립연월일을 입력하세요"/>
                         <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker' >
@@ -102,7 +102,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="form-control-label">개업연월일</label>
+                    <label class="form-control-label">*개업연월일</label>
                     <div class='input-group' id='datetimepicker2' data-td-target-input='nearest' data-td-target-toggle='nearest'>
                         <input id='cp_open' type='text' class='form-control' data-td-target='#datetimepicker2' placeholder="개업연월일을 입력하세요"/>
                         <span class='input-group-text' data-td-target='#datetimepicker2' data-td-toggle='datetimepicker' >
@@ -176,8 +176,8 @@
             cp_domain : input_cp_domain
         };
 
-        if(input_cp_num == "" ||input_cp_name == "" || 
-        input_cp_address == "" || input_cp_tel == "" ||
+        if(input_cp_num == "" ||input_cp_name == "" || input_cp_establish == "" ||
+        input_cp_address == "" || input_cp_tel == "" || input_cp_open == "" ||
         input_cp_type == "" || input_cp_head_name =="" || input_cp_head_id == ""){
             alert('*이 있는 칸은 채워주시기 바랍니다.')
             return;
