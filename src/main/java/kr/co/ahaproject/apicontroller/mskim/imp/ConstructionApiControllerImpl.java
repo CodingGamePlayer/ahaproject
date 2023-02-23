@@ -58,6 +58,10 @@ public class ConstructionApiControllerImpl implements ConstructionApiController{
 		if(cstDTO==null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
+		String after = new AhaCommonMethod().changeDate(cstDTO.getCst_start());
+		cstDTO.setCst_start(after);
+		after = new AhaCommonMethod().changeDate(cstDTO.getCst_end());
+		cstDTO.setCst_end(after);
 		
 		int result = cstService.update(cstDTO);
 		
