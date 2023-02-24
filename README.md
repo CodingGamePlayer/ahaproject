@@ -1,4 +1,4 @@
-# ahaproject
+# Ahaproject
 <br>
 <ul>
   <li> 해당 프로젝트는 기업체의 요청을 받아 진행이 되는 프로젝트 입니다.
