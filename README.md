@@ -7,9 +7,10 @@
   <li> Spring Security를 활용하여 접속하는 유저들의 권한을 관리 할 수 있습니다. 
 </ul>
 
+
 ## Presentation Video of the Ahaproject
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/322m1MgEuzo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+### https://www.youtube.com/watch?v=322m1MgEuzo
 
 ## Presentation of the Ahaproject
 <div style="overflow : scroll; height: 400px;">
